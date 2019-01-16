@@ -69,6 +69,7 @@
 	
 	<modules>
 		<module>extension-api</module>
+		<module>extension-util</module>
 	</modules>
 
 	<developers>
@@ -87,7 +88,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Encoding for .xml files generated from unit tests -->
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<failOnMissingWebXml>false</failOnMissingWebXml>
 		
 		<junit.version>5.2.0</junit.version>
 		<junit.platform.version>1.0.0</junit.platform.version>
