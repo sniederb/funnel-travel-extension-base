@@ -51,6 +51,10 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<modules>
+		<module>extension-api</module>
+	</modules>
 
 	<developers>
 		<developer>
