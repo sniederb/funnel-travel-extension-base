@@ -5,6 +5,7 @@ package ch.want.funnel.extension.tripdata;
 
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
 import ch.want.funnel.extension.FunnelExtension;
 
@@ -23,7 +24,9 @@ public interface TripDataModifier {
      *            and associated values with possible inheritance applied
      * @param locale
      *            Locale for error messages
-     * @return
+     * @return The modified trip content. If the extension recognizes that no modification is needed, an {@link Optional#empty()} is
+     *         returned.
+     *
      */
-    String modify(String tripData, Map<String, Object> settings, Locale locale);
+    Optional<String> modify(String tripData, Map<String, Object> settings, Locale locale);
 }
