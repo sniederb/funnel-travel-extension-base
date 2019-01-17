@@ -21,5 +21,9 @@ public enum SettingItemValueType {
     /**
      * Integer value (typically for HTTP ports)
      */
-    INT
+    INT,
+    /**
+     * Boolean value
+     */
+    BOOLEAN
 }

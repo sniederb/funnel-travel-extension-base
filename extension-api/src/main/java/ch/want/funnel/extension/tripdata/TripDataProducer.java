@@ -21,7 +21,9 @@ public interface TripDataProducer {
      *            and associated values with possible inheritance applied
      * @param locale
      *            Locale for error messages
-     * @return A list of booking data structures in the format defined by {@link FunnelExtension#getDataFormat()}
+     * @return A list of booking data structures in the format defined by {@link FunnelExtension#getDataFormat()}.
+     *         BEWARE: for TripDataTwoPhasedProducer implementation, this list contains only an external ID which
+     *         will be later referenced in the second phase
      */
     List<String> createTripData(Map<String, Object> settings, Locale locale);
 }

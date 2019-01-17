@@ -1,0 +1,124 @@
+# Guide to writing a funnel.travel extension
+
+Last updated: Jan 17th, 2019
+
+## Minimal requirements
+
+The extension will run in the JVM context of the funnel.travel server using JRE 8. The minimum dependency is to
+
+```xml
+<dependency>
+	<groupId>ch.want.funnel</groupId>
+	<artifactId>extension-api</artifactId>
+	<version>1.0.0</version>
+</dependency>
+```
+
+The extension must:
+* implement the `FunnelExtension` interface
+* provide a file named `funnel-extension.json` (content see below)
+* implement at least one of the following interfaces:
+    * TripDataProducer
+    * TripDataModifier
+    * TripDataConsumer
+    * TripDataWebhook
+
+### funnel-extension.json
+
+The `funnel-extension.json` file tells the funnel.travel server about the extension.
+
+```json
+{
+  "Implementation": "ch.want.funnel.extension.email.EmailExtension",
+  "Name": "Confirmation E-mails",
+  "Author": "WaNT GmbH",
+  "Version": "1.0.0",
+  "Description": "Read confirmation e-mails from a POP3/IMAP e-mail server."
+  "URL": "http://www.want.ch/emailextension.html"
+}
+```
+
+Mandatory properties are 'Implementation', 'Name', 'Author', 'Version', and 'Description'. If the optional 'URL' is provided, 
+a link to the URL will be shown to the user.
+
+(The logo URL is _not_ provided by the JSON file, but by the interface implementation. The reason is that many implementations
+will provide the logo as part of the JAR, ie. implementations will use Class#getResource(String).)
+
+## Settings
+
+By implementing the `FunnelExtension` interface, the extension must provide some methods related to settings:
+
+```java
+List<SettingItem> getSettings();
+void validateSettings(Map<String, Object> settingValues, Locale locale) throws IllegalSettingException;
+String getLabelForKey(String settingItemKey, Locale locale);
+```
+
+This mechanism allows for the extension to tell funnel.travel which settings are needed to operate. The `validateSettings`
+implementation must ensure that all mandatory settings are provided and valid.
+
+## Types of extensions
+
+### TripDataProducer
+
+A 'producer' extension create travel data to be stored in funnel.travel. It takes only the extension settings and retrieves
+travel data from an external source.
+
+This interface is suitable for pull systems such as retrieving e-mails.
+
+### TripDataModifier
+
+A 'modifier' extension alters travel data. This can mean augmenting existing booking data with eg. flight statistics or more
+detailed hotel information, but it can also entirely change the booking structure by eg. rebooking a flight.
+
+This interface is suitable for modifications based on timed events or as reaction to trip events.
+
+#### Internal execution management
+
+User settings along with funnel.travel interna define which extensions get called when. The scenario of an "endless modification loop",
+however, needs to be taken into account when implementing a `TripDataModifier`.
+
+A `TripDataModifier` might get called whenever booking data has changed. If there are multiple such extensions, they might trigger
+calling each other in an endless loop. The implementation must therefore verify if a modification is necessary and taking place,
+and return an empty Optional if no modification has occurred.
+
+```java
+Optional<String> modify(String tripData, Map<String, Object> settings, Locale locale);
+```
+
+_*TODO*_ describe mechanism to store internal data in settings! 
+
+
+### TripDataConsumer
+
+A 'consumer' extension only receives travel data, without any feedback to funnel.travel. Typical examples are reporting or data feeds
+to accounting systems.
+
+### TripDataWebhook
+
+A 'webhook' extension is typically either a producer or modifier where execution is triggered by a third-party system.
+
+This interface is suitable for push systems such as notification calls from booking systems.
+
+## Library dependencies
+
+The extension will run in the JVM context of the funnel.travel, and as such will have available the runtime libraries provided by funnel.travel.
+
+* ch.qos.logback, Version 1.1.11
+* com.google.code.gson, Version 2.8.2
+* com.googlecode.json-simple, Version 1.1.1
+* commons-beanutils, Version 1.9.3
+* commons-collections, Version 3.2.2
+* commons-codec, Version 1.10
+* javax.mail, Version 1.5.6
+* com.sun.mail, Version 1.5.6
+* org.apache.httpcomponents (httpclient), Version 4.5.5
+* org.apache.httpcomponents (httpcore), Version 4.4.9
+* org.apache.httpcomponents (httpmime), Version 4.5.5
+* com.fasterxml.jackson.core (jackson-core), Version 2.8.11
+* com.fasterxml.jackson.core (jackson-dataformat-csv), Version 2.8.11
+* com.fasterxml.jackson.core (jackson-dataformat-xml), Version 2.8.11
+* com.fasterxml.jackson.core (jackson-dataformat-yaml), Version 2.8.11
+* org.freemarker, Version 2.3.28
+* ch.want.funnel (extension-util), Version 1.0.0
+
