@@ -66,6 +66,26 @@ travel data from an external source.
 
 This interface is suitable for pull systems such as retrieving e-mails.
 
+### TripDataTwoPhasedProducer
+
+Some 'producer' mechanisms works such that in a first step, the extension triggers data production asynchronously. Once ready,
+the data is then delivered via webhook. The interface `TripDataTwoPhasedProducer` supports this process by mandating
+that the producer's 
+
+```java
+List<String> createTripData(Map<String, Object> settings, Locale locale);
+````
+
+does *not* produce trip data objects, but simply a list of unique, external IDs. These will be stored by funnel.travel in a "pending"
+state. As webhook, the external system must then call
+
+```
+https://www.funnel.travel/p/publicapi/extension/webhook/glb/<classname of the extension>
+```
+
+Subsequently, the extension is called first to extract the unique, external ID from the payload, and then called again
+to convert to payload to a trip object structure.
+
 ### TripDataModifier
 
 A 'modifier' extension alters travel data. This can mean augmenting existing booking data with eg. flight statistics or more
