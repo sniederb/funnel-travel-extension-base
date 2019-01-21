@@ -25,5 +25,11 @@ public enum SettingItemValueType {
     /**
      * Boolean value
      */
-    BOOLEAN
+    BOOLEAN,
+    /**
+     * This value type signifies a usage, rather than a value class. {@code INTERNAL} settings are
+     * never revealed to the user. Rather, they allow an extension to maintain cross-execution
+     * state by updating the internal value whenever called.
+     */
+    INTERNAL
 }

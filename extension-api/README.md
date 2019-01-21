@@ -57,6 +57,10 @@ String getLabelForKey(String settingItemKey, Locale locale);
 This mechanism allows for the extension to tell funnel.travel which settings are needed to operate. The `validateSettings`
 implementation must ensure that all mandatory settings are provided and valid.
 
+When calling produce / modify / consume, the provided map is subsequently scanned for changed 'INTERNAL' values. These are
+then saved back the to account extension settings. In this way, an extension can maintain a account-wide state between
+executions. 
+
 ## Types of extensions
 
 ### TripDataProducer
@@ -119,6 +123,57 @@ to accounting systems.
 A 'webhook' extension is typically either a producer or modifier where execution is triggered by a third-party system.
 
 This interface is suitable for push systems such as notification calls from booking systems.
+
+## The Booking#extensionData field
+
+Each Booking object holds a `extensionData` JSON field, which extensions can use in varying ways. The root node holds a key
+per extension classname. *Data from other extensions will be available to all extensions, so do not store sensitive data here*. 
+
+### Additional data for extension
+
+The data structure passed to funnel.travel in the `extensionData` field will be passed back to the extension unchanged. Thus an extension can hold 
+additional state in this field, eg: 
+
+```json
+{
+	"ch.want.funnel.extension.email.EmailExtension": {
+	    "lastExecution": "20190121T14:55:23Z",
+	    "lastGeneratedId": 662323667
+    }
+}
+```
+
+### Additional data for user
+
+An extension can add data to be presented to the user by adding a `ui` node with a predefined structure:
+
+```json
+{
+	"ch.want.funnel.extension.email.EmailExtension": {
+	    "lastExecution": "20190121T14:55:23Z",
+	    "lastGeneratedId": 662323667,
+	    "ui": [
+	    	{
+	    		"contextType": "SEGMENT",
+	    		"contextUuid": "c8ec4565-d7d1-4c48-8ff7-a5eac3a5778f",
+	    		"labelKey": "myextension.label1",
+	    		"valueType": "STRING",
+	    		"value": "This segment was verified by Foobar"
+	    	}
+	    ]
+	}
+}
+
+```
+
+The following rules apply:
+
+* contextType must be one of the following: "BOOKING" | "SERVICE" | "LEG" | "SEGMENT" | "TRAVELER"
+* contextUuid must be derived by the extension from the provided trip data structure.
+* labelKey will eventually be sent back to the extension in the `getLabelForKey` method for translation
+* valueType must be one of the following: "STRING", "DATE", "INT", "BOOLEAN"
+
+Beware that extensions must not provide some sort of execution status as additional UI field, as that status is already displayed natively by funnel.travel. 
 
 ## Library dependencies
 
