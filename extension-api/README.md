@@ -168,7 +168,7 @@ An extension can add data to be presented to the user by adding a `ui` node with
 
 The following rules apply:
 
-* contextType must be one of the following: "BOOKING" | "SERVICE" | "LEG" | "SEGMENT" | "TRAVELER"
+* contextType must be one of the following: "BOOKING" | "SERVICE" | "SEGMENT"
 * contextUuid must be derived by the extension from the provided trip data structure.
 * labelKey will eventually be sent back to the extension in the `getLabelForKey` method for translation
 * valueType must be one of the following: "STRING", "DATE", "INT", "BOOLEAN"
