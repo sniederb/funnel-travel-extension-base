@@ -13,7 +13,7 @@ import ch.want.funnel.extension.FunnelExtension;
  * Implementations of this interface retrieve trip data from other sources such as e-mail servers,
  * booking websites or a GDS.
  */
-public interface TripDataProducer {
+public interface TripDataProducer extends TripDataWebhook {
 
     /**
      * @param settings
@@ -22,8 +22,8 @@ public interface TripDataProducer {
      * @param locale
      *            Locale for error messages
      * @return A list of booking data structures in the format defined by {@link FunnelExtension#getDataFormat()}.
-     *         BEWARE: for TripDataTwoPhasedProducer implementation, this list contains only an external ID which
-     *         will be later referenced in the second phase
+     *         BEWARE: for TripDataTwoPhasedProducer implementation, this list is expected to contain UTF-8 Strings
+     *         containing an external ID which will later be referenced in the second phase.
      */
-    List<String> createTripData(Map<String, Object> settings, Locale locale);
+    List<byte[]> getRawSources(Map<String, Object> settings, Locale locale);
 }

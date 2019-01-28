@@ -66,7 +66,17 @@ executions.
 ### TripDataProducer
 
 A 'producer' extension create travel data to be stored in funnel.travel. It takes only the extension settings and retrieves
-travel data from an external source.
+travel data from an external source. The call sequence has two phases:
+
+```java
+List<byte[]> getRawSources(Map<String, Object> settings, Locale locale);
+```
+.. retrieves raw sources, and passes these to funnel.travel. The raw source will be stored together with the trip object.
+
+```java
+String convertRawSourceToTripData(byte[] rawSource, Map<String, Object> settings, Locale locale);
+```
+... converts a single raw source to a funnel.travel trip object.
 
 This interface is suitable for pull systems such as retrieving e-mails.
 
@@ -77,18 +87,23 @@ the data is then delivered via webhook. The interface `TripDataTwoPhasedProducer
 that the producer's 
 
 ```java
-List<String> createTripData(Map<String, Object> settings, Locale locale);
+List<byte[]> getRawSources(Map<String, Object> settings, Locale locale);
 ````
 
-does *not* produce trip data objects, but simply a list of unique, external IDs. These will be stored by funnel.travel in a "pending"
-state. As webhook, the external system must then call
+does *not* produce full raw sources, but simply a list of unique, external IDs (returned as String.getBytes(UTF-8)). 
+These will be stored by funnel.travel in a "pending" state. As webhook, the external system must then call
 
 ```
 https://www.funnel.travel/p/publicapi/extension/webhook/glb/<classname of the extension>
 ```
 
-Subsequently, the extension is called first to extract the unique, external ID from the payload, and then called again
-to convert to payload to a trip object structure.
+Subsequently, the extension is called first to extract the unique, external ID from the payload, and then called 
+
+```java
+String convertRawSourceToTripData(byte[] rawSource, Map<String, Object> settings, Locale locale);
+```
+
+to convert the payload to a trip object structure.
 
 ### TripDataModifier
 
