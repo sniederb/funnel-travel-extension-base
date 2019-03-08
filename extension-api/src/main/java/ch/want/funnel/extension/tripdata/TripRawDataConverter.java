@@ -1,5 +1,5 @@
 /*
- * Created on 15 Jan 2019
+ * Created on 08.03.2019
  */
 package ch.want.funnel.extension.tripdata;
 
@@ -9,15 +9,19 @@ import java.util.Map;
 import ch.want.funnel.extension.FunnelExtension;
 
 /**
- * Implementations of this interface take a payload from a webhook, and convert it to a funnel.travel payload.
+ * Implementations are capable of converting raw trip sources into a structure readable by funnel.travel.
+ * Typical examples of implementations are webhook-based extensions which receive push notifications
+ * from an external system.
  */
-public interface TripDataWebhook {
+public interface TripRawDataConverter {
 
     /**
      * For a given external source record, extract some key properties to be stored as metadata.
      *
      * @param rawSource
+     *            The original trip data source such an email MIME message
      * @param settings
+     *            Account-specific settings
      * @param locale
      * @return
      */
@@ -28,6 +32,7 @@ public interface TripDataWebhook {
      * second step, after {@link TripDataProducer#getRawSources(Map, Locale)} has fetched raw sources.
      *
      * @param rawSource
+     *            The original trip data source such an email MIME message
      * @param settings
      *            A Map holding the keys defined in {@link FunnelExtension#getSettings()},
      *            and associated values with possible inheritance applied
