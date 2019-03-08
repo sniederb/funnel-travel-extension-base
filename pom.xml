@@ -94,4 +94,20 @@
 		<checkstyle.latest.version>8.10</checkstyle.latest.version>
 	</properties>
 	
+	<repositories>
+		<repository>
+			<id>funnel-extension</id>
+			<url>http://www.want.ch/nexus/repository/funnel-extension/</url>
+		</repository>
+	</repositories>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>funnel-extension-snapshots</id>
+			<url>http://www.want.ch/nexus/repository/funnel-extension-snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>funnel-extension-releases</id>
+			<url>http://www.want.ch/nexus/repository/funnel-extension-releases/</url>
+		</repository>
+	</distributionManagement>
 </project>
