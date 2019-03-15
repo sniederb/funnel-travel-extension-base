@@ -91,7 +91,7 @@
 		
 		<junit.version>5.2.0</junit.version>
 		<junit.platform.version>1.0.0</junit.platform.version>
-		<checkstyle.latest.version>8.10</checkstyle.latest.version>
+		<checkstyle.latest.version>[8.18,)</checkstyle.latest.version>
 	</properties>
 	
 	<repositories>
