@@ -40,7 +40,7 @@ public abstract class AbstractTemplateBasedExtension {
         return parseJsonPayloadToMap(payload);
     }
 
-    protected Map<String, Object> parsePayloadToMap(final JsonNode payloadNode) throws IOException {
+    protected Map<String, Object> parsePayloadToMap(final JsonNode payloadNode) {
         return OBJECTMAPPER.convertValue(payloadNode, new TypeReference<Map<String, Object>>() {
         });
     }

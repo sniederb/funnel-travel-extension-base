@@ -11,12 +11,33 @@ public class ContentMetadata {
     public final String description;
     public final String participants;
     public final String mimeType;
+    public final boolean discardAsIntermediate;
 
+    /**
+     * Create an instance for further processing
+     * 
+     * @param creationDate
+     * @param mimeType
+     * @param description
+     * @param participants
+     */
     public ContentMetadata(final OffsetDateTime creationDate, final String mimeType, final String description, final String participants) {
         this.creationDate = creationDate;
         this.mimeType = mimeType;
         this.description = description;
         this.participants = participants;
+        this.discardAsIntermediate = false;
+    }
+
+    /**
+     * Create an instance with {@code discardAsIntermediate} set to true.
+     */
+    public ContentMetadata() {
+        this.creationDate = null;
+        this.mimeType = null;
+        this.description = null;
+        this.participants = null;
+        this.discardAsIntermediate = true;
     }
 
     /**
@@ -58,5 +79,14 @@ public class ContentMetadata {
      */
     public String getMimeType() {
         return mimeType;
+    }
+
+    /**
+     * If true, funnel.travel will discard this content (assuming that later, another update will arrive)
+     * 
+     * @return
+     */
+    public boolean isDiscardAsIntermediate() {
+        return discardAsIntermediate;
     }
 }
