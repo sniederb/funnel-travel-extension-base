@@ -59,7 +59,11 @@ implementation must ensure that all mandatory settings are provided and valid.
 
 When calling produce / modify / consume, the provided map is subsequently scanned for changed 'INTERNAL' values. These are
 then saved back the to account extension settings. In this way, an extension can maintain a account-wide state between
-executions. 
+executions.
+
+### Execution environment
+The provided settings will always contain some environment-specific keys:
+The key `SettingItem.KEY_SERVERCONTEXT` will hold the server-path, eg. `/be/prod`. The key `SettingItem.KEY_FILESTORE` holds a string pointing to the server location for storing files. If the extension implementation creates files, it must do so using `SettingItem.KEY_FILESTORE`. A few files can be stored directly at that location; if the extension produces more than 10 files, it should create a subdirectory.
 
 ## Types of extensions
 
@@ -104,6 +108,8 @@ String convertRawSourceToTripData(byte[] rawSource, Map<String, Object> settings
 ```
 
 to convert the payload to a trip object structure.
+
+**Beware** that with a two-phased producer, there is a time-period during which the original payload has been retrieved, but the second phase has not been executed. The extension implementation must ensure that if triggered again, it will not _again_ retrieve the original payload.   
 
 ### TripDataModifier
 
@@ -194,6 +200,7 @@ Beware that extensions must not provide some sort of execution status as additio
 
 The extension will run in the JVM context of the funnel.travel, and as such will have available the runtime libraries provided by funnel.travel.
 
+* slf4j-api, Version 1.7.25
 * ch.qos.logback, Version 1.1.11
 * com.google.code.gson, Version 2.8.2
 * com.googlecode.json-simple, Version 1.1.1

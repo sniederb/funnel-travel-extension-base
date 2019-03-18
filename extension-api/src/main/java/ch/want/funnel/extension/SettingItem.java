@@ -5,6 +5,8 @@ package ch.want.funnel.extension;
 
 public class SettingItem {
 
+    public static final String KEY_FILESTORE = "funnel.environment.filestore";
+    public static final String KEY_SERVERCONTEXT = "funnel.environment.servercontext";
     private String key;
     private SettingItemValueType valueType = SettingItemValueType.STRING;
     private boolean mandatory;
