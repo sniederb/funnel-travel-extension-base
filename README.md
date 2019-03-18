@@ -201,6 +201,7 @@ Beware that extensions must not provide some sort of execution status as additio
 The extension will run in the JVM context of the funnel.travel, and as such will have available the runtime libraries provided by funnel.travel.
 
 * slf4j-api, Version 1.7.25
+** Use jcl-over-slf4j for an implementation in tests
 * ch.qos.logback, Version 1.1.11
 * com.google.code.gson, Version 2.8.2
 * com.googlecode.json-simple, Version 1.1.1
