@@ -31,6 +31,9 @@ public interface TripRawDataConverter {
      * Convert data from an external source, as part of a two phased production. This call is the
      * second step, after {@link TripDataProducer#getRawSources(Map, Locale)} has fetched raw sources.
      *
+     * This method is NOT called if {@link #extractMetadata(byte[], Map, Locale)} has returned a {@link ContentMetadata}
+     * with {@link ContentMetadata#isDiscardAsIntermediate()} of {@code true}
+     *
      * @param rawSource
      *            The original trip data source such an email MIME message
      * @param settings

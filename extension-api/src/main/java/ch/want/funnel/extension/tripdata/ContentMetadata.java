@@ -3,11 +3,11 @@
  */
 package ch.want.funnel.extension.tripdata;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 
 public class ContentMetadata {
 
-    public final OffsetDateTime creationDate;
+    public final Date creationDate;
     public final String description;
     public final String participants;
     public final String mimeType;
@@ -15,13 +15,13 @@ public class ContentMetadata {
 
     /**
      * Create an instance for further processing
-     * 
+     *
      * @param creationDate
      * @param mimeType
      * @param description
      * @param participants
      */
-    public ContentMetadata(final OffsetDateTime creationDate, final String mimeType, final String description, final String participants) {
+    public ContentMetadata(final Date creationDate, final String mimeType, final String description, final String participants) {
         this.creationDate = creationDate;
         this.mimeType = mimeType;
         this.description = description;
@@ -41,11 +41,11 @@ public class ContentMetadata {
     }
 
     /**
-     * Get the date this content was originally created. If unknown, OffsetDateTime.now() should be used.
+     * Get the date this content was originally created. If unknown, new Date()() should be used.
      *
      * @return
      */
-    public OffsetDateTime getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
@@ -83,7 +83,7 @@ public class ContentMetadata {
 
     /**
      * If true, funnel.travel will discard this content (assuming that later, another update will arrive)
-     * 
+     *
      * @return
      */
     public boolean isDiscardAsIntermediate() {
