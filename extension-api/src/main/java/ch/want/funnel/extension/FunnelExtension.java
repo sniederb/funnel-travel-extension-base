@@ -28,10 +28,12 @@ public interface FunnelExtension {
 
     /**
      * Define with what format this extension works
+     * 
+     * @param settingValues
      *
      * @return
      */
-    DataFormat getDataFormat();
+    DataFormat getDataFormat(Map<String, Object> settingValues);
 
     /**
      * Get a list of settings which the implementation requires.

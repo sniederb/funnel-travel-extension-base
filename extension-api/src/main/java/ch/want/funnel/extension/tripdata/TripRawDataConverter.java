@@ -41,7 +41,7 @@ public interface TripRawDataConverter {
      *            and associated values with possible inheritance applied
      * @param locale
      *            Locale for error messages
-     * @return A booking data structures in the format defined by {@link FunnelExtension#getDataFormat()}.
+     * @return A booking data structures in the format defined by {@link FunnelExtension#getDataFormat(Map)}.
      */
     String convertRawSourceToTripData(byte[] rawSource, Map<String, Object> settings, Locale locale);
 }

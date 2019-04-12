@@ -18,7 +18,7 @@ public interface TripDataModifier {
     /**
      *
      * @param tripData
-     *            Booking data structure in the format defined by {@link FunnelExtension#getDataFormat()}
+     *            Booking data structure in the format defined by {@link FunnelExtension#getDataFormat(Map)}
      * @param settings
      *            A Map holding the keys defined in {@link FunnelExtension#getSettings()},
      *            and associated values with possible inheritance applied
