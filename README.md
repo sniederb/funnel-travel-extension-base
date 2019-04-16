@@ -196,6 +196,13 @@ The following rules apply:
 
 Beware that extensions must not provide some sort of execution status as additional UI field, as that status is already displayed natively by funnel.travel. 
 
+## Date/time handling
+
+* Timestamps which denote a server-event (such as 'last login' or a changelog event) are serialized in UTC using the ISO 8601 format, e.g `2019-04-15T13:09:00.710Z`.
+* Dates are serialized in XML format, eg. `2019-04-19`. This is mainly relevant for departure / arrival dates
+* Date/Times for departures / arrivals of travel segments (flight, train etc) are serialized in ISO 8601 format **but without a timezone**, eg. `2019-04-20T04:56:00`. The time here is always interpreted as local to the departing / arriving destination. If an extension sends (or modifies) trip data, it must ensure that the timestamp is delivered either **without timezone**, or that the time is adjusted accordingly. 
+
+
 ## Library dependencies
 
 The extension will run in the JVM context of the funnel.travel, and as such will have available the runtime libraries provided by funnel.travel.
