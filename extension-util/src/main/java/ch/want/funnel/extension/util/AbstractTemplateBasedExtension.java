@@ -4,7 +4,6 @@
 package ch.want.funnel.extension.util;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.io.StringWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -124,7 +123,7 @@ public abstract class AbstractTemplateBasedExtension {
      */
     protected Template parseTemplate(final String template) throws IOException {
         assertConfigurationPublished();
-        return new Template("adhoc-" + template.hashCode(), new StringReader(template), freemarkerConfig);
+        return new Template("adhoc-" + template.hashCode(), template, freemarkerConfig);
     }
 
     private void assertConfigurationPublished() {

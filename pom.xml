@@ -4,6 +4,7 @@
 	<groupId>ch.want.funnel</groupId>
 	<artifactId>extension-base</artifactId>
 	<packaging>pom</packaging>
+	<!-- If your project.version contains SNAPSHOT (f.e., 1.2-SNAPSHOT) and you execute mvn deploy, artifacts will be deployed to your snapshot repository. -->
 	<version>1.0.0-SNAPSHOT</version>
 	<name>funnel-extension-base</name>
 	<url>http://www.funnel.travel/</url>
