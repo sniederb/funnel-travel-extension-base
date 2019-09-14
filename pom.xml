@@ -97,18 +97,18 @@
 	
 	<repositories>
 		<repository>
-			<id>funnel-extension</id>
-			<url>http://www.want.ch/nexus/repository/funnel-extension/</url>
+			<id>funnel-extension-api</id>
+			<url>http://www.want.ch/nexus/repository/funnel-extension-api/</url>
 		</repository>
 	</repositories>
 	<distributionManagement>
 		<snapshotRepository>
-			<id>funnel-extension-snapshots</id>
-			<url>http://www.want.ch/nexus/repository/funnel-extension-snapshots/</url>
+			<id>funnel-extension-api-snapshots</id>
+			<url>http://www.want.ch/nexus/repository/funnel-extension-api-snapshots/</url>
 		</snapshotRepository>
 		<repository>
-			<id>funnel-extension-releases</id>
-			<url>http://www.want.ch/nexus/repository/funnel-extension-releases/</url>
+			<id>funnel-extension-api-releases</id>
+			<url>http://www.want.ch/nexus/repository/funnel-extension-api-releases/</url>
 		</repository>
 	</distributionManagement>
 </project>
