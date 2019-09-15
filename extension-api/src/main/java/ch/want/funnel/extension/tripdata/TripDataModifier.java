@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import ch.want.funnel.extension.FunnelExtension;
+import ch.want.funnel.extension.model.Booking;
 
 /**
  * Implementations of this interface take an existing trip structure, and return the structure after some form
@@ -17,16 +18,16 @@ public interface TripDataModifier {
 
     /**
      *
-     * @param tripData
-     *            Booking data structure in the format defined by {@link FunnelExtension#getDataFormat(Map)}
+     * @param booking
+     *            Booking data structure
      * @param settings
      *            A Map holding the keys defined in {@link FunnelExtension#getSettings()},
      *            and associated values with possible inheritance applied
      * @param locale
      *            Locale for error messages
-     * @return The modified trip content. If the extension recognizes that no modification is needed, an {@link Optional#empty()} is
+     * @return The modified booking content. If the extension recognizes that no modification is needed, an {@link Optional#empty()} is
      *         returned.
      *
      */
-    Optional<String> modify(String tripData, Map<String, Object> settings, Locale locale);
+    Optional<Booking> modify(Booking booking, Map<String, Object> settings, Locale locale);
 }

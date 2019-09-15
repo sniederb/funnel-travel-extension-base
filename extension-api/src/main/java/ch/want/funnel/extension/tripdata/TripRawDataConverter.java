@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import ch.want.funnel.extension.FunnelExtension;
+import ch.want.funnel.extension.model.Booking;
 
 /**
  * Implementations are capable of converting raw trip sources into a structure readable by funnel.travel.
@@ -41,7 +42,7 @@ public interface TripRawDataConverter {
      *            and associated values with possible inheritance applied
      * @param locale
      *            Locale for error messages
-     * @return A booking data structures in the format defined by {@link FunnelExtension#getDataFormat(Map)}.
+     * @return A booking data structures
      */
-    String convertRawSourceToTripData(byte[] rawSource, Map<String, Object> settings, Locale locale);
+    Booking convertRawSourceToTripData(byte[] rawSource, Map<String, Object> settings, Locale locale);
 }

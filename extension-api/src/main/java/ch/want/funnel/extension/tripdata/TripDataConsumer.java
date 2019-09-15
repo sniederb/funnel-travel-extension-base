@@ -7,13 +7,14 @@ import java.util.Locale;
 import java.util.Map;
 
 import ch.want.funnel.extension.FunnelExtension;
+import ch.want.funnel.extension.model.Booking;
 
 public interface TripDataConsumer {
 
     /**
      *
-     * @param tripData
-     *            Booking data structure in the format defined by {@link FunnelExtension#getDataFormat(Map)}
+     * @param booking
+     *            Booking data structure
      * @param settings
      *            A Map holding the keys defined in {@link FunnelExtension#getSettings()},
      *            and associated values with possible inheritance applied
@@ -21,5 +22,5 @@ public interface TripDataConsumer {
      *            Locale for error messages
      * @return
      */
-    void consume(String tripData, Map<String, Object> settings, Locale locale);
+    void consume(Booking booking, Map<String, Object> settings, Locale locale);
 }

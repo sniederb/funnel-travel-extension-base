@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import ch.want.funnel.extension.tripdata.DataFormat;
-
 /**
  * Interface for the main implemenation of a funnel extension. Be sure to register the implementation class by putting
  * a resource file named "funnel-extension.json" in the same package as the implementation:
@@ -25,15 +23,6 @@ import ch.want.funnel.extension.tripdata.DataFormat;
  * </pre>
  */
 public interface FunnelExtension {
-
-    /**
-     * Define with what format this extension works
-     * 
-     * @param settingValues
-     *
-     * @return
-     */
-    DataFormat getDataFormat(Map<String, Object> settingValues);
 
     /**
      * Get a list of settings which the implementation requires.

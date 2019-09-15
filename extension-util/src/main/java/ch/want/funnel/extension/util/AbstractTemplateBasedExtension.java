@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
+import ch.want.funnel.extension.model.Booking;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -149,6 +150,16 @@ public abstract class AbstractTemplateBasedExtension {
      * @param freemarkerConfiguration
      */
     protected void updateFreemarkerConfiguration(final Configuration freemarkerConfiguration) {
+    }
+
+    protected String render(final Template template, final Booking bookingData) throws IOException {
+        try {
+            final StringWriter result = new StringWriter();
+            template.process(bookingData, result);
+            return result.toString();
+        } catch (final TemplateException e) {
+            throw new IOException(e.getMessage(), e);
+        }
     }
 
     protected String render(final Template template, final Map<String, Object> templateData) throws IOException {

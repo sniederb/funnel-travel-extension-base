@@ -5,12 +5,20 @@ package ch.want.funnel.extension.tripdata;
 
 import java.util.Date;
 
+/**
+ * This class provides information on the raw source content. As an example, with an email as source, this class
+ * will hold the email subject, MIME type and received date.
+ */
 public class ContentMetadata {
 
     public final Date creationDate;
     public final String description;
     public final String participants;
     public final String mimeType;
+    /**
+     * If true, the funnel.travel server is advised to discard the source. Set this to true if a data stream
+     * produces multiple sources during a push or pull process and this is not the final source.
+     */
     public final boolean discardAsIntermediate;
 
     /**
@@ -69,11 +77,13 @@ public class ContentMetadata {
 
     /**
      * MIME types handled by funnel.travel:
-     * - multipart/mixed (for MIME e-mail messages)
-     * - text/plain
-     * - text/html
-     * - application/json
-     * - application/xml
+     * <ul>
+     * <li>multipart/mixed (for MIME e-mail messages)
+     * <li>text/plain
+     * <li>text/html
+     * <li>application/json
+     * <li>application/xml
+     * </ul>
      *
      * @return
      */
