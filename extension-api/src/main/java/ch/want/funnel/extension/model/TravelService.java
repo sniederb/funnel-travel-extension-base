@@ -5,7 +5,9 @@ package ch.want.funnel.extension.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -91,12 +93,30 @@ public class TravelService implements Serializable {
         return departuredate;
     }
 
+    /**
+     * Some extensions might use libraries which still lack proper java.time support.
+     * 
+     * @return
+     */
+    public Date getDeparturedateAsUtilDate() {
+        return departuredate == null ? null : java.util.Date.from(departuredate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
     public void setDeparturedate(final LocalDate departuredate) {
         this.departuredate = departuredate;
     }
 
     public LocalDate getReturndate() {
         return returndate;
+    }
+
+    /**
+     * Some extensions might use libraries which still lack proper java.time support.
+     * 
+     * @return
+     */
+    public Date getReturndateAsUtilDate() {
+        return returndate == null ? null : java.util.Date.from(returndate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
     public void setReturndate(final LocalDate returndate) {

@@ -5,13 +5,16 @@ package ch.want.funnel.extension.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.JsonNode;
 
 public class Booking implements Serializable {
@@ -45,6 +48,29 @@ public class Booking implements Serializable {
 
     public Booking() {
         // default c'tor
+    }
+
+    private static boolean isBlank(final String s) {
+        return s == null || s.length() == 0;
+    }
+
+    public String getHeader() {
+        final StringJoiner joiner = new StringJoiner(", ");
+        if (!isBlank(getProviderSourcename())) {
+            joiner.add(getProviderSourcename());
+        } else if (!isBlank(getProviderName())) {
+            joiner.add(getProviderName());
+        }
+        if (!isBlank(getSourceDomain())) {
+            joiner.add(getSourceDomain());
+        }
+        if (!isBlank(getReferencenumber())) {
+            joiner.add(getReferencenumber());
+        }
+        if ((getTotalprice() != null) && (getTotalprice().compareTo(BigDecimal.ZERO) != 0)) {
+            joiner.add(getTotalpricecurrency() + " " + new DecimalFormat("#,##0.00").format(getTotalprice()));
+        }
+        return joiner.toString();
     }
 
     public UUID getUuid() {
@@ -95,22 +121,36 @@ public class Booking implements Serializable {
         this.sourceDomain = sourceDomain;
     }
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = JsonFormatConstants.JS_DATE_FORMAT, timezone = JsonFormat.DEFAULT_TIMEZONE)
     public LocalDate getDeparturedate() {
         return departuredate;
     }
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = JsonFormatConstants.JS_DATE_FORMAT, timezone = JsonFormat.DEFAULT_TIMEZONE)
+    /**
+     * Some extensions might use libraries which still lack proper java.time support.
+     *
+     * @return
+     */
+    public Date getDeparturedateAsUtilDate() {
+        return departuredate == null ? null : java.util.Date.from(departuredate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
     public void setDeparturedate(final LocalDate departuredate) {
         this.departuredate = departuredate;
     }
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = JsonFormatConstants.JS_DATE_FORMAT, timezone = JsonFormat.DEFAULT_TIMEZONE)
     public LocalDate getReturndate() {
         return returndate;
     }
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = JsonFormatConstants.JS_DATE_FORMAT, timezone = JsonFormat.DEFAULT_TIMEZONE)
+    /**
+     * Some extensions might use libraries which still lack proper java.time support.
+     *
+     * @return
+     */
+    public Date getReturndateAsUtilDate() {
+        return returndate == null ? null : java.util.Date.from(returndate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
     public void setReturndate(final LocalDate returndate) {
         this.returndate = returndate;
     }

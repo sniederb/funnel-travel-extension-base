@@ -1,10 +1,10 @@
 # Guide to writing a funnel.travel extension
 
-Last updated: Jan 17th, 2019
+Last updated: Sep 15th, 2019
 
 ## Minimal requirements
 
-The extension will run in the JVM context of the funnel.travel server using JRE 8. The minimum dependency is to
+The extension will run in the JVM context of the funnel.travel server using JRE 8. The minimum dependency is to add
 
 ```xml
 <dependency>
@@ -78,9 +78,9 @@ List<byte[]> getRawSources(Map<String, Object> settings, Locale locale);
 .. retrieves raw sources, and passes these to funnel.travel. The raw source will be stored together with the trip object.
 
 ```java
-String convertRawSourceToTripData(byte[] rawSource, Map<String, Object> settings, Locale locale);
+Booking convertRawSourceToTripData(byte[] rawSource, Map<String, Object> settings, Locale locale);
 ```
-... converts a single raw source to a funnel.travel trip object.
+... converts a single raw source to a funnel.travel booking object.
 
 This interface is suitable for pull systems such as retrieving e-mails.
 
@@ -104,10 +104,10 @@ https://www.funnel.travel/p/publicapi/extension/webhook/glb/<classname of the ex
 Subsequently, the extension is called first to extract the unique, external ID from the payload, and then called 
 
 ```java
-String convertRawSourceToTripData(byte[] rawSource, Map<String, Object> settings, Locale locale);
+Booking convertRawSourceToTripData(byte[] rawSource, Map<String, Object> settings, Locale locale);
 ```
 
-to convert the payload to a trip object structure.
+to convert the payload to a booking object structure.
 
 **Beware** that with a two-phased producer, there is a time-period during which the original payload has been retrieved, but the second phase has not been executed. The extension implementation must ensure that if triggered again, it will not _again_ retrieve the original payload.   
 
@@ -128,7 +128,7 @@ calling each other in an endless loop. The implementation must therefore verify 
 and return an empty Optional if no modification has occurred.
 
 ```java
-Optional<String> modify(String tripData, Map<String, Object> settings, Locale locale);
+Optional<Booking> modify(Booking bookingData, Map<String, Object> settings, Locale locale);
 ```
 
 _*TODO*_ describe mechanism to store internal data in settings! 
@@ -207,23 +207,24 @@ Beware that extensions must not provide some sort of execution status as additio
 
 The extension will run in the JVM context of the funnel.travel, and as such will have available the runtime libraries provided by funnel.travel.
 
-* slf4j-api, Version 1.7.25
+* slf4j-api, version1.7.25
 ** Use jcl-over-slf4j for an implementation in tests
-* ch.qos.logback, Version 1.1.11
-* com.google.code.gson, Version 2.8.2
-* com.googlecode.json-simple, Version 1.1.1
-* commons-beanutils, Version 1.9.3
-* commons-collections, Version 3.2.2
-* commons-codec, Version 1.10
-* javax.mail, Version 1.5.6
-* com.sun.mail, Version 1.5.6
-* org.apache.httpcomponents (httpclient), Version 4.5.5
-* org.apache.httpcomponents (httpcore), Version 4.4.9
-* org.apache.httpcomponents (httpmime), Version 4.5.5
-* com.fasterxml.jackson.core (jackson-core), Version 2.8.11
-* com.fasterxml.jackson.core (jackson-dataformat-csv), Version 2.8.11
-* com.fasterxml.jackson.core (jackson-dataformat-xml), Version 2.8.11
-* com.fasterxml.jackson.core (jackson-dataformat-yaml), Version 2.8.11
-* org.freemarker, Version 2.3.28
-* ch.want.funnel (extension-util), Version 1.0.0
+* ch.qos.logback, version1.1.11
+* com.google.code.gson, version2.8.2
+* com.googlecode.json-simple, version1.1.1
+* commons-beanutils, version1.9.3
+* commons-collections, version3.2.2
+* commons-codec, version1.10
+* commons-io, version 2.6
+* javax.mail, version1.5.6
+* com.sun.mail, version1.5.6
+* org.apache.httpcomponents (httpclient), version4.5.5
+* org.apache.httpcomponents (httpcore), version4.4.9
+* org.apache.httpcomponents (httpmime), version4.5.5
+* com.fasterxml.jackson.core (jackson-core), version2.8.11
+* com.fasterxml.jackson.core (jackson-dataformat-csv), version2.8.11
+* com.fasterxml.jackson.core (jackson-dataformat-xml), version2.8.11
+* com.fasterxml.jackson.core (jackson-dataformat-yaml), version2.8.11
+* org.freemarker, version2.3.28
+* ch.want.funnel (extension-util), version1.0.0
 
