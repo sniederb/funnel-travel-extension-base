@@ -42,7 +42,7 @@ pipeline {
                 }
                 // pattern: comma- or space-separated list of patterns of files that must be included.
                 step([$class: 'CheckStylePublisher', canComputeNew: false, defaultEncoding: '', healthy: '', 
-                	unstableTotalHigh: '0', unstableTotalNormal: '100', pattern: 'funnel-server/target/checkstyle-result.xml, webclient/target/lint-reports/checkstyle-result.xml', unHealthy: ''])
+                	unstableTotalHigh: '0', unstableTotalNormal: '100', pattern: 'extension-api/target/checkstyle-result.xml,extension-util/target/checkstyle-result.xml', unHealthy: ''])
             }
         }
     }
