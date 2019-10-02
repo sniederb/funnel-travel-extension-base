@@ -34,7 +34,12 @@ The `funnel-extension.json` file tells the funnel.travel server about the extens
   "Author": "WaNT GmbH",
   "Version": "1.0.0",
   "Description": "Read confirmation e-mails from a POP3/IMAP e-mail server."
-  "URL": "http://www.want.ch/emailextension.html"
+  "URL": "http://www.want.ch/emailextension.html",
+  "Permissions": [
+  	{
+  	  "Socket": "my.datahub.com"
+  	}
+  ]
 }
 ```
 
@@ -43,6 +48,9 @@ a link to the URL will be shown to the user.
 
 (The logo URL is _not_ provided by the JSON file, but by the interface implementation. The reason is that many implementations
 will provide the logo as part of the JAR, ie. implementations will use Class#getResource(String).)
+
+The extension must declare its interaction with the "outside" world through the `permissions` array. These will be listed on
+the UI. In the above example, the extension will exchange data with the `my.datahub.com` server. 
 
 ## Settings
 
@@ -63,7 +71,9 @@ executions.
 
 ### Execution environment
 The provided settings will always contain some environment-specific keys:
-The key `SettingItem.KEY_SERVERCONTEXT` will hold the server-path, eg. `/be/prod`. The key `SettingItem.KEY_FILESTORE` holds a string pointing to the server location for storing files. If the extension implementation creates files, it must do so using `SettingItem.KEY_FILESTORE`. A few files can be stored directly at that location; if the extension produces more than 10 files, it should create a subdirectory.
+    * The key `SettingItem.KEY_SERVERCONTEXT` will hold the server-path, eg. `/be/prod`. 
+    * The key `SettingItem.KEY_FILESTORE` holds a string pointing to the server location for storing files. If the extension implementation creates files, it must do so using `SettingItem.KEY_FILESTORE`. A few files can be stored directly at that location; if the extension produces more than 10 files, it should create a subdirectory.
+    * The key `SettingItem.KEY_ISPRODUCTION` holds a Boolean indicating whether the current context is production or not
 
 ## Types of extensions
 
