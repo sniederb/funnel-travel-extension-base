@@ -15,13 +15,13 @@ The extension will run in the JVM context of the funnel.travel server using JRE 
 ```
 
 The extension must:
-* implement the `FunnelExtension` interface
-* provide a file named `funnel-extension.json` (content see below)
-* implement at least one of the following interfaces:
-    * TripDataProducer
-    * TripDataModifier
-    * TripDataConsumer
-    * TripDataWebhook
+- implement the `FunnelExtension` interface
+- provide a file named `funnel-extension.json` (content see below)
+- implement at least one of the following interfaces:
+    - TripDataProducer
+    - TripDataModifier
+    - TripDataConsumer
+    - TripDataWebhook
 
 ### funnel-extension.json
 
@@ -52,6 +52,20 @@ will provide the logo as part of the JAR, ie. implementations will use Class#get
 The extension must declare its interaction with the "outside" world through the `permissions` array. These will be listed on
 the UI. In the above example, the extension will exchange data with the `my.datahub.com` server. 
 
+## Presentation of the extension in funnel.travel
+
+Each extension is presented in a standard layout.
+
+![Presentation of the ACME extension](https://www.funnel.travel/be/prod/doc/screenshots/extension-presentation.png)
+
+- "Test Producer" is taken from the "Name" in `funnel-extension.json`
+- "WaNT GmbH" is taken from the "Author" in `funnel-extension.json`
+- "1.0.0" is taken from the "Version" in `funnel-extension.json`
+- "Produce test trips from pre-defined JSON files. Only used in testing." is taken from the "Description" in `funnel-extension.json`
+- "More" points to the link defined by "URL" in `funnel-extension.json`
+- The logo is read by FunnelExtension#getLogoUrl(), and rendered with `max-width: 70px; max-height: 70px;`
+
+
 ## Settings
 
 By implementing the `FunnelExtension` interface, the extension must provide some methods related to settings:
@@ -71,9 +85,12 @@ executions.
 
 ### Execution environment
 The provided settings will always contain some environment-specific keys:
-    * The key `SettingItem.KEY_SERVERCONTEXT` will hold the server-path, eg. `/be/prod`. 
-    * The key `SettingItem.KEY_FILESTORE` holds a string pointing to the server location for storing files. If the extension implementation creates files, it must do so using `SettingItem.KEY_FILESTORE`. A few files can be stored directly at that location; if the extension produces more than 10 files, it should create a subdirectory.
-    * The key `SettingItem.KEY_ISPRODUCTION` holds a Boolean indicating whether the current context is production or not
+
+- The key `SettingItem.KEY_SERVERCONTEXT` will hold the server-path, eg. `/be/prod`. 
+- The key `SettingItem.KEY_FILESTORE` holds a string pointing to the server location for storing files. If the extension 
+      implementation creates files, it must do so using `SettingItem.KEY_FILESTORE`. Note that the directory is *independent 
+      of the account*, ie. it is in the extension's responsibility to manage directories per account if this would be necessary.
+- The key `SettingItem.KEY_ISPRODUCTION` holds a Boolean indicating whether the current context is production or not
 
 ## Types of extensions
 
@@ -141,9 +158,6 @@ and return an empty Optional if no modification has occurred.
 Optional<Booking> modify(Booking bookingData, Map<String, Object> settings, Locale locale);
 ```
 
-_*TODO*_ describe mechanism to store internal data in settings! 
-
-
 ### TripDataConsumer
 
 A 'consumer' extension only receives travel data, without any feedback to funnel.travel. Typical examples are reporting or data feeds
@@ -154,6 +168,21 @@ to accounting systems.
 A 'webhook' extension is typically either a producer or modifier where execution is triggered by a third-party system.
 
 This interface is suitable for push systems such as notification calls from booking systems.
+
+
+### Updating internal settings and/or booking state
+
+*All* extension types (even consumers) can write back:
+
+1. internal settings
+2. extension state on the booking
+
+The first is useful when an extension needs to maintain eg. an accounting sequence number over all executions. The extension simply needs to replace the desired key 
+in the `settings` map, and mark the key as `SettingItemValueType.INTERNAL`.
+
+The second one is useful for extensions which need to write back a tracking ID or similar. This, again, could be an accounting sequence number, or a tracking ID etc.
+See the following chapter on how to handle such Booking#extensionData.  
+
 
 ## The Booking#extensionData field
 
@@ -173,6 +202,25 @@ additional state in this field, eg:
     }
 }
 ```
+
+Any extension, also consumers, can update `extensionData`. The implementation must consider the case where Booking#getExtensionData() returns null.
+
+```java
+private void updateExtensionData(final Booking booking, final String value) {
+    ObjectNode extensionData = (ObjectNode) booking.getExtensionData();
+    if (extensionData == null) {
+        extensionData = JsonNodeFactory.instance.objectNode();
+        booking.setExtensionData(extensionData);
+    }
+    ObjectNode internalData = (ObjectNode) extensionData.get(this.getClass().getName());
+    if ((internalData == null) || (internalData.isNull())) {
+        internalData = JsonNodeFactory.instance.objectNode();
+        extensionData.set(this.getClass().getName(), internalData);
+    }
+    internalData.put("trackingId", value);
+}
+```
+
 
 ### Additional data for user
 
@@ -218,10 +266,11 @@ Beware that extensions must not provide some sort of execution status as additio
 The extension will run in the JVM context of the funnel.travel, and as such will have available the runtime libraries provided by funnel.travel.
 
 * slf4j-api, version1.7.25
-** Use jcl-over-slf4j for an implementation in tests
+    * Use jcl-over-slf4j for an implementation in tests
 * ch.qos.logback, version1.1.11
 * com.google.code.gson, version2.8.2
 * com.googlecode.json-simple, version1.1.1
+* com.google.guava (guava), version 19.0
 * commons-beanutils, version1.9.3
 * commons-collections, version3.2.2
 * commons-codec, version1.10
