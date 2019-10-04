@@ -91,6 +91,7 @@ The provided settings will always contain some environment-specific keys:
       implementation creates files, it must do so using `SettingItem.KEY_FILESTORE`. Note that the directory is *independent 
       of the account*, ie. it is in the extension's responsibility to manage directories per account if this would be necessary.
 - The key `SettingItem.KEY_ISPRODUCTION` holds a Boolean indicating whether the current context is production or not
+- TripDataProducer will additionally receive `SettingItem.KEY_ACCOUNT_UUID` as UUID
 
 ## Types of extensions
 
@@ -275,6 +276,8 @@ The extension will run in the JVM context of the funnel.travel, and as such will
 * commons-collections, version3.2.2
 * commons-codec, version1.10
 * commons-io, version 2.6
+* commons-net, version 3.6
+* com.jcraft, jsch, version 0.1.55
 * javax.mail, version1.5.6
 * com.sun.mail, version1.5.6
 * org.apache.httpcomponents (httpclient), version4.5.5

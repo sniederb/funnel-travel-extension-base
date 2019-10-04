@@ -8,6 +8,7 @@ public class SettingItem {
     public static final String KEY_FILESTORE = "funnel.environment.filestore";
     public static final String KEY_SERVERCONTEXT = "funnel.environment.servercontext";
     public static final String KEY_ISPRODUCTION = "funnel.environment.isproduction";
+    public static final String KEY_ACCOUNT_UUID = "funnel.environment.account-uuid";
     private String key;
     private SettingItemValueType valueType = SettingItemValueType.STRING;
     private boolean mandatory;
