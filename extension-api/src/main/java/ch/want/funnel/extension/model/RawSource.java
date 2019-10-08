@@ -18,6 +18,7 @@ public class RawSource implements Serializable {
     private String subject;
     private String paxlist;
     private String mime;
+    private byte[] source;
 
     public UUID getUuid() {
         return uuid;
@@ -81,5 +82,13 @@ public class RawSource implements Serializable {
 
     public void setMime(final String mime) {
         this.mime = mime;
+    }
+
+    public byte[] getSource() {
+        return source;
+    }
+
+    public void setSource(final byte[] source) {
+        this.source = source;
     }
 }

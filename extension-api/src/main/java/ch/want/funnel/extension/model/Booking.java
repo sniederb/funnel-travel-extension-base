@@ -36,6 +36,7 @@ public class Booking implements Serializable {
     private String destinationName;
     private String url;
     private String providerName;
+    private String comment;
     private TripImportStrategy importStrategy = TripImportStrategy.FULL;
     private String extensionClassname;
     private boolean forceNewTrip;
@@ -289,5 +290,13 @@ public class Booking implements Serializable {
 
     public void setCustomfields(final List<CustomFieldValue> customfields) {
         this.customfields = customfields;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(final String comment) {
+        this.comment = comment;
     }
 }

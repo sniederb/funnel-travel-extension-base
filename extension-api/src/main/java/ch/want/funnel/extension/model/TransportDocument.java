@@ -13,7 +13,7 @@ public class TransportDocument implements Serializable {
     private static final long serialVersionUID = 1L;
     private UUID uuid;
     private UUID travelServiceUuid;
-    private UUID travellerUuid;
+    private UUID bookingTravelerMapUuid;
     private TransportDocumentType transportDocumentType;
     private String referencenumber;
     private String description;
@@ -36,12 +36,12 @@ public class TransportDocument implements Serializable {
         this.travelServiceUuid = travelServiceUuid;
     }
 
-    public UUID getTravellerUuid() {
-        return travellerUuid;
+    public UUID getBookingTravelerMapUuid() {
+        return bookingTravelerMapUuid;
     }
 
-    public void setTravellerUuid(final UUID travellerUuid) {
-        this.travellerUuid = travellerUuid;
+    public void setBookingTravelerMapUuid(final UUID bookingTravelerMapUuid) {
+        this.bookingTravelerMapUuid = bookingTravelerMapUuid;
     }
 
     public TransportDocumentType getTransportDocumentType() {

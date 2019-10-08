@@ -17,6 +17,9 @@ public class SingleSegment implements Serializable {
     private String serviceDescription;
     private String startConditions;
     private String endConditions;
+    private String street;
+    private String zip;
+    private String city;
 
     public UUID getUuid() {
         return uuid;
@@ -80,5 +83,29 @@ public class SingleSegment implements Serializable {
 
     public void setEndConditions(final String endConditions) {
         this.endConditions = endConditions;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(final String street) {
+        this.street = street;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(final String zip) {
+        this.zip = zip;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(final String city) {
+        this.city = city;
     }
 }

@@ -24,6 +24,7 @@ public class TravelService implements Serializable {
     private LocalDate departuredate;
     private LocalDate returndate;
     private String cancellationPolicy;
+    private String comment;
     private transient List<TransportDocument> transportDocuments = new ArrayList<>();
     private transient List<PriceItem> priceitems = new ArrayList<>();
     private transient List<SegmentedLeg> segmentedLegs = new ArrayList<>();
@@ -95,7 +96,7 @@ public class TravelService implements Serializable {
 
     /**
      * Some extensions might use libraries which still lack proper java.time support.
-     * 
+     *
      * @return
      */
     public Date getDeparturedateAsUtilDate() {
@@ -112,7 +113,7 @@ public class TravelService implements Serializable {
 
     /**
      * Some extensions might use libraries which still lack proper java.time support.
-     * 
+     *
      * @return
      */
     public Date getReturndateAsUtilDate() {
@@ -161,5 +162,13 @@ public class TravelService implements Serializable {
 
     public void setSingleSegment(final SingleSegment singleSegment) {
         this.singleSegment = singleSegment;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(final String comment) {
+        this.comment = comment;
     }
 }

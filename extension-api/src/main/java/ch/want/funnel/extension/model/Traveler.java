@@ -1,21 +1,26 @@
-/*
- * Created on 5 Jan 2018
- */
 package ch.want.funnel.extension.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.UUID;
 
 public class Traveler implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private UUID uuid;
+    private UUID userloginUuid;
     private UUID organizationUuid;
     private String firstname;
     private String firstnameNonAps;
     private String lastname;
+    private String fullname;
     private String email;
-    private String username;
+    private String sourceId;
+    private Date birthdate;
+    private String passportCountry;
+    private String passportNumber;
+    private Date passportExpiration;
+    private String passportPlaceOfIssue;
 
     public UUID getUuid() {
         return uuid;
@@ -57,6 +62,19 @@ public class Traveler implements Serializable {
         this.lastname = lastname;
     }
 
+    /**
+     * Set by extensions which cannot distinguish between first and last name
+     *
+     * @return
+     */
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(final String fullname) {
+        this.fullname = fullname;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -65,11 +83,59 @@ public class Traveler implements Serializable {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
+    public UUID getUserloginUuid() {
+        return userloginUuid;
     }
 
-    public void setUsername(final String username) {
-        this.username = username;
+    public void setUserloginUuid(final UUID userloginUuid) {
+        this.userloginUuid = userloginUuid;
+    }
+
+    public String getSourceId() {
+        return sourceId;
+    }
+
+    public void setSourceId(final String sourceId) {
+        this.sourceId = sourceId;
+    }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(final Date birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public String getPassportCountry() {
+        return passportCountry;
+    }
+
+    public void setPassportCountry(final String passportCountry) {
+        this.passportCountry = passportCountry;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(final String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
+    public Date getPassportExpiration() {
+        return passportExpiration;
+    }
+
+    public void setPassportExpiration(final Date passportExpiration) {
+        this.passportExpiration = passportExpiration;
+    }
+
+    public String getPassportPlaceOfIssue() {
+        return passportPlaceOfIssue;
+    }
+
+    public void setPassportPlaceOfIssue(final String passportPlaceOfIssue) {
+        this.passportPlaceOfIssue = passportPlaceOfIssue;
     }
 }
