@@ -296,6 +296,14 @@ public class Booking implements Serializable {
         return comment;
     }
 
+    public void addCommentLine(final String line) {
+        if ((this.comment == null) || (this.comment.length() == 0)) {
+            this.comment = line;
+        } else {
+            this.comment = this.comment + "\n" + line;
+        }
+    }
+
     public void setComment(final String comment) {
         this.comment = comment;
     }

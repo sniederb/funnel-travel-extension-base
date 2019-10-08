@@ -1,7 +1,7 @@
 package ch.want.funnel.extension.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class Traveler implements Serializable {
@@ -16,10 +16,10 @@ public class Traveler implements Serializable {
     private String fullname;
     private String email;
     private String sourceId;
-    private Date birthdate;
+    private LocalDate birthdate;
     private String passportCountry;
     private String passportNumber;
-    private Date passportExpiration;
+    private LocalDate passportExpiration;
     private String passportPlaceOfIssue;
 
     public UUID getUuid() {
@@ -99,11 +99,11 @@ public class Traveler implements Serializable {
         this.sourceId = sourceId;
     }
 
-    public Date getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(final Date birthdate) {
+    public void setBirthdate(final LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -123,11 +123,11 @@ public class Traveler implements Serializable {
         this.passportNumber = passportNumber;
     }
 
-    public Date getPassportExpiration() {
+    public LocalDate getPassportExpiration() {
         return passportExpiration;
     }
 
-    public void setPassportExpiration(final Date passportExpiration) {
+    public void setPassportExpiration(final LocalDate passportExpiration) {
         this.passportExpiration = passportExpiration;
     }
 
