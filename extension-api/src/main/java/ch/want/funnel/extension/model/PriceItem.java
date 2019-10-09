@@ -7,13 +7,19 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "uuid")
 public class PriceItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private UUID uuid;
-    private UUID bookingUuid;
-    private UUID travelServiceUuid;
-    private UUID transportDocumentUuid;
+    @JsonBackReference("service-priceitems")
+    private TravelService travelService;
+    @JsonBackReference("document-prices")
+    private TransportDocument transportDocument;
     private PriceItemType priceItemType;
     private String description;
     private String currency;
@@ -28,28 +34,20 @@ public class PriceItem implements Serializable {
         this.uuid = uuid;
     }
 
-    public UUID getBookingUuid() {
-        return bookingUuid;
+    public TravelService getTravelService() {
+        return travelService;
     }
 
-    public void setBookingUuid(final UUID bookingUuid) {
-        this.bookingUuid = bookingUuid;
+    public void setTravelService(final TravelService travelService) {
+        this.travelService = travelService;
     }
 
-    public UUID getTravelServiceUuid() {
-        return travelServiceUuid;
+    public TransportDocument getTransportDocument() {
+        return transportDocument;
     }
 
-    public void setTravelServiceUuid(final UUID travelServiceUuid) {
-        this.travelServiceUuid = travelServiceUuid;
-    }
-
-    public UUID getTransportDocumentUuid() {
-        return transportDocumentUuid;
-    }
-
-    public void setTransportDocumentUuid(final UUID transportDocumentUuid) {
-        this.transportDocumentUuid = transportDocumentUuid;
+    public void setTransportDocument(final TransportDocument transportDocument) {
+        this.transportDocument = transportDocument;
     }
 
     public PriceItemType getPriceItemType() {

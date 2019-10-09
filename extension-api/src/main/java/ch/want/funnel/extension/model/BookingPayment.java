@@ -12,7 +12,6 @@ public class BookingPayment implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private UUID uuid;
-    private UUID bookingUuid;
     private OffsetDateTime entryTimestamp;
     private String description;
     private String currency;
@@ -28,14 +27,6 @@ public class BookingPayment implements Serializable {
 
     public void setUuid(final UUID uuid) {
         this.uuid = uuid;
-    }
-
-    public UUID getBookingUuid() {
-        return bookingUuid;
-    }
-
-    public void setBookingUuid(final UUID bookingUuid) {
-        this.bookingUuid = bookingUuid;
     }
 
     public OffsetDateTime getEntryTimestamp() {

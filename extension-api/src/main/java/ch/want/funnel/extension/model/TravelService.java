@@ -11,6 +11,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "uuid")
+@JsonIgnoreProperties(value = { "departuredateAsUtilDate", "returndateAsUtilDate" }, allowGetters = true)
 public class TravelService implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,9 +32,13 @@ public class TravelService implements Serializable {
     private LocalDate returndate;
     private String cancellationPolicy;
     private String comment;
+    @JsonManagedReference("service-documents")
     private transient List<TransportDocument> transportDocuments = new ArrayList<>();
+    @JsonManagedReference("service-priceitems")
     private transient List<PriceItem> priceitems = new ArrayList<>();
+    @JsonManagedReference("service-legs")
     private transient List<SegmentedLeg> segmentedLegs = new ArrayList<>();
+    @JsonManagedReference("singlesegment")
     private transient SingleSegment singleSegment;
 
     public TravelService() {

@@ -8,12 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "uuid")
 public class SegmentedLeg implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private UUID uuid;
-    private UUID travelServiceUuid;
+    @JsonBackReference("service-legs")
+    private TravelService travelService;
     private Integer legNr;
+    @JsonManagedReference("leg-segments")
     private transient List<TransportSegment> segments = new ArrayList<>();
 
     public UUID getUuid() {
@@ -24,12 +32,12 @@ public class SegmentedLeg implements Serializable {
         this.uuid = uuid;
     }
 
-    public UUID getTravelServiceUuid() {
-        return travelServiceUuid;
+    public TravelService getTravelService() {
+        return travelService;
     }
 
-    public void setTravelServiceUuid(final UUID travelServiceUuid) {
-        this.travelServiceUuid = travelServiceUuid;
+    public void setTravelService(final TravelService travelService) {
+        this.travelService = travelService;
     }
 
     public Integer getLegNr() {

@@ -1,6 +1,3 @@
-/*
- * Created on 7 Jan 2019
- */
 package ch.want.funnel.extension.model;
 
 import java.io.Serializable;
@@ -15,8 +12,10 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 
+@JsonIgnoreProperties(value = { "header", "departuredateAsUtilDate", "returndateAsUtilDate" }, allowGetters = true)
 public class Booking implements Serializable {
 
     private static final long serialVersionUID = 1L;

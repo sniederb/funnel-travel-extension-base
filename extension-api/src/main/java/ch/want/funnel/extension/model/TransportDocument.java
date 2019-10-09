@@ -8,15 +8,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "uuid")
 public class TransportDocument implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private UUID uuid;
-    private UUID travelServiceUuid;
-    private UUID bookingTravelerMapUuid;
+    @JsonBackReference("service-documents")
+    private TravelService travelService;
+    @JsonBackReference("document-traveler")
+    private Traveler traveler;
     private TransportDocumentType transportDocumentType;
     private String referencenumber;
     private String description;
+    @JsonManagedReference("document-prices")
     private transient List<PriceItem> priceitems = new ArrayList<>();
     private transient List<String> associatedSegments = new ArrayList<>();
 
@@ -28,20 +37,20 @@ public class TransportDocument implements Serializable {
         this.uuid = uuid;
     }
 
-    public UUID getTravelServiceUuid() {
-        return travelServiceUuid;
+    public TravelService getTravelService() {
+        return travelService;
     }
 
-    public void setTravelServiceUuid(final UUID travelServiceUuid) {
-        this.travelServiceUuid = travelServiceUuid;
+    public void setTravelService(final TravelService travelService) {
+        this.travelService = travelService;
     }
 
-    public UUID getBookingTravelerMapUuid() {
-        return bookingTravelerMapUuid;
+    public Traveler getTraveler() {
+        return traveler;
     }
 
-    public void setBookingTravelerMapUuid(final UUID bookingTravelerMapUuid) {
-        this.bookingTravelerMapUuid = bookingTravelerMapUuid;
+    public void setTraveler(final Traveler traveler) {
+        this.traveler = traveler;
     }
 
     public TransportDocumentType getTransportDocumentType() {
@@ -76,8 +85,24 @@ public class TransportDocument implements Serializable {
         this.priceitems = priceitems;
     }
 
+    /**
+     * Get a list of elements, the count of which must match the count of all segments present in the parent.
+     * An association will be created/updated if the value at the matching index is truthy (true, TRUE), or if
+     * the list contains the UUID of the segment (at any position!)
+     */
     public List<String> getAssociatedSegments() {
         return associatedSegments;
+    }
+
+    public void initializeAssociatedSegments(final TravelService segmentedService) {
+        initializeAssociatedSegments(segmentedService, false);
+    }
+
+    public void initializeAssociatedSegments(final TravelService segmentedService, final boolean defaultValue) {
+        associatedSegments.clear();
+        segmentedService.getSegmentedLegs().stream()
+                .flatMap(leg -> leg.getSegments().stream())
+                .forEach(seg -> associatedSegments.add(Boolean.toString(defaultValue)));
     }
 
     public void setAssociatedSegments(final List<String> associatedSegments) {

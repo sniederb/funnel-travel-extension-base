@@ -6,11 +6,14 @@ package ch.want.funnel.extension.model;
 import java.io.Serializable;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 public class SingleSegment implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private UUID uuid;
-    private UUID travelServiceUuid;
+    @JsonBackReference("singlesegment")
+    private TravelService travelService;
     private String destination;
     private String destinationName;
     private String providerDescription;
@@ -29,12 +32,12 @@ public class SingleSegment implements Serializable {
         this.uuid = uuid;
     }
 
-    public UUID getTravelServiceUuid() {
-        return travelServiceUuid;
+    public TravelService getTravelService() {
+        return travelService;
     }
 
-    public void setTravelServiceUuid(final UUID travelServiceUuid) {
-        this.travelServiceUuid = travelServiceUuid;
+    public void setTravelService(final TravelService travelService) {
+        this.travelService = travelService;
     }
 
     public String getDestination() {

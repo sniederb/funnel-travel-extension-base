@@ -11,7 +11,6 @@ public class RawSource implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private UUID uuid;
-    private UUID bookingUuid;
     private String externalid;
     private String origin;
     private OffsetDateTime entrydate;
@@ -26,14 +25,6 @@ public class RawSource implements Serializable {
 
     public void setUuid(final UUID uuid) {
         this.uuid = uuid;
-    }
-
-    public UUID getBookingUuid() {
-        return bookingUuid;
-    }
-
-    public void setBookingUuid(final UUID bookingUuid) {
-        this.bookingUuid = bookingUuid;
     }
 
     public String getExternalid() {

@@ -9,11 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "uuid")
 public class TransportSegment implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private UUID uuid;
-    private UUID segmentedLegUuid;
+    @JsonBackReference("leg-segments")
+    private SegmentedLeg segmentedLeg;
     private Short segNr;
     private LocalDateTime departuretime;
     private String departingfromdestination;
@@ -36,12 +42,12 @@ public class TransportSegment implements Serializable {
         this.uuid = uuid;
     }
 
-    public UUID getSegmentedLegUuid() {
-        return segmentedLegUuid;
+    public SegmentedLeg getSegmentedLeg() {
+        return segmentedLeg;
     }
 
-    public void setSegmentedLegUuid(final UUID segmentedLegUuid) {
-        this.segmentedLegUuid = segmentedLegUuid;
+    public void setSegmentedLeg(final SegmentedLeg segmentedLeg) {
+        this.segmentedLeg = segmentedLeg;
     }
 
     public Short getSegNr() {
