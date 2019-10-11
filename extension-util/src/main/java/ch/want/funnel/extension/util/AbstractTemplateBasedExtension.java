@@ -106,8 +106,9 @@ public abstract class AbstractTemplateBasedExtension {
      *
      * @param templateResourceName
      *            The full resource name, ie. incl. package path (even if template is in the same package as the caller)
-     * @return
+     * @return a Freemarker template
      * @throws IOException
+     *             If the {@code templateResourceName} is invalid
      */
     protected Template loadTemplate(final String templateResourceName) throws IOException {
         assertConfigurationPublished();
@@ -119,8 +120,9 @@ public abstract class AbstractTemplateBasedExtension {
      *
      * @param templateResourceName
      *            The full resource name, ie. incl. package path (even if template is in the same package as the caller)
-     * @return
+     * @return a Freemarker template
      * @throws IOException
+     *             If the {@code templateResourceName} is invalid
      */
     protected Template parseTemplate(final String template) throws IOException {
         assertConfigurationPublished();
