@@ -29,6 +29,7 @@ public class TransportSegment implements Serializable {
     private String arrivingAtDestinationName;
     private Integer durationinminutes;
     private String travelclass;
+    private String farebasis;
     private String providername;
     private String connectionnumber;
     private String reservationlocator;
@@ -104,6 +105,14 @@ public class TransportSegment implements Serializable {
 
     public void setTravelclass(final String travelclass) {
         this.travelclass = travelclass;
+    }
+
+    public String getFarebasis() {
+        return farebasis;
+    }
+
+    public void setFarebasis(final String farebasis) {
+        this.farebasis = farebasis;
     }
 
     public String getProvidername() {

@@ -20,7 +20,6 @@ public class TransportDocument implements Serializable {
     private UUID uuid;
     @JsonBackReference("service-documents")
     private TravelService travelService;
-    @JsonBackReference("document-traveler")
     private Traveler traveler;
     private TransportDocumentType transportDocumentType;
     private String referencenumber;
