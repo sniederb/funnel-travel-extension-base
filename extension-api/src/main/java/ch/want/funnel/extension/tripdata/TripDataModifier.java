@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import ch.want.funnel.extension.FunnelExtension;
 import ch.want.funnel.extension.model.Booking;
+import ch.want.funnel.extension.model.TravelerProfileAffinity;
 
 /**
  * Implementations of this interface take an existing trip structure, and return the structure after some form
@@ -30,4 +31,12 @@ public interface TripDataModifier {
      *
      */
     Optional<Booking> modify(Booking booking, Map<String, Object> settings, Locale locale);
+
+    /**
+     * Indicate how badly this extension needs extended traveler profile data. Use
+     * {@link TravelerProfileAffinity#NONE} if you don't know.
+     * 
+     * @return
+     */
+    TravelerProfileAffinity getTravelerProfileAffinity();
 }

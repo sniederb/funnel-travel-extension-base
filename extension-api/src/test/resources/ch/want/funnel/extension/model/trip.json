@@ -1,0 +1,293 @@
+{
+	"uuid": null,
+	"funnelIdentifier": null,
+	"accountIdentifier": null,
+	"accountUuid": null,
+	"organizationUuid": null,
+	"created": null,
+	"title": null,
+	"departuredate": null,
+	"returndate": null,
+	"destination": null,
+	"comment": null,
+	"bookings": [
+		{
+			"uuid": null,
+			"tripUuid": null,
+			"providerUuid": null,
+			"created": null,
+			"providerSourcename": "Expedia",
+			"sourceDomain": "Expedia",
+			"departuredate": null,
+			"returndate": null,
+			"referencenumber": "7383012568246",
+			"totalpricecurrency": null,
+			"totalprice": null,
+			"extensionData": null,
+			"destinationCode": null,
+			"destinationName": null,
+			"url": null,
+			"providerName": null,
+			"comment": null,
+			"importStrategy": "FULL",
+			"extensionClassname": null,
+			"forceNewTrip": false,
+			"travelservices": [
+				{
+					"uuid": null,
+					"bookingUuid": null,
+					"providerUuid": null,
+					"providerSourcename": "",
+					"travelServiceType": "FLIGHT",
+					"bookingstatus": null,
+					"referencenumber": "PCRESW",
+					"departuredate": null,
+					"returndate": null,
+					"cancellationPolicy": null,
+					"comment": null,
+					"transportDocuments": [
+						{
+							"uuid": null,
+							"traveler": null,
+							"transportDocumentType": null,
+							"referencenumber": "0742798225235",
+							"description": null,
+							"priceitems": [
+								{
+									"uuid": null,
+									"priceItemType": "FARE_PER_PAX",
+									"description": null,
+									"currency": "CHF",
+									"amount": 373.25,
+									"amountInAccountCurrency": null
+								},
+								{
+									"uuid": null,
+									"priceItemType": "TAX_PER_PAX",
+									"description": null,
+									"currency": "CHF",
+									"amount": 101.25,
+									"amountInAccountCurrency": null
+								}
+							],
+							"associatedSegments": []
+						},
+						{
+							"uuid": null,
+							"traveler": null,
+							"transportDocumentType": null,
+							"referencenumber": "0742798225234",
+							"description": null,
+							"priceitems": [
+								{
+									"uuid": null,
+									"priceItemType": "FARE_PER_PAX",
+									"description": null,
+									"currency": "CHF",
+									"amount": 373.25,
+									"amountInAccountCurrency": null
+								},
+								{
+									"uuid": null,
+									"priceItemType": "TAX_PER_PAX",
+									"description": null,
+									"currency": "CHF",
+									"amount": 101.25,
+									"amountInAccountCurrency": null
+								}
+							],
+							"associatedSegments": []
+						}
+					],
+					"priceitems": [],
+					"segmentedLegs": [
+						{
+							"uuid": null,
+							"legNr": 0,
+							"segments": [
+								{
+									"uuid": null,
+									"segNr": 0,
+									"departuretime": [
+										2019,
+										1,
+										2,
+										9,
+										10
+									],
+									"departingfromdestination": "ZRH/CH",
+									"departingFromDestinationName": null,
+									"arrivaltime": [
+										2019,
+										1,
+										2,
+										10,
+										55
+									],
+									"arrivingatdestination": "AMS/NL",
+									"arrivingAtDestinationName": null,
+									"durationinminutes": null,
+									"travelclass": "Economy",
+									"farebasis": null,
+									"providername": "KL",
+									"connectionnumber": "1954",
+									"reservationlocator": "PCRESW",
+									"auxiliaries": []
+								},
+								{
+									"uuid": null,
+									"segNr": 1,
+									"departuretime": [
+										2019,
+										1,
+										2,
+										12,
+										10
+									],
+									"departingfromdestination": "AMS/NL",
+									"departingFromDestinationName": null,
+									"arrivaltime": [
+										2019,
+										1,
+										2,
+										12,
+										50
+									],
+									"arrivingatdestination": "INV/GB",
+									"arrivingAtDestinationName": null,
+									"durationinminutes": null,
+									"travelclass": "Economy",
+									"farebasis": null,
+									"providername": "KL",
+									"connectionnumber": "929",
+									"reservationlocator": "PCRESW",
+									"auxiliaries": []
+								}
+							]
+						},
+						{
+							"uuid": null,
+							"legNr": 1,
+							"segments": [
+								{
+									"uuid": null,
+									"segNr": 0,
+									"departuretime": [
+										2019,
+										1,
+										30,
+										13,
+										20
+									],
+									"departingfromdestination": "INV/GB",
+									"departingFromDestinationName": null,
+									"arrivaltime": [
+										2019,
+										1,
+										30,
+										16,
+										0
+									],
+									"arrivingatdestination": "AMS/NL",
+									"arrivingAtDestinationName": null,
+									"durationinminutes": null,
+									"travelclass": "Economy",
+									"farebasis": null,
+									"providername": "KL",
+									"connectionnumber": "930",
+									"reservationlocator": "PCRESW",
+									"auxiliaries": []
+								},
+								{
+									"uuid": null,
+									"segNr": 1,
+									"departuretime": [
+										2019,
+										1,
+										30,
+										17,
+										5
+									],
+									"departingfromdestination": "AMS/NL",
+									"departingFromDestinationName": null,
+									"arrivaltime": [
+										2019,
+										1,
+										30,
+										18,
+										25
+									],
+									"arrivingatdestination": "ZRH/CH",
+									"arrivingAtDestinationName": null,
+									"durationinminutes": null,
+									"travelclass": "Economy",
+									"farebasis": null,
+									"providername": "KL",
+									"connectionnumber": "1963",
+									"reservationlocator": "PCRESW",
+									"auxiliaries": []
+								}
+							]
+						}
+					],
+					"singleSegment": null,
+					"returndateAsUtilDate": null,
+					"departuredateAsUtilDate": null
+				}
+			],
+			"priceitems": [],
+			"payments": [],
+			"rawsources": [],
+			"participants": [
+				{
+					"uuid": null,
+					"userloginUuid": null,
+					"organizationUuid": null,
+					"firstname": "John",
+					"firstnameNonAps": null,
+					"lastname": "Busybody",
+					"fullname": "John Busybody",
+					"email": null,
+					"sourceId": null,
+					"birthdate": null,
+					"passportCountry": null,
+					"passportNumber": null,
+					"passportExpiration": null,
+					"passportPlaceOfIssue": null
+				},
+				{
+					"uuid": null,
+					"userloginUuid": null,
+					"organizationUuid": null,
+					"firstname": "Sara",
+					"firstnameNonAps": null,
+					"lastname": "Schnell",
+					"fullname": "Sara Schnell",
+					"email": null,
+					"sourceId": null,
+					"birthdate": null,
+					"passportCountry": null,
+					"passportNumber": null,
+					"passportExpiration": null,
+					"passportPlaceOfIssue": null
+				}
+			],
+			"customfields": [],
+			"returndateAsUtilDate": null,
+			"departuredateAsUtilDate": null,
+			"header": "Expedia, Expedia, 7383012568246"
+		}
+	],
+	"customfieldValues": [
+		{
+			"internalvalue": "foobar",
+			"customField": {
+				"datatype": "STRING",
+				"editDirective": "OPTIONAL",
+				"name": "Cost center"
+			}
+		}
+	],
+	"returndateAsUtilDate": null,
+	"departuredateAsUtilDate": null
+}

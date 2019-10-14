@@ -8,6 +8,8 @@ import java.util.Map;
 
 import ch.want.funnel.extension.FunnelExtension;
 import ch.want.funnel.extension.model.Booking;
+import ch.want.funnel.extension.model.TravelerProfileAffinity;
+import ch.want.funnel.extension.model.Trip;
 
 public interface TripDataConsumer {
 
@@ -22,5 +24,13 @@ public interface TripDataConsumer {
      *            Locale for error messages
      * @return
      */
-    void consume(Booking booking, Map<String, Object> settings, Locale locale);
+    void consume(Booking booking, Trip trip, Map<String, Object> settings, Locale locale);
+
+    /**
+     * Indicate how badly this extension needs extended traveler profile data. Use
+     * {@link TravelerProfileAffinity#NONE} if you don't know.
+     * 
+     * @return
+     */
+    TravelerProfileAffinity getTravelerProfileAffinity();
 }

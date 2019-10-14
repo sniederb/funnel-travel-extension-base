@@ -27,6 +27,12 @@ public class RawSource implements Serializable {
         this.uuid = uuid;
     }
 
+    /**
+     * For file-based producers, this <strong>must</strong> be the filename. Note that
+     * filenames only need to be unique within a booking.
+     * 
+     * @return
+     */
     public String getExternalid() {
         return externalid;
     }
