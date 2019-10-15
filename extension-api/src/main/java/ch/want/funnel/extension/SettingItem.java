@@ -3,6 +3,8 @@
  */
 package ch.want.funnel.extension;
 
+import java.util.SortedMap;
+
 public class SettingItem {
 
     public static final String KEY_FILESTORE = "funnel.environment.filestore";
@@ -13,6 +15,7 @@ public class SettingItem {
     private SettingItemValueType valueType = SettingItemValueType.STRING;
     private boolean mandatory;
     private SettingItemInheritance inheritance = SettingItemInheritance.ACCOUNT_ONLY;
+    private SortedMap<Object, String> options;
 
     public SettingItem() {
         // default bean c'tor for Jackson
@@ -76,5 +79,16 @@ public class SettingItem {
         }
         this.valueType = valueType;
         return this;
+    }
+
+    /**
+     * Beware: this will be null if {@link #setOptions(SortedMap)} was never called
+     */
+    public SortedMap<Object, String> getOptions() {
+        return options;
+    }
+
+    public void setOptions(final SortedMap<Object, String> options) {
+        this.options = options;
     }
 }
