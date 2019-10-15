@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 public class Traveler implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,6 +23,7 @@ public class Traveler implements Serializable {
     private String passportNumber;
     private LocalDate passportExpiration;
     private String passportPlaceOfIssue;
+    private JsonNode extendedProfileData;
 
     public UUID getUuid() {
         return uuid;
@@ -137,5 +140,20 @@ public class Traveler implements Serializable {
 
     public void setPassportPlaceOfIssue(final String passportPlaceOfIssue) {
         this.passportPlaceOfIssue = passportPlaceOfIssue;
+    }
+
+    /**
+     * If the extension has request profile data, this JSON data <strong>might</strong>
+     * be populated. Even for {@link TravelerProfileAffinity#NEED_TO_HAVE}, this might be null in
+     * the case a traveler lookup in the profile system failed.
+     * 
+     * @return Can be null
+     */
+    public JsonNode getExtendedProfileData() {
+        return extendedProfileData;
+    }
+
+    public void setExtendedProfileData(final JsonNode extendedProfileData) {
+        this.extendedProfileData = extendedProfileData;
     }
 }
