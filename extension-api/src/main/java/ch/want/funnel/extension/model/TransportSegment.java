@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -14,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "uuid")
-public class TransportSegment implements Serializable {
+public class TransportSegment implements Serializable, Comparable<TransportSegment> {
 
     private static final long serialVersionUID = 1L;
     private UUID uuid;
@@ -161,5 +162,49 @@ public class TransportSegment implements Serializable {
 
     public void setArrivingAtDestinationName(final String arrivingAtDestinationName) {
         this.arrivingAtDestinationName = arrivingAtDestinationName;
+    }
+
+    @Override
+    public int compareTo(final TransportSegment other) {
+        int result = 0;
+        // we're comparing *local* timestamps here, which is functionally dubious. However, it's rather hard
+        // to depart at a given time, and catch a connecting flight in a different time zone with an *earlier*
+        // local departure time.
+        if ((departuretime != null) && (other.departuretime != null)) {
+            result = departuretime.compareTo(other.departuretime);
+        }
+        if ((result == 0) && (arrivaltime != null) && (other.arrivaltime != null)) {
+            result = arrivaltime.compareTo(other.arrivaltime);
+        }
+        if ((result == 0) && (segNr != null) && (other.segNr != null)) {
+            result = segNr - other.segNr;
+        }
+        return result;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((departingfromdestination == null) ? 0 : departingfromdestination.hashCode());
+        result = prime * result + ((departuretime == null) ? 0 : departuretime.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if ((obj == null) || (getClass() != obj.getClass())) {
+            return false;
+        }
+        final TransportSegment other = (TransportSegment) obj;
+        if (uuid != null && Objects.equals(uuid, other.uuid)) {
+            return true;
+        }
+        return Objects.equals(departingfromdestination, other.departingfromdestination) &&
+                Objects.equals(departuretime, other.departuretime) &&
+                Objects.equals(connectionnumber, other.connectionnumber);
     }
 }

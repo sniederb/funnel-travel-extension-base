@@ -261,6 +261,19 @@ Beware that extensions must not provide some sort of execution status as additio
 * Dates are serialized in XML format, eg. `2019-04-19`. This is mainly relevant for departure / arrival dates
 * Date/Times for departures / arrivals of travel segments (flight, train etc) are serialized in ISO 8601 format **but without a timezone**, eg. `2019-04-20T04:56:00`. The time here is always interpreted as local to the departing / arriving destination. If an extension sends (or modifies) trip data, it must ensure that the timestamp is delivered either **without timezone**, or that the time is adjusted accordingly. 
 
+## Common issues
+
+### My extension needs to be called per trip, not per booking
+
+Extension management runs per booking, states are also maintained per booking. However, the associated trip is passed to consumer extensions. Thus for consumer extensions, the implementation
+should add a marker in the booking extension data when first called, and then check for that marker on all bookings of the trip to see if the extension was already executed.
+
+### The destinations don't work for me
+
+The destination on a booking and service level are determined based on the organization's location (if associated users are identified). For some extensions, this destination 'calculation'
+might be insufficient, or the extension needs to handle multi-stay trips (traveling salesman). For such cases, the `SegmentSplitter` from extension-utils can be used to take
+all segments from a service and split it into legs based on the stay at each destination.
+
 
 ## Library dependencies
 
