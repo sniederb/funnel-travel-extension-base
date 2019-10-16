@@ -32,6 +32,7 @@ public class SegmentSplitter {
         for (final TransportSegment segment : allsegments) {
             if (currentLeg == null) {
                 currentLeg = new SegmentedLeg();
+                currentLeg.setLegNr(legs.size() + 1);
                 legs.add(currentLeg);
             } else if (previousSegment != null) {
                 if (Objects.equals(previousSegment.getArrivingatdestination(), segment.getDepartingfromdestination()) &&

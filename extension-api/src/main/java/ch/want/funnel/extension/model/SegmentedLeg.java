@@ -6,10 +6,12 @@ package ch.want.funnel.extension.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -59,23 +61,31 @@ public class SegmentedLeg implements Serializable {
         this.segments = segments;
     }
 
+    @JsonIgnore
+    public TransportSegment getFirstSegment() {
+        return segments.isEmpty() ? null : segments.get(0);
+    }
+
+    @JsonIgnore
+    public TransportSegment getLastSegment() {
+        return segments.isEmpty() ? null : segments.get(segments.size() - 1);
+    }
+
     /**
      * Get departing destination of first segment
      *
      * @return
      */
     public String getDepartingDestination() {
-        if (segments.isEmpty()) {
-            return null;
-        }
-        return segments.get(0).getDepartingfromdestination();
+        return Optional.ofNullable(getFirstSegment())
+                .map(TransportSegment::getDepartingfromdestination)
+                .orElse(null);
     }
 
     public String getDepartingDestinationName() {
-        if (segments.isEmpty()) {
-            return null;
-        }
-        return segments.get(0).getDepartingFromDestinationName();
+        return Optional.ofNullable(getFirstSegment())
+                .map(TransportSegment::getDepartingFromDestinationName)
+                .orElse(null);
     }
 
     /**
@@ -84,17 +94,15 @@ public class SegmentedLeg implements Serializable {
      * @return
      */
     public String getArrivalDestination() {
-        if (segments.isEmpty()) {
-            return null;
-        }
-        return segments.get(segments.size() - 1).getArrivingatdestination();
+        return Optional.ofNullable(getLastSegment())
+                .map(TransportSegment::getArrivingatdestination)
+                .orElse(null);
     }
 
     public String getArrivalDestinationName() {
-        if (segments.isEmpty()) {
-            return null;
-        }
-        return segments.get(segments.size() - 1).getArrivingAtDestinationName();
+        return Optional.ofNullable(getLastSegment())
+                .map(TransportSegment::getArrivingAtDestinationName)
+                .orElse(null);
     }
 
     /**
