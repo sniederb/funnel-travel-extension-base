@@ -1,0 +1,105 @@
+{
+  "uuid": "3d9205ca-f264-4ad8-b1ac-e645557eaa99",
+  "firstname": "Remo",
+  "middlename": "",
+  "name": "Räber",
+  "email": "remo.test@umbrella.ch",
+  "data": {
+    "emergencyContact": {
+      "firstname": "Help",
+      "phone": "+419119911911",
+      "email": "help@umbrella.ch",
+      "lastname": "Sos"
+    },
+    "generalData": {
+      "birthdate": "",
+      "gender": "MR",
+      "mobilePhone": "+4176123456",
+      "nationality": "CH",
+      "language": "de_CH",
+      "privatePhone": "",
+      "businessPhone": "+41441234567",
+      "title": "",
+      "email": "remo.test@umbrella.ch"
+    },
+    "company": {
+      "externalNr": "RemUmb123",
+      "zipCode": "8620",
+      "uuid": "51386c57-9d4b-48ef-8440-01e91fd64fe2",
+      "email3": "",
+      "email2": "",
+      "phone": "",
+      "street": "Binzstrasse 33",
+      "countryCode": "CH",
+      "name": "Umbrella AG",
+      "street2": "",
+      "place": "Wetzikon ZH",
+      "fax": "",
+      "email": ""
+    },
+    "papers": {
+      "visas": [
+        {
+          "country": "US",
+          "number": "ABCD123",
+          "entryType": "MULTIPLE",
+          "expiration": "31.12.2019",
+          "couuntry": "US",
+          "issueDate": "01.10.2019"
+        }
+      ],
+      "idCards": [
+        {
+          "country": "CH",
+          "number": "9999",
+          "expiration": "",
+          "issueDate": "01.10.2019"
+        }
+      ],
+      "passports": [
+        {
+          "country": "CH",
+          "number": "123123123",
+          "expiration": "01.01.2020",
+          "couuntry": "CH",
+          "issueDate": "01.01.2010",
+          "issuePlace": "",
+          "primary": true
+        },
+        {
+          "country": "CH",
+          "number": "X1231",
+          "issueCountry": "CH",
+          "expiration": "01.01.2029",
+          "couuntry": "CH",
+          "issueDate": "01.01.2019",
+          "issuePlace": "Zürich",
+          "primary": false
+        }
+      ]
+    },
+    "genericValues": {
+      "Testfeld2": "Testfeld 2"
+    },
+    "memberships": {
+      "flight": [
+        {
+          "alliance": "LH",
+          "memberNumber": "999991231231"
+        }
+      ],
+      "rentalCar": [
+        {
+          "alliance": "ZD",
+          "memberNumber": "991231"
+        }
+      ],
+      "hotel": [
+        {
+          "alliance": "RT",
+          "memberNumber": "1123111"
+        }
+      ]
+    }
+  }
+}
