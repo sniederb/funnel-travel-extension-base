@@ -9,122 +9,68 @@ import com.fasterxml.jackson.databind.JsonNode;
  */
 public class ExtendedProfileDataAccessor {
 
-    private final JsonNode extendedProfileData;
+    private final TravelerProfileDataFormat dataFormat;
 
     public ExtendedProfileDataAccessor(final JsonNode extendedProfileData) {
-        this.extendedProfileData = extendedProfileData;
+        dataFormat = getDataFormat(extendedProfileData);
     }
 
-    /**
-     * Search {@code data -> papers -> passports [primary == true]}
-     */
-    public Optional<JsonNode> getPassport() {
-        final JsonNode passportsNode = Optional.ofNullable(extendedProfileData.get("data"))
-                .map(data -> data.get("papers"))
-                .map(papers -> papers.get("passports"))
-                .orElse(null);
-        JsonNode result = null;
-        if (passportsNode != null) {
-            for (final JsonNode passport : passportsNode) {
-                if (passport.get("primary").asBoolean(false) || (result == null)) {
-                    result = passport;
-                }
+    private TravelerProfileDataFormat getDataFormat(final JsonNode extendedProfileData) {
+        if (extendedProfileData.hasNonNull("funnelTravelerProfileDataFormat")) {
+            final String profileClient = extendedProfileData.get("funnelTravelerProfileDataFormat").asText();
+            switch (profileClient) {
+            case "UmbrellaFacesClient":
+                return new UmbrellaFacesProfileDataAccessor(extendedProfileData);
             }
         }
-        return Optional.ofNullable(result);
+        return new NoopProfileDataAccessor();
+    }
+
+    public Optional<JsonNode> getPassport() {
+        return dataFormat.getPassport();
     }
 
     public Optional<String> getCountry(final JsonNode passportNode) {
-        return Optional.ofNullable(passportNode)
-                .map(json -> json.get("country"))
-                .map(JsonNode::asText);
+        return dataFormat.getCountry(passportNode);
     }
 
-    /**
-     * Search {@code data -> generalData}
-     */
     public Optional<JsonNode> getContactData() {
-        return Optional.ofNullable(extendedProfileData.get("data"))
-                .map(data -> data.get("generalData"));
+        return dataFormat.getContactData();
     }
 
-    /**
-     * {@code contactNode} is obtained using {@link #getContactData()}
-     */
     public Optional<String> getContactPhone(final JsonNode contactNode) {
-        return Optional.ofNullable(contactNode)
-                .map(json -> json.get("businessPhone"))
-                .map(JsonNode::asText);
+        return dataFormat.getContactPhone(contactNode);
     }
 
-    /**
-     * Search {@code data -> company}
-     */
     public Optional<JsonNode> getCompanyData() {
-        return Optional.ofNullable(extendedProfileData.get("data"))
-                .map(data -> data.get("company"));
+        return dataFormat.getCompanyData();
     }
 
-    /**
-     * {@code companyNode} is obtained using {@link #getCompanyData()}
-     */
     public Optional<String> getCompanyName(final JsonNode companyNode) {
-        return Optional.ofNullable(companyNode)
-                .map(json -> json.get("name"))
-                .map(JsonNode::asText);
+        return dataFormat.getCompanyName(companyNode);
     }
 
-    /**
-     * {@code companyNode} is obtained using {@link #getCompanyData()}
-     */
     public Optional<String> getCompanyStreet(final JsonNode companyNode) {
-        return Optional.ofNullable(companyNode)
-                .map(json -> json.get("street"))
-                .map(JsonNode::asText);
+        return dataFormat.getCompanyStreet(companyNode);
     }
 
-    /**
-     * {@code companyNode} is obtained using {@link #getCompanyData()}
-     */
     public Optional<String> getCompanyStreet2(final JsonNode companyNode) {
-        return Optional.ofNullable(companyNode)
-                .map(json -> json.get("street2"))
-                .map(JsonNode::asText);
+        return dataFormat.getCompanyStreet2(companyNode);
     }
 
-    /**
-     * {@code companyNode} is obtained using {@link #getCompanyData()}
-     */
     public Optional<String> getCompanyPlace(final JsonNode companyNode) {
-        return Optional.ofNullable(companyNode)
-                .map(json -> json.get("place"))
-                .map(JsonNode::asText);
+        return dataFormat.getCompanyPlace(companyNode);
     }
 
-    /**
-     * {@code companyNode} is obtained using {@link #getCompanyData()}
-     */
     public Optional<String> getCompanyZip(final JsonNode companyNode) {
-        return Optional.ofNullable(companyNode)
-                .map(json -> json.get("zipCode"))
-                .map(JsonNode::asText);
+        return dataFormat.getCompanyZip(companyNode);
     }
 
-    /**
-     * {@code companyNode} is obtained using {@link #getCompanyData()}
-     */
     public Optional<String> getCompanyCountry(final JsonNode companyNode) {
-        return Optional.ofNullable(companyNode)
-                .map(json -> json.get("countryCode"))
-                .map(JsonNode::asText);
+        return dataFormat.getCompanyCountry(companyNode);
     }
 
-    /**
-     * {@code companyNode} is obtained using {@link #getCompanyData()}
-     */
     public Optional<String> getCompanyPhone(final JsonNode companyNode) {
-        return Optional.ofNullable(companyNode)
-                .map(json -> json.get("phone"))
-                .map(JsonNode::asText);
+        return dataFormat.getCompanyPhone(companyNode);
     }
 }

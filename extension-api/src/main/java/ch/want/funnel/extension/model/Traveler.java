@@ -23,7 +23,7 @@ public class Traveler implements Serializable {
     private String passportNumber;
     private LocalDate passportExpiration;
     private String passportPlaceOfIssue;
-    private JsonNode extendedProfileData;
+    private transient JsonNode extendedProfileData;
 
     public UUID getUuid() {
         return uuid;
@@ -146,7 +146,7 @@ public class Traveler implements Serializable {
      * If the extension has request profile data, this JSON data <strong>might</strong>
      * be populated. Even for {@link TravelerProfileAffinity#NEED_TO_HAVE}, this might be null in
      * the case a traveler lookup in the profile system failed.
-     * 
+     *
      * @return Can be null
      */
     public JsonNode getExtendedProfileData() {
