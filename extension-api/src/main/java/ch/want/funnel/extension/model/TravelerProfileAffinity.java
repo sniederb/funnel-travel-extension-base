@@ -11,6 +11,10 @@ public enum TravelerProfileAffinity {
      * Indicates that this extension requires having extended traveler profile data available.
      * Activating the extension on an account with a traveler profile suite integration will
      * fail.
+     *
+     * <strong>Note that extension implementations must still validate that extended traveler profile data
+     * is present when called for consume or modify, as funnel.travel will only ensure a consistent setup, but not that
+     * profile data is found for every booking / pax.</strong>
      */
     NEED_TO_HAVE
 }

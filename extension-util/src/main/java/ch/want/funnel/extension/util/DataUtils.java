@@ -1,6 +1,3 @@
-/*
- * Created on 03.10.2019
- */
 package ch.want.funnel.extension.util;
 
 public final class DataUtils {
