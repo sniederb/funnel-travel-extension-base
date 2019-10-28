@@ -14,7 +14,7 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see ch.want.funnel.extension.util.TravelerProfileDataFormat#getPassport()
      */
     @Override
@@ -34,9 +34,14 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
         return Optional.ofNullable(result);
     }
 
+    @Override
+    public Optional<String> getPrimaryEmail() {
+        return Optional.ofNullable(extendedProfileData.get("email")).map(JsonNode::asText);
+    }
+
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see ch.want.funnel.extension.util.TravelerProfileDataFormat#getCountry(com.fasterxml.jackson.databind.JsonNode)
      */
     @Override
@@ -48,7 +53,7 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see ch.want.funnel.extension.util.TravelerProfileDataFormat#getContactData()
      */
     @Override
@@ -59,7 +64,7 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see ch.want.funnel.extension.util.TravelerProfileDataFormat#getContactPhone(com.fasterxml.jackson.databind.JsonNode)
      */
     @Override
@@ -71,7 +76,7 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see ch.want.funnel.extension.util.TravelerProfileDataFormat#getCompanyData()
      */
     @Override
@@ -82,7 +87,7 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see ch.want.funnel.extension.util.TravelerProfileDataFormat#getCompanyName(com.fasterxml.jackson.databind.JsonNode)
      */
     @Override
@@ -94,7 +99,7 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see ch.want.funnel.extension.util.TravelerProfileDataFormat#getCompanyStreet(com.fasterxml.jackson.databind.JsonNode)
      */
     @Override
@@ -106,7 +111,7 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see ch.want.funnel.extension.util.TravelerProfileDataFormat#getCompanyStreet2(com.fasterxml.jackson.databind.JsonNode)
      */
     @Override
@@ -118,7 +123,7 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see ch.want.funnel.extension.util.TravelerProfileDataFormat#getCompanyPlace(com.fasterxml.jackson.databind.JsonNode)
      */
     @Override
@@ -130,7 +135,7 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see ch.want.funnel.extension.util.TravelerProfileDataFormat#getCompanyZip(com.fasterxml.jackson.databind.JsonNode)
      */
     @Override
@@ -142,7 +147,7 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see ch.want.funnel.extension.util.TravelerProfileDataFormat#getCompanyCountry(com.fasterxml.jackson.databind.JsonNode)
      */
     @Override
@@ -154,7 +159,7 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see ch.want.funnel.extension.util.TravelerProfileDataFormat#getCompanyPhone(com.fasterxml.jackson.databind.JsonNode)
      */
     @Override

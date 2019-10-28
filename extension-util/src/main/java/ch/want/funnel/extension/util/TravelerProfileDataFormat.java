@@ -11,6 +11,11 @@ public interface TravelerProfileDataFormat {
      */
     Optional<JsonNode> getPassport();
 
+    /**
+     * Search {@code data -> papers -> passports [primary == true]}
+     */
+    Optional<String> getPrimaryEmail();
+
     Optional<String> getCountry(JsonNode passportNode);
 
     /**

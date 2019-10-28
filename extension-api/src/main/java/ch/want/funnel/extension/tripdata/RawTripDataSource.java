@@ -1,6 +1,3 @@
-/*
- * Created on 08.03.2019
- */
 package ch.want.funnel.extension.tripdata;
 
 import java.io.Serializable;
@@ -14,6 +11,10 @@ public class RawTripDataSource implements Serializable {
     private final byte[] source;
     private final String uniqueSourceId;
 
+    /**
+     * The {@code source} will be persisted in funnel.travel and presented to the user in the booking section.
+     * (must match {@link ContentMetadata#getMimeType()}
+     */
     public RawTripDataSource(final byte[] source, final String uniqueSourceId) {
         this.source = source;
         this.uniqueSourceId = uniqueSourceId;

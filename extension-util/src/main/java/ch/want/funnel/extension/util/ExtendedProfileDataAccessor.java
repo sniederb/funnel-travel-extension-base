@@ -42,6 +42,10 @@ public class ExtendedProfileDataAccessor {
         return dataFormat.getContactPhone(contactNode);
     }
 
+    public Optional<String> getPrimaryEmail() {
+        return dataFormat.getPrimaryEmail();
+    }
+
     public Optional<JsonNode> getCompanyData() {
         return dataFormat.getCompanyData();
     }

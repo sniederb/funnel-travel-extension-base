@@ -12,6 +12,11 @@ class NoopProfileDataAccessor implements TravelerProfileDataFormat {
     }
 
     @Override
+    public Optional<String> getPrimaryEmail() {
+        return Optional.empty();
+    }
+
+    @Override
     public Optional<String> getCountry(final JsonNode passportNode) {
         return Optional.empty();
     }

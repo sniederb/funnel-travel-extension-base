@@ -26,6 +26,18 @@ public class ExtendedProfileDataAccessorTest {
     }
 
     @Test
+    public void getPrimaryEmail() throws Exception {
+        // arrange
+        final JsonNode json = getProfileJson();
+        final ExtendedProfileDataAccessor testee = new ExtendedProfileDataAccessor(json);
+        // act
+        final Optional<String> primaryEmail = testee.getPrimaryEmail();
+        // assert
+        assertTrue(primaryEmail.isPresent());
+        assertEquals("remo.test@umbrella.ch", primaryEmail.get());
+    }
+
+    @Test
     public void getCountry() throws Exception {
         // arrange
         final JsonNode json = getProfileJson();
