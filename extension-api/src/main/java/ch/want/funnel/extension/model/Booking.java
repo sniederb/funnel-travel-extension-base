@@ -28,6 +28,9 @@ public class Booking implements Serializable {
     private LocalDate departuredate;
     private LocalDate returndate;
     private String referencenumber;
+    private String sourceInternalReferencenumber;
+    private String productkey;
+    private String travelagencyId;
     private String totalpricecurrency;
     private BigDecimal totalprice;
     private transient JsonNode extensionData;
@@ -155,12 +158,51 @@ public class Booking implements Serializable {
         this.returndate = returndate;
     }
 
+    /**
+     * The {@code referencenumber} reflects the number presented to the customer. If the source system
+     * uses a different, internal ID, be sure to set {@link #setSourceInternalReferencenumber(String)}
+     */
     public String getReferencenumber() {
         return referencenumber;
     }
 
     public void setReferencenumber(final String referencenumber) {
         this.referencenumber = referencenumber;
+    }
+
+    /**
+     * The {@code sourceInternalReferencenumber} reflects the ID for this booking internal to the source system.
+     * This is often a UUID or a length hash-type string.
+     */
+    public String getSourceInternalReferencenumber() {
+        return sourceInternalReferencenumber;
+    }
+
+    public void setSourceInternalReferencenumber(final String sourceInternalReferencenumber) {
+        this.sourceInternalReferencenumber = sourceInternalReferencenumber;
+    }
+
+    /**
+     * The {@code productkey} has no business-function within funnel.travel, but consumer extensions
+     * might use it.
+     */
+    public String getProductkey() {
+        return productkey;
+    }
+
+    public void setProductkey(final String productkey) {
+        this.productkey = productkey;
+    }
+
+    /**
+     * The travel agency key, eg. an Amadeus OID, Galileo PCC, or CETS agency locator.
+     */
+    public String getTravelagencyId() {
+        return travelagencyId;
+    }
+
+    public void setTravelagencyId(final String travelagencyId) {
+        this.travelagencyId = travelagencyId;
     }
 
     public String getTotalpricecurrency() {
