@@ -32,9 +32,11 @@ The `funnel-extension.json` file tells the funnel.travel server about the extens
   "Implementation": "ch.want.funnel.extension.email.EmailExtension",
   "Name": "Confirmation E-mails",
   "Author": "WaNT GmbH",
+  "BookingSource": "Domain of booking platform",
   "Version": "1.0.0",
   "Description": "Read confirmation e-mails from a POP3/IMAP e-mail server."
   "URL": "http://www.want.ch/emailextension.html",
+  "PrivacyPolicyURL": "http://www.want.ch/privacy.html",
   "Permissions": [
   	{
   	  "Socket": "my.datahub.com"
@@ -43,8 +45,9 @@ The `funnel-extension.json` file tells the funnel.travel server about the extens
 }
 ```
 
-Mandatory properties are 'Implementation', 'Name', 'Author', 'Version', and 'Description'. If the optional 'URL' is provided, 
-a link to the URL will be shown to the user.
+Mandatory properties are 'Implementation', 'Name', 'Author', 'Version', 'Description' and 'PrivacyPolicyURL'. If the optional 'URL' is provided, 
+a link to the URL will be shown to the user. **Producer** extensions are recommend to supply 'BookingSource'; if this is not a constant value, then
+describe what sources the extension will provide.
 
 (The logo URL is _not_ provided by the JSON file, but by the interface implementation. The reason is that many implementations
 will provide the logo as part of the JAR, ie. implementations will use Class#getResource(String).)
