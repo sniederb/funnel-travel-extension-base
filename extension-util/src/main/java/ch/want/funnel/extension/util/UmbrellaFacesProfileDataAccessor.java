@@ -1,5 +1,8 @@
 package ch.want.funnel.extension.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -20,9 +23,9 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
     @Override
     public Optional<JsonNode> getPassport() {
         final JsonNode passportsNode = Optional.ofNullable(extendedProfileData.get("data"))
-                .map(data -> data.get("papers"))
-                .map(papers -> papers.get("passports"))
-                .orElse(null);
+            .map(data -> data.get("papers"))
+            .map(papers -> papers.get("passports"))
+            .orElse(null);
         JsonNode result = null;
         if (passportsNode != null) {
             for (final JsonNode passport : passportsNode) {
@@ -39,6 +42,21 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
         return Optional.ofNullable(extendedProfileData.get("email")).map(JsonNode::asText);
     }
 
+    @Override
+    public Optional<Date> getBirthdate() {
+        return getContactData()
+            .map(n -> n.get("birthdate"))
+            .map(JsonNode::asText)
+            .map(s -> s.length() > 0 ? s : null)
+            .map(s -> {
+                try {
+                    return new SimpleDateFormat("dd.MM.yyyy").parse(s);
+                } catch (final ParseException e) {
+                    return null;
+                }
+            });
+    }
+
     /*
      * (non-Javadoc)
      *
@@ -47,8 +65,37 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
     @Override
     public Optional<String> getCountry(final JsonNode passportNode) {
         return Optional.ofNullable(passportNode)
-                .map(json -> json.get("country"))
-                .map(JsonNode::asText);
+            .map(json -> json.get("country"))
+            .map(JsonNode::asText);
+    }
+
+    @Override
+    public Optional<String> getPassportNumber(final JsonNode passportNode) {
+        return Optional.ofNullable(passportNode)
+            .map(json -> json.get("number"))
+            .map(JsonNode::asText);
+    }
+
+    @Override
+    public Optional<String> getPassportPlaceOfIssue(final JsonNode passportNode) {
+        return Optional.ofNullable(passportNode)
+            .map(json -> json.get("issuePlace"))
+            .map(JsonNode::asText);
+    }
+
+    @Override
+    public Optional<Date> getPassportExpiration(final JsonNode passportNode) {
+        return Optional.ofNullable(passportNode)
+            .map(json -> json.get("expiration"))
+            .map(JsonNode::asText)
+            // expect format dd.MM.yyyy
+            .map(s -> {
+                try {
+                    return new SimpleDateFormat("dd.MM.yyyy").parse(s);
+                } catch (final ParseException e) {
+                    return null;
+                }
+            });
     }
 
     /*
@@ -59,7 +106,7 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
     @Override
     public Optional<JsonNode> getContactData() {
         return Optional.ofNullable(extendedProfileData.get("data"))
-                .map(data -> data.get("generalData"));
+            .map(data -> data.get("generalData"));
     }
 
     /*
@@ -70,8 +117,8 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
     @Override
     public Optional<String> getContactPhone(final JsonNode contactNode) {
         return Optional.ofNullable(contactNode)
-                .map(json -> json.get("businessPhone"))
-                .map(JsonNode::asText);
+            .map(json -> json.get("businessPhone"))
+            .map(JsonNode::asText);
     }
 
     /*
@@ -82,7 +129,7 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
     @Override
     public Optional<JsonNode> getCompanyData() {
         return Optional.ofNullable(extendedProfileData.get("data"))
-                .map(data -> data.get("company"));
+            .map(data -> data.get("company"));
     }
 
     /*
@@ -93,8 +140,8 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
     @Override
     public Optional<String> getCompanyName(final JsonNode companyNode) {
         return Optional.ofNullable(companyNode)
-                .map(json -> json.get("name"))
-                .map(JsonNode::asText);
+            .map(json -> json.get("name"))
+            .map(JsonNode::asText);
     }
 
     /*
@@ -105,8 +152,8 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
     @Override
     public Optional<String> getCompanyStreet(final JsonNode companyNode) {
         return Optional.ofNullable(companyNode)
-                .map(json -> json.get("street"))
-                .map(JsonNode::asText);
+            .map(json -> json.get("street"))
+            .map(JsonNode::asText);
     }
 
     /*
@@ -117,8 +164,8 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
     @Override
     public Optional<String> getCompanyStreet2(final JsonNode companyNode) {
         return Optional.ofNullable(companyNode)
-                .map(json -> json.get("street2"))
-                .map(JsonNode::asText);
+            .map(json -> json.get("street2"))
+            .map(JsonNode::asText);
     }
 
     /*
@@ -129,8 +176,8 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
     @Override
     public Optional<String> getCompanyPlace(final JsonNode companyNode) {
         return Optional.ofNullable(companyNode)
-                .map(json -> json.get("place"))
-                .map(JsonNode::asText);
+            .map(json -> json.get("place"))
+            .map(JsonNode::asText);
     }
 
     /*
@@ -141,8 +188,8 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
     @Override
     public Optional<String> getCompanyZip(final JsonNode companyNode) {
         return Optional.ofNullable(companyNode)
-                .map(json -> json.get("zipCode"))
-                .map(JsonNode::asText);
+            .map(json -> json.get("zipCode"))
+            .map(JsonNode::asText);
     }
 
     /*
@@ -153,8 +200,8 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
     @Override
     public Optional<String> getCompanyCountry(final JsonNode companyNode) {
         return Optional.ofNullable(companyNode)
-                .map(json -> json.get("countryCode"))
-                .map(JsonNode::asText);
+            .map(json -> json.get("countryCode"))
+            .map(JsonNode::asText);
     }
 
     /*
@@ -165,7 +212,7 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
     @Override
     public Optional<String> getCompanyPhone(final JsonNode companyNode) {
         return Optional.ofNullable(companyNode)
-                .map(json -> json.get("phone"))
-                .map(JsonNode::asText);
+            .map(json -> json.get("phone"))
+            .map(JsonNode::asText);
     }
 }

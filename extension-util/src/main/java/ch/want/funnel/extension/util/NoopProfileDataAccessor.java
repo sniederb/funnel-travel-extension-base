@@ -1,5 +1,6 @@
 package ch.want.funnel.extension.util;
 
+import java.util.Date;
 import java.util.Optional;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -68,6 +69,26 @@ class NoopProfileDataAccessor implements TravelerProfileDataFormat {
 
     @Override
     public Optional<String> getCompanyPhone(final JsonNode companyNode) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Date> getBirthdate() {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<String> getPassportNumber(final JsonNode passportNode) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<String> getPassportPlaceOfIssue(final JsonNode passportNode) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Date> getPassportExpiration(final JsonNode passportNode) {
         return Optional.empty();
     }
 }

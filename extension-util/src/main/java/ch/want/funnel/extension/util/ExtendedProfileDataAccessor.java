@@ -1,5 +1,6 @@
 package ch.want.funnel.extension.util;
 
+import java.util.Date;
 import java.util.Optional;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -30,8 +31,26 @@ public class ExtendedProfileDataAccessor {
         return dataFormat.getPassport();
     }
 
+    /**
+     * Get 'country' information from passport node
+     *
+     * @param passportNode
+     * @return
+     */
     public Optional<String> getCountry(final JsonNode passportNode) {
         return dataFormat.getCountry(passportNode);
+    }
+
+    public Optional<String> getPassportNumber(final JsonNode passportNode) {
+        return dataFormat.getPassportNumber(passportNode);
+    }
+
+    public Optional<String> getPassportPlaceOfIssue(final JsonNode passportNode) {
+        return dataFormat.getPassportPlaceOfIssue(passportNode);
+    }
+
+    public Optional<Date> getPassportExpiration(final JsonNode passportNode) {
+        return dataFormat.getPassportExpiration(passportNode);
     }
 
     public Optional<JsonNode> getContactData() {
@@ -44,6 +63,10 @@ public class ExtendedProfileDataAccessor {
 
     public Optional<String> getPrimaryEmail() {
         return dataFormat.getPrimaryEmail();
+    }
+
+    public Optional<Date> getBirthdate() {
+        return dataFormat.getBirthdate();
     }
 
     public Optional<JsonNode> getCompanyData() {

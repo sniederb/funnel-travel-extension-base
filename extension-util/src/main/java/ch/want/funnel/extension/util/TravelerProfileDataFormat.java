@@ -1,5 +1,6 @@
 package ch.want.funnel.extension.util;
 
+import java.util.Date;
 import java.util.Optional;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -16,7 +17,15 @@ public interface TravelerProfileDataFormat {
      */
     Optional<String> getPrimaryEmail();
 
+    Optional<Date> getBirthdate();
+
     Optional<String> getCountry(JsonNode passportNode);
+
+    Optional<String> getPassportNumber(JsonNode passportNode);
+
+    Optional<String> getPassportPlaceOfIssue(JsonNode passportNode);
+
+    Optional<Date> getPassportExpiration(JsonNode passportNode);
 
     /**
      * Search {@code data -> generalData}
