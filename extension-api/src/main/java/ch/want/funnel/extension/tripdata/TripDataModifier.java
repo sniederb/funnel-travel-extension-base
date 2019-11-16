@@ -5,8 +5,8 @@ package ch.want.funnel.extension.tripdata;
 
 import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 
+import ch.want.funnel.extension.ExtensionResult;
 import ch.want.funnel.extension.FunnelExtension;
 import ch.want.funnel.extension.model.Booking;
 import ch.want.funnel.extension.model.TravelerProfileAffinity;
@@ -26,16 +26,16 @@ public interface TripDataModifier {
      *            and associated values with possible inheritance applied
      * @param locale
      *            Locale for error messages
-     * @return The modified booking content. If the extension recognizes that no modification is needed, an {@link Optional#empty()} is
-     *         returned.
+     * @return The processing result. If the extension recognizes that no modification is needed, the {@code modifiedBooking} should
+     *         be set to null in the {@link ExtensionResult}.
      *
      */
-    Optional<Booking> modify(Booking booking, Map<String, Object> settings, Locale locale);
+    ExtensionResult modify(Booking booking, Map<String, Object> settings, Locale locale);
 
     /**
      * Indicate how badly this extension needs extended traveler profile data. Use
      * {@link TravelerProfileAffinity#NONE} if you don't know.
-     * 
+     *
      * @return
      */
     TravelerProfileAffinity getTravelerProfileAffinity();

@@ -6,6 +6,7 @@ package ch.want.funnel.extension.tripdata;
 import java.util.Locale;
 import java.util.Map;
 
+import ch.want.funnel.extension.ExtensionResult;
 import ch.want.funnel.extension.FunnelExtension;
 import ch.want.funnel.extension.model.Booking;
 import ch.want.funnel.extension.model.TravelerProfileAffinity;
@@ -22,14 +23,14 @@ public interface TripDataConsumer {
      *            and associated values with possible inheritance applied
      * @param locale
      *            Locale for error messages
-     * @return
+     * @return The processing result
      */
-    void consume(Booking booking, Trip trip, Map<String, Object> settings, Locale locale);
+    ExtensionResult consume(Booking booking, Trip trip, Map<String, Object> settings, Locale locale);
 
     /**
      * Indicate how badly this extension needs extended traveler profile data. Use
      * {@link TravelerProfileAffinity#NONE} if you don't know.
-     * 
+     *
      * @return
      */
     TravelerProfileAffinity getTravelerProfileAffinity();
