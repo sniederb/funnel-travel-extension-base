@@ -2,6 +2,7 @@ package ch.want.funnel.extension.util;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,15 @@ public class ExtensionDataAccess {
      * If found, the entry value string is returned.
      */
     public static Optional<String> searchAllExtensionDataForRemark(final Trip trip, final String remarkPrefix) {
+        return searchAllExtensionDataForRemark(trip, remarkPrefix, null);
+    }
+
+    /**
+     * Same as {@link #searchAllExtensionDataForRemark(Trip, String)} without the pax tattoo, but if a {@code paxTattoo}
+     * is provided, this method searches for entries with a {@code ,Pn} suffix. For valid "P"-associations see
+     * {@link DataUtils#mapAssociationToNumbers(String)}
+     */
+    public static Optional<String> searchAllExtensionDataForRemark(final Trip trip, final String remarkPrefix, final String paxTattoo) {
         final List<JsonNode> allExtensionData = trip.getBookings().stream()
             .filter(bk -> bk.getExtensionData() != null)
             .map(Booking::getExtensionData)
@@ -33,7 +43,7 @@ public class ExtensionDataAccess {
         for (final JsonNode extensionData : allExtensionData) {
             for (final Iterator<String> iterator = extensionData.fieldNames(); iterator.hasNext();) {
                 final String extensionClassname = iterator.next();
-                final Optional<String> result = searchExtensionSubnode(extensionData.get(extensionClassname), remarkPrefix);
+                final Optional<String> result = searchExtensionSubnode(extensionData.get(extensionClassname), remarkPrefix, paxTattoo);
                 if (result.isPresent()) {
                     return result;
                 }
@@ -42,17 +52,37 @@ public class ExtensionDataAccess {
         return Optional.empty();
     }
 
-    private static Optional<String> searchExtensionSubnode(final JsonNode extensionSubnode, final String remarkPrefix) {
+    private static Optional<String> searchExtensionSubnode(final JsonNode extensionSubnode, final String remarkPrefix, final String paxTattoo) {
         final JsonNode remarks = extensionSubnode.get("remarks");
         if ((remarks != null) && remarks.isArray()) {
             final ArrayNode remarksArray = (ArrayNode) remarks;
             for (final JsonNode value : remarksArray) {
-                if (!value.isNull() && value.asText().startsWith(remarkPrefix)) {
-                    return Optional.of(value.asText());
+                final Optional<String> remarkContent = getMatchingRemarkContent(value, remarkPrefix, paxTattoo);
+                if (remarkContent.isPresent()) {
+                    return remarkContent;
                 }
             }
         }
         return Optional.empty();
+    }
+
+    private static Optional<String> getMatchingRemarkContent(final JsonNode remarkNode, final String remarkPrefix, final String paxTattoo) {
+        if (remarkNode == null || remarkNode.isNull() || !remarkNode.isTextual()) {
+            return Optional.empty();
+        }
+        final String[] remarkLineParts = remarkNode.asText().split("[,;][pP]");
+        if (!remarkLineParts[0].startsWith(remarkPrefix)) {
+            return Optional.empty();
+        }
+        if (remarkLineParts.length > 1) {
+            final boolean hasTattooMatch = DataUtils.mapAssociationToNumbers(remarkLineParts[1]).stream()//
+                .map(i -> i.toString())//
+                .anyMatch(s -> Objects.equals(s, paxTattoo));
+            if (!hasTattooMatch) {
+                return Optional.empty();
+            }
+        }
+        return Optional.of(remarkLineParts[0]);
     }
 
     public Optional<JsonNode> getNode(final String extensionClassname, final String key) {
