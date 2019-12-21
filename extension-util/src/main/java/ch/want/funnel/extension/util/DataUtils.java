@@ -4,6 +4,12 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.stream.IntStream;
 
+import ch.want.funnel.extension.model.Booking;
+import ch.want.funnel.extension.model.SegmentedLeg;
+import ch.want.funnel.extension.model.TransportSegment;
+import ch.want.funnel.extension.model.TravelService;
+import ch.want.funnel.extension.model.Trip;
+
 public final class DataUtils {
 
     private DataUtils() {
@@ -28,6 +34,25 @@ public final class DataUtils {
             throw new IllegalArgumentException("Expected a destination code in the format DDD/CC, but got " + funnelDestinationCode);
         }
         return funnelDestinationCode.substring(0, 3);
+    }
+
+    /**
+     * Get the departing !destination! (eg. 'ZRH') of the very first segment.
+     *
+     * @param trip
+     * @return
+     */
+    public static String getDepartingAirport(final Trip trip) {
+        for (final Booking booking : trip.getBookings()) {
+            for (final TravelService service : booking.getTravelservices()) {
+                for (final SegmentedLeg leg : service.getSegmentedLegs()) {
+                    for (final TransportSegment segment : leg.getSegments()) {
+                        return getDestination(segment.getDepartingfromdestination());
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     /**

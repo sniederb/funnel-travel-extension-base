@@ -4,16 +4,35 @@ import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import ch.want.funnel.extension.model.Trip;
+
 public class DataUtilsTest {
+
+    private final ObjectMapper objectMapper;
+
+    public DataUtilsTest() {
+        objectMapper = new ObjectMapper()//
+            .registerModule(new JavaTimeModule())//
+            .setTimeZone(TimeZone.getTimeZone("UTC"))
+            .setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.WRITE_ENUMS_USING_INDEX);
+    }
 
     @Test
     public void getCountry() throws Exception {
@@ -25,6 +44,13 @@ public class DataUtilsTest {
     public void getDestination() throws Exception {
         final String destination = DataUtils.getDestination("BCN/ES");
         assertEquals("BCN", destination);
+    }
+
+    @Test
+    public void getDepartingAirport() throws Exception {
+        final Trip trip = getTrip();
+        final String origin = DataUtils.getDepartingAirport(trip);
+        assertEquals("ZRH", origin);
     }
 
     @TestFactory
@@ -40,6 +66,10 @@ public class DataUtilsTest {
                 assertThat(associations, containsInAnyOrder(testdata.expected));
             }))
             .collect(Collectors.toList());
+    }
+
+    private Trip getTrip() throws IOException {
+        return objectMapper.readValue(this.getClass().getResourceAsStream("/example-trip-with-remarks.json"), Trip.class);
     }
 
     private static class AssociationTestData {
