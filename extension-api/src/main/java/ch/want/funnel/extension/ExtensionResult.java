@@ -17,10 +17,10 @@ import ch.want.funnel.extension.tripdata.TripDataModifier;
  */
 public class ExtensionResult {
 
+    public static final ExtensionResult OK = new ExtensionResult("");
     private final String message;
     private final int returnCode;
     private final Booking modifiedBooking;
-    public static ExtensionResult OK = new ExtensionResult("");
 
     public ExtensionResult(final String message) {
         this(null, 0, message);

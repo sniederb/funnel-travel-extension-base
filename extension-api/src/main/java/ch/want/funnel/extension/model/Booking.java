@@ -15,7 +15,7 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 
-@JsonIgnoreProperties(value = { "header", "departuredateAsUtilDate", "returndateAsUtilDate" }, allowGetters = true)
+@JsonIgnoreProperties(value = { "header", "changed", "departuredateAsUtilDate", "returndateAsUtilDate" }, allowGetters = true)
 public class Booking implements Serializable {
 
     private static final long serialVersionUID = 1L;

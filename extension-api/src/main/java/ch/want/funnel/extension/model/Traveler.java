@@ -12,6 +12,7 @@ public class Traveler implements Serializable {
     private UUID uuid;
     private UUID userloginUuid;
     private UUID organizationUuid;
+    private String tattooNumber;
     private String firstname;
     private String firstnameNonAps;
     private String lastname;
@@ -155,5 +156,13 @@ public class Traveler implements Serializable {
 
     public void setExtendedProfileData(final JsonNode extendedProfileData) {
         this.extendedProfileData = extendedProfileData;
+    }
+
+    public String getTattooNumber() {
+        return tattooNumber;
+    }
+
+    public void setTattooNumber(final String tattooNumber) {
+        this.tattooNumber = tattooNumber;
     }
 }
