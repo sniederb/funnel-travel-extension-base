@@ -1,6 +1,7 @@
 package ch.want.funnel.extension.util;
 
 import java.util.Date;
+import java.util.Locale;
 import java.util.Optional;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -29,6 +30,11 @@ class NoopProfileDataAccessor implements TravelerProfileDataFormat {
 
     @Override
     public Optional<String> getContactPhone(final JsonNode contactNode) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Locale> getContactLocale(final JsonNode contactNode) {
         return Optional.empty();
     }
 

@@ -1,6 +1,7 @@
 package ch.want.funnel.extension.util;
 
 import java.util.Date;
+import java.util.Locale;
 import java.util.Optional;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -59,6 +60,10 @@ public class ExtendedProfileDataAccessor {
 
     public Optional<String> getContactPhone(final JsonNode contactNode) {
         return dataFormat.getContactPhone(contactNode);
+    }
+
+    public Optional<Locale> getContactLocale(final JsonNode contactNode) {
+        return dataFormat.getContactLocale(contactNode);
     }
 
     public Optional<String> getPrimaryEmail() {

@@ -105,6 +105,20 @@ public class ExtendedProfileDataAccessorTest {
     }
 
     @Test
+    public void getContactLocale() throws Exception {
+        // arrange
+        final JsonNode json = getProfileJson();
+        final ExtendedProfileDataAccessor testee = new ExtendedProfileDataAccessor(json);
+        // act
+        final Optional<JsonNode> contactData = testee.getContactData();
+        assertTrue(contactData.isPresent());
+        final Optional<Locale> result = testee.getContactLocale(contactData.get());
+        // assert
+        assertTrue(result.isPresent());
+        assertEquals(new Locale("de", "CH"), result.get());
+    }
+
+    @Test
     public void getCompanyData() throws Exception {
         // arrange
         final JsonNode json = getProfileJson();
