@@ -86,6 +86,10 @@ When calling produce / modify / consume, the provided map is subsequently scanne
 then saved back the to account extension settings. In this way, an extension can maintain a account-wide state between
 executions.
 
+### Producer (converter) extensions
+"Privacy by design" asks to reduce the data scope where possible. In order to accommodate that principal, implementations of `TripRawDataConverter` **must** provide a small set of settings are conveniently pre-defined in the `MinimalConverterSettings` class.  
+
+
 ### Execution environment
 The provided settings will always contain some environment-specific keys:
 

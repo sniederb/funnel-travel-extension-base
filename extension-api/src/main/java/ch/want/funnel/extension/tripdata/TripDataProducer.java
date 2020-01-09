@@ -10,7 +10,7 @@ import java.util.Map;
 import ch.want.funnel.extension.FunnelExtension;
 
 /**
- * Implementations of this interface retrieve trip data from other sources such as e-mail servers,
+ * Implementations of this interface retrieve trip data from "pull" sources such as e-mail servers,
  * booking websites or a GDS.
  */
 public interface TripDataProducer extends TripRawDataConverter {
