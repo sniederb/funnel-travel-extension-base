@@ -6,8 +6,17 @@ import java.util.Map;
 
 public abstract class MinimalConverterSettings extends AbstractSettings {
 
+    /**
+     * If activate - and only if - includes meal, seat, accommodation preferences.
+     */
     public static final String INCLUDE_TRAVEL_PREFERENCES = "include_travel_preferences";
+    /**
+     * If activate - and only if - includes SR DOCS / AP information
+     */
     public static final String INCLUDE_PASSPORT_DATA = "include_passport_data";
+    /**
+     * If activate - and only if - includes remarks, insurance, etc.
+     */
     public static final String INCLUDE_NON_TRAVEL_DATA = "include_non_travel_data";
     protected final Map<String, Object> settingValues;
 

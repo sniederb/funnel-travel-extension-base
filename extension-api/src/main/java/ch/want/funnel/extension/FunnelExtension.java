@@ -25,7 +25,8 @@ import java.util.Map;
 public interface FunnelExtension {
 
     /**
-     * Get a list of settings which the implementation requires.
+     * Get a list of settings which the implementation requires. The settings will be presented in the UI
+     * <strong>in the same order</strong> as provided by the returned list.
      *
      * @return
      */
