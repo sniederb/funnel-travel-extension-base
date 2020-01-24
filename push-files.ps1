@@ -5,11 +5,17 @@
 # The check on age is important as there can be issues processing files which are still in 
 # the process of being written by the GDS PNR printer.
 #
+# If ExecutionPolicy is an issue, the script could be executed with
+# >Powershell.exe -ExecutionPolicy ByPass push-files.ps1
+#
 # WaNT GmbH (no copyright, feel free to copy and adapt)
 
-Set-Variable BaseDirectory -value "C:\printer\pnrs" -option Constant
+Set-Variable BaseDirectory -value "C:\proprinter\airs" -option Constant
 Set-Variable MinAgeInMinutes -value 2 -option Constant
-Set-Variable ContentFilterExpression -value "VISA" -option Constant 
+# Unanimous = all substrings must match
+Set-Variable UnanimousSubstrings -value @('UMB-TRAV', 'VISA/') -option Constant 
+# Affirmative = at least one substring must match
+Set-Variable AffirmativeSubstrings -value @(';ZRH12345A;', ';ZRH12345B;') -option Constant 
 Set-Variable WebhookUrl -value "https://www.funnel.travel/p/be/publicapi/extension/webhook/eas/{extensionAccountSettingUuid}" -option Constant 
 # end of configuration
 
@@ -23,24 +29,21 @@ New-Item -ItemType Directory -Force -Path "$BaseDirectory\skipped" | Out-Null
 Write-Host "Processing $BaseDirectory with a cutoff of $MaxTimestamp"
 foreach ($pnr in Get-ChildItem $BaseDirectory -Attributes !Directory+!System)
 {
+    # this timestamp check prevents reading a PNR which is right now only being created by a ProPrinter or PrintManager
     if ($pnr.CreationTime -lt $MaxTimestamp)
     {
         Write-Host "Checking content of $pnr"
         $FileContent = Get-Content "$BaseDirectory\$pnr"
-        if (($FileContent | %{$_ -match $ContentFilterExpression}) -contains $true)
+        $UnanimousVote = $true
+        $UnanimousSubstrings | ForEach {
+            $UnanimousVote = $UnanimousVote -and ($FileContent -match $_ )
+        }
+        $AffirmativeVote = $null -ne ($AffirmativeSubstrings | ? { $FileContent -match $_ })
+        
+        if ($UnanimousVote -and $AffirmativeVote)
         {
             Write-Host ".. Posting $pnr"
-            # Powershell doesn't handle multipart very well, so create the body manually
-            $boundary = [System.Guid]::NewGuid().ToString(); 
-
-            $bodyLines = ( 
-                "--$boundary",
-                "Content-Disposition: form-data; name=`"file`"; filename=`"$pnr`"",
-                "Content-Type: application/octet-stream$LF",
-                $FileContent,
-                "--$boundary--$LF" 
-            ) -join $LF
-            $Response = Invoke-RestMethod -Uri $WebhookUrl -Method Post -ContentType "multipart/form-data; boundary=`"$boundary`"" -Body $bodyLines
+            $Response = Invoke-WebRequest -uri $WebhookUrl -Method Post -ContentType 'text/plain' -Infile "$BaseDirectory\$pnr" | ConvertFrom-Json
             if ($Response.messageCode -eq "OK")
             {
                 Write-Host ".. $pnr was successfully uploaded"
