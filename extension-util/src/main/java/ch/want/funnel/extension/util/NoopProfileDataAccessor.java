@@ -34,6 +34,11 @@ class NoopProfileDataAccessor implements TravelerProfileDataFormat {
     }
 
     @Override
+    public Optional<String> getNationality(final JsonNode contactNode) {
+        return Optional.empty();
+    }
+
+    @Override
     public Optional<Locale> getContactLocale(final JsonNode contactNode) {
         return Optional.empty();
     }

@@ -120,6 +120,13 @@ class UmbrellaFacesProfileDataAccessor implements TravelerProfileDataFormat {
     }
 
     @Override
+    public Optional<String> getNationality(final JsonNode contactNode) {
+        return Optional.ofNullable(contactNode)
+            .map(json -> json.get("nationality"))
+            .map(JsonNode::asText);
+    }
+
+    @Override
     public Optional<Locale> getContactLocale(final JsonNode contactNode) {
         return Optional.ofNullable(contactNode)
             .map(json -> json.get("language"))

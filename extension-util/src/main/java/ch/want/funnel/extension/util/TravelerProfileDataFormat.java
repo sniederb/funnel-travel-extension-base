@@ -26,6 +26,8 @@ public interface TravelerProfileDataFormat {
 
     Optional<Locale> getContactLocale(JsonNode contactNode);
 
+    Optional<String> getNationality(JsonNode contactNode);
+
     Optional<String> getContactPhone(JsonNode contactNode);
 
     Optional<JsonNode> getCompanyData();

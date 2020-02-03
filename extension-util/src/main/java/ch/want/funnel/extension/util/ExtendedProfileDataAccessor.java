@@ -66,6 +66,10 @@ public class ExtendedProfileDataAccessor {
         return dataFormat.getContactLocale(contactNode);
     }
 
+    public Optional<String> getNationality(final JsonNode contactNode) {
+        return dataFormat.getNationality(contactNode);
+    }
+
     public Optional<String> getPrimaryEmail() {
         return dataFormat.getPrimaryEmail();
     }
