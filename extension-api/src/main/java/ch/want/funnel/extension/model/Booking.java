@@ -21,6 +21,7 @@ public class Booking implements Serializable {
     private static final long serialVersionUID = 1L;
     private UUID uuid;
     private UUID tripUuid;
+    private String midofficeReferenceNumber;
     private UUID providerUuid;
     private OffsetDateTime created;
     private String providerSourcename;
@@ -180,6 +181,17 @@ public class Booking implements Serializable {
 
     public void setSourceInternalReferencenumber(final String sourceInternalReferencenumber) {
         this.sourceInternalReferencenumber = sourceInternalReferencenumber;
+    }
+
+    /**
+     * The {@code midofficeReferenceNumber} reflects the ID for this booking in the customer's midoffice / expense system..
+     */
+    public String getMidofficeReferenceNumber() {
+        return midofficeReferenceNumber;
+    }
+
+    public void setMidofficeReferenceNumber(final String midofficeReferenceNumber) {
+        this.midofficeReferenceNumber = midofficeReferenceNumber;
     }
 
     /**
