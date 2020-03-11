@@ -1,6 +1,3 @@
-/*
- * Created on 17 Jan 2019
- */
 package ch.want.funnel.extension.tripdata;
 
 import java.util.Locale;
