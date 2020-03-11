@@ -44,6 +44,16 @@ public class SingleSegment implements Serializable {
         return destination;
     }
 
+    /**
+     * Set the destination in a best-effort:
+     * <ul>
+     * <li>If available, set &lt;three-letter location code&gt;/&lt;two-letter country code&gt; (eg ZRH/CH)</li>
+     * <li>If a destination description is available, set that</li>
+     * <li>If a two-letter country code is available, add it with a trailing slash (eg. Heathrow/GB)</li>
+     * </ul>
+     * 
+     * @param destination
+     */
     public void setDestination(final String destination) {
         this.destination = destination;
     }
