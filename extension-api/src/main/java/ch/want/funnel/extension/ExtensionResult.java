@@ -3,16 +3,15 @@ package ch.want.funnel.extension;
 import java.util.Optional;
 
 import ch.want.funnel.extension.model.Booking;
-import ch.want.funnel.extension.tripdata.TripDataConsumer;
-import ch.want.funnel.extension.tripdata.TripDataModifier;
+import ch.want.funnel.extension.tripdata.TripDataProducer;
 
 /**
- * Result class for {@link TripDataModifier} and {@link TripDataConsumer} extensions
- * to indicate processing state.
+ * Result class for extensions to indicate processing state.
  * <ul>
  * <li>If processing failed exceptionally, and re-processing is desirable, throw an exception</li>
  * <li>If processing basically succeeded, this class allows for returning a processing message
  * and/or a return code.</li>
+ * <li>For {@link TripDataProducer} extensions being called by a webhook, the {@link #message} will be returned as a HTTP response.</li>
  * </ul>
  */
 public class ExtensionResult {
@@ -20,7 +19,7 @@ public class ExtensionResult {
     public static final ExtensionResult OK = new ExtensionResult("");
     private final String message;
     private final int returnCode;
-    private final Booking modifiedBooking;
+    private final Booking booking;
 
     public ExtensionResult(final String message) {
         this(null, 0, message);
@@ -34,16 +33,20 @@ public class ExtensionResult {
         this(null, returnCode, message);
     }
 
-    public ExtensionResult(final Booking modifiedBooking, final String message) {
-        this(modifiedBooking, 0, message);
+    public ExtensionResult(final Booking booking) {
+        this(booking, 0, "");
     }
 
-    public ExtensionResult(final Booking modifiedBooking, final int returnCode) {
-        this(modifiedBooking, returnCode, "");
+    public ExtensionResult(final Booking booking, final String message) {
+        this(booking, 0, message);
     }
 
-    public ExtensionResult(final Booking modifiedBooking, final int returnCode, final String message) {
-        this.modifiedBooking = modifiedBooking;
+    public ExtensionResult(final Booking booking, final int returnCode) {
+        this(booking, returnCode, "");
+    }
+
+    public ExtensionResult(final Booking booking, final int returnCode, final String message) {
+        this.booking = booking;
         this.returnCode = returnCode;
         this.message = message;
     }
@@ -56,7 +59,7 @@ public class ExtensionResult {
         return returnCode;
     }
 
-    public Optional<Booking> getModifiedBooking() {
-        return Optional.ofNullable(modifiedBooking);
+    public Optional<Booking> getBooking() {
+        return Optional.ofNullable(booking);
     }
 }

@@ -6,8 +6,8 @@ package ch.want.funnel.extension.tripdata;
 import java.util.Locale;
 import java.util.Map;
 
+import ch.want.funnel.extension.ExtensionResult;
 import ch.want.funnel.extension.FunnelExtension;
-import ch.want.funnel.extension.model.Booking;
 
 /**
  * Implementations are capable of converting raw trip sources into a structure readable by funnel.travel.
@@ -42,7 +42,7 @@ public interface TripRawDataConverter {
      *            and associated values with possible inheritance applied
      * @param locale
      *            Locale for error messages
-     * @return A booking data structures
+     * @return A {@link ExtensionResult} with the {@link ExtensionResult#message} holding the webhook response
      */
-    Booking convertRawSourceToTripData(byte[] rawSource, Map<String, Object> settings, Locale locale);
+    ExtensionResult convertRawSourceToTripData(byte[] rawSource, Map<String, Object> settings, Locale locale);
 }
