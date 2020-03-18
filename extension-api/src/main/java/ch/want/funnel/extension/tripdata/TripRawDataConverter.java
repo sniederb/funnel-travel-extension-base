@@ -29,11 +29,28 @@ public interface TripRawDataConverter {
     ContentMetadata extractMetadata(byte[] rawSource, Map<String, Object> settings, Locale locale);
 
     /**
+     * <p>
      * Convert data from an external source, as part of a two phased production. This call is the
      * second step, after {@link TripDataProducer#getRawSources(Map, Locale)} has fetched raw sources.
+     * </p>
      *
+     * <p>
      * This method is NOT called if {@link #extractMetadata(byte[], Map, Locale)} has returned a {@link ContentMetadata}
      * with {@link ContentMetadata#isDiscardAsIntermediate()} of {@code true}
+     * </p>
+     *
+     * <p>
+     * The returned {@link ExtensionResult} can contain a message, in which case that is used as server response. Messages
+     * starting with '&lt;' will be sent as {@code application/xml}, Messages starting with '{' or '[' will be sent as
+     * {@code application/json}, all other messages will be sent as {@code text/plain}. If no message
+     * is provided, a successful webhook call will reply with
+     * </p>
+     *
+     * <pre>
+     * Content type = application/json
+     *
+     * {"messageCode":"OK"}
+     * </pre>
      *
      * @param rawSource
      *            The original trip data source such an email MIME message
