@@ -19,7 +19,7 @@ public class ExtendedProfileData implements Serializable {
     private String surname;
     private String surname2;
     private String mainEmailAddress;
-    private HashSet<String> emailAddresses = new HashSet<>();
+    private final HashSet<String> emailAddresses = new HashSet<>();
     private LocalDate birthdate;
     private Gender gender;
     private String phoneMobile;
@@ -134,16 +134,14 @@ public class ExtendedProfileData implements Serializable {
     }
 
     public void setMainEmailAddress(final String mainEmailAddress) {
-        this.mainEmailAddress = mainEmailAddress;
-        this.emailAddresses.add(mainEmailAddress);
+        if (mainEmailAddress != null) {
+            this.mainEmailAddress = mainEmailAddress;
+            this.emailAddresses.add(mainEmailAddress);
+        }
     }
 
-    public HashSet<String> getEmailAddresses() {
+    public Set<String> getEmailAddresses() {
         return emailAddresses;
-    }
-
-    public void setEmailAddresses(final HashSet<String> emailAddresses) {
-        this.emailAddresses = emailAddresses;
     }
 
     /**
@@ -170,8 +168,10 @@ public class ExtendedProfileData implements Serializable {
     }
 
     public void setMainPassport(final OfficialDocument mainPassport) {
-        this.mainPassport = mainPassport;
-        this.officialDocuments.add(mainPassport);
+        if (mainPassport != null) {
+            this.mainPassport = mainPassport;
+            this.officialDocuments.add(mainPassport);
+        }
     }
 
     public Set<OfficialDocument> getOfficialDocuments() {

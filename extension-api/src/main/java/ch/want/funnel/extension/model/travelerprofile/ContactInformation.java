@@ -1,7 +1,10 @@
 package ch.want.funnel.extension.model.travelerprofile;
 
-public class ContactInformation {
+import java.io.Serializable;
 
+public class ContactInformation implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private String refNumber;
     private String fullname;
     private String street;
