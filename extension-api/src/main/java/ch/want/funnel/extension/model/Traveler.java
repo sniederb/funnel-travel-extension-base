@@ -20,6 +20,7 @@ public class Traveler implements Serializable {
     private String fullname;
     private String email;
     private String sourceId;
+    private String sourceDisplayId;
     private LocalDate birthdate;
     private String passportCountry;
     private String passportNumber;
@@ -96,12 +97,32 @@ public class Traveler implements Serializable {
         this.userloginUuid = userloginUuid;
     }
 
+    /**
+     * The internal ID of the traveler in the source system
+     *
+     * @return
+     */
     public String getSourceId() {
         return sourceId;
     }
 
     public void setSourceId(final String sourceId) {
         this.sourceId = sourceId;
+    }
+
+    /**
+     * The displayed ID of the traveler in the source system. This can be identical to
+     * {@link #getSourceId()} (or - in that case - left empty), but some systems maintain
+     * an internal ID (often UUID or sequence) and a display value (often a login name or similar)
+     * 
+     * @return
+     */
+    public String getSourceDisplayId() {
+        return sourceDisplayId;
+    }
+
+    public void setSourceDisplayId(final String sourceDisplayId) {
+        this.sourceDisplayId = sourceDisplayId;
     }
 
     public LocalDate getBirthdate() {
