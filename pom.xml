@@ -51,7 +51,7 @@
 			</plugin>
 			<plugin>
 			    <artifactId>maven-checkstyle-plugin</artifactId>
-			    <version>3.1.0</version>
+			    <version>${maven-checkstyle-plugin.version}</version>
 			    <dependencies>
 	                <dependency>
 	                    <groupId>com.puppycrawl.tools</groupId>
@@ -91,7 +91,10 @@
 		
 		<junit.version>5.2.0</junit.version>
 		<junit.platform.version>1.0.0</junit.platform.version>
+		<!-- These two version need to be roughly in sync, otherwise you'll get -->
+		<!-- An API incompatibility was encountered while executing org.apache.maven.plugins:maven-checkstyle-plugin -->
 		<checkstyle.latest.version>[8.18,)</checkstyle.latest.version>
+		<maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
 	</properties>
 	
 	<repositories>
