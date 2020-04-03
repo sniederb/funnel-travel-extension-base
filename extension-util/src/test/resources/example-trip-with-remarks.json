@@ -231,12 +231,12 @@
 					"lastname": "Schmid",
 					"fullname": "Silvia Schmid",
 					"email": "silvia-schmid@schmid.ch.undef",
-					"sourceId": "",
+					"sourceId": null,
 					"birthdate": "1981-02-10",
-					"passportCountry": "",
-					"passportNumber": "",
-					"passportExpiration": "",
-					"passportPlaceOfIssue": ""
+					"passportCountry": null,
+					"passportNumber": null,
+					"passportExpiration": null,
+					"passportPlaceOfIssue": null
 				}
 			],
 			"customfields": []

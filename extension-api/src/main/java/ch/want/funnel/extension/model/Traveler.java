@@ -114,7 +114,7 @@ public class Traveler implements Serializable {
      * The displayed ID of the traveler in the source system. This can be identical to
      * {@link #getSourceId()} (or - in that case - left empty), but some systems maintain
      * an internal ID (often UUID or sequence) and a display value (often a login name or similar)
-     * 
+     *
      * @return
      */
     public String getSourceDisplayId() {
@@ -122,7 +122,7 @@ public class Traveler implements Serializable {
     }
 
     public void setSourceDisplayId(final String sourceDisplayId) {
-        this.sourceDisplayId = sourceDisplayId;
+        this.sourceDisplayId = emptyToNull(sourceDisplayId);
     }
 
     public LocalDate getBirthdate() {
@@ -133,12 +133,23 @@ public class Traveler implements Serializable {
         this.birthdate = birthdate;
     }
 
+    /**
+     * Get the ISO-3166-1 alpha-2 country code
+     */
     public String getPassportCountry() {
         return passportCountry;
     }
 
+    /**
+     * Set the ISO-3166-1 alpha-2 country code. This method throws an {@link IllegalArgumentException}
+     * if {@code passportCountry} is not-null and length is not equal 2.
+     */
     public void setPassportCountry(final String passportCountry) {
-        this.passportCountry = passportCountry;
+        final String strippedPassportCountry = emptyToNull(passportCountry);
+        if ((strippedPassportCountry != null) && (strippedPassportCountry.length() != 2)) {
+            throw new IllegalArgumentException("This is not a ISO-3166-1 alpha-2 country code: " + passportCountry);
+        }
+        this.passportCountry = strippedPassportCountry;
     }
 
     public String getPassportNumber() {
@@ -146,7 +157,7 @@ public class Traveler implements Serializable {
     }
 
     public void setPassportNumber(final String passportNumber) {
-        this.passportNumber = passportNumber;
+        this.passportNumber = emptyToNull(passportNumber);
     }
 
     public LocalDate getPassportExpiration() {
@@ -162,7 +173,7 @@ public class Traveler implements Serializable {
     }
 
     public void setPassportPlaceOfIssue(final String passportPlaceOfIssue) {
-        this.passportPlaceOfIssue = passportPlaceOfIssue;
+        this.passportPlaceOfIssue = emptyToNull(passportPlaceOfIssue);
     }
 
     public Optional<ExtendedProfileData> getExtendedProfileData() {
@@ -178,6 +189,13 @@ public class Traveler implements Serializable {
     }
 
     public void setTattooNumber(final String tattooNumber) {
-        this.tattooNumber = tattooNumber;
+        this.tattooNumber = emptyToNull(tattooNumber);
+    }
+
+    private static String emptyToNull(final String s) {
+        if ((s == null) || (s.trim().length() == 0)) {
+            return null;
+        }
+        return s;
     }
 }

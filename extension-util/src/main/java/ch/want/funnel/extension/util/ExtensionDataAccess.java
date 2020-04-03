@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.NullNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import ch.want.funnel.extension.model.Booking;
@@ -92,7 +93,9 @@ public class ExtensionDataAccess {
     }
 
     /**
-     *
+     * Retrieve the current {@link JsonNode} for a given {@code key}. If no node exists, a new one is created.
+     * Beware that this method might return a {@link NullNode}.
+     * 
      * @param extensionClassname
      * @param key
      * @param array
@@ -121,15 +124,15 @@ public class ExtensionDataAccess {
     }
 
     private ObjectNode getOrCreate(final String extensionClassname) {
-        ObjectNode extensionData = (ObjectNode) booking.getExtensionData();
-        if (extensionData == null) {
+        JsonNode extensionData = booking.getExtensionData();
+        if ((extensionData == null) || !extensionData.isObject()) {
             extensionData = JsonNodeFactory.instance.objectNode();
             booking.setExtensionData(extensionData);
         }
         ObjectNode internalData = (ObjectNode) extensionData.get(extensionClassname);
-        if ((internalData == null) || (internalData.isNull())) {
+        if ((internalData == null) || !internalData.isObject()) {
             internalData = JsonNodeFactory.instance.objectNode();
-            extensionData.set(extensionClassname, internalData);
+            ((ObjectNode) extensionData).set(extensionClassname, internalData);
         }
         return internalData;
     }
