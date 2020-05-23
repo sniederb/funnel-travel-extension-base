@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ch.want.funnel</groupId>
 	<artifactId>extension-base</artifactId>
@@ -13,10 +12,10 @@
 		<url>http://www.want.ch</url>
 	</organization>
 	<scm>
-		<connection>scm:git:ssh://git@www.want.ch/home/git/repos/funnel-extension-base.git</connection>
-		<url>scm:git:ssh://git@www.want.ch/home/git/repos/funnel-extension-base.git</url>
-		<developerConnection>scm:git:ssh://git@www.want.ch/home/git/repos/funnel-extension-base.git</developerConnection>
-	</scm>
+		<connection>scm:git:git@github.com:sniederb/funnel-travel-extension-base.git</connection>
+		<url>scm:git:git@github.com:sniederb/funnel-travel-extension-base.git</url>
+		<developerConnection>scm:git:git@github.com:sniederb/funnel-travel-extension-base.git</developerConnection>
+    </scm>
 	<issueManagement>
 		<system>JIRA</system>
 		<url>http://www.want.ch/jira/</url>
