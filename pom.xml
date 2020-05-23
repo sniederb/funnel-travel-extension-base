@@ -3,7 +3,7 @@
 	<groupId>ch.want.funnel</groupId>
 	<artifactId>extension-base</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.1-SNAPSHOR</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>funnel-extension-base</name>
 	<url>http://www.funnel.travel/</url>
 
