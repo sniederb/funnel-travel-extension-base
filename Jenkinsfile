@@ -58,7 +58,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    def exitCode = sh(script: "mvn release:clean checkstyle:check install deploy -Dproject.version=${projectVersion}", returnStatus: true)
+                    def exitCode = sh(script: "mvn clean checkstyle:check install deploy -Dproject.version=${projectVersion}", returnStatus: true)
                     if (exitCode != 0) {
                         currentBuild.result = "UNSTABLE"
                     }
@@ -85,7 +85,7 @@ pipeline {
                 	}
                 	sshagent(['github']) {
 		            	sh """
-		            		mvn --batch-mode release:prepare release:perform ${devVersionCommand}
+		            		mvn --batch-mode release:clean release:prepare release:perform ${devVersionCommand}
 		            	"""
                     }
             	}
