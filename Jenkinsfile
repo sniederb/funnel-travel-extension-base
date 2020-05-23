@@ -28,11 +28,12 @@ pipeline {
     		steps {
     			checkout( [
                     $class: 'GitSCM',
-                    branches: [[name: 'refs/heads/master']],
+                    branches: [[name: '*/master']],
                     doGenerateSubmoduleConfigurations: false,
                     extensions: [[
                     	$class: 'AuthorInChangelog',
-                    	localBranch: 'master'
+                    	$class: 'LocalBranch',
+                    	localBranch: "**"
                     ]],
                     submoduleCfg: [],
                     userRemoteConfigs: [[credentialsId: 'github', url: 'git@github.com:sniederb/funnel-travel-extension-base.git']]
