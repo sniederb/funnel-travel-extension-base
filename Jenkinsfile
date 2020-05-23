@@ -16,6 +16,12 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr:'10'))
     }
     
+    parameters {
+        booleanParam(name: 'PARAM_PERFORM_RELEASE', description: 'Release version?', defaultValue: false)
+        string(name: 'PARAM_RELEASE_NEXT_VERSION', description: 'Next development version', defaultValue: "")
+    }
+    
+    
     stages {
         // 'readMavenPom' requires the 'pipeline-utility-steps' plugin 
         stage ('Checkout') {
@@ -43,6 +49,29 @@ pipeline {
                 // pattern: comma- or space-separated list of patterns of files that must be included.
                 step([$class: 'CheckStylePublisher', canComputeNew: false, defaultEncoding: '', healthy: '', 
                 	unstableTotalHigh: '0', unstableTotalNormal: '100', pattern: 'extension-api/target/checkstyle-result.xml,extension-util/target/checkstyle-result.xml', unHealthy: ''])
+            }
+        }
+        
+        stage('Create release') {
+            when {
+                expression { 
+                    (currentBuild.result == null || currentBuild.result == 'SUCCESS') &&
+                    params.PARAM_PERFORM_RELEASE        
+                }
+            }
+            steps {
+            	script {
+            		def devVersionCommand = ""
+            		if (params.PARAM_RELEASE_NEXT_VERSION != "") {
+                		devVersionCommand = "-DdevelopmentVersion=${params.PARAM_RELEASE_NEXT_VERSION}"
+                		echo "Next development version manually set to ${params.PARAM_RELEASE_NEXT_VERSION}"
+                	}
+                	sshagent(['38ebf53b-ebfe-480c-b7d0-e090a1b17f56']) {
+		            	sh """
+		            		mvn -X --batch-mode release:prepare release:perform ${devVersionCommand}
+		            	"""
+                    }
+            	}
             }
         }
     }

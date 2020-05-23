@@ -13,8 +13,9 @@
 		<url>http://www.want.ch</url>
 	</organization>
 	<scm>
-		<connection>ssh://git@www.want.ch/home/git/repos/funnel-extension-base.git</connection>
-		<developerConnection>ssh://git@www.want.ch/home/git/repos/funnel-extension-base.git</developerConnection>
+		<connection>scm:git:ssh://git@www.want.ch/home/git/repos/funnel-extension-base.git</connection>
+		<url>scm:git:ssh://git@www.want.ch/home/git/repos/funnel-extension-base.git</url>
+		<developerConnection>scm:git:ssh://git@www.want.ch/home/git/repos/funnel-extension-base.git</developerConnection>
 	</scm>
 	<issueManagement>
 		<system>JIRA</system>
@@ -64,6 +65,14 @@
 			      <suppressionsLocation>./checkstyle-suppressions.xml</suppressionsLocation>
 			    </configuration>
 			</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+        			<arguments>-DskipTests</arguments>
+    			</configuration>
+            </plugin>
 		</plugins>
 	</build>
 	
