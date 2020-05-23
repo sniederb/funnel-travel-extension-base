@@ -35,7 +35,7 @@ pipeline {
                     	localBranch: 'master'
                     ]],
                     submoduleCfg: [],
-                    userRemoteConfigs: [[credentialsId: 'github', url: 'ssh://git@github.com:sniederb/funnel-travel-extension-base.git']]
+                    userRemoteConfigs: [[credentialsId: 'github', url: 'git@github.com:sniederb/funnel-travel-extension-base.git']]
                 ] )
     		}
     	}
