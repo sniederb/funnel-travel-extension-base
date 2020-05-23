@@ -23,6 +23,23 @@ pipeline {
     
     
     stages {
+    
+    	stage ('Checkout HEAD') {
+    		steps {
+    			checkout( [
+                    $class: 'GitSCM',
+                    branches: [[name: 'refs/heads/master']],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [[
+                    	$class: 'AuthorInChangelog',
+                    	localBranch: 'master'
+                    ]],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [[credentialsId: 'github', url: 'ssh://git@github.com:sniederb/funnel-travel-extension-base.git']]
+                ] )
+    		}
+    	}
+    
         // 'readMavenPom' requires the 'pipeline-utility-steps' plugin 
         stage ('Checkout') {
             steps {
@@ -66,9 +83,9 @@ pipeline {
                 		devVersionCommand = "-DdevelopmentVersion=${params.PARAM_RELEASE_NEXT_VERSION}"
                 		echo "Next development version manually set to ${params.PARAM_RELEASE_NEXT_VERSION}"
                 	}
-                	sshagent(['38ebf53b-ebfe-480c-b7d0-e090a1b17f56']) {
+                	sshagent(['github']) {
 		            	sh """
-		            		mvn -X --batch-mode release:prepare release:perform ${devVersionCommand}
+		            		mvn --batch-mode release:prepare release:perform ${devVersionCommand}
 		            	"""
                     }
             	}
