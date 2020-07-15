@@ -18,7 +18,7 @@ pipeline {
     
     parameters {
         booleanParam(name: 'PARAM_PERFORM_RELEASE', description: 'Release version?', defaultValue: false)
-        string(name: 'PARAM_RELEASE_NEXT_VERSION', description: 'Next development version', defaultValue: "")
+        string(name: 'PARAM_RELEASE_NEXT_VERSION', description: 'Next development version, e.g. 1.0.3-SNAPSHOT', defaultValue: "")
     }
     
     

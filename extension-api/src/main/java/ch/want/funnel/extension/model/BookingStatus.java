@@ -13,7 +13,7 @@ public enum BookingStatus {
      */
     OPTION,
     /**
-     * Booking is in the process of bein confirmed (eg. waiting for hotel to respond)
+     * Booking is in the process of being confirmed (eg. waiting for hotel to respond, or a waitlisted segment)
      */
     PROCESSING,
     /**
