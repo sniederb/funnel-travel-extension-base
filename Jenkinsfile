@@ -23,7 +23,6 @@ pipeline {
     
     
     stages {
-    
     	stage ('Checkout HEAD') {
     		steps {
     			checkout( [

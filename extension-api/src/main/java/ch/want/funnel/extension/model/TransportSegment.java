@@ -31,6 +31,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     private Integer durationinminutes;
     private String travelclass;
     private String farebasis;
+    private BookingStatus bookingstatus;
     private String providername;
     private String connectionnumber;
     private String reservationlocator;
@@ -98,6 +99,14 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
 
     public void setDurationinminutes(final Integer durationinminutes) {
         this.durationinminutes = durationinminutes;
+    }
+
+    public BookingStatus getBookingstatus() {
+        return bookingstatus;
+    }
+
+    public void setBookingstatus(final BookingStatus bookingstatus) {
+        this.bookingstatus = bookingstatus;
     }
 
     public String getTravelclass() {
@@ -204,7 +213,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
             return true;
         }
         return Objects.equals(departingfromdestination, other.departingfromdestination) &&
-                Objects.equals(departuretime, other.departuretime) &&
-                Objects.equals(connectionnumber, other.connectionnumber);
+            Objects.equals(departuretime, other.departuretime) &&
+            Objects.equals(connectionnumber, other.connectionnumber);
     }
 }
