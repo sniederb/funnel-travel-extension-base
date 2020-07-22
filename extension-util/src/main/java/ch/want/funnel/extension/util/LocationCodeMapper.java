@@ -11,7 +11,7 @@ public class LocationCodeMapper {
     private final ResourceBundle messageResource;
 
     private LocationCodeMapper() {
-        this.messageResource = PropertyResourceBundle.getBundle("ch/want/funnel/extension/sncf-locations", Locale.US);
+        this.messageResource = PropertyResourceBundle.getBundle("ch/want/funnel/extension/railstations", Locale.US);
     }
 
     /**
@@ -19,7 +19,11 @@ public class LocationCodeMapper {
      * This method maps a SNCF train station code (eg. FRMSC) to the UN location code (eg. MRS/FR)
      */
     public static Optional<String> convertSncfToFunnelLocation(final String gareSncfCode) {
-        return instance.getMessage(gareSncfCode);
+        return instance.getMessage("sncf." + gareSncfCode);
+    }
+
+    public static Optional<String> convertAmtrakToFunnelLocation(final String amtrakStationCode) {
+        return instance.getMessage("amtrak." + amtrakStationCode);
     }
 
     private Optional<String> getMessage(final String gareSncfCode) {
