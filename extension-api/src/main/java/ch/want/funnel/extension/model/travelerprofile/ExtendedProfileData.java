@@ -28,6 +28,7 @@ public class ExtendedProfileData implements Serializable {
     private String nationality;
     private Locale language;
     private ContactInformation companyContact;
+    private ContactInformation homeContact;
     // using concrete collection classes here to ensure serialization
     private final HashSet<OfficialDocument> officialDocuments = new HashSet<>();
     private OfficialDocument mainPassport;
@@ -129,6 +130,10 @@ public class ExtendedProfileData implements Serializable {
         this.phoneBusiness = phoneBusiness;
     }
 
+    /**
+     * Get the email address to be used for any correspondence. The returned value will also be present in the
+     * collection returned by {@link #getEmailAddresses()}
+     */
     public String getMainEmailAddress() {
         return mainEmailAddress;
     }
@@ -140,15 +145,19 @@ public class ExtendedProfileData implements Serializable {
         }
     }
 
+    /**
+     * Get all known email addresses for the traveler. Beware that some of these might refer to
+     * travel arrangers.
+     */
     public Set<String> getEmailAddresses() {
         return emailAddresses;
     }
 
     /**
-     * Nationality is an ISO 3166-1 alpha-2 code
+     * Nationality is an ISO 3166-1 alpha-2 code, upper case
      */
     public String getNationality() {
-        return nationality;
+        return nationality == null ? null : nationality.toUpperCase();
     }
 
     public void setNationality(final String nationality) {
@@ -163,6 +172,10 @@ public class ExtendedProfileData implements Serializable {
         this.language = language;
     }
 
+    /**
+     * Returns the passport the traveler normally uses. The returned element will also be part of
+     * the collection returned by {@link #getOfficialDocuments()}
+     */
     public Optional<OfficialDocument> getMainPassport() {
         return Optional.ofNullable(mainPassport);
     }
@@ -174,23 +187,48 @@ public class ExtendedProfileData implements Serializable {
         }
     }
 
+    /**
+     * Get all documents assigned to the traveler. Beware that this collection represents whatever the
+     * profile tool returned, ie. it <strong>might contain already expired documents</strong>.
+     */
     public Set<OfficialDocument> getOfficialDocuments() {
         return officialDocuments;
     }
 
+    /**
+     * Get travel memberships
+     */
     public Set<Membership> getMemberships() {
         return memberships;
     }
 
+    /**
+     * Get additional key/value data pairs. This map is specific to the profile tool used, and
+     * possibly even the setup therein.
+     */
     public Map<String, String> getAdditionalData() {
         return additionalData;
     }
 
+    /**
+     * Returns {@link ContactInformation} for the traveler's company.
+     */
     public Optional<ContactInformation> getCompanyContact() {
         return Optional.ofNullable(companyContact);
     }
 
     public void setCompanyContact(final ContactInformation companyContact) {
         this.companyContact = companyContact;
+    }
+
+    /**
+     * Returns {@link ContactInformation} for the traveler's home address.
+     */
+    public Optional<ContactInformation> getHomeContact() {
+        return Optional.ofNullable(homeContact);
+    }
+
+    public void setHomeContact(final ContactInformation homeContact) {
+        this.homeContact = homeContact;
     }
 }
