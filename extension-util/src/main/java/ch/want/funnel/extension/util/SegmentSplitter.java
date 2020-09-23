@@ -11,11 +11,11 @@ import ch.want.funnel.extension.model.TransportSegment;
 
 public class SegmentSplitter {
 
-    private final List<TransportSegment> allsegments;
+    private final List<TransportSegment> allSegmentsSorted;
 
     public SegmentSplitter(final List<TransportSegment> allsegments) {
-        this.allsegments = new ArrayList<>(allsegments);
-        Collections.sort(this.allsegments);
+        this.allSegmentsSorted = new ArrayList<>(allsegments);
+        Collections.sort(this.allSegmentsSorted);
     }
 
     /**
@@ -29,21 +29,18 @@ public class SegmentSplitter {
         final List<SegmentedLeg> legs = new ArrayList<>();
         SegmentedLeg currentLeg = null;
         TransportSegment previousSegment = null;
-        for (final TransportSegment segment : allsegments) {
+        for (final TransportSegment segment : allSegmentsSorted) {
             if (currentLeg == null) {
-                currentLeg = new SegmentedLeg();
-                currentLeg.setLegNr(legs.size() + 1);
-                legs.add(currentLeg);
+                currentLeg = createSegmentedLeg(legs);
             } else if (previousSegment != null) {
                 if (Objects.equals(previousSegment.getArrivingatdestination(), segment.getDepartingfromdestination()) &&
-                        Objects.equals(previousSegment.getDepartingfromdestination(), segment.getArrivingatdestination())) {
-                    currentLeg = new SegmentedLeg();
-                    legs.add(currentLeg);
+                    Objects.equals(previousSegment.getDepartingfromdestination(), segment.getArrivingatdestination())) {
+                    // first segment of return journey, mirroring the last of previous leg
+                    currentLeg = createSegmentedLeg(legs);
                 } else if ((previousSegment.getArrivaltime() != null) && (segment.getDeparturetime() != null)) {
                     final long hours = previousSegment.getArrivaltime().until(segment.getDeparturetime(), ChronoUnit.HOURS);
                     if (hours > maxHoursForLayover) {
-                        currentLeg = new SegmentedLeg();
-                        legs.add(currentLeg);
+                        currentLeg = createSegmentedLeg(legs);
                     }
                 }
             }
@@ -51,5 +48,12 @@ public class SegmentSplitter {
             previousSegment = segment;
         }
         return legs;
+    }
+
+    private SegmentedLeg createSegmentedLeg(final List<SegmentedLeg> legs) {
+        final SegmentedLeg leg = new SegmentedLeg();
+        leg.setLegNr(legs.size() + 1);
+        legs.add(leg);
+        return leg;
     }
 }

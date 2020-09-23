@@ -1,12 +1,11 @@
 package ch.want.funnel.extension.util;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -24,12 +23,14 @@ public class SegmentSplitterTest {
         final List<SegmentedLeg> legs = new SegmentSplitter(segments).split(8);
         // assert
         int segmentCount = 0;
-        assertEquals(expectedLegArrivalDestinations.length, legs.size(), "Count of legs");
+        Assertions.assertEquals(expectedLegArrivalDestinations.length, legs.size(), "Count of legs");
         for (int i = 0; i < expectedLegArrivalDestinations.length; i++) {
-            assertEquals(expectedLegArrivalDestinations[i], legs.get(i).getArrivalDestination());
-            segmentCount += legs.get(i).getSegments().size();
+            final SegmentedLeg leg = legs.get(i);
+            Assertions.assertNotNull(leg.getLegNr());
+            Assertions.assertEquals(expectedLegArrivalDestinations[i], leg.getArrivalDestination());
+            segmentCount += leg.getSegments().size();
         }
-        assertEquals(segments.size(), segmentCount, "Count of segments on all legs");
+        Assertions.assertEquals(segments.size(), segmentCount, "Count of segments on all legs");
     }
 
     public static class SegmentArgumentsProvider implements ArgumentsProvider {
@@ -37,11 +38,11 @@ public class SegmentSplitterTest {
         @Override
         public Stream<? extends Arguments> provideArguments(final ExtensionContext context) {
             return Stream.of(
-                    Arguments.of("zurichToFrankfurtAndBack", zurichToFrankfurtAndBack(), new String[] { "FRA/DE", "ZRH/CH" }),
-                    Arguments.of("zurichToNewYorkViaFrankfurtAndBack", zurichToNewYorkViaFrankfurtAndBack(), new String[] { "JFK/US", "ZRH/CH" }),
-                    Arguments.of("travelingSalesManToWarsawAndMoscowAndBelgrade", travelingSalesManToWarsawAndMoscowAndBelgrade(),
-                            new String[] { "WAW/PL", "SVO/RU", "BEG/RS", "ZRH/CH" }),
-                    Arguments.of("missingDates", missingDates(), new String[] { "ZRH/CH" }));
+                Arguments.of("zurichToFrankfurtAndBack", zurichToFrankfurtAndBack(), new String[] { "FRA/DE", "ZRH/CH" }),
+                Arguments.of("zurichToNewYorkViaFrankfurtAndBack", zurichToNewYorkViaFrankfurtAndBack(), new String[] { "JFK/US", "ZRH/CH" }),
+                Arguments.of("travelingSalesManToWarsawAndMoscowAndBelgrade", travelingSalesManToWarsawAndMoscowAndBelgrade(),
+                    new String[] { "WAW/PL", "SVO/RU", "BEG/RS", "ZRH/CH" }),
+                Arguments.of("missingDates", missingDates(), new String[] { "ZRH/CH" }));
         }
 
         private List<TransportSegment> zurichToFrankfurtAndBack() {

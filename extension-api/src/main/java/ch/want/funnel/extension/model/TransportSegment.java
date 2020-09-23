@@ -176,9 +176,9 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     @Override
     public int compareTo(final TransportSegment other) {
         int result = 0;
-        // we're comparing *local* timestamps here, which is functionally dubious. However, it's rather hard
-        // to depart at a given time, and catch a connecting flight in a different time zone with an *earlier*
-        // local departure time.
+        // we're comparing *local* timestamps here, which is functionally dubious. However, it's rare to depart
+        // at a given time, and catch a connecting flight in a different time zone with an *earlier* local
+        // departure time. These cases will normally be Pacific -> US flights
         if ((departuretime != null) && (other.departuretime != null)) {
             result = departuretime.compareTo(other.departuretime);
         }
