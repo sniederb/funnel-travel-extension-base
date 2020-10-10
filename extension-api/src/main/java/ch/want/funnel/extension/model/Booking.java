@@ -41,6 +41,7 @@ public class Booking implements Serializable {
     private String providerName;
     private String comment;
     private TripImportStrategy importStrategy = TripImportStrategy.FULL;
+    private ExtensionCallAction extensionCallAction;
     private String extensionClassname;
     private boolean forceNewTrip;
     private transient List<TravelService> travelservices = new ArrayList<>();
@@ -359,5 +360,13 @@ public class Booking implements Serializable {
 
     public void setComment(final String comment) {
         this.comment = comment;
+    }
+
+    public ExtensionCallAction getExtensionCallAction() {
+        return extensionCallAction;
+    }
+
+    public void setExtensionCallAction(final ExtensionCallAction extensionCallAction) {
+        this.extensionCallAction = extensionCallAction;
     }
 }
