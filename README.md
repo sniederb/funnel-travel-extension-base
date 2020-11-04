@@ -10,7 +10,7 @@ The extension will run in the JVM context of the funnel.travel server using JRE 
 <dependency>
 	<groupId>ch.want.funnel</groupId>
 	<artifactId>extension-api</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.6</version>
 </dependency>
 ```
 
@@ -34,7 +34,7 @@ The `funnel-extension.json` file tells the funnel.travel server about the extens
   "Author": "WaNT GmbH",
   "BookingSource": "Domain of booking platform",
   "Version": "1.0.0",
-  "Description": "Read confirmation e-mails from a POP3/IMAP e-mail server."
+  "Description": "Read confirmation e-mails from a POP3/IMAP e-mail server.",
   "URL": "http://www.want.ch/emailextension.html",
   "PrivacyPolicyURL": "http://www.want.ch/privacy.html",
   "Permissions": [
