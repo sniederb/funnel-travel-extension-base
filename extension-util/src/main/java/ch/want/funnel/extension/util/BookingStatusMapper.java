@@ -24,7 +24,7 @@ public class BookingStatusMapper {
     /**
      * You use the GK status code to enter a confirmed ghost segment or GL for a waitlisted ghost segment.
      */
-    public static final Set<String> GHOST_STATUS_CODES;;
+    public static final Set<String> GHOST_STATUS_CODES;
     static {
         final Set<String> codes = new HashSet<>();
         codes.add("GL");
