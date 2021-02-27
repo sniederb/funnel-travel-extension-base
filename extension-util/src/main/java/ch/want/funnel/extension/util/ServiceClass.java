@@ -19,7 +19,7 @@ public enum ServiceClass {
     ECONOMY("Economy", "Y", "Q"), //
     SPECIAL_FARE("Special fare", "B", "H", "L", "M", "V"), //
     PREMIUM_ECONOMY("Premium economy", "W", "E", "A"), //
-    BUSINESS("Busines", "J", "C", "D"), //
+    BUSINESS("Business", "J", "C", "D"), //
     FIRST("First", "F", "P", "A", "R");
 
     private final String description;
