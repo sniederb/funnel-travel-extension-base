@@ -1,6 +1,3 @@
-/*
- * Created on 30 Nov 2018
- */
 package ch.want.funnel.extension.model;
 
 public enum BookingStatus {

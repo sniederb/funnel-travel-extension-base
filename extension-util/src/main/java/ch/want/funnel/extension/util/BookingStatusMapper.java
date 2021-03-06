@@ -62,4 +62,31 @@ public class BookingStatusMapper {
         }
         return BookingStatus.CONFIRMED;
     }
+
+    /**
+     * This method returns a <strong>possible</strong> value for a GDS status. Refering to
+     * {@link #getBookingStatus(String)} it is clear that multiple status are mapped to the
+     * same value, so this method simply returns on of those.
+     * 
+     * @param funnelStatus
+     * @return
+     */
+    public static String getBookingStatus(final BookingStatus funnelStatus) {
+        if (funnelStatus != null) {
+            switch (funnelStatus) {
+            case CONFIRMED:
+                return "OK";
+            case OPTION:
+                return "OP";
+            case CANCELED:
+                return "XX";
+            case PROCESSING:
+                return "RQ";
+            case UNDEFINED:
+            default:
+                return "";
+            }
+        }
+        return "";
+    }
 }

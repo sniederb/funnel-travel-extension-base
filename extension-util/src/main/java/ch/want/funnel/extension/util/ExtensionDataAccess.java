@@ -1,5 +1,7 @@
 package ch.want.funnel.extension.util;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -53,6 +55,21 @@ public class ExtensionDataAccess {
         return Optional.empty();
     }
 
+    public List<String> getAllRemarks() {
+        return Optional.ofNullable(booking.getExtensionData())
+            .map(node -> node.get("remarks"))
+            .filter(node -> node != null && node.isArray())
+            .map(node -> (ArrayNode) node)
+            .map(remarksArray -> {
+                final List<String> remarks = new ArrayList<>();
+                for (final JsonNode value : remarksArray) {
+                    remarks.add(value.asText());
+                }
+                return remarks;
+            })
+            .orElse(Collections.emptyList());
+    }
+
     private static Optional<String> searchExtensionSubnode(final JsonNode extensionSubnode, final String remarkPrefix, final String paxTattoo) {
         final JsonNode remarks = extensionSubnode.get("remarks");
         if ((remarks != null) && remarks.isArray()) {
@@ -77,7 +94,7 @@ public class ExtensionDataAccess {
         }
         if (remarkLineParts.length > 1) {
             final boolean hasTattooMatch = DataUtils.mapAssociationToNumbers(remarkLineParts[1]).stream()//
-                .map(i -> i.toString())//
+                .map(i -> i.toString())// NOSONAR
                 .anyMatch(s -> Objects.equals(s, paxTattoo));
             if (!hasTattooMatch) {
                 return Optional.empty();
@@ -95,7 +112,7 @@ public class ExtensionDataAccess {
     /**
      * Retrieve the current {@link JsonNode} for a given {@code key}. If no node exists, a new one is created.
      * Beware that this method might return a {@link NullNode}.
-     * 
+     *
      * @param extensionClassname
      * @param key
      * @param array
