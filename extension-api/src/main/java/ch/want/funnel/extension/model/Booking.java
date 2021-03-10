@@ -15,7 +15,7 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 
-@JsonIgnoreProperties(value = { "header", "changed", "departuredateAsUtilDate", "returndateAsUtilDate" }, allowGetters = true)
+@JsonIgnoreProperties(value = { "header", "departuredateAsUtilDate", "returndateAsUtilDate" }, allowGetters = true)
 public class Booking implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,6 +24,7 @@ public class Booking implements Serializable {
     private String midofficeReferenceNumber;
     private UUID providerUuid;
     private OffsetDateTime created;
+    private OffsetDateTime lastModified;
     private String providerSourcename;
     private String sourceDomain;
     private LocalDate departuredate;
@@ -34,6 +35,7 @@ public class Booking implements Serializable {
     private String travelagencyId;
     private String totalpricecurrency;
     private BigDecimal totalprice;
+    private BigDecimal purchaseprice;
     private transient JsonNode extensionData;
     private String destinationCode;
     private String destinationName;
@@ -108,6 +110,14 @@ public class Booking implements Serializable {
 
     public void setCreated(final OffsetDateTime created) {
         this.created = created;
+    }
+
+    public OffsetDateTime getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(final OffsetDateTime lastModified) {
+        this.lastModified = lastModified;
     }
 
     public String getProviderSourcename() {
@@ -226,12 +236,30 @@ public class Booking implements Serializable {
         this.totalpricecurrency = totalpricecurrency;
     }
 
+    /**
+     * The total booking price, in {@link #getTotalpricecurrency()}
+     *
+     * @return
+     */
     public BigDecimal getTotalprice() {
         return totalprice;
     }
 
     public void setTotalprice(final BigDecimal totalprice) {
         this.totalprice = totalprice;
+    }
+
+    /**
+     * The total booking purchase price, in {@link #getTotalpricecurrency()}
+     *
+     * @return
+     */
+    public BigDecimal getPurchaseprice() {
+        return purchaseprice;
+    }
+
+    public void setPurchaseprice(final BigDecimal purchaseprice) {
+        this.purchaseprice = purchaseprice;
     }
 
     public JsonNode getExtensionData() {

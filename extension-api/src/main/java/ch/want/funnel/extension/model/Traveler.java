@@ -14,6 +14,7 @@ public class Traveler implements Serializable {
     private UUID userloginUuid;
     private UUID organizationUuid;
     private String tattooNumber;
+    private String salutation;
     private String firstname;
     private String firstnameNonAps;
     private String lastname;
@@ -42,6 +43,14 @@ public class Traveler implements Serializable {
 
     public void setOrganizationUuid(final UUID organizationUuid) {
         this.organizationUuid = organizationUuid;
+    }
+
+    public String getSalutation() {
+        return salutation;
+    }
+
+    public void setSalutation(final String salutation) {
+        this.salutation = salutation;
     }
 
     public String getFirstname() {

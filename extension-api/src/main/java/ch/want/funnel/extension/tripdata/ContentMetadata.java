@@ -3,7 +3,7 @@
  */
 package ch.want.funnel.extension.tripdata;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * This class provides information on the raw source content. As an example, with an email as source, this class
@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class ContentMetadata {
 
-    public final Date creationDate;
+    public final LocalDateTime creationDate;
     public final String description;
     public final String participants;
     public final String mimeType;
@@ -29,7 +29,7 @@ public class ContentMetadata {
      * @param description
      * @param participants
      */
-    public ContentMetadata(final Date creationDate, final String mimeType, final String description, final String participants) {
+    public ContentMetadata(final LocalDateTime creationDate, final String mimeType, final String description, final String participants) {
         this.creationDate = creationDate;
         this.mimeType = mimeType;
         this.description = description;
@@ -49,11 +49,11 @@ public class ContentMetadata {
     }
 
     /**
-     * Get the date this content was originally created. If unknown, new Date()() should be used.
+     * Get the date this content was originally created. If unknown, {@code LocalDateTime.now()} should be used.
      *
      * @return
      */
-    public Date getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
