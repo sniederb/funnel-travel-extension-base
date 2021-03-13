@@ -8,9 +8,13 @@ import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.StringJoiner;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -52,6 +56,7 @@ public class Booking implements Serializable {
     private transient List<RawSource> rawsources = new ArrayList<>();
     private transient List<Traveler> participants = new ArrayList<>();
     private transient List<CustomFieldValue> customfields = new ArrayList<>();
+    private transient List<VatDistribution> vatDistribution = new ArrayList<>();
 
     public Booking() {
         // default c'tor
@@ -249,6 +254,20 @@ public class Booking implements Serializable {
         this.totalprice = totalprice;
     }
 
+    public void updateTotalpriceFromPriceitems() {
+        final Map<String, BigDecimal> amountPerCurrency = getPriceitemsIncludingNested().stream()
+            .collect(Collectors.groupingBy(PriceItem::getCurrency))
+            .entrySet().stream()
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                e -> e.getValue().stream().map(PriceItem::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add)));
+        if (amountPerCurrency.size() == 1) {
+            final Map.Entry<String, BigDecimal> bookingAmount = amountPerCurrency.entrySet().iterator().next();
+            setTotalpricecurrency(bookingAmount.getKey());
+            setTotalprice(bookingAmount.getValue());
+        }
+    }
+
     /**
      * The total booking purchase price, in {@link #getTotalpricecurrency()}
      *
@@ -338,6 +357,18 @@ public class Booking implements Serializable {
         return priceitems;
     }
 
+    private Set<PriceItem> getPriceitemsIncludingNested() {
+        final Set<PriceItem> allpriceitems = new HashSet<>();
+        allpriceitems.addAll(getPriceitems());
+        getTravelservices().forEach(srv -> {
+            allpriceitems.addAll(srv.getPriceitems());
+            srv.getTransportDocuments().forEach(doc -> {
+                allpriceitems.addAll(doc.getPriceitems());
+            });
+        });
+        return allpriceitems;
+    }
+
     public void setPriceitems(final List<PriceItem> priceitems) {
         this.priceitems = priceitems;
     }
@@ -364,6 +395,14 @@ public class Booking implements Serializable {
 
     public void setParticipants(final List<Traveler> participants) {
         this.participants = participants;
+    }
+
+    public List<VatDistribution> getVatDistribution() {
+        return vatDistribution;
+    }
+
+    public void setVatDistribution(final List<VatDistribution> vatDistribution) {
+        this.vatDistribution = vatDistribution;
     }
 
     public List<CustomFieldValue> getCustomfields() {
