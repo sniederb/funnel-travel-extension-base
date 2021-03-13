@@ -72,10 +72,13 @@ public final class DataUtils {
         }
         for (final String s : association.split("[,;]")) {
             final int dashPosition = s.indexOf('-');
+            final int slashPosition = s.indexOf('/');
             if (dashPosition >= 0) {
                 final String from = s.substring(0, dashPosition);
                 final String to = s.substring(dashPosition + 1);
                 IntStream.rangeClosed(Integer.parseInt(from), Integer.parseInt(to)).boxed().forEach(result::add);
+            } else if (slashPosition >= 0) {
+                result.add(Integer.parseInt(s.substring(0, slashPosition)));
             } else {
                 result.add(Integer.parseInt(s));
             }
