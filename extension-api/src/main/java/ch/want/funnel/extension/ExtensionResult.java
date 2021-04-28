@@ -11,11 +11,14 @@ import ch.want.funnel.extension.tripdata.TripDataProducer;
  * <li>If processing failed exceptionally, and re-processing is desirable, throw an exception</li>
  * <li>If processing basically succeeded, this class allows for returning a processing message
  * and/or a return code.</li>
+ * <li>If processing worked, but the execution should still show up in the list of failed extension calls, return an error code
+ * {@link #EXECUTION_ERROR_RETURN_CODE}</li>
  * <li>For {@link TripDataProducer} extensions being called by a webhook, the {@link #message} will be returned as a HTTP response.</li>
  * </ul>
  */
 public class ExtensionResult {
 
+    public static final int EXECUTION_ERROR_RETURN_CODE = 999;
     public static final ExtensionResult OK = new ExtensionResult("");
     private final String message;
     private final int returnCode;

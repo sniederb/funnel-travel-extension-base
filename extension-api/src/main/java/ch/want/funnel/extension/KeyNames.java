@@ -11,8 +11,7 @@ public final class KeyNames {
     public static final String UI_ELEMENT_CONTEXTTYPE = "contextType";
     public static final String UI_ELEMENT_CONTEXTUUID = "contextUuid";
     /**
-     * funnel.travel will try to translate the value for this key using its internal messages. Most likely,
-     * this property should remain empty, and the entire message string should be saved in {@link #UI_ELEMENT_VALUE}
+     * funnel.travel will try to translate the value for this key using {@link FunnelExtension#getLabelForKey(String, java.util.Locale)}
      */
     public static final String UI_ELEMENT_LABELKEY = "labelKey";
     public static final String UI_ELEMENT_VALUETYPE = "valueType";
