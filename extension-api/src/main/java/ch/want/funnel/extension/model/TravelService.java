@@ -69,6 +69,10 @@ public class TravelService implements Serializable {
         this.providerUuid = providerUuid;
     }
 
+    /**
+     * Get the provider name as delivered from the source system. From a GDS, this will typically be a
+     * two- or three-letter GDS code (airline, hotel chain)
+     */
     public String getProviderSourcename() {
         return providerSourcename;
     }

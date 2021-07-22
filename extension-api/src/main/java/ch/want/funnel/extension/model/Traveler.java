@@ -156,7 +156,7 @@ public class Traveler implements Serializable {
     public void setPassportCountry(final String passportCountry) {
         final String strippedPassportCountry = emptyToNull(passportCountry);
         if ((strippedPassportCountry != null) && (strippedPassportCountry.length() != 2)) {
-            throw new IllegalArgumentException("This is not a ISO-3166-1 alpha-2 country code: " + passportCountry);
+            throw new IllegalArgumentException("This is not an ISO-3166-1 alpha-2 country code: " + passportCountry);
         }
         this.passportCountry = strippedPassportCountry;
     }

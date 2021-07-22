@@ -37,6 +37,7 @@ public class Booking implements Serializable {
     private String sourceInternalReferencenumber;
     private String productkey;
     private String travelagencyId;
+    private String agentSign;
     private String totalpricecurrency;
     private BigDecimal totalprice;
     private BigDecimal purchaseprice;
@@ -50,6 +51,7 @@ public class Booking implements Serializable {
     private ExtensionCallAction extensionCallAction;
     private String extensionClassname;
     private boolean forceNewTrip;
+    private boolean packaged;
     private transient List<TravelService> travelservices = new ArrayList<>();
     private transient List<PriceItem> priceitems = new ArrayList<>();
     private transient List<BookingPayment> payments = new ArrayList<>();
@@ -231,6 +233,14 @@ public class Booking implements Serializable {
 
     public void setTravelagencyId(final String travelagencyId) {
         this.travelagencyId = travelagencyId;
+    }
+
+    public String getAgentSign() {
+        return agentSign;
+    }
+
+    public void setAgentSign(final String agentSign) {
+        this.agentSign = agentSign;
     }
 
     public String getTotalpricecurrency() {
@@ -435,5 +445,18 @@ public class Booking implements Serializable {
 
     public void setExtensionCallAction(final ExtensionCallAction extensionCallAction) {
         this.extensionCallAction = extensionCallAction;
+    }
+
+    /**
+     * If true, the {@link #getTravelservices()} form a package, and consumers must not split these services
+     * 
+     * @return
+     */
+    public boolean isPackaged() {
+        return packaged;
+    }
+
+    public void setPackaged(final boolean packaged) {
+        this.packaged = packaged;
     }
 }

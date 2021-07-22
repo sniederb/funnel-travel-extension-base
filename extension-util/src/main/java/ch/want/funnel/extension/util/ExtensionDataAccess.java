@@ -2,10 +2,13 @@ package ch.want.funnel.extension.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -56,18 +59,20 @@ public class ExtensionDataAccess {
     }
 
     public List<String> getAllRemarks() {
-        return Optional.ofNullable(booking.getExtensionData())
-            .map(node -> node.get("remarks"))
-            .filter(node -> node != null && node.isArray())
-            .map(node -> (ArrayNode) node)
-            .map(remarksArray -> {
-                final List<String> remarks = new ArrayList<>();
-                for (final JsonNode value : remarksArray) {
+        if (booking.getExtensionData() == null) {
+            return Collections.emptyList();
+        }
+        final List<String> remarks = new ArrayList<>();
+        for (final Iterator<Map.Entry<String, JsonNode>> iterator = booking.getExtensionData().fields(); iterator.hasNext();) {
+            final Map.Entry<String, JsonNode> entry = iterator.next();
+            final JsonNode remarksNode = entry.getValue().get("remarks");
+            if (remarksNode != null && remarksNode.isArray()) {
+                for (final JsonNode value : remarksNode) {
                     remarks.add(value.asText());
                 }
-                return remarks;
-            })
-            .orElse(Collections.emptyList());
+            }
+        }
+        return remarks;
     }
 
     private static Optional<String> searchExtensionSubnode(final JsonNode extensionSubnode, final String remarkPrefix, final String paxTattoo) {
@@ -152,5 +157,11 @@ public class ExtensionDataAccess {
             ((ObjectNode) extensionData).set(extensionClassname, internalData);
         }
         return internalData;
+    }
+
+    private <T> Set<T> toSet(final Iterator<T> iterator) {
+        final Set<T> result = new HashSet<>();
+        iterator.forEachRemaining(result::add);
+        return result;
     }
 }

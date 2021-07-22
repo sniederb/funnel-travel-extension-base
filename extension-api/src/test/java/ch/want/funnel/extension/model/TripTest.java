@@ -14,7 +14,7 @@ public class TripTest {
     @Test
     public void serialize() throws Exception {
         final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
-        final byte[] payload = IOUtils.resourceToByteArray("/ch/want/funnel/extension/model/trip.json");
+        final byte[] payload = IOUtils.resourceToByteArray("/ch/want/funnel/extension/model/trip-7383012568246.json");
         // act
         final Trip trip = objectMapper.readValue(payload, Trip.class);
         final String tripAsJson = objectMapper.writeValueAsString(trip);

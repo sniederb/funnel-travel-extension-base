@@ -3,6 +3,7 @@ package ch.want.funnel.extension.util;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.TimeZone;
 
@@ -68,6 +69,16 @@ public class ExtensionDataAccessTest {
         final Optional<String> result = ExtensionDataAccess.searchAllExtensionDataForRemark(trip, "VISA/N-", null);
         assertTrue(result.isPresent());
         assertEquals("VISA/N-DE", result.get());
+    }
+
+    @Test
+    public void getAllRemarks_bookingWithRemarksShouldReturnArray() throws Exception {
+        final Trip trip = getTrip();
+        final ExtensionDataAccess testee = new ExtensionDataAccess(trip.getBookings().get(0));
+        // act
+        final List<String> result = testee.getAllRemarks();
+        assertNotNull(result);
+        assertEquals(4, result.size());
     }
 
     @Test

@@ -4,9 +4,11 @@
 package ch.want.funnel.extension.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class SingleSegment implements Serializable {
 
@@ -16,13 +18,23 @@ public class SingleSegment implements Serializable {
     private TravelService travelService;
     private String destination;
     private String destinationName;
+    private String endDestination;
+    private String endDestinationName;
     private String providerDescription;
     private String serviceDescription;
+    private String additionalDescription;
+    private String serviceTypeCode;
+    private Integer serviceCount;
     private String startConditions;
+    private String startTime;
     private String endConditions;
+    private String endTime;
     private String street;
     private String zip;
     private String city;
+    private String rateCode;
+    private String rateCurrency;
+    private BigDecimal rate;
 
     public UUID getUuid() {
         return uuid;
@@ -51,7 +63,7 @@ public class SingleSegment implements Serializable {
      * <li>If a destination description is available, set that</li>
      * <li>If a two-letter country code is available, add it with a trailing slash (eg. Heathrow/GB)</li>
      * </ul>
-     * 
+     *
      * @param destination
      */
     public void setDestination(final String destination) {
@@ -66,16 +78,49 @@ public class SingleSegment implements Serializable {
         this.destinationName = destinationName;
     }
 
+    /**
+     * General-purpose getter for the description of the provider.
+     * See {@link #getHotelName()}, {@link #getRentalcarCompany()} and {@link #getMiscServiceDescription()} resp.
+     */
     public String getProviderDescription() {
         return providerDescription;
+    }
+
+    @JsonIgnore
+    public String getHotelName() {
+        return getProviderDescription();
+    }
+
+    @JsonIgnore
+    public String getRentalcarCompany() {
+        return getProviderDescription();
+    }
+
+    @JsonIgnore
+    public String getMiscServiceDescription() {
+        return getProviderDescription();
     }
 
     public void setProviderDescription(final String providerDescription) {
         this.providerDescription = providerDescription;
     }
 
+    /**
+     * General-purpose getter for the description of the service provided.
+     * See {@link #getRoomDescription()}, {@link #getVehicleDescription()} resp.
+     */
     public String getServiceDescription() {
         return serviceDescription;
+    }
+
+    @JsonIgnore
+    public String getRoomDescription() {
+        return getServiceDescription();
+    }
+
+    @JsonIgnore
+    public String getVehicleDescription() {
+        return getServiceDescription();
     }
 
     public void setServiceDescription(final String serviceDescription) {
@@ -120,5 +165,85 @@ public class SingleSegment implements Serializable {
 
     public void setCity(final String city) {
         this.city = city;
+    }
+
+    public String getEndDestination() {
+        return endDestination;
+    }
+
+    public void setEndDestination(final String endDestination) {
+        this.endDestination = endDestination;
+    }
+
+    public String getEndDestinationName() {
+        return endDestinationName;
+    }
+
+    public void setEndDestinationName(final String endDestinationName) {
+        this.endDestinationName = endDestinationName;
+    }
+
+    public String getAdditionalDescription() {
+        return additionalDescription;
+    }
+
+    public void setAdditionalDescription(final String additionalDescription) {
+        this.additionalDescription = additionalDescription;
+    }
+
+    public String getServiceTypeCode() {
+        return serviceTypeCode;
+    }
+
+    public void setServiceTypeCode(final String serviceTypeCode) {
+        this.serviceTypeCode = serviceTypeCode;
+    }
+
+    public Integer getServiceCount() {
+        return serviceCount;
+    }
+
+    public void setServiceCount(final Integer serviceCount) {
+        this.serviceCount = serviceCount;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(final String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(final String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getRateCode() {
+        return rateCode;
+    }
+
+    public void setRateCode(final String rateCode) {
+        this.rateCode = rateCode;
+    }
+
+    public String getRateCurrency() {
+        return rateCurrency;
+    }
+
+    public void setRateCurrency(final String rateCurrency) {
+        this.rateCurrency = rateCurrency;
+    }
+
+    public BigDecimal getRate() {
+        return rate;
+    }
+
+    public void setRate(final BigDecimal rate) {
+        this.rate = rate;
     }
 }

@@ -108,22 +108,10 @@
 								{
 									"uuid": null,
 									"segNr": 0,
-									"departuretime": [
-										2019,
-										1,
-										2,
-										9,
-										10
-									],
+									"departuretime": "2019-01-02T09:10:00",
 									"departingfromdestination": "ZRH/CH",
 									"departingFromDestinationName": null,
-									"arrivaltime": [
-										2019,
-										1,
-										2,
-										10,
-										55
-									],
+									"arrivaltime": "2019-01-02T10:55:00",
 									"arrivingatdestination": "AMS/NL",
 									"arrivingAtDestinationName": null,
 									"durationinminutes": null,
@@ -137,22 +125,10 @@
 								{
 									"uuid": null,
 									"segNr": 1,
-									"departuretime": [
-										2019,
-										1,
-										2,
-										12,
-										10
-									],
+									"departuretime": "2019-01-02T12:10:00",
 									"departingfromdestination": "AMS/NL",
 									"departingFromDestinationName": null,
-									"arrivaltime": [
-										2019,
-										1,
-										2,
-										12,
-										50
-									],
+									"arrivaltime": "2019-01-02T12:50:00",
 									"arrivingatdestination": "INV/GB",
 									"arrivingAtDestinationName": null,
 									"durationinminutes": null,
@@ -172,22 +148,10 @@
 								{
 									"uuid": null,
 									"segNr": 0,
-									"departuretime": [
-										2019,
-										1,
-										30,
-										13,
-										20
-									],
+									"departuretime": "2019-01-30T13:20:00",
 									"departingfromdestination": "INV/GB",
 									"departingFromDestinationName": null,
-									"arrivaltime": [
-										2019,
-										1,
-										30,
-										16,
-										0
-									],
+									"arrivaltime": "2019-01-30T16:00:00",
 									"arrivingatdestination": "AMS/NL",
 									"arrivingAtDestinationName": null,
 									"durationinminutes": null,
@@ -201,22 +165,10 @@
 								{
 									"uuid": null,
 									"segNr": 1,
-									"departuretime": [
-										2019,
-										1,
-										30,
-										17,
-										5
-									],
+									"departuretime": "2019-01-30T17:05:00",
 									"departingfromdestination": "AMS/NL",
 									"departingFromDestinationName": null,
-									"arrivaltime": [
-										2019,
-										1,
-										30,
-										18,
-										25
-									],
+									"arrivaltime": "2019-01-30T18:25:00",
 									"arrivingatdestination": "ZRH/CH",
 									"arrivingAtDestinationName": null,
 									"durationinminutes": null,

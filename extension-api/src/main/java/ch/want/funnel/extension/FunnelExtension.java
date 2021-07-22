@@ -42,10 +42,9 @@ public interface FunnelExtension {
     void validateSettings(Map<String, Object> settingValues, Locale locale) throws IllegalSettingException;
 
     /**
-     *
-     * @param settingItemKey
-     * @param locale
-     * @return
+     * Translate a resource bundle key. This is used to display labels for settings, in which case the
+     * {@code settingItemKey} will match the {@link SettingItem#getKey()}. A further use is to translate
+     * UI elements added to the booking extension data.
      */
     String getLabelForKey(String settingItemKey, Locale locale);
 
