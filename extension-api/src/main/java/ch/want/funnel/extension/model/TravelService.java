@@ -105,8 +105,15 @@ public class TravelService implements Serializable {
         this.referencenumber = referencenumber;
     }
 
+    /**
+     * The start date of the service, using 'flight' naming. Same as {@link #getCheckInDate()}
+     */
     public LocalDate getDeparturedate() {
         return departuredate;
+    }
+
+    public LocalDate getCheckInDate() {
+        return getDeparturedate();
     }
 
     /**
@@ -122,8 +129,17 @@ public class TravelService implements Serializable {
         this.departuredate = departuredate;
     }
 
+    /**
+     * The end date of the service, using 'flight' naming. Same as {@link #getCheckOutDate()}
+     * 
+     * @return
+     */
     public LocalDate getReturndate() {
         return returndate;
+    }
+
+    public LocalDate getCheckOutDate() {
+        return getDeparturedate();
     }
 
     /**

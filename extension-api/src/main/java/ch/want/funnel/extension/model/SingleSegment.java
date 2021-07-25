@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class SingleSegment implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public static final String SERVICE_TYPECODE_REFUND = "Refund";
     private UUID uuid;
     @JsonBackReference("singlesegment")
     private TravelService travelService;
@@ -183,14 +184,28 @@ public class SingleSegment implements Serializable {
         this.endDestinationName = endDestinationName;
     }
 
+    /**
+     * Multi-purpose, additional description field. See {@link #getRentalCarExtras()} and {@link #getHotelAndPensionDescription()}
+     */
     public String getAdditionalDescription() {
         return additionalDescription;
+    }
+
+    public String getRentalCarExtras() {
+        return getAdditionalDescription();
+    }
+
+    public String getHotelAndPensionDescription() {
+        return getAdditionalDescription();
     }
 
     public void setAdditionalDescription(final String additionalDescription) {
         this.additionalDescription = additionalDescription;
     }
 
+    /**
+     * A code describing the service type, such as a room code or a car code.
+     */
     public String getServiceTypeCode() {
         return serviceTypeCode;
     }
