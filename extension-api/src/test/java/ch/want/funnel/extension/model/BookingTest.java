@@ -16,7 +16,7 @@ public class BookingTest {
     @Test
     public void serialize() throws Exception {
         final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
-        final byte[] payload = IOUtils.resourceToByteArray("/ch/want/funnel/extension/model/booking.json");
+        final byte[] payload = IOUtils.resourceToByteArray("/ch/want/funnel/extension/model/booking-7383012568246.json");
         // act
         final Booking booking = objectMapper.readValue(payload, Booking.class);
         final String bookingAsJson = objectMapper.writeValueAsString(booking);
@@ -28,7 +28,7 @@ public class BookingTest {
     @Test
     public void updateTotalpriceFromPriceitems() throws Exception {
         final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
-        final byte[] payload = IOUtils.resourceToByteArray("/ch/want/funnel/extension/model/booking.json");
+        final byte[] payload = IOUtils.resourceToByteArray("/ch/want/funnel/extension/model/booking-7383012568246.json");
         // act
         final Booking booking = objectMapper.readValue(payload, Booking.class);
         booking.updateTotalpriceFromPriceitems();

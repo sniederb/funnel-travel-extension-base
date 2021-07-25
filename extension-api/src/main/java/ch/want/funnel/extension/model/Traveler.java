@@ -5,8 +5,12 @@ import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import ch.want.funnel.extension.model.travelerprofile.ExtendedProfileData;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "uuid")
 public class Traveler implements Serializable {
 
     private static final long serialVersionUID = 1L;
