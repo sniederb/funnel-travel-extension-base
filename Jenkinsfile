@@ -58,11 +58,13 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    def exitCode = sh(script: "mvn clean checkstyle:check install deploy -Dproject.version=${projectVersion}", returnStatus: true)
+                    def exitCode = sh(script: "mvn clean checkstyle:check deploy -Dproject.version=${projectVersion}", returnStatus: true)
                     if (exitCode != 0) {
                         currentBuild.result = "UNSTABLE"
                     }
                 }
+                echo "Collecting JUnit test results" 	
+                junit allowEmptyResults: true, testResults: 'extension-api/target/surefire-reports/**/*.xml,extension-util/target/surefire-reports/**/*.xml'
                 // pattern: comma- or space-separated list of patterns of files that must be included.
                 step([$class: 'CheckStylePublisher', canComputeNew: false, defaultEncoding: '', healthy: '', 
                 	unstableTotalHigh: '0', unstableTotalNormal: '100', pattern: 'extension-api/target/checkstyle-result.xml,extension-util/target/checkstyle-result.xml', unHealthy: ''])
@@ -94,9 +96,6 @@ pipeline {
     }
     
     post {
-        always {
-            junit allowEmptyResults: true, testResults: 'extension-api/target/surefire-reports/**/*.xml,extension-util/target/surefire-reports/**/*.xml'
-        }
         unstable {
             slackSend (color: 'warning', message: "funnel-extension-base: There were test failures in job '${currentBuild.displayName}' (<${env.BUILD_URL}|Open>)")
         }
