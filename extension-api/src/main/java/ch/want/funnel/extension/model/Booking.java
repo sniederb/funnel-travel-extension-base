@@ -37,7 +37,9 @@ public class Booking implements Serializable {
     private String sourceInternalReferencenumber;
     private String productkey;
     private String travelagencyId;
+    private String ticketingTravelagencyId;
     private String agentSign;
+    private String customerAccountId;
     private String totalpricecurrency;
     private BigDecimal totalprice;
     private BigDecimal purchaseprice;
@@ -449,7 +451,7 @@ public class Booking implements Serializable {
 
     /**
      * If true, the {@link #getTravelservices()} form a package, and consumers must not split these services
-     * 
+     *
      * @return
      */
     public boolean isPackaged() {
@@ -458,5 +460,24 @@ public class Booking implements Serializable {
 
     public void setPackaged(final boolean packaged) {
         this.packaged = packaged;
+    }
+
+    public String getTicketingTravelagencyId() {
+        return ticketingTravelagencyId;
+    }
+
+    public void setTicketingTravelagencyId(final String ticketingTravelagencyId) {
+        this.ticketingTravelagencyId = ticketingTravelagencyId;
+    }
+
+    /**
+     * Reference to customer account. In Amadeus this is the AIAN.
+     */
+    public String getCustomerAccountId() {
+        return customerAccountId;
+    }
+
+    public void setCustomerAccountId(final String customerAccountId) {
+        this.customerAccountId = customerAccountId;
     }
 }
