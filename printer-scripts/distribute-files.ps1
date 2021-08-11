@@ -9,7 +9,7 @@
 Set-Variable BaseDirectory -value "C:\proprinter\airs" -option Constant
 Set-Variable TrashDirectory -value "C:\proprinter\funneltravel\unassigned" -option Constant
 Set-Variable Logfile -value "C:\proprinter\logs\distribute.log"
-Set-Variable FileMustInclude -value "ENDX" -option Constant
+Set-Variable FileMustEndWith -value "END" -option Constant
 
 Set-Variable TargetDirectories -value @{}
 $TargetDirectories.Add('ZRH12345A', 'C:\proprinter\funneltravel\customer1')
@@ -30,13 +30,14 @@ New-Item -ItemType Directory -Force -Path "$TrashDirectory" | Out-Null
 LogWrite "Distributing files from $BaseDirectory"
 foreach ($pnr in Get-ChildItem $BaseDirectory -Attributes !Directory+!System)
 {
-    $FileContent = Get-Content "$BaseDirectory\$pnr"
-    if ($FileContent.Contains($FileMustInclude))
+    $FileContentLineArray = Get-Content "$BaseDirectory\$pnr"
+    $LastLine = $FileContentLineArray[-1]
+    if ($LastLine.Contains($FileMustEndWith))
     {
         $FoundMatch = $FALSE
         foreach($TargetSubstring in $TargetDirectories.keys)
         {
-            if ($FileContent -match $TargetSubstring)
+            if ($FileContentLineArray -match $TargetSubstring)
             {
                 $TargetDirectory = $TargetDirectories.$TargetSubstring
                 LogWrite "Moving $pnr to $TargetDirectory"
