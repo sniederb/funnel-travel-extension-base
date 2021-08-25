@@ -48,6 +48,7 @@ foreach ($pnr in Get-ChildItem $BaseDirectory -Attributes !Directory+!System)
         }
         if (-Not $FoundMatch) 
         {
+        	LogWrite "Skipping $pnr to $TrashDirectory"
             Move-Item "$BaseDirectory\$pnr" "$TrashDirectory"
         }
     }
