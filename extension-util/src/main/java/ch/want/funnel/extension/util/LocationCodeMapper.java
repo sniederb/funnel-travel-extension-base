@@ -22,6 +22,10 @@ public class LocationCodeMapper {
         return instance.getMessage("sncf." + gareSncfCode);
     }
 
+    /**
+     * AMTRAK uses three-letter rail station codes, which don't correspond with UN location codes.
+     * This method maps an AMTRAK train station code (eg. ARB) to the UN location code (eg. ARB/US)
+     */
     public static Optional<String> convertAmtrakToFunnelLocation(final String amtrakStationCode) {
         return instance.getMessage("amtrak." + amtrakStationCode);
     }
