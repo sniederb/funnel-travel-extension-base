@@ -27,7 +27,7 @@ public class TravelService implements Serializable {
     private String providerSourcename;
     private TravelServiceType travelServiceType;
     private BookingStatus bookingstatus;
-    private String referencenumber;
+    private String referenceNumber;
     private LocalDate departuredate;
     private LocalDate returndate;
     private String cancellationPolicy;
@@ -40,6 +40,8 @@ public class TravelService implements Serializable {
     private transient List<SegmentedLeg> segmentedLegs = new ArrayList<>();
     @JsonManagedReference("singlesegment")
     private transient SingleSegment singleSegment;
+    @JsonManagedReference("references")
+    private transient List<TravelServiceReference> travelServiceReferences = new ArrayList<>();
 
     public TravelService() {
         // default c'tor
@@ -97,12 +99,38 @@ public class TravelService implements Serializable {
         this.bookingstatus = bookingstatus;
     }
 
-    public String getReferencenumber() {
-        return referencenumber;
+    /**
+     * The reference number of this service at the source, e.g. a hotel confirmation number. For
+     * references in one or multiple booking platforms, use {@link TravelServiceReference}
+     *
+     * @return
+     */
+    public String getReferenceNumber() {
+        return referenceNumber;
     }
 
+    public void setReferenceNumber(final String referenceNumber) {
+        this.referenceNumber = referenceNumber;
+    }
+
+    /**
+     * Use {@link #getReferenceNumber()}
+     *
+     * @return
+     */
+    @Deprecated
+    public String getReferencenumber() {
+        return getReferenceNumber();
+    }
+
+    /**
+     * Use {@link #setReferenceNumber(String)}
+     *
+     * @return
+     */
+    @Deprecated
     public void setReferencenumber(final String referencenumber) {
-        this.referencenumber = referencenumber;
+        setReferenceNumber(referencenumber);
     }
 
     /**
@@ -131,7 +159,7 @@ public class TravelService implements Serializable {
 
     /**
      * The end date of the service, using 'flight' naming. Same as {@link #getCheckOutDate()}
-     * 
+     *
      * @return
      */
     public LocalDate getReturndate() {
@@ -201,5 +229,13 @@ public class TravelService implements Serializable {
 
     public void setComment(final String comment) {
         this.comment = comment;
+    }
+
+    public List<TravelServiceReference> getTravelServiceReferences() {
+        return travelServiceReferences;
+    }
+
+    public void setTravelServiceReferences(final List<TravelServiceReference> travelServiceReferences) {
+        this.travelServiceReferences = travelServiceReferences;
     }
 }

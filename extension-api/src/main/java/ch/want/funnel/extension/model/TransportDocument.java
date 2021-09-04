@@ -22,7 +22,7 @@ public class TransportDocument implements Serializable {
     private TravelService travelService;
     private Traveler traveler;
     private TransportDocumentType transportDocumentType;
-    private String referencenumber;
+    private String referenceNumber;
     private String description;
     @JsonManagedReference("document-prices")
     private transient List<PriceItem> priceitems = new ArrayList<>();
@@ -60,12 +60,32 @@ public class TransportDocument implements Serializable {
         this.transportDocumentType = transportDocumentType;
     }
 
-    public String getReferencenumber() {
-        return referencenumber;
+    public String getReferenceNumber() {
+        return referenceNumber;
     }
 
+    public void setReferenceNumber(final String referenceNumber) {
+        this.referenceNumber = referenceNumber;
+    }
+
+    /**
+     * Use {@link #getReferenceNumber()}
+     * 
+     * @return
+     */
+    @Deprecated
+    public String getReferencenumber() {
+        return getReferenceNumber();
+    }
+
+    /**
+     * Use {@link #setReferenceNumber(String)}
+     * 
+     * @return
+     */
+    @Deprecated
     public void setReferencenumber(final String referencenumber) {
-        this.referencenumber = referencenumber;
+        setReferenceNumber(referencenumber);
     }
 
     public String getDescription() {
@@ -100,8 +120,8 @@ public class TransportDocument implements Serializable {
     public void initializeAssociatedSegments(final TravelService segmentedService, final boolean defaultValue) {
         associatedSegments.clear();
         segmentedService.getSegmentedLegs().stream()
-                .flatMap(leg -> leg.getSegments().stream())
-                .forEach(seg -> associatedSegments.add(Boolean.toString(defaultValue)));
+            .flatMap(leg -> leg.getSegments().stream())
+            .forEach(seg -> associatedSegments.add(Boolean.toString(defaultValue)));
     }
 
     public void setAssociatedSegments(final List<String> associatedSegments) {

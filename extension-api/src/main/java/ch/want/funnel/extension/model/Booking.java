@@ -33,7 +33,7 @@ public class Booking implements Serializable {
     private String sourceDomain;
     private LocalDate departuredate;
     private LocalDate returndate;
-    private String referencenumber;
+    private String referenceNumber;
     private String sourceInternalReferencenumber;
     private String productkey;
     private String travelagencyId;
@@ -183,17 +183,37 @@ public class Booking implements Serializable {
      * The {@code referencenumber} reflects the number presented to the customer. If the source system
      * uses a different, internal ID, be sure to set {@link #setSourceInternalReferencenumber(String)}
      */
-    public String getReferencenumber() {
-        return referencenumber;
+    public String getReferenceNumber() {
+        return referenceNumber;
     }
 
+    public void setReferenceNumber(final String referenceNumber) {
+        this.referenceNumber = referenceNumber;
+    }
+
+    /**
+     * Use {@link #getReferenceNumber()}
+     * 
+     * @return
+     */
+    @Deprecated
+    public String getReferencenumber() {
+        return getReferenceNumber();
+    }
+
+    /**
+     * Use {@link #setReferenceNumber(String)}
+     * 
+     * @return
+     */
+    @Deprecated
     public void setReferencenumber(final String referencenumber) {
-        this.referencenumber = referencenumber;
+        setReferenceNumber(referencenumber);
     }
 
     /**
      * The {@code sourceInternalReferencenumber} reflects the ID for this booking internal to the source system.
-     * This is often a UUID or a length hash-type string.
+     * This is often a UUID or a length hash-type string, but might also be identical to {@link #getReferencenumber()}
      */
     public String getSourceInternalReferencenumber() {
         return sourceInternalReferencenumber;
@@ -204,7 +224,7 @@ public class Booking implements Serializable {
     }
 
     /**
-     * The {@code midofficeReferenceNumber} reflects the ID for this booking in the customer's midoffice / expense system..
+     * The {@code midofficeReferenceNumber} reflects the ID for this booking in the customer's midoffice / expense system.
      */
     public String getMidofficeReferenceNumber() {
         return midofficeReferenceNumber;
