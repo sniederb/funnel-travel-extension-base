@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 public class TravelServiceReference {
 
-    @JsonBackReference("service-legs")
+    @JsonBackReference("references")
     private TravelService travelService;
     private String system;
     private String referenceNumber;
