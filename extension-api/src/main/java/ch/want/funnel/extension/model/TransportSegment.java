@@ -35,6 +35,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     private String providername;
     private String connectionnumber;
     private String reservationlocator;
+    private String baggage;
     private transient List<TransportDocument> auxiliaries = new ArrayList<>();
 
     public UUID getUuid() {
@@ -171,6 +172,14 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
 
     public void setArrivingAtDestinationName(final String arrivingAtDestinationName) {
         this.arrivingAtDestinationName = arrivingAtDestinationName;
+    }
+
+    public String getBaggage() {
+        return baggage;
+    }
+
+    public void setBaggage(final String baggage) {
+        this.baggage = baggage;
     }
 
     @Override

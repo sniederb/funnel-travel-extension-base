@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import ch.want.funnel.extension.model.Traveler;
+
 public abstract class MinimalConverterSettings extends AbstractSettings {
 
     /**
@@ -36,10 +38,16 @@ public abstract class MinimalConverterSettings extends AbstractSettings {
         return Boolean.TRUE.equals(settingValues.get(INCLUDE_TRAVEL_PREFERENCES));
     }
 
+    /**
+     * If {@code false}, produces should not add passport data to {@link Traveler} entries
+     */
     public boolean isIncludePassportData() {
         return Boolean.TRUE.equals(settingValues.get(INCLUDE_PASSPORT_DATA));
     }
 
+    /**
+     * If {@code false}, produces should not process remarks
+     */
     public boolean isIncludeNonTravelData() {
         return Boolean.TRUE.equals(settingValues.get(INCLUDE_NON_TRAVEL_DATA));
     }
