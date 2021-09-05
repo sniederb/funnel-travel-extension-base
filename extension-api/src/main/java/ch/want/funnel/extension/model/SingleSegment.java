@@ -191,10 +191,12 @@ public class SingleSegment implements Serializable {
         return additionalDescription;
     }
 
+    @JsonIgnore
     public String getRentalCarExtras() {
         return getAdditionalDescription();
     }
 
+    @JsonIgnore
     public String getHotelAndPensionDescription() {
         return getAdditionalDescription();
     }

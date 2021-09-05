@@ -15,6 +15,7 @@ public class BookingPayment implements Serializable {
     private UUID uuid;
     private OffsetDateTime entryTimestamp;
     private String description;
+    private String serviceReference;
     private String currency;
     private BigDecimal amount;
     private PaymentType paymentType;
@@ -87,5 +88,13 @@ public class BookingPayment implements Serializable {
 
     public void setCcExpiration(final LocalDate ccExpiration) {
         this.ccExpiration = ccExpiration;
+    }
+
+    public String getServiceReference() {
+        return serviceReference;
+    }
+
+    public void setServiceReference(final String serviceReference) {
+        this.serviceReference = serviceReference;
     }
 }

@@ -36,6 +36,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     private String connectionnumber;
     private String reservationlocator;
     private String baggage;
+    private Integer co2KiloPerPax;
     private transient List<TransportDocument> auxiliaries = new ArrayList<>();
 
     public UUID getUuid() {
@@ -180,6 +181,14 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
 
     public void setBaggage(final String baggage) {
         this.baggage = baggage;
+    }
+
+    public Integer getCo2KiloPerPax() {
+        return co2KiloPerPax;
+    }
+
+    public void setCo2KiloPerPax(final Integer co2KiloPerPax) {
+        this.co2KiloPerPax = co2KiloPerPax;
     }
 
     @Override

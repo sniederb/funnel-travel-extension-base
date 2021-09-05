@@ -9,6 +9,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -193,7 +194,7 @@ public class Booking implements Serializable {
 
     /**
      * Use {@link #getReferenceNumber()}
-     * 
+     *
      * @return
      */
     @Deprecated
@@ -203,7 +204,7 @@ public class Booking implements Serializable {
 
     /**
      * Use {@link #setReferenceNumber(String)}
-     * 
+     *
      * @return
      */
     @Deprecated
@@ -284,20 +285,6 @@ public class Booking implements Serializable {
 
     public void setTotalprice(final BigDecimal totalprice) {
         this.totalprice = totalprice;
-    }
-
-    public void updateTotalpriceFromPriceitems() {
-        final Map<String, BigDecimal> amountPerCurrency = getPriceitemsIncludingNested().stream()
-            .collect(Collectors.groupingBy(PriceItem::getCurrency))
-            .entrySet().stream()
-            .collect(Collectors.toMap(
-                Map.Entry::getKey,
-                e -> e.getValue().stream().map(PriceItem::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add)));
-        if (amountPerCurrency.size() == 1) {
-            final Map.Entry<String, BigDecimal> bookingAmount = amountPerCurrency.entrySet().iterator().next();
-            setTotalpricecurrency(bookingAmount.getKey());
-            setTotalprice(bookingAmount.getValue());
-        }
     }
 
     /**
@@ -387,18 +374,6 @@ public class Booking implements Serializable {
 
     public List<PriceItem> getPriceitems() {
         return priceitems;
-    }
-
-    private Set<PriceItem> getPriceitemsIncludingNested() {
-        final Set<PriceItem> allpriceitems = new HashSet<>();
-        allpriceitems.addAll(getPriceitems());
-        getTravelservices().forEach(srv -> {
-            allpriceitems.addAll(srv.getPriceitems());
-            srv.getTransportDocuments().forEach(doc -> {
-                allpriceitems.addAll(doc.getPriceitems());
-            });
-        });
-        return allpriceitems;
     }
 
     public void setPriceitems(final List<PriceItem> priceitems) {
@@ -499,5 +474,53 @@ public class Booking implements Serializable {
 
     public void setCustomerAccountId(final String customerAccountId) {
         this.customerAccountId = customerAccountId;
+    }
+
+    /**
+     * By default, all {@link #priceitems} collections hold all entries including nested. Thus {@link #getPriceitems()} will
+     * return <strong>all</priceitems> priceitems, including those on {@link TravelService} and {@link TransportDocument}
+     * level. Calling this method removes priceitems from all collections except the most local one.
+     */
+    public void removeMultiReferencedPriceitems() {
+        for (final Iterator<PriceItem> iterator = priceitems.iterator(); iterator.hasNext();) {
+            final PriceItem priceitem = iterator.next();
+            if (priceitem.getTravelService() != null) {
+                iterator.remove();
+            }
+        }
+        for (final TravelService service : travelservices) {
+            for (final Iterator<PriceItem> iterator = service.getPriceitems().iterator(); iterator.hasNext();) {
+                final PriceItem priceitem = iterator.next();
+                if (priceitem.getTransportDocument() != null) {
+                    iterator.remove();
+                }
+            }
+        }
+    }
+
+    public void updateTotalpriceFromPriceitems() {
+        final Map<String, BigDecimal> amountPerCurrency = getPriceitemsIncludingNested().stream()
+            .collect(Collectors.groupingBy(PriceItem::getCurrency))
+            .entrySet().stream()
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                e -> e.getValue().stream().map(PriceItem::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add)));
+        if (amountPerCurrency.size() == 1) {
+            final Map.Entry<String, BigDecimal> bookingAmount = amountPerCurrency.entrySet().iterator().next();
+            setTotalpricecurrency(bookingAmount.getKey());
+            setTotalprice(bookingAmount.getValue());
+        }
+    }
+
+    private Set<PriceItem> getPriceitemsIncludingNested() {
+        final Set<PriceItem> allpriceitems = new HashSet<>();
+        allpriceitems.addAll(getPriceitems());
+        getTravelservices().forEach(srv -> {
+            allpriceitems.addAll(srv.getPriceitems());
+            srv.getTransportDocuments().forEach(doc -> {
+                allpriceitems.addAll(doc.getPriceitems());
+            });
+        });
+        return allpriceitems;
     }
 }
