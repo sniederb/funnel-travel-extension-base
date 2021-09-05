@@ -170,7 +170,7 @@ public class TravelService implements Serializable {
 
     @JsonIgnore
     public LocalDate getCheckOutDate() {
-        return getDeparturedate();
+        return getReturndate();
     }
 
     /**
