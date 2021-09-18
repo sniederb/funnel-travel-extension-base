@@ -28,6 +28,7 @@ public class Trip implements Serializable {
     private String comment;
     private transient List<Booking> bookings = new ArrayList<>();
     private transient List<CustomFieldValue> customfieldValues = new ArrayList<>();
+    private transient List<OrganizationUnitAgencyCode> agencyCodes = new ArrayList<>();
 
     public UUID getUuid() {
         return uuid;
@@ -149,5 +150,13 @@ public class Trip implements Serializable {
 
     public void setCustomfieldValues(final List<CustomFieldValue> customfieldValues) {
         this.customfieldValues = customfieldValues;
+    }
+
+    public List<OrganizationUnitAgencyCode> getAgencyCodes() {
+        return agencyCodes;
+    }
+
+    public void setAgencyCodes(final List<OrganizationUnitAgencyCode> agencyCodes) {
+        this.agencyCodes = agencyCodes;
     }
 }
