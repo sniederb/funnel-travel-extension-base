@@ -67,7 +67,7 @@ public class BookingStatusMapper {
      * This method returns a <strong>possible</strong> value for a GDS status. Refering to
      * {@link #getBookingStatus(String)} it is clear that multiple status are mapped to the
      * same value, so this method simply returns on of those.
-     * 
+     *
      * @param funnelStatus
      * @return
      */

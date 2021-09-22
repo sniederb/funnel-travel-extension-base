@@ -12,13 +12,13 @@ Checkstyle configuration that checks the Google coding conventions from Google J
 <module name="Checker">
   <property name="severity" value="warning"/>
   <property name="charset" value="UTF-8"/>
-  <property name="fileExtensions" value="java, properties, xml"/>
-  
+  <property name="fileExtensions" value="java, xml"/>
+
   <module name="LineLength">
     <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
     <property name="max" value="160"/>
   </module>
-  
+
   <module name="TreeWalker">
     <module name="OuterTypeFilename"/>
     <module name="IllegalTokenText">
@@ -31,7 +31,6 @@ Checkstyle configuration that checks the Google coding conventions from Google J
       <property name="allowByTailComment" value="true"/>
       <property name="allowNonPrintableEscapes" value="true"/>
     </module>
-    
     <module name="AvoidStarImport">
       <property name="excludes" value="org.hamcrest.CoreMatchers,org.hamcrest.MatcherAssert,org.mockito.Mockito,org.junit.jupiter.api.Assertions,org.springframework.test.web.servlet.request.MockMvcRequestBuilders,org.springframework.test.web.servlet.result.MockMvcResultMatchers,org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors,org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers,java.lang.annotation.ElementType"/>
     </module>
@@ -67,12 +66,14 @@ Checkstyle configuration that checks the Google coding conventions from Google J
     <module name="FallThrough"/>
     <module name="UpperEll"/>
     <module name="ModifierOrder"/>
+    <!--
     <module name="EmptyLineSeparator">
       <property name="tokens" value="IMPORT,CLASS_DEF,ENUM_DEF,INTERFACE_DEF,CTOR_DEF,METHOD_DEF,INSTANCE_INIT,VARIABLE_DEF"/>
       <property name="allowNoEmptyLineBetweenFields" value="true"/>
       <property name="allowMultipleEmptyLines" value="false"/>
       <property name="allowMultipleEmptyLinesInsideClassMembers" value="false"/>
     </module>
+    -->
     <module name="SeparatorWrap">
       <property name="id" value="SeparatorWrapDot"/>
       <property name="option" value="nl"/>
@@ -154,11 +155,14 @@ Checkstyle configuration that checks the Google coding conventions from Google J
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
     </module>
     <module name="VariableDeclarationUsageDistance"/>
-    <module name="CustomImportOrder">
-      <property name="customImportOrderRules" value="STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE"/>
-      <property name="thirdPartyPackageRegExp" value="^com\."/>
-      <property name="specialImportsRegExp" value="^org\."/>
-      <property name="sortImportsInGroupAlphabetically" value="true"/>
+    <!-- Should match Preferences - Java - Code Style - Organize Imports -->
+    <module name="ImportOrder">
+      <property name="groups" value="/^java\./,javax,org,com"/>
+      <property name="ordered" value="true"/>
+      <property name="separated" value="true"/>
+      <!-- Where should static imports go -->
+      <property name="option" value="above"/>
+      <property name="sortStaticImportsAlphabetically" value="true"/>
     </module>
     <module name="MethodParamPad"/>
     <module name="NoWhitespaceBefore">
@@ -204,7 +208,6 @@ Checkstyle configuration that checks the Google coding conventions from Google J
       <property name="allowMissingReturnTag" value="true"/>
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
     </module>
-    
     <module name="MethodName">
       <property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9_]*$"/>
       <message key="name.invalidPattern" value="Method name ''{0}'' must match pattern ''{1}''."/>

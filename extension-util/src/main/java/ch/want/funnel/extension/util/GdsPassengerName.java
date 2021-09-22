@@ -8,9 +8,12 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GdsPassengerName {
 
+    private static final Logger LOG = LoggerFactory.getLogger(GdsPassengerName.class);
     private static final Set<String> MALE_SALUATIONS;
     private static final Set<String> FEMALE_SALUATIONS;
     private final String lastname;
@@ -132,6 +135,9 @@ public class GdsPassengerName {
             case "ADT":
                 this.passengerType = addOn.getAddOnType();
                 break;
+            default:
+                LOG.warn("Unknown passenger add-on type {}", addOn.getAddOnType());
+                break;
             }
             remainingComposite = removeTrailing(remainingComposite, addOn.getEntireAddOn());
             lastBracket = remainingComposite.lastIndexOf('(');
@@ -196,7 +202,7 @@ public class GdsPassengerName {
 
         /**
          * Format: 04OCT10
-         * 
+         *
          * @param dateValue
          * @return
          */
