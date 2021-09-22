@@ -27,7 +27,7 @@ public class ExtendedProfileData implements Serializable {
     private String phoneBusiness;
     private String nationality;
     private Locale language;
-    private ContactInformation companyContact;
+    private Company companyContact;
     private ContactInformation homeContact;
     // using concrete collection classes here to ensure serialization
     private final HashSet<OfficialDocument> officialDocuments = new HashSet<>();
@@ -211,13 +211,13 @@ public class ExtendedProfileData implements Serializable {
     }
 
     /**
-     * Returns {@link ContactInformation} for the traveler's company.
+     * Returns {@link Company} for the traveler's company.
      */
-    public Optional<ContactInformation> getCompanyContact() {
+    public Optional<Company> getCompanyContact() {
         return Optional.ofNullable(companyContact);
     }
 
-    public void setCompanyContact(final ContactInformation companyContact) {
+    public void setCompanyContact(final Company companyContact) {
         this.companyContact = companyContact;
     }
 
