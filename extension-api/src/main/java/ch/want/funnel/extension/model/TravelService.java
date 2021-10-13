@@ -103,11 +103,14 @@ public class TravelService implements Serializable {
     /**
      * The reference number of this service at the source, e.g. a hotel confirmation number. For
      * references in one or multiple booking platforms, use {@link TravelServiceReference}
-     *
-     * @return
      */
     public String getReferenceNumber() {
         return referenceNumber;
+    }
+
+    @JsonIgnore
+    public String getRefundedTicketNumber() {
+        return getReferenceNumber();
     }
 
     public void setReferenceNumber(final String referenceNumber) {

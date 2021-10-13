@@ -1,6 +1,3 @@
-/*
- * Created on 26 Apr 2018
- */
 package ch.want.funnel.extension.model;
 
 import java.io.Serializable;
@@ -13,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class SingleSegment implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public static final String SERVICE_TYPECODE_INSURANCE = "Insurance";
     public static final String SERVICE_TYPECODE_REFUND = "Refund";
+    public static final String SERVICE_TYPECODE_TRANSFER = "Transfer";
     private UUID uuid;
     @JsonBackReference("singlesegment")
     private TravelService travelService;
@@ -124,6 +123,11 @@ public class SingleSegment implements Serializable {
         return getServiceDescription();
     }
 
+    @JsonIgnore
+    public String getTransferDescription() {
+        return getServiceDescription();
+    }
+
     public void setServiceDescription(final String serviceDescription) {
         this.serviceDescription = serviceDescription;
     }
@@ -212,10 +216,49 @@ public class SingleSegment implements Serializable {
         return serviceTypeCode;
     }
 
+    public boolean isRefund() {
+        return SERVICE_TYPECODE_REFUND.equals(serviceTypeCode);
+    }
+
+    public boolean isInsurance() {
+        return SERVICE_TYPECODE_INSURANCE.equals(serviceTypeCode);
+    }
+
+    public boolean isTransfer() {
+        return SERVICE_TYPECODE_TRANSFER.equals(serviceTypeCode);
+    }
+
     public void setServiceTypeCode(final String serviceTypeCode) {
         this.serviceTypeCode = serviceTypeCode;
     }
 
+    public void setRefund(final boolean isRefund) {
+        if (isRefund) {
+            setServiceTypeCode(SERVICE_TYPECODE_REFUND);
+        } else if (isRefund()) {
+            setServiceTypeCode(null);
+        }
+    }
+
+    public void setInsurance(final boolean isInsurance) {
+        if (isInsurance) {
+            setServiceTypeCode(SERVICE_TYPECODE_INSURANCE);
+        } else if (isInsurance()) {
+            setServiceTypeCode(null);
+        }
+    }
+
+    public void setTransfer(final boolean isTransfer) {
+        if (isTransfer) {
+            setServiceTypeCode(SERVICE_TYPECODE_TRANSFER);
+        } else if (isTransfer()) {
+            setServiceTypeCode(null);
+        }
+    }
+
+    /**
+     * Get the number of hotel rooms or number of rental cars
+     */
     public Integer getServiceCount() {
         return serviceCount;
     }
@@ -240,6 +283,9 @@ public class SingleSegment implements Serializable {
         this.endTime = endTime;
     }
 
+    /**
+     * A code describing the rate, e.g. a room rate code. This can be a corporate rate or a promo code.
+     */
     public String getRateCode() {
         return rateCode;
     }

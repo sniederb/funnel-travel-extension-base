@@ -39,7 +39,8 @@ public enum TravelServiceType {
      */
     PACKAGE,
     /**
-     * Unsegmented type
+     * Unsegmented type. For special cases of a misc service such as refund or transfer, see constants for
+     * {@link SingleSegment#getServiceTypeCode()} in {@link SingleSegment}
      * Ordinal: 7
      */
     MISC;
