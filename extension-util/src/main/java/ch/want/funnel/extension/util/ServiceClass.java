@@ -16,11 +16,14 @@ import java.util.Set;
  * See eg. <a href="https://www.cheapflights.com/news/what-are-airline-classes">What are the differences between airline classes</a>
  */
 public enum ServiceClass {
-    ECONOMY("Economy", "Y", "Q"), //
-    SPECIAL_FARE("Special fare", "B", "H", "L", "M", "V"), //
-    PREMIUM_ECONOMY("Premium economy", "W", "E", "A"), //
-    BUSINESS("Business", "J", "C", "D"), //
-    FIRST("First", "F", "P", "A", "R");
+    ECONOMY("Economy", "B", "E", "G", "H", "I", "K", "L", "M", "N", "O", "Q", "S", "T", "U", "V", "W", "X", "Y"), //
+    SPECIAL_FARE("Special fare"), //
+    /**
+     * Premium economy is something which certain airlines define, e.g. LH for E, G and N
+     */
+    PREMIUM_ECONOMY("Premium economy"), //
+    BUSINESS("Business", "C", "D", "J", "P", "Z"), //
+    FIRST("First", "A", "F", "R");
 
     private final String description;
     private final Set<String> fareClasses;
