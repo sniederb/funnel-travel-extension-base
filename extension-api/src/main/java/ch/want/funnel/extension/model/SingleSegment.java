@@ -10,9 +10,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class SingleSegment implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public static final String SERVICE_TYPECODE_INSURANCE = "Insurance";
-    public static final String SERVICE_TYPECODE_REFUND = "Refund";
-    public static final String SERVICE_TYPECODE_TRANSFER = "Transfer";
+    public static final String SERVICE_TYPECODE_INSURANCE = "INSURANCE";
+    public static final String SERVICE_TYPECODE_REFUND = "REFUND";
+    public static final String SERVICE_TYPECODE_TRANSFER = "TRANSFER";
     private UUID uuid;
     @JsonBackReference("singlesegment")
     private TravelService travelService;
@@ -217,15 +217,15 @@ public class SingleSegment implements Serializable {
     }
 
     public boolean isRefund() {
-        return SERVICE_TYPECODE_REFUND.equals(serviceTypeCode);
+        return SERVICE_TYPECODE_REFUND.equalsIgnoreCase(serviceTypeCode);
     }
 
     public boolean isInsurance() {
-        return SERVICE_TYPECODE_INSURANCE.equals(serviceTypeCode);
+        return SERVICE_TYPECODE_INSURANCE.equalsIgnoreCase(serviceTypeCode);
     }
 
     public boolean isTransfer() {
-        return SERVICE_TYPECODE_TRANSFER.equals(serviceTypeCode);
+        return SERVICE_TYPECODE_TRANSFER.equalsIgnoreCase(serviceTypeCode);
     }
 
     public void setServiceTypeCode(final String serviceTypeCode) {
