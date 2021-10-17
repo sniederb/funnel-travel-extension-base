@@ -2,6 +2,11 @@ package ch.want.funnel.extension.model;
 
 public enum TripImportStrategy {
     /**
+     * With this strategy, the form object will be mirrored to trip data, i.e. everything not present anymore
+     * in the form object will be deleted. The only exception are the raw sources.
+     */
+    MIRROR,
+    /**
      * With this strategy, data not present in the form object will be deleted, except:
      * <ul>
      * <li>Numbered tickets</li>

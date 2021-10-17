@@ -205,6 +205,10 @@ public class TravelService implements Serializable {
         this.transportDocuments = transportDocuments;
     }
 
+    /**
+     * Get all price items associated with this service. This will <strong>include</strong> price items bound to a
+     * {@link TransportDocument}.
+     */
     public List<PriceItem> getPriceitems() {
         return priceitems;
     }
