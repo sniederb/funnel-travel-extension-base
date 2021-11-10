@@ -10,10 +10,12 @@ import org.apache.commons.lang3.StringUtils;
 public class LocationCodeMapper {
 
     private static final LocationCodeMapper instance = new LocationCodeMapper();
-    private final ResourceBundle messageResource;
+    private final ResourceBundle railStationLocationCodes;
+    private final ResourceBundle railStationNames;
 
     private LocationCodeMapper() {
-        this.messageResource = PropertyResourceBundle.getBundle("ch/want/funnel/extension/railstations", Locale.US);
+        this.railStationLocationCodes = PropertyResourceBundle.getBundle("ch/want/funnel/extension/railstations", Locale.US);
+        this.railStationNames = PropertyResourceBundle.getBundle("ch/want/funnel/extension/railstation-names", Locale.US);
     }
 
     /**
@@ -35,7 +37,7 @@ public class LocationCodeMapper {
         if (StringUtils.isBlank(amtrakStationCode)) {
             return Optional.empty();
         }
-        return instance.getMessage("amtrak." + amtrakStationCode);
+        return instance.getLocationCode("amtrak." + amtrakStationCode);
     }
 
     /**
@@ -46,7 +48,7 @@ public class LocationCodeMapper {
         if (StringUtils.isBlank(dbRl100Code)) {
             return Optional.empty();
         }
-        return instance.getMessage("deutschebahn." + dbRl100Code.replace(' ', '_'));
+        return instance.getLocationCode("deutschebahn." + dbRl100Code.replace(' ', '_'));
     }
 
     /**
@@ -57,13 +59,31 @@ public class LocationCodeMapper {
         if (StringUtils.isBlank(gareSncfCode)) {
             return Optional.empty();
         }
-        return instance.getMessage("sncf." + gareSncfCode);
+        return instance.getLocationCode("sncf." + gareSncfCode);
     }
 
-    private Optional<String> getMessage(final String gareSncfCode) {
-        if (gareSncfCode == null) {
+    public static Optional<String> getBenerailRailStationName(final String gareSncfCode) {
+        if (StringUtils.isBlank(gareSncfCode)) {
             return Optional.empty();
         }
-        return messageResource.containsKey(gareSncfCode) ? Optional.of(messageResource.getString(gareSncfCode)) : Optional.empty();
+        Optional<String> result = instance.getStationName("benerail." + gareSncfCode);
+        if (!result.isPresent()) {
+            result = instance.getStationName("sncf." + gareSncfCode);
+        }
+        return result;
+    }
+
+    private Optional<String> getLocationCode(final String messageKey) {
+        if (messageKey == null) {
+            return Optional.empty();
+        }
+        return railStationLocationCodes.containsKey(messageKey) ? Optional.of(railStationLocationCodes.getString(messageKey)) : Optional.empty();
+    }
+
+    private Optional<String> getStationName(final String messageKey) {
+        if (messageKey == null) {
+            return Optional.empty();
+        }
+        return railStationNames.containsKey(messageKey) ? Optional.of(railStationNames.getString(messageKey)) : Optional.empty();
     }
 }

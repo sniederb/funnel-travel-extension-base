@@ -3,6 +3,7 @@ package ch.want.funnel.extension.util;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -16,6 +17,18 @@ public class LocationCodeMapperTest {
     void convertSncfToFunnelLocation(final String system, final boolean expectedResult) {
         final boolean result = LocationCodeMapper.isSncfGroup(system);
         Assertions.assertEquals(expectedResult, result);
+    }
+
+    @ParameterizedTest()
+    @CsvSource({ "DEBBB,Basel Badischer Bahnhof", "BEBMI,Bruxelles-Midi", "FRGER,La Bresse", "FOOBAR," })
+    void getBenerailRailStationName(final String stationCode, final String expectedResult) {
+        final Optional<String> result = LocationCodeMapper.getBenerailRailStationName(stationCode);
+        if (StringUtils.isBlank(expectedResult)) {
+            Assertions.assertFalse(result.isPresent());
+        } else {
+            Assertions.assertTrue(result.isPresent());
+            Assertions.assertEquals(expectedResult, result.get());
+        }
     }
 
     @ParameterizedTest(name = "parseSncf_{0}")
