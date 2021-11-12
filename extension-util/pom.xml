@@ -6,14 +6,14 @@
 	<parent>
 		<groupId>ch.want.funnel</groupId>
 		<artifactId>extension-base</artifactId>
-		<version>1.0.26-SNAPSHOT</version>
+		<version>1.0.26</version>
 	</parent>
 	
 	<dependencies>
 		<dependency>
 		    <groupId>ch.want.funnel</groupId>
 		    <artifactId>extension-api</artifactId>
-		    <version>1.0.26-SNAPSHOT</version>
+		    <version>1.0.26</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.freemarker</groupId>
