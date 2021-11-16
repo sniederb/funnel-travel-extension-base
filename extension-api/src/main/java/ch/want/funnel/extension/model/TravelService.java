@@ -4,6 +4,7 @@
 package ch.want.funnel.extension.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ public class TravelService implements Serializable {
     private TravelServiceType travelServiceType;
     private BookingStatus bookingstatus;
     private String referenceNumber;
+    private String purchasePriceCurrency;
+    private BigDecimal purchasePrice;
     private LocalDate departuredate;
     private LocalDate returndate;
     private String cancellationPolicy;
@@ -247,5 +250,21 @@ public class TravelService implements Serializable {
 
     public void setTravelServiceReferences(final List<TravelServiceReference> travelServiceReferences) {
         this.travelServiceReferences = travelServiceReferences;
+    }
+
+    public String getPurchasePriceCurrency() {
+        return purchasePriceCurrency;
+    }
+
+    public void setPurchasePriceCurrency(final String purchasePriceCurrency) {
+        this.purchasePriceCurrency = purchasePriceCurrency;
+    }
+
+    public BigDecimal getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(final BigDecimal purchasePrice) {
+        this.purchasePrice = purchasePrice;
     }
 }
