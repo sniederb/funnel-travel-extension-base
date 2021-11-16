@@ -43,8 +43,6 @@ public class Booking implements Serializable {
     private String customerAccountId;
     private String totalpricecurrency;
     private BigDecimal totalprice;
-    private String purchasepricecurrency;
-    private BigDecimal purchaseprice;
     private transient JsonNode extensionData;
     private String destinationCode;
     private String destinationName;
@@ -286,27 +284,6 @@ public class Booking implements Serializable {
 
     public void setTotalprice(final BigDecimal totalprice) {
         this.totalprice = totalprice;
-    }
-
-    public String getPurchasepricecurrency() {
-        return purchasepricecurrency;
-    }
-
-    public void setPurchasepricecurrency(final String purchasepricecurrency) {
-        this.purchasepricecurrency = purchasepricecurrency;
-    }
-
-    /**
-     * The total booking purchase price, in {@link #getPurchasepricecurrency()}
-     *
-     * @return
-     */
-    public BigDecimal getPurchaseprice() {
-        return purchaseprice;
-    }
-
-    public void setPurchaseprice(final BigDecimal purchaseprice) {
-        this.purchaseprice = purchaseprice;
     }
 
     public JsonNode getExtensionData() {

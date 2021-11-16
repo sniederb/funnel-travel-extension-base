@@ -25,6 +25,8 @@ public class PriceItem implements Serializable {
     private String currency;
     private BigDecimal amount;
     private BigDecimal amountInAccountCurrency;
+    private String purchasePriceCurrency;
+    private BigDecimal purchasePrice;
 
     public UUID getUuid() {
         return uuid;
@@ -88,5 +90,24 @@ public class PriceItem implements Serializable {
 
     public void setAmountInAccountCurrency(final BigDecimal amountInAccountCurrency) {
         this.amountInAccountCurrency = amountInAccountCurrency;
+    }
+
+    /**
+     * Get purchase price currency, with fallback to {@link #getCurrency()}
+     */
+    public String getPurchasePriceCurrency() {
+        return purchasePriceCurrency == null ? currency : purchasePriceCurrency;
+    }
+
+    public void setPurchasePriceCurrency(final String purchasePriceCurrency) {
+        this.purchasePriceCurrency = purchasePriceCurrency;
+    }
+
+    public BigDecimal getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(final BigDecimal purchasePrice) {
+        this.purchasePrice = purchasePrice;
     }
 }
