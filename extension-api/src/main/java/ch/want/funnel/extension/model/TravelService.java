@@ -33,6 +33,7 @@ public class TravelService implements Serializable {
     private LocalDate returndate;
     private String cancellationPolicy;
     private String comment;
+    private boolean lowCostAirline;
     @JsonManagedReference("service-documents")
     private transient List<TransportDocument> transportDocuments = new ArrayList<>();
     @JsonManagedReference("service-priceitems")
@@ -247,5 +248,13 @@ public class TravelService implements Serializable {
 
     public void setTravelServiceReferences(final List<TravelServiceReference> travelServiceReferences) {
         this.travelServiceReferences = travelServiceReferences;
+    }
+
+    public boolean isLowCostAirline() {
+        return lowCostAirline;
+    }
+
+    public void setLowCostAirline(final boolean lowCostAirline) {
+        this.lowCostAirline = lowCostAirline;
     }
 }
