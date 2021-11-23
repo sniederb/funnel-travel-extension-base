@@ -211,6 +211,8 @@ public class SingleSegment implements Serializable {
 
     /**
      * A code describing the service type, such as a room code or a car code.
+     * Provider should make sure to send the more generally applicable code. If e.g. there
+     * is a RoomTypeCode (A1D) and a RoomCode (A1DBX8), the former should be used.
      */
     public String getServiceTypeCode() {
         return serviceTypeCode;
