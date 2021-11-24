@@ -33,7 +33,7 @@ public class TravelService implements Serializable {
     private LocalDate returndate;
     private String cancellationPolicy;
     private String comment;
-    private boolean nonBspAirline;
+    private Boolean nonBspFlight;
     @JsonManagedReference("service-documents")
     private transient List<TransportDocument> transportDocuments = new ArrayList<>();
     @JsonManagedReference("service-priceitems")
@@ -254,11 +254,11 @@ public class TravelService implements Serializable {
      * If true, the {@link #getProviderSourcename()} is not a BSP-airline. As such, BSP-style 13-digit tickets are meaningless, and vendor
      * locators should be used instead.
      */
-    public boolean isNonBspAirline() {
-        return nonBspAirline;
+    public Boolean getNonBspFlight() {
+        return nonBspFlight;
     }
 
-    public void setNonBspAirline(final boolean nonBspAirline) {
-        this.nonBspAirline = nonBspAirline;
+    public void setNonBspFlight(final Boolean nonBspFlight) {
+        this.nonBspFlight = nonBspFlight;
     }
 }
