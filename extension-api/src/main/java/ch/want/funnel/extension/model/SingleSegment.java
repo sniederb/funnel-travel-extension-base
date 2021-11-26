@@ -18,8 +18,10 @@ public class SingleSegment implements Serializable {
     private TravelService travelService;
     private String destination;
     private String destinationName;
+    private String destinationIata;
     private String endDestination;
     private String endDestinationName;
+    private String endDestinationIata;
     private String providerDescription;
     private String serviceDescription;
     private String additionalDescription;
@@ -76,6 +78,14 @@ public class SingleSegment implements Serializable {
 
     public void setDestinationName(final String destinationName) {
         this.destinationName = destinationName;
+    }
+
+    public String getDestinationIata() {
+        return destinationIata;
+    }
+
+    public void setDestinationIata(final String destinationIata) {
+        this.destinationIata = destinationIata;
     }
 
     /**
@@ -186,6 +196,14 @@ public class SingleSegment implements Serializable {
 
     public void setEndDestinationName(final String endDestinationName) {
         this.endDestinationName = endDestinationName;
+    }
+
+    public String getEndDestinationIata() {
+        return endDestinationIata;
+    }
+
+    public void setEndDestinationIata(final String endDestinationIata) {
+        this.endDestinationIata = endDestinationIata;
     }
 
     /**

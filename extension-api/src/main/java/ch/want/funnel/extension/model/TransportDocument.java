@@ -22,6 +22,7 @@ public class TransportDocument implements Serializable {
     private TravelService travelService;
     private Traveler traveler;
     private TransportDocumentType transportDocumentType;
+    private String issuingAirline;
     private String referenceNumber;
     private String description;
     @JsonManagedReference("document-prices")
@@ -60,6 +61,19 @@ public class TransportDocument implements Serializable {
         this.transportDocumentType = transportDocumentType;
     }
 
+    /**
+     * For flight-related documents, this method indicate the ticket issuing airline (2-letter airline code).
+     * 
+     * @return
+     */
+    public String getIssuingAirline() {
+        return issuingAirline;
+    }
+
+    public void setIssuingAirline(final String issuingAirline) {
+        this.issuingAirline = issuingAirline;
+    }
+
     public String getReferenceNumber() {
         return referenceNumber;
     }
@@ -70,7 +84,7 @@ public class TransportDocument implements Serializable {
 
     /**
      * Use {@link #getReferenceNumber()}
-     * 
+     *
      * @return
      */
     @Deprecated
@@ -80,7 +94,7 @@ public class TransportDocument implements Serializable {
 
     /**
      * Use {@link #setReferenceNumber(String)}
-     * 
+     *
      * @return
      */
     @Deprecated

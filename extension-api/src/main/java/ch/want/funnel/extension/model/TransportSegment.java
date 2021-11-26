@@ -25,9 +25,11 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     private LocalDateTime departuretime;
     private String departingfromdestination;
     private String departingFromDestinationName;
+    private String departingFromIata;
     private LocalDateTime arrivaltime;
     private String arrivingatdestination;
     private String arrivingAtDestinationName;
+    private String arrivingAtIata;
     private Integer durationinminutes;
     private String travelclass;
     private String farebasis;
@@ -71,12 +73,36 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
         this.departuretime = departuretime;
     }
 
+    /**
+     * funnel.travel will set a UN location code, e.g. ZRH/CH. Note that the UN location
+     * code doesn't always match the IATA code. For the latter, see {@link #getDepartingFromIata()}.
+     */
     public String getDepartingfromdestination() {
         return departingfromdestination;
     }
 
     public void setDepartingfromdestination(final String departingfromdestination) {
         this.departingfromdestination = departingfromdestination;
+    }
+
+    public String getDepartingFromIata() {
+        return departingFromIata;
+    }
+
+    public void setDepartingFromIata(final String departingFromIata) {
+        this.departingFromIata = departingFromIata;
+    }
+
+    /**
+     * Get a human-readable description of the destination. If {@link #getDepartingfromdestination()} is empty,
+     * this field might still contain information from the original source (provider extension)
+     */
+    public String getDepartingFromDestinationName() {
+        return departingFromDestinationName;
+    }
+
+    public void setDepartingFromDestinationName(final String departingFromDestinationName) {
+        this.departingFromDestinationName = departingFromDestinationName;
     }
 
     public LocalDateTime getArrivaltime() {
@@ -87,12 +113,31 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
         this.arrivaltime = arrivaltime;
     }
 
+    /**
+     * See {@link #getDepartingfromdestination()} for details on destinations
+     */
     public String getArrivingatdestination() {
         return arrivingatdestination;
     }
 
     public void setArrivingatdestination(final String arrivingatdestination) {
         this.arrivingatdestination = arrivingatdestination;
+    }
+
+    public String getArrivingAtIata() {
+        return arrivingAtIata;
+    }
+
+    public void setArrivingAtIata(final String arrivingAtIata) {
+        this.arrivingAtIata = arrivingAtIata;
+    }
+
+    public String getArrivingAtDestinationName() {
+        return arrivingAtDestinationName;
+    }
+
+    public void setArrivingAtDestinationName(final String arrivingAtDestinationName) {
+        this.arrivingAtDestinationName = arrivingAtDestinationName;
     }
 
     public Integer getDurationinminutes() {
@@ -157,22 +202,6 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
 
     public void setAuxiliaries(final List<TransportDocument> auxiliaries) {
         this.auxiliaries = auxiliaries;
-    }
-
-    public String getDepartingFromDestinationName() {
-        return departingFromDestinationName;
-    }
-
-    public void setDepartingFromDestinationName(final String departingFromDestinationName) {
-        this.departingFromDestinationName = departingFromDestinationName;
-    }
-
-    public String getArrivingAtDestinationName() {
-        return arrivingAtDestinationName;
-    }
-
-    public void setArrivingAtDestinationName(final String arrivingAtDestinationName) {
-        this.arrivingAtDestinationName = arrivingAtDestinationName;
     }
 
     public String getBaggage() {
