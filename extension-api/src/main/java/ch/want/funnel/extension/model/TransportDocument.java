@@ -63,7 +63,7 @@ public class TransportDocument implements Serializable {
 
     /**
      * For flight-related documents, this method indicate the ticket issuing airline (2-letter airline code).
-     * 
+     *
      * @return
      */
     public String getIssuingAirline() {
@@ -80,26 +80,6 @@ public class TransportDocument implements Serializable {
 
     public void setReferenceNumber(final String referenceNumber) {
         this.referenceNumber = referenceNumber;
-    }
-
-    /**
-     * Use {@link #getReferenceNumber()}
-     *
-     * @return
-     */
-    @Deprecated
-    public String getReferencenumber() {
-        return getReferenceNumber();
-    }
-
-    /**
-     * Use {@link #setReferenceNumber(String)}
-     *
-     * @return
-     */
-    @Deprecated
-    public void setReferencenumber(final String referencenumber) {
-        setReferenceNumber(referencenumber);
     }
 
     public String getDescription() {

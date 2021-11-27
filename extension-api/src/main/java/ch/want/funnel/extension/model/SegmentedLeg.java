@@ -97,11 +97,11 @@ public class SegmentedLeg implements Serializable {
      *
      * @return
      */
-    public Location getMidpointDestination() {
+    public Optional<Location> getMidpointDestination() {
         if (segments.isEmpty()) {
-            return null;
+            return Optional.empty();
         }
         final int useArrivalOfSegmentIndex = (segments.size() - 1) / 2;
-        return segments.get(useArrivalOfSegmentIndex).getArrivingAtLocation();
+        return Optional.of(segments.get(useArrivalOfSegmentIndex).getArrivingAtLocation());
     }
 }

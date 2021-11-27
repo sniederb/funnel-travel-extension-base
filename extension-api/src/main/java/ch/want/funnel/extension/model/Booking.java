@@ -80,8 +80,8 @@ public class Booking implements Serializable {
         if (!isBlank(getSourceDomain())) {
             joiner.add(getSourceDomain());
         }
-        if (!isBlank(getReferencenumber())) {
-            joiner.add(getReferencenumber());
+        if (!isBlank(getReferenceNumber())) {
+            joiner.add(getReferenceNumber());
         }
         if ((getTotalprice() != null) && (getTotalprice().compareTo(BigDecimal.ZERO) != 0)) {
             joiner.add(getTotalpricecurrency() + " " + new DecimalFormat("#,##0.00").format(getTotalprice()));
@@ -189,26 +189,6 @@ public class Booking implements Serializable {
 
     public void setReferenceNumber(final String referenceNumber) {
         this.referenceNumber = referenceNumber;
-    }
-
-    /**
-     * Use {@link #getReferenceNumber()}
-     *
-     * @return
-     */
-    @Deprecated
-    public String getReferencenumber() {
-        return getReferenceNumber();
-    }
-
-    /**
-     * Use {@link #setReferenceNumber(String)}
-     *
-     * @return
-     */
-    @Deprecated
-    public void setReferencenumber(final String referencenumber) {
-        setReferenceNumber(referencenumber);
     }
 
     /**

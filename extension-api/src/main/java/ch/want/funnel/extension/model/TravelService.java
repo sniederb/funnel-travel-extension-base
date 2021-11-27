@@ -119,26 +119,6 @@ public class TravelService implements Serializable {
     }
 
     /**
-     * Use {@link #getReferenceNumber()}
-     *
-     * @return
-     */
-    @Deprecated
-    public String getReferencenumber() {
-        return getReferenceNumber();
-    }
-
-    /**
-     * Use {@link #setReferenceNumber(String)}
-     *
-     * @return
-     */
-    @Deprecated
-    public void setReferencenumber(final String referencenumber) {
-        setReferenceNumber(referencenumber);
-    }
-
-    /**
      * The start date of the service, using 'flight' naming. Same as {@link #getCheckInDate()}
      */
     public LocalDate getDeparturedate() {

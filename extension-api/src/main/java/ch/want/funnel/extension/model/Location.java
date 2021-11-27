@@ -60,7 +60,12 @@ public class Location implements Serializable {
     }
 
     public String getCountryCode() {
-        return countryCode;
+        if (countryCode != null) {
+            return countryCode;
+        }
+        return get(EntryType.UNLOCATION)
+            .map(s -> s.substring(4))
+            .orElse(null);
     }
 
     public void setCountryCode(final String countryCode) {
