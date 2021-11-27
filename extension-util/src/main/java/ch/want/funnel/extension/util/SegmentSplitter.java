@@ -33,8 +33,8 @@ public class SegmentSplitter {
             if (currentLeg == null) {
                 currentLeg = createSegmentedLeg(legs);
             } else if (previousSegment != null) {
-                if (Objects.equals(previousSegment.getArrivingatdestination(), segment.getDepartingfromdestination()) &&
-                    Objects.equals(previousSegment.getDepartingfromdestination(), segment.getArrivingatdestination())) {
+                if (Objects.equals(previousSegment.getArrivingAtLocation(), segment.getDepartingFromLocation()) &&
+                    Objects.equals(previousSegment.getDepartingFromLocation(), segment.getArrivingAtLocation())) {
                     // first segment of return journey, mirroring the last of previous leg
                     currentLeg = createSegmentedLeg(legs);
                 } else if ((previousSegment.getArrivaltime() != null) && (segment.getDeparturetime() != null)) {

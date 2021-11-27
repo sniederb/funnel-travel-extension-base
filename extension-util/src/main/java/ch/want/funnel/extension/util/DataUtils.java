@@ -2,12 +2,12 @@ package ch.want.funnel.extension.util;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
-import ch.want.funnel.extension.model.Booking;
-import ch.want.funnel.extension.model.SegmentedLeg;
+import ch.want.funnel.extension.model.Location;
 import ch.want.funnel.extension.model.TransportSegment;
-import ch.want.funnel.extension.model.TravelService;
+import ch.want.funnel.extension.model.TravelServiceType;
 import ch.want.funnel.extension.model.Trip;
 
 public final class DataUtils {
@@ -42,17 +42,14 @@ public final class DataUtils {
      * @param trip
      * @return
      */
-    public static String getDepartingAirport(final Trip trip) {
-        for (final Booking booking : trip.getBookings()) {
-            for (final TravelService service : booking.getTravelservices()) {
-                for (final SegmentedLeg leg : service.getSegmentedLegs()) {
-                    for (final TransportSegment segment : leg.getSegments()) {
-                        return getDestination(segment.getDepartingfromdestination());
-                    }
-                }
-            }
-        }
-        return null;
+    public static Optional<Location> getDepartingAirport(final Trip trip) {
+        return trip.getBookings().stream()
+            .flatMap(booking -> booking.getTravelservices().stream())
+            .filter(srv -> TravelServiceType.hasSegments(srv.getTravelServiceType()))
+            .flatMap(srv -> srv.getSegmentedLegs().stream())
+            .flatMap(leg -> leg.getSegments().stream())
+            .map(TransportSegment::getDepartingFromLocation)
+            .findFirst();
     }
 
     /**

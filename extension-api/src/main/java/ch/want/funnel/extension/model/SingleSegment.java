@@ -16,12 +16,8 @@ public class SingleSegment implements Serializable {
     private UUID uuid;
     @JsonBackReference("singlesegment")
     private TravelService travelService;
-    private String destination;
-    private String destinationName;
-    private String destinationIata;
-    private String endDestination;
-    private String endDestinationName;
-    private String endDestinationIata;
+    private Location startLocation;
+    private Location endLocation;
     private String providerDescription;
     private String serviceDescription;
     private String additionalDescription;
@@ -54,38 +50,15 @@ public class SingleSegment implements Serializable {
         this.travelService = travelService;
     }
 
-    public String getDestination() {
-        return destination;
+    public Location getStartLocation() {
+        if (startLocation == null) {
+            startLocation = new Location();
+        }
+        return startLocation;
     }
 
-    /**
-     * Set the destination in a best-effort:
-     * <ul>
-     * <li>If available, set &lt;three-letter location code&gt;/&lt;two-letter country code&gt; (eg ZRH/CH)</li>
-     * <li>If a destination description is available, set that</li>
-     * <li>If a two-letter country code is available, add it with a trailing slash (eg. Heathrow/GB)</li>
-     * </ul>
-     *
-     * @param destination
-     */
-    public void setDestination(final String destination) {
-        this.destination = destination;
-    }
-
-    public String getDestinationName() {
-        return destinationName;
-    }
-
-    public void setDestinationName(final String destinationName) {
-        this.destinationName = destinationName;
-    }
-
-    public String getDestinationIata() {
-        return destinationIata;
-    }
-
-    public void setDestinationIata(final String destinationIata) {
-        this.destinationIata = destinationIata;
+    public void setStartLocation(final Location startLocation) {
+        this.startLocation = startLocation;
     }
 
     /**
@@ -182,28 +155,15 @@ public class SingleSegment implements Serializable {
         this.city = city;
     }
 
-    public String getEndDestination() {
-        return endDestination;
+    public Location getEndLocation() {
+        if (endLocation == null) {
+            endLocation = new Location();
+        }
+        return endLocation;
     }
 
-    public void setEndDestination(final String endDestination) {
-        this.endDestination = endDestination;
-    }
-
-    public String getEndDestinationName() {
-        return endDestinationName;
-    }
-
-    public void setEndDestinationName(final String endDestinationName) {
-        this.endDestinationName = endDestinationName;
-    }
-
-    public String getEndDestinationIata() {
-        return endDestinationIata;
-    }
-
-    public void setEndDestinationIata(final String endDestinationIata) {
-        this.endDestinationIata = endDestinationIata;
+    public void setEndLocation(final Location endLocation) {
+        this.endLocation = endLocation;
     }
 
     /**

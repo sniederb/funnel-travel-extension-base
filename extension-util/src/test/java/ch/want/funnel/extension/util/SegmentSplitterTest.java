@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 
+import ch.want.funnel.extension.model.Location;
 import ch.want.funnel.extension.model.SegmentedLeg;
 import ch.want.funnel.extension.model.TransportSegment;
 
@@ -27,7 +28,10 @@ public class SegmentSplitterTest {
         for (int i = 0; i < expectedLegArrivalDestinations.length; i++) {
             final SegmentedLeg leg = legs.get(i);
             Assertions.assertNotNull(leg.getLegNr());
-            Assertions.assertEquals(expectedLegArrivalDestinations[i], leg.getArrivalDestination());
+            final String unLocationArrival = leg.getArrivalDestination()
+                .map(location -> location.get(Location.EntryType.UNLOCATION).orElse(""))
+                .orElse("");
+            Assertions.assertEquals(expectedLegArrivalDestinations[i], unLocationArrival);
             segmentCount += leg.getSegments().size();
         }
         Assertions.assertEquals(segments.size(), segmentCount, "Count of segments on all legs");
@@ -83,11 +87,17 @@ public class SegmentSplitterTest {
                 final String arrivingCode, final String flightNumber) {
             final TransportSegment segment = new TransportSegment();
             segment.setDeparturetime(departing);
-            segment.setDepartingfromdestination(departingCode);
+            segment.setDepartingFromLocation(buildLocation(departingCode));
             segment.setArrivaltime(arriving);
-            segment.setArrivingatdestination(arrivingCode);
+            segment.setArrivingAtLocation(buildLocation(arrivingCode));
             segment.setConnectionnumber(flightNumber);
             return segment;
+        }
+
+        private Location buildLocation(final String unLocationCode) {
+            final Location location = new Location();
+            location.set(Location.EntryType.UNLOCATION, unLocationCode);
+            return location;
         }
     }
 }

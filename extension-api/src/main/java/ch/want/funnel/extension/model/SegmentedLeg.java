@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "uuid")
 @JsonIgnoreProperties(value = { "departingDestination", "departingDestinationName", "arrivalDestination", "arrivalDestinationName",
-        "midpointDestination" }, allowGetters = true)
+    "midpointDestination" }, allowGetters = true)
 public class SegmentedLeg implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -76,16 +76,9 @@ public class SegmentedLeg implements Serializable {
      *
      * @return
      */
-    public String getDepartingDestination() {
+    public Optional<Location> getDepartingDestination() {
         return Optional.ofNullable(getFirstSegment())
-                .map(TransportSegment::getDepartingfromdestination)
-                .orElse(null);
-    }
-
-    public String getDepartingDestinationName() {
-        return Optional.ofNullable(getFirstSegment())
-                .map(TransportSegment::getDepartingFromDestinationName)
-                .orElse(null);
+            .map(TransportSegment::getDepartingFromLocation);
     }
 
     /**
@@ -93,16 +86,9 @@ public class SegmentedLeg implements Serializable {
      *
      * @return
      */
-    public String getArrivalDestination() {
+    public Optional<Location> getArrivalDestination() {
         return Optional.ofNullable(getLastSegment())
-                .map(TransportSegment::getArrivingatdestination)
-                .orElse(null);
-    }
-
-    public String getArrivalDestinationName() {
-        return Optional.ofNullable(getLastSegment())
-                .map(TransportSegment::getArrivingAtDestinationName)
-                .orElse(null);
+            .map(TransportSegment::getArrivingAtLocation);
     }
 
     /**
@@ -111,11 +97,11 @@ public class SegmentedLeg implements Serializable {
      *
      * @return
      */
-    public String getMidpointDestination() {
+    public Location getMidpointDestination() {
         if (segments.isEmpty()) {
             return null;
         }
         final int useArrivalOfSegmentIndex = (segments.size() - 1) / 2;
-        return segments.get(useArrivalOfSegmentIndex).getArrivingatdestination();
+        return segments.get(useArrivalOfSegmentIndex).getArrivingAtLocation();
     }
 }

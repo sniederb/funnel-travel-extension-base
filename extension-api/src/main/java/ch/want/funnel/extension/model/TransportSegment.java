@@ -23,13 +23,9 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     private SegmentedLeg segmentedLeg;
     private Short segNr;
     private LocalDateTime departuretime;
-    private String departingfromdestination;
-    private String departingFromDestinationName;
-    private String departingFromIata;
+    private Location departingFromLocation;
     private LocalDateTime arrivaltime;
-    private String arrivingatdestination;
-    private String arrivingAtDestinationName;
-    private String arrivingAtIata;
+    private Location arrivingAtLocation;
     private Integer durationinminutes;
     private String travelclass;
     private String farebasis;
@@ -73,71 +69,12 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
         this.departuretime = departuretime;
     }
 
-    /**
-     * funnel.travel will set a UN location code, e.g. ZRH/CH. Note that the UN location
-     * code doesn't always match the IATA code. For the latter, see {@link #getDepartingFromIata()}.
-     */
-    public String getDepartingfromdestination() {
-        return departingfromdestination;
-    }
-
-    public void setDepartingfromdestination(final String departingfromdestination) {
-        this.departingfromdestination = departingfromdestination;
-    }
-
-    public String getDepartingFromIata() {
-        return departingFromIata;
-    }
-
-    public void setDepartingFromIata(final String departingFromIata) {
-        this.departingFromIata = departingFromIata;
-    }
-
-    /**
-     * Get a human-readable description of the destination. If {@link #getDepartingfromdestination()} is empty,
-     * this field might still contain information from the original source (provider extension)
-     */
-    public String getDepartingFromDestinationName() {
-        return departingFromDestinationName;
-    }
-
-    public void setDepartingFromDestinationName(final String departingFromDestinationName) {
-        this.departingFromDestinationName = departingFromDestinationName;
-    }
-
     public LocalDateTime getArrivaltime() {
         return arrivaltime;
     }
 
     public void setArrivaltime(final LocalDateTime arrivaltime) {
         this.arrivaltime = arrivaltime;
-    }
-
-    /**
-     * See {@link #getDepartingfromdestination()} for details on destinations
-     */
-    public String getArrivingatdestination() {
-        return arrivingatdestination;
-    }
-
-    public void setArrivingatdestination(final String arrivingatdestination) {
-        this.arrivingatdestination = arrivingatdestination;
-    }
-
-    public String getArrivingAtIata() {
-        return arrivingAtIata;
-    }
-
-    public void setArrivingAtIata(final String arrivingAtIata) {
-        this.arrivingAtIata = arrivingAtIata;
-    }
-
-    public String getArrivingAtDestinationName() {
-        return arrivingAtDestinationName;
-    }
-
-    public void setArrivingAtDestinationName(final String arrivingAtDestinationName) {
-        this.arrivingAtDestinationName = arrivingAtDestinationName;
     }
 
     public Integer getDurationinminutes() {
@@ -242,7 +179,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((departingfromdestination == null) ? 0 : departingfromdestination.hashCode());
+        result = prime * result + ((departingFromLocation == null) ? 0 : departingFromLocation.hashCode());
         result = prime * result + ((departuretime == null) ? 0 : departuretime.hashCode());
         return result;
     }
@@ -259,8 +196,30 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
         if (uuid != null && Objects.equals(uuid, other.uuid)) {
             return true;
         }
-        return Objects.equals(departingfromdestination, other.departingfromdestination) &&
+        return Objects.equals(departingFromLocation, other.departingFromLocation) &&
             Objects.equals(departuretime, other.departuretime) &&
             Objects.equals(connectionnumber, other.connectionnumber);
+    }
+
+    public Location getDepartingFromLocation() {
+        if (departingFromLocation == null) {
+            departingFromLocation = new Location();
+        }
+        return departingFromLocation;
+    }
+
+    public void setDepartingFromLocation(final Location departingFromLocation) {
+        this.departingFromLocation = departingFromLocation;
+    }
+
+    public Location getArrivingAtLocation() {
+        if (arrivingAtLocation == null) {
+            arrivingAtLocation = new Location();
+        }
+        return arrivingAtLocation;
+    }
+
+    public void setArrivingAtLocation(final Location arrivingAtLocation) {
+        this.arrivingAtLocation = arrivingAtLocation;
     }
 }

@@ -109,11 +109,17 @@
 									"uuid": null,
 									"segNr": 0,
 									"departuretime": "2019-01-02T09:10:00",
-									"departingfromdestination": "ZRH/CH",
-									"departingFromDestinationName": null,
+									"departingFromLocation": {
+										"entries": {
+											"UNLOCATION": "ZRH/CH"
+										}
+									},
 									"arrivaltime": "2019-01-02T10:55:00",
-									"arrivingatdestination": "AMS/NL",
-									"arrivingAtDestinationName": null,
+									"arrivingAtLocation": {
+										"entries": {
+											"UNLOCATION": "AMS/NL"
+										}
+									},
 									"durationinminutes": null,
 									"travelclass": "Economy",
 									"farebasis": null,
@@ -126,11 +132,17 @@
 									"uuid": null,
 									"segNr": 1,
 									"departuretime": "2019-01-02T12:10:00",
-									"departingfromdestination": "AMS/NL",
-									"departingFromDestinationName": null,
+									"departingFromLocation": {
+										"entries": {
+											"UNLOCATION": "AMS/NL"
+										}
+									},
 									"arrivaltime": "2019-01-02T12:50:00",
-									"arrivingatdestination": "INV/GB",
-									"arrivingAtDestinationName": null,
+									"arrivingAtLocation": {
+										"entries": {
+											"UNLOCATION": "INV/GB"
+										}
+									},
 									"durationinminutes": null,
 									"travelclass": "Economy",
 									"farebasis": null,
@@ -149,11 +161,17 @@
 									"uuid": null,
 									"segNr": 0,
 									"departuretime": "2019-01-30T13:20:00",
-									"departingfromdestination": "INV/GB",
-									"departingFromDestinationName": null,
+									"departingFromLocation": {
+										"entries": {
+											"UNLOCATION": "INV/GB"
+										}
+									},
 									"arrivaltime": "2019-01-30T16:00:00",
-									"arrivingatdestination": "AMS/NL",
-									"arrivingAtDestinationName": null,
+									"arrivingAtLocation": {
+										"entries": {
+											"UNLOCATION": "AMS/NL"
+										}
+									},
 									"durationinminutes": null,
 									"travelclass": "Economy",
 									"farebasis": null,
@@ -166,11 +184,17 @@
 									"uuid": null,
 									"segNr": 1,
 									"departuretime": "2019-01-30T17:05:00",
-									"departingfromdestination": "AMS/NL",
-									"departingFromDestinationName": null,
+									"departingFromLocation": {
+										"entries": {
+											"UNLOCATION": "AMS/NL"
+										}
+									},
 									"arrivaltime": "2019-01-30T18:25:00",
-									"arrivingatdestination": "ZRH/CH",
-									"arrivingAtDestinationName": null,
+									"arrivingAtLocation": {
+										"entries": {
+											"UNLOCATION": "ZRH/CH"
+										}
+									},
 									"durationinminutes": null,
 									"travelclass": "Economy",
 									"farebasis": null,

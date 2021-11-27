@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import ch.want.funnel.extension.model.Location;
 import ch.want.funnel.extension.model.Trip;
 
 public class DataUtilsTest {
@@ -49,8 +51,9 @@ public class DataUtilsTest {
     @Test
     public void getDepartingAirport() throws Exception {
         final Trip trip = getTrip();
-        final String origin = DataUtils.getDepartingAirport(trip);
-        assertEquals("ZRH", origin);
+        final Optional<Location> origin = DataUtils.getDepartingAirport(trip);
+        assertTrue(origin.isPresent());
+        assertEquals("ZRH/CH", origin.get().get(Location.EntryType.UNLOCATION).orElse(""));
     }
 
     @TestFactory
