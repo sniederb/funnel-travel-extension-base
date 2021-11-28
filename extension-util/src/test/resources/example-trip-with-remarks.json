@@ -33,8 +33,10 @@
                     ]
                 }
             },
-            "destinationCode": "BCN/ES",
-            "destinationName": "Barcelona",
+            "destination": {
+            	"unLocationCode":"BCN/ES",
+            	"name" : "Barcelona"
+            }, 
             "url": "http://localhost:4200/#/trips/ea0203f2-33ff-4250-a03c-60801e72b010",
             "providerName": "IBERIA",
             "travelservices": [

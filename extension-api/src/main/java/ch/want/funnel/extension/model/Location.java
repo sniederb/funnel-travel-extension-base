@@ -2,6 +2,8 @@ package ch.want.funnel.extension.model;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Location implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,6 +55,7 @@ public class Location implements Serializable {
         this.name = isBlank(name) ? null : name;
     }
 
+    @JsonIgnore
     public boolean isUndefined() {
         return isBlank(iataCode) && isBlank(unLocationCode) && isBlank(generalCode) && isBlank(name);
     }
@@ -66,6 +69,7 @@ public class Location implements Serializable {
      * </ol>
      * if all above are empty, null is returned.
      */
+    @JsonIgnore
     public String getGeneralDescription() {
         String result = getName();
         if (isBlank(result)) {

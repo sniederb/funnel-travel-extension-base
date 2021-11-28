@@ -44,8 +44,7 @@ public class Booking implements Serializable {
     private String totalpricecurrency;
     private BigDecimal totalprice;
     private transient JsonNode extensionData;
-    private String destinationCode;
-    private String destinationName;
+    private Location destination;
     private String url;
     private String providerName;
     private String comment;
@@ -274,20 +273,15 @@ public class Booking implements Serializable {
         this.extensionData = extensionData;
     }
 
-    public String getDestinationCode() {
-        return destinationCode;
+    public Location getDestination() {
+        if (destination == null) {
+            destination = new Location();
+        }
+        return destination;
     }
 
-    public void setDestinationCode(final String destinationCode) {
-        this.destinationCode = destinationCode;
-    }
-
-    public String getDestinationName() {
-        return destinationName;
-    }
-
-    public void setDestinationName(final String destinationName) {
-        this.destinationName = destinationName;
+    public void setDestination(final Location destination) {
+        this.destination = destination;
     }
 
     public String getUrl() {
