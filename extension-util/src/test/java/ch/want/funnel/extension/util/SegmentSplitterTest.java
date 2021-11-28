@@ -29,7 +29,7 @@ public class SegmentSplitterTest {
             final SegmentedLeg leg = legs.get(i);
             Assertions.assertNotNull(leg.getLegNr());
             final String unLocationArrival = leg.getArrivalDestination()
-                .map(location -> location.get(Location.EntryType.UNLOCATION).orElse(""))
+                .map(location -> location.getUnLocationCode())
                 .orElse("");
             Assertions.assertEquals(expectedLegArrivalDestinations[i], unLocationArrival);
             segmentCount += leg.getSegments().size();
@@ -96,7 +96,7 @@ public class SegmentSplitterTest {
 
         private Location buildLocation(final String unLocationCode) {
             final Location location = new Location();
-            location.set(Location.EntryType.UNLOCATION, unLocationCode);
+            location.setUnLocationCode(unLocationCode);
             return location;
         }
     }

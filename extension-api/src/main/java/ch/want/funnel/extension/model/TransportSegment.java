@@ -109,6 +109,9 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
         this.farebasis = farebasis;
     }
 
+    /**
+     * Get the operating provider
+     */
     public String getProvidername() {
         return providername;
     }

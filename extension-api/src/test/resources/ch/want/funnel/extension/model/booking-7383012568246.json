@@ -95,15 +95,11 @@
 							"segNr": 0,
 							"departuretime": "2019-01-02T09:10:00",
 							"departingFromLocation": {
-								"entries": {
-									"UNLOCATION": "ZRH/CH"
-								}
+								"unLocationCode": "ZRH/CH"
 							},
 							"arrivaltime": "2019-01-02T10:55:00",
 							"arrivingAtLocation": {
-								"entries": {
-									"UNLOCATION": "AMS/NL"
-								}
+								"unLocationCode": "AMS/NL"
 							},
 							"durationinminutes": null,
 							"travelclass": "Economy",
@@ -117,15 +113,11 @@
 							"segNr": 1,
 							"departuretime": "2019-01-02T12:10:00",
 							"departingFromLocation": {
-								"entries": {
-									"UNLOCATION": "AMS/NL"
-								}
+								"unLocationCode": "AMS/NL"
 							},
 							"arrivaltime": "2019-01-02T12:50:00",
 							"arrivingAtLocation": {
-								"entries": {
-									"UNLOCATION": "INV/GB"
-								}
+								"unLocationCode": "INV/GB"
 							},
 							"durationinminutes": null,
 							"travelclass": "Economy",
@@ -145,15 +137,11 @@
 							"segNr": 0,
 							"departuretime": "2019-01-30T13:20:00",
 							"departingFromLocation": {
-								"entries": {
-									"UNLOCATION": "INV/GB"
-								}
+								"unLocationCode": "INV/GB"
 							},
 							"arrivaltime": "2019-01-30T16:00:00",
 							"arrivingAtLocation": {
-								"entries": {
-									"UNLOCATION": "AMS/NL"
-								}
+								"unLocationCode": "AMS/NL"
 							},
 							"durationinminutes": null,
 							"travelclass": "Economy",
@@ -167,15 +155,11 @@
 							"segNr": 1,
 							"departuretime": "2019-01-30T17:05:00",
 							"departingFromLocation": {
-								"entries": {
-									"UNLOCATION": "AMS/NL"
-								}
+								"unLocationCode": "AMS/NL"
 							},
 							"arrivaltime": "2019-01-30T18:25:00",
 							"arrivingAtLocation": {
-								"entries": {
-									"UNLOCATION": "ZRH/CH"
-								}
+								"unLocationCode": "ZRH/CH"
 							},
 							"durationinminutes": null,
 							"travelclass": "Economy",
@@ -200,10 +184,8 @@
 			"returndate": "2019-01-12",
 			"singleSegment": {
 				"startLocation": {
-					"entries" : {
-						"GENERAL" : "Inverness"
-					},
-					"countryCode" : "GB"
+					"name": "Inverness",
+					"countryCode": "GB"
 				},
 				"providerDescription": "The Glenmoriston Townhouse Hotel, Inverness",
 				"serviceDescription": "Club Double Room",

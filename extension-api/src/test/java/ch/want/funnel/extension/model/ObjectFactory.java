@@ -59,13 +59,13 @@ public final class ObjectFactory {
     public static Location createLocation(final String iataCode, final String unLocation, final String general) {
         final Location location = new Location();
         if (iataCode != null) {
-            location.set(Location.EntryType.IATA, iataCode);
+            location.setIataCode(iataCode);
         }
         if (unLocation != null) {
-            location.set(Location.EntryType.UNLOCATION, unLocation);
+            location.setUnLocationCode(unLocation);
         }
         if (general != null) {
-            location.set(Location.EntryType.GENERAL, general);
+            location.setName(general);
         }
         return location;
     }

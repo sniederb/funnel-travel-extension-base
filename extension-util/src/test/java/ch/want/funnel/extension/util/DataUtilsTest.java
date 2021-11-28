@@ -53,7 +53,7 @@ public class DataUtilsTest {
         final Trip trip = getTrip();
         final Optional<Location> origin = DataUtils.getDepartingAirport(trip);
         assertTrue(origin.isPresent());
-        assertEquals("ZRH/CH", origin.get().get(Location.EntryType.UNLOCATION).orElse(""));
+        assertEquals("ZRH/CH", origin.get().getUnLocationCode());
     }
 
     @TestFactory

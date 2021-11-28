@@ -18,11 +18,11 @@ public class LocationTest {
     @Test
     public void sameCodesAreEqual() {
         final Location locationA = new Location();
-        locationA.set(Location.EntryType.IATA, "ZRH");
-        locationA.set(Location.EntryType.UNLOCATION, "ZRH/CH");
+        locationA.setIataCode("ZRH");
+        locationA.setUnLocationCode("ZRH/CH");
         final Location locationB = new Location();
-        locationB.set(Location.EntryType.IATA, "ZRH");
-        locationB.set(Location.EntryType.UNLOCATION, "ZRH/CH");
+        locationB.setIataCode("ZRH");
+        locationB.setUnLocationCode("ZRH/CH");
         // act
         final boolean result = locationA.equals(locationB);
         // assert
@@ -32,12 +32,12 @@ public class LocationTest {
     @Test
     public void additionalCodesAreNotEqual() {
         final Location locationA = new Location();
-        locationA.set(Location.EntryType.IATA, "ZRH");
-        locationA.set(Location.EntryType.UNLOCATION, "ZRH/CH");
+        locationA.setIataCode("ZRH");
+        locationA.setUnLocationCode("ZRH/CH");
         final Location locationB = new Location();
-        locationB.set(Location.EntryType.IATA, "ZRH");
-        locationB.set(Location.EntryType.UNLOCATION, "ZRH/CH");
-        locationB.set(Location.EntryType.SNCF, "CHAJD");
+        locationB.setIataCode("ZRH");
+        locationB.setUnLocationCode("ZRH/CH");
+        locationB.setGeneralCode("CHAJD");
         // act
         final boolean result = locationA.equals(locationB);
         // assert
@@ -47,11 +47,11 @@ public class LocationTest {
     @Test
     public void differentCodesAreNotEqual() {
         final Location locationA = new Location();
-        locationA.set(Location.EntryType.IATA, "ZRH");
-        locationA.set(Location.EntryType.UNLOCATION, "ZRH/CH");
+        locationA.setIataCode("ZRH");
+        locationA.setUnLocationCode("ZRH/CH");
         final Location locationB = new Location();
-        locationB.set(Location.EntryType.IATA, "GVA");
-        locationB.set(Location.EntryType.UNLOCATION, "GVA/CH");
+        locationB.setIataCode("GVA");
+        locationB.setUnLocationCode("GVA/CH");
         // act
         final boolean result = locationA.equals(locationB);
         // assert
@@ -61,8 +61,8 @@ public class LocationTest {
     @Test
     public void toStringListsEntries() {
         final Location location = new Location();
-        location.set(Location.EntryType.IATA, "ZRH");
-        location.set(Location.EntryType.UNLOCATION, "ZRH/CH");
+        location.setIataCode("ZRH");
+        location.setUnLocationCode("ZRH/CH");
         location.setCountryCode("CH");
         final String result = location.toString();
         Assertions.assertEquals("class ch.want.funnel.extension.model.Location{countryCode=CH, entries={IATA=ZRH, UNLOCATION=ZRH/CH}}", result);

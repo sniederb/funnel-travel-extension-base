@@ -35,10 +35,10 @@ public class BookingTest {
         Assertions.assertEquals(2, firstLeg.getSegments().size());
         final TransportSegment firstSegment = firstLeg.getSegments().get(0);
         Assertions.assertNotNull(firstSegment.getDepartingFromLocation());
-        Assertions.assertEquals("ZRH/CH", firstSegment.getDepartingFromLocation().get(Location.EntryType.UNLOCATION).orElse(""));
+        Assertions.assertEquals("ZRH/CH", firstSegment.getDepartingFromLocation().getUnLocationCode());
         final TravelService hotelService = booking.getTravelservices().get(1);
         Assertions.assertNotNull(hotelService.getSingleSegment().getStartLocation());
-        Assertions.assertEquals("Inverness", hotelService.getSingleSegment().getStartLocation().get(Location.EntryType.GENERAL).orElse(""));
+        Assertions.assertEquals("Inverness", hotelService.getSingleSegment().getStartLocation().getName());
         MatcherAssert.assertThat(bookingAsJson, CoreMatchers.containsString("0742798225235"));
         MatcherAssert.assertThat(bookingAsJson, CoreMatchers.containsString("header"));
     }
