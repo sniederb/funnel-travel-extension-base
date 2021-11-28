@@ -59,8 +59,8 @@ public class SegmentSplitter {
     }
 
     private static boolean equals(final Location a, final Location b) {
-        return Objects.equals(a.getIataCode(), b.getIataCode()) ||
-            Objects.equals(a.getUnLocationCode(), b.getUnLocationCode()) ||
-            Objects.equals(a.getGeneralCode(), b.getGeneralCode());
+        return (a.getIataCode() != null && Objects.equals(a.getIataCode(), b.getIataCode())) ||
+            (a.getUnLocationCode() != null && Objects.equals(a.getUnLocationCode(), b.getUnLocationCode())) ||
+            (a.getGeneralCode() != null && Objects.equals(a.getGeneralCode(), b.getGeneralCode()));
     }
 }
