@@ -7,7 +7,7 @@
 	"sourceDomain": "Expedia",
 	"departuredate": null,
 	"returndate": null,
-	"referencenumber": "7383012568246",
+	"referenceNumber": "7383012568246",
 	"totalpricecurrency": null,
 	"totalprice": null,
 	"extensionData": null,
@@ -27,7 +27,7 @@
 			"providerSourcename": "",
 			"travelServiceType": "FLIGHT",
 			"bookingstatus": null,
-			"referencenumber": "PCRESW",
+			"referenceNumber": "PCRESW",
 			"departuredate": null,
 			"returndate": null,
 			"cancellationPolicy": null,
@@ -35,7 +35,7 @@
 			"transportDocuments": [
 				{
 					"uuid": null,
-					"referencenumber": "0742798225235",
+					"referenceNumber": "0742798225235",
 					"traveler": "b41ef637-6274-44ac-83f5-a42a9d2d65f4",
 					"description": null,
 					"priceitems": [
@@ -60,7 +60,7 @@
 				},
 				{
 					"uuid": null,
-					"referencenumber": "0742798225234",
+					"referenceNumber": "0742798225234",
 					"traveler": "b1a89c44-a105-4cb7-8828-6d3689fac0b0",
 					"description": null,
 					"priceitems": [
@@ -179,7 +179,7 @@
 			"providerUuid": null,
 			"providerSourcename": "Bookingcom",
 			"travelServiceType": "HOTEL",
-			"referencenumber": "1281529927",
+			"referenceNumber": "1281529927",
 			"departuredate": "2019-01-11",
 			"returndate": "2019-01-12",
 			"singleSegment": {

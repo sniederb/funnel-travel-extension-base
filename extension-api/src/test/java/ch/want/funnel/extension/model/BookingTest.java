@@ -49,7 +49,7 @@ public class BookingTest {
         // act
         final String bookingAsJson = OBJECTMAPPER.writeValueAsString(booking);
         //
-        MatcherAssert.assertThat(bookingAsJson, CoreMatchers.containsString("IATA"));
+        MatcherAssert.assertThat(bookingAsJson, CoreMatchers.containsString("iataCode"));
     }
 
     @Test

@@ -1,302 +1,305 @@
 {
-	"uuid": null,
-	"funnelIdentifier": null,
-	"accountIdentifier": null,
-	"accountUuid": null,
-	"organizationUuid": null,
-	"created": null,
-	"title": null,
-	"departuredate": null,
-	"returndate": null,
-	"destination": null,
-	"comment": null,
-	"bookings": [
-		{
-			"uuid": "73bed396-4d35-4921-8276-075d65604ac8",
-			"tripUuid": "ea0203f2-33ff-4250-a03c-60801e72b010",
-			"providerUuid": "2ad8d8c3-48c3-4fa5-835e-781df5ca9528",
-			"created": "2019-10-02T15:59:23.848204Z",
-			"providerSourcename": "Iberia",
-			"sourceDomain": "ebookers.com",
-			"departuredate": "2019-10-17",
-			"returndate": "2019-10-19",
-			"referencenumber": "PBEBCH7230944634",
-			"totalpricecurrency": "USD",
-			"totalprice": 1389.7,
-			"extensionData": {
-				"ch.want.funnel.extension.galileomir.GalileoMirExtension": {
-					"remarks": [
-						"VL-105515OCTHDQRMSUIVPCJW",
-						"VL-095315OCTMUCRM1AN9OMCU",
-						"VISA/E-FOO.BAR@NOWHERE.COM,P1",
-						"VISA/N-DE"
-					]
-				}
-			},
-			"destinationCode": "BCN/ES",
-			"destinationName": "Barcelona",
-			"url": "http://localhost:4200/#/trips/ea0203f2-33ff-4250-a03c-60801e72b010",
-			"providerName": "IBERIA",
-			"travelservices": [
-				{
-					"uuid": "4153fbef-511b-4f62-b122-0e5559ad4831",
-					"providerUuid": "80adc765-9bec-4c1d-a805-64968599263e",
-					"providerSourcename": "ebookers.com",
-					"travelServiceType": "FLIGHT",
-					"bookingstatus": "CONFIRMED",
-					"referencenumber": null,
-					"departuredate": "2019-10-17",
-					"returndate": "2019-10-19",
-					"cancellationPolicy": null,
-					"transportDocuments": [
-						{
-							"uuid": "c1f7640a-84e1-49df-b9aa-695cc3727d32",
-							"transportDocumentType": "TICKET",
-							"referencenumber": "256 1122334457",
-							"description": "Ticket",
-							"priceitems": [
-								{
-									"uuid": "8cb5d479-9665-4b55-a8d8-2c36ee882187",
-									"priceItemType": "FARE_PER_PAX",
-									"description": "Ticket",
-									"currency": "USD",
-									"amount": 546.55,
-									"amountInAccountCurrency": 544.58
-								},
-								{
-									"uuid": "3a79696e-83b3-45fc-9d1e-cc897d58090f",
-									"priceItemType": "TAX_PER_PAX",
-									"description": "Tax",
-									"currency": "USD",
-									"amount": 142.3,
-									"amountInAccountCurrency": 141.79
-								}
-							],
-							"associatedSegments": []
-						},
-						{
-							"uuid": "7ec6b559-bcce-4e7e-8029-2875e5151395",
-							"transportDocumentType": "TICKET",
-							"referencenumber": "256 1122334455",
-							"description": "Ticket",
-							"priceitems": [
-								{
-									"uuid": "1a2b2a7f-c609-4e38-bafe-0e36be3ac054",
-									"priceItemType": "FARE_PER_PAX",
-									"description": "Ticket",
-									"currency": "USD",
-									"amount": 546.55,
-									"amountInAccountCurrency": 544.58
-								},
-								{
-									"uuid": "b642030a-0c73-45eb-8c32-1c7a42e50474",
-									"priceItemType": "TAX_PER_PAX",
-									"description": "Tax",
-									"currency": "USD",
-									"amount": 142.3,
-									"amountInAccountCurrency": 141.79
-								}
-							],
-							"associatedSegments": []
-						}
-					],
-					"priceitems": [],
-					"segmentedLegs": [
-						{
-							"uuid": "9c96e82c-abbb-4bc8-9ea3-fbfb02cede5c",
-							"legNr": 0,
-							"segments": [
-								{
-									"uuid": "11be1fc8-77c2-44f3-a231-b1544f41535a",
-									"segNr": 0,
-									"departuretime": "2019-10-17T09:35:00",
-									"departingFromLocation": {
-										"unLocationCode": "ZRH/CH",
-										"name": "Zurich"
-									},
-									"arrivaltime": "2019-10-17T11:20:00",
-									"arrivingAtLocation": {
-										"unLocationCode": "BCN/ES",
-										"name": "Barcelona"
-									},
-									"durationinminutes": null,
-									"travelclass": "ECONOMY",
-									"providername": "VY",
-									"connectionnumber": "6247",
-									"reservationlocator": "6SV8AI",
-									"auxiliaries": [
-										{
-											"uuid": "b8af4379-3357-4a83-ab43-f8683e42396b",
-											"transportDocumentType": "EMD",
-											"referencenumber": "123 45674354355",
-											"description": "Seat 12A",
-											"priceitems": [
-												{
-													"uuid": "5e3ec6ac-2296-42b4-90af-20e564707fdb",
-													"priceItemType": "DEFAULT",
-													"description": "Sitzplatz",
-													"currency": "USD",
-													"amount": 6.0,
-													"amountInAccountCurrency": 5.98
-												}
-											],
-											"associatedSegments": []
-										}
-									]
-								}
-							]
-						},
-						{
-							"uuid": "23c2bea7-95b0-4cfe-ba6b-5088b41060d3",
-							"legNr": 1,
-							"segments": [
-								{
-									"uuid": "5a8c2eea-8759-42dc-ba18-41d13693585e",
-									"segNr": 0,
-									"departuretime": "2019-10-19T17:55:00",
-									"departingFromLocation": {
-										"unLocationCode": "BCN/ES",
-										"name": "Barcelona"
-									},
-									"arrivaltime": "2019-10-19T19:50:00",
-									"arrivingAtLocation": {
-										"unLocationCode": "ZRH/CH",
-										"name": "Zurich"
-									},
-									"durationinminutes": null,
-									"travelclass": "ECONOMY",
-									"providername": "VY",
-									"connectionnumber": "6248",
-									"reservationlocator": "6SV8AI",
-									"auxiliaries": [
-										{
-											"uuid": "fe5146c1-a388-4c4a-be09-d2836e042b84",
-											"transportDocumentType": "EMD",
-											"referencenumber": "123 45674354378",
-											"description": "Seat 8B",
-											"priceitems": [
-												{
-													"uuid": "d3c334db-08ef-423f-8846-e3d6cb0c6e30",
-													"priceItemType": "DEFAULT",
-													"description": "Sitzplatz",
-													"currency": "USD",
-													"amount": 6.0,
-													"amountInAccountCurrency": 5.98
-												}
-											],
-											"associatedSegments": []
-										}
-									]
-								}
-							]
-						}
-					],
-					"singleSegment": null
-				}
-			],
-			"priceitems": [],
-			"payments": [
-				{
-					"uuid": "fb85b15c-44a9-427c-85dc-11a3b2ceb8e7",
-					"entryTimestamp": "2019-09-25T15:59:23.849306Z",
-					"description": "VI XXXXXXX 1234",
-					"currency": "USD",
-					"amount": 1389.7
-				}
-			],
-			"rawsources": [
-				{
-					"uuid": "4bca91b0-e769-4a5a-876a-f8740e976481",
-					"externalid": null,
-					"origin": "ebooker.com",
-					"entrydate": "2019-09-25T15:59:23.877508Z",
-					"subject": "Flight Confirmation | Zürich Sat, 13 Apr 2013",
-					"paxlist": "John Busybody",
-					"mime": "multipart/mixed"
-				}
-			],
-			"participants": [
-				{
-					"uuid": "179bddc5-c15d-4874-9fe9-0f04d227f368",
-					"organizationUuid": "9d309005-e81d-497d-981d-654d8df763e5",
-					"firstname": "John",
-					"firstnameNonAps": null,
-					"lastname": "Busybody",
-					"fullname": "John Busybody",
-					"email": "j-busybody@schmid.ch.undef",
-					"sourceId": "TR56HM",
-					"birthdate": "1985-10-17",
-					"passportCountry": "CH",
-					"passportNumber": "X123456780",
-					"passportExpiration": "2025-08-22",
-					"passportPlaceOfIssue": ""
-				},
-				{
-					"uuid": "a2c80055-a158-4979-95a8-bf8210051fe0",
-					"organizationUuid": "dd7f564d-cd4b-4f3d-88cb-70e0caa61df2",
-					"firstname": "Silvia",
-					"firstnameNonAps": null,
-					"lastname": "Schmid",
-					"fullname": "Silvia Schmid",
-					"email": "silvia-schmid@schmid.ch.undef",
-					"sourceId": null,
-					"birthdate": "1981-02-10",
-					"passportCountry": null,
-					"passportNumber": null,
-					"passportExpiration": null,
-					"passportPlaceOfIssue": null
-				}
-			],
-			"customfields": []
-		},
-		{
-			"uuid": "fc47c143-9da3-47a9-98e9-187fe62423e6",
-			"providerSourcename": "Bookingcom",
-			"sourceDomain": "Bookingcom",
-			"referencenumber": "1281529927",
-			"travelservices": [
-				{
-					"providerUuid": null,
-					"providerSourcename": "Bookingcom",
-					"travelServiceType": "HOTEL",
-					"referencenumber": "1281529927",
-					"departuredate": "2019-10-17",
-					"returndate": "2019-10-19",
-					"singleSegment": {
-						"startLocation": ,
-					"providerDescription": "The Townhouse Hotel, Barcelona",
-					"serviceDescription": "Club Double Room",
-					"startConditions": "",
-					"endConditions": ""
-				},"priceitems":
-				[
-					{
-						"priceItemType": "AUX_PER_BOOKING",
-						"currency": "CHF",
-						"amount": "200.00"
-					}
-				]
-			],
-			"participants": [
-				{
-					"lastname": "Busybody",
-					"firstname": "John",
-					"fullname": "John Busybody"
-				}
-			],
-			"payments": []
-		}
-	],
-	"customfieldValues": [
-		{
-			"internalvalue": "foobar",
-			"customField": {
-				"datatype": "STRING",
-				"editDirective": "OPTIONAL",
-				"name": "Cost center"
-			}
-		}
-	],
-	"returndateAsUtilDate": null,
-	"departuredateAsUtilDate": null
+    "uuid": null,
+    "funnelIdentifier": null,
+    "accountIdentifier": null,
+    "accountUuid": null,
+    "organizationUuid": null,
+    "created": null,
+    "title": null,
+    "departuredate": null,
+    "returndate": null,
+    "destination": null,
+    "comment": null,
+    "bookings": [
+        {
+            "uuid": "73bed396-4d35-4921-8276-075d65604ac8",
+            "tripUuid": "ea0203f2-33ff-4250-a03c-60801e72b010",
+            "providerUuid": "2ad8d8c3-48c3-4fa5-835e-781df5ca9528",
+            "created": "2019-10-02T15:59:23.848204Z",
+            "providerSourcename": "Iberia",
+            "sourceDomain": "ebookers.com",
+            "departuredate": "2019-10-17",
+            "returndate": "2019-10-19",
+            "referenceNumber": "PBEBCH7230944634",
+            "totalpricecurrency": "USD",
+            "totalprice": 1389.7,
+            "extensionData": {
+                "ch.want.funnel.extension.galileomir.GalileoMirExtension": {
+                    "remarks": [
+                        "VL-105515OCTHDQRMSUIVPCJW",
+                        "VL-095315OCTMUCRM1AN9OMCU",
+                        "VISA/E-FOO.BAR@NOWHERE.COM,P1",
+                        "VISA/N-DE"
+                    ]
+                }
+            },
+            "destinationCode": "BCN/ES",
+            "destinationName": "Barcelona",
+            "url": "http://localhost:4200/#/trips/ea0203f2-33ff-4250-a03c-60801e72b010",
+            "providerName": "IBERIA",
+            "travelservices": [
+                {
+                    "uuid": "4153fbef-511b-4f62-b122-0e5559ad4831",
+                    "providerUuid": "80adc765-9bec-4c1d-a805-64968599263e",
+                    "providerSourcename": "ebookers.com",
+                    "travelServiceType": "FLIGHT",
+                    "bookingstatus": "CONFIRMED",
+                    "referenceNumber": null,
+                    "departuredate": "2019-10-17",
+                    "returndate": "2019-10-19",
+                    "cancellationPolicy": null,
+                    "transportDocuments": [
+                        {
+                            "uuid": "c1f7640a-84e1-49df-b9aa-695cc3727d32",
+                            "transportDocumentType": "TICKET",
+                            "referenceNumber": "256 1122334457",
+                            "description": "Ticket",
+                            "priceitems": [
+                                {
+                                    "uuid": "8cb5d479-9665-4b55-a8d8-2c36ee882187",
+                                    "priceItemType": "FARE_PER_PAX",
+                                    "description": "Ticket",
+                                    "currency": "USD",
+                                    "amount": 546.55,
+                                    "amountInAccountCurrency": 544.58
+                                },
+                                {
+                                    "uuid": "3a79696e-83b3-45fc-9d1e-cc897d58090f",
+                                    "priceItemType": "TAX_PER_PAX",
+                                    "description": "Tax",
+                                    "currency": "USD",
+                                    "amount": 142.3,
+                                    "amountInAccountCurrency": 141.79
+                                }
+                            ],
+                            "associatedSegments": []
+                        },
+                        {
+                            "uuid": "7ec6b559-bcce-4e7e-8029-2875e5151395",
+                            "transportDocumentType": "TICKET",
+                            "referenceNumber": "256 1122334455",
+                            "description": "Ticket",
+                            "priceitems": [
+                                {
+                                    "uuid": "1a2b2a7f-c609-4e38-bafe-0e36be3ac054",
+                                    "priceItemType": "FARE_PER_PAX",
+                                    "description": "Ticket",
+                                    "currency": "USD",
+                                    "amount": 546.55,
+                                    "amountInAccountCurrency": 544.58
+                                },
+                                {
+                                    "uuid": "b642030a-0c73-45eb-8c32-1c7a42e50474",
+                                    "priceItemType": "TAX_PER_PAX",
+                                    "description": "Tax",
+                                    "currency": "USD",
+                                    "amount": 142.3,
+                                    "amountInAccountCurrency": 141.79
+                                }
+                            ],
+                            "associatedSegments": []
+                        }
+                    ],
+                    "priceitems": [],
+                    "segmentedLegs": [
+                        {
+                            "uuid": "9c96e82c-abbb-4bc8-9ea3-fbfb02cede5c",
+                            "legNr": 0,
+                            "segments": [
+                                {
+                                    "uuid": "11be1fc8-77c2-44f3-a231-b1544f41535a",
+                                    "segNr": 0,
+                                    "departuretime": "2019-10-17T09:35:00",
+                                    "departingFromLocation": {
+                                        "unLocationCode": "ZRH/CH",
+                                        "name": "Zurich"
+                                    },
+                                    "arrivaltime": "2019-10-17T11:20:00",
+                                    "arrivingAtLocation": {
+                                        "unLocationCode": "BCN/ES",
+                                        "name": "Barcelona"
+                                    },
+                                    "durationinminutes": null,
+                                    "travelclass": "ECONOMY",
+                                    "providername": "VY",
+                                    "connectionnumber": "6247",
+                                    "reservationlocator": "6SV8AI",
+                                    "auxiliaries": [
+                                        {
+                                            "uuid": "b8af4379-3357-4a83-ab43-f8683e42396b",
+                                            "transportDocumentType": "EMD",
+                                            "referenceNumber": "123 45674354355",
+                                            "description": "Seat 12A",
+                                            "priceitems": [
+                                                {
+                                                    "uuid": "5e3ec6ac-2296-42b4-90af-20e564707fdb",
+                                                    "priceItemType": "DEFAULT",
+                                                    "description": "Sitzplatz",
+                                                    "currency": "USD",
+                                                    "amount": 6.0,
+                                                    "amountInAccountCurrency": 5.98
+                                                }
+                                            ],
+                                            "associatedSegments": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "uuid": "23c2bea7-95b0-4cfe-ba6b-5088b41060d3",
+                            "legNr": 1,
+                            "segments": [
+                                {
+                                    "uuid": "5a8c2eea-8759-42dc-ba18-41d13693585e",
+                                    "segNr": 0,
+                                    "departuretime": "2019-10-19T17:55:00",
+                                    "departingFromLocation": {
+                                        "unLocationCode": "BCN/ES",
+                                        "name": "Barcelona"
+                                    },
+                                    "arrivaltime": "2019-10-19T19:50:00",
+                                    "arrivingAtLocation": {
+                                        "unLocationCode": "ZRH/CH",
+                                        "name": "Zurich"
+                                    },
+                                    "durationinminutes": null,
+                                    "travelclass": "ECONOMY",
+                                    "providername": "VY",
+                                    "connectionnumber": "6248",
+                                    "reservationlocator": "6SV8AI",
+                                    "auxiliaries": [
+                                        {
+                                            "uuid": "fe5146c1-a388-4c4a-be09-d2836e042b84",
+                                            "transportDocumentType": "EMD",
+                                            "referenceNumber": "123 45674354378",
+                                            "description": "Seat 8B",
+                                            "priceitems": [
+                                                {
+                                                    "uuid": "d3c334db-08ef-423f-8846-e3d6cb0c6e30",
+                                                    "priceItemType": "DEFAULT",
+                                                    "description": "Sitzplatz",
+                                                    "currency": "USD",
+                                                    "amount": 6.0,
+                                                    "amountInAccountCurrency": 5.98
+                                                }
+                                            ],
+                                            "associatedSegments": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "singleSegment": null
+                }
+            ],
+            "priceitems": [],
+            "payments": [
+                {
+                    "uuid": "fb85b15c-44a9-427c-85dc-11a3b2ceb8e7",
+                    "entryTimestamp": "2019-09-25T15:59:23.849306Z",
+                    "description": "VI XXXXXXX 1234",
+                    "currency": "USD",
+                    "amount": 1389.7
+                }
+            ],
+            "rawsources": [
+                {
+                    "uuid": "4bca91b0-e769-4a5a-876a-f8740e976481",
+                    "externalid": null,
+                    "origin": "ebooker.com",
+                    "entrydate": "2019-09-25T15:59:23.877508Z",
+                    "subject": "Flight Confirmation | Zürich Sat, 13 Apr 2013",
+                    "paxlist": "John Busybody",
+                    "mime": "multipart/mixed"
+                }
+            ],
+            "participants": [
+                {
+                    "uuid": "179bddc5-c15d-4874-9fe9-0f04d227f368",
+                    "organizationUuid": "9d309005-e81d-497d-981d-654d8df763e5",
+                    "firstname": "John",
+                    "firstnameNonAps": null,
+                    "lastname": "Busybody",
+                    "fullname": "John Busybody",
+                    "email": "j-busybody@schmid.ch.undef",
+                    "sourceId": "TR56HM",
+                    "birthdate": "1985-10-17",
+                    "passportCountry": "CH",
+                    "passportNumber": "X123456780",
+                    "passportExpiration": "2025-08-22",
+                    "passportPlaceOfIssue": ""
+                },
+                {
+                    "uuid": "a2c80055-a158-4979-95a8-bf8210051fe0",
+                    "organizationUuid": "dd7f564d-cd4b-4f3d-88cb-70e0caa61df2",
+                    "firstname": "Silvia",
+                    "firstnameNonAps": null,
+                    "lastname": "Schmid",
+                    "fullname": "Silvia Schmid",
+                    "email": "silvia-schmid@schmid.ch.undef",
+                    "sourceId": null,
+                    "birthdate": "1981-02-10",
+                    "passportCountry": null,
+                    "passportNumber": null,
+                    "passportExpiration": null,
+                    "passportPlaceOfIssue": null
+                }
+            ],
+            "customfields": []
+        },
+        {
+            "uuid": "fc47c143-9da3-47a9-98e9-187fe62423e6",
+            "providerSourcename": "Bookingcom",
+            "sourceDomain": "Bookingcom",
+            "referenceNumber": "1281529927",
+            "travelservices": [
+                {
+                    "providerUuid": null,
+                    "providerSourcename": "Bookingcom",
+                    "travelServiceType": "HOTEL",
+                    "referenceNumber": "1281529927",
+                    "departuredate": "2019-10-17",
+                    "returndate": "2019-10-19",
+                    "singleSegment": {
+                        "startLocation": {
+                            "name": "Barcelona/ES"
+                        },
+                        "providerDescription": "The Townhouse Hotel, Barcelona",
+                        "serviceDescription": "Club Double Room",
+                        "startConditions": "",
+                        "endConditions": ""
+                    },
+                    "priceitems": [
+                        {
+                            "priceItemType": "AUX_PER_BOOKING",
+                            "currency": "CHF",
+                            "amount": "200.00"
+                        }
+                    ]
+                }
+            ],
+            "participants": [
+                {
+                    "lastname": "Busybody",
+                    "firstname": "John",
+                    "fullname": "John Busybody"
+                }
+            ],
+            "payments": []
+        }
+    ],
+    "customfieldValues": [
+        {
+            "internalvalue": "foobar",
+            "customField": {
+                "datatype": "STRING",
+                "editDirective": "OPTIONAL",
+                "name": "Cost center"
+            }
+        }
+    ],
+    "returndateAsUtilDate": null,
+    "departuredateAsUtilDate": null
 }

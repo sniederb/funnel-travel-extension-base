@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import ch.want.funnel.extension.model.Location;
 import ch.want.funnel.extension.model.SegmentedLeg;
 import ch.want.funnel.extension.model.TransportSegment;
 
@@ -33,8 +34,8 @@ public class SegmentSplitter {
             if (currentLeg == null) {
                 currentLeg = createSegmentedLeg(legs);
             } else if (previousSegment != null) {
-                if (Objects.equals(previousSegment.getArrivingAtLocation(), segment.getDepartingFromLocation()) &&
-                    Objects.equals(previousSegment.getDepartingFromLocation(), segment.getArrivingAtLocation())) {
+                if (equals(previousSegment.getArrivingAtLocation(), segment.getDepartingFromLocation()) &&
+                    equals(previousSegment.getDepartingFromLocation(), segment.getArrivingAtLocation())) {
                     // first segment of return journey, mirroring the last of previous leg
                     currentLeg = createSegmentedLeg(legs);
                 } else if ((previousSegment.getArrivaltime() != null) && (segment.getDeparturetime() != null)) {
@@ -55,5 +56,11 @@ public class SegmentSplitter {
         leg.setLegNr(legs.size() + 1);
         legs.add(leg);
         return leg;
+    }
+
+    private static boolean equals(final Location a, final Location b) {
+        return Objects.equals(a.getIataCode(), b.getIataCode()) ||
+            Objects.equals(a.getUnLocationCode(), b.getUnLocationCode()) ||
+            Objects.equals(a.getGeneralCode(), b.getGeneralCode());
     }
 }

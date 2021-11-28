@@ -16,7 +16,7 @@ public class Location implements Serializable {
     }
 
     public void setIataCode(final String iataCode) {
-        this.iataCode = iataCode;
+        this.iataCode = isBlank(iataCode) ? null : iataCode;
     }
 
     /**
@@ -27,7 +27,7 @@ public class Location implements Serializable {
     }
 
     public void setUnLocationCode(final String unLocationCode) {
-        this.unLocationCode = unLocationCode;
+        this.unLocationCode = isBlank(unLocationCode) ? null : unLocationCode;
     }
 
     /**
@@ -39,7 +39,7 @@ public class Location implements Serializable {
     }
 
     public void setGeneralCode(final String generalCode) {
-        this.generalCode = generalCode;
+        this.generalCode = isBlank(generalCode) ? null : generalCode;
     }
 
     /**
@@ -50,7 +50,7 @@ public class Location implements Serializable {
     }
 
     public void setName(final String name) {
-        this.name = name;
+        this.name = isBlank(name) ? null : name;
     }
 
     public boolean isUndefined() {

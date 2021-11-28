@@ -2,69 +2,41 @@ package ch.want.funnel.extension.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class LocationTest {
 
     @Test
-    public void emptyLocationsAreEqual() {
-        final Location locationA = new Location();
-        final Location locationB = new Location();
-        // act
-        final boolean result = locationA.equals(locationB);
-        // assert
-        Assertions.assertTrue(result);
-    }
-
-    @Test
-    public void sameCodesAreEqual() {
-        final Location locationA = new Location();
-        locationA.setIataCode("ZRH");
-        locationA.setUnLocationCode("ZRH/CH");
-        final Location locationB = new Location();
-        locationB.setIataCode("ZRH");
-        locationB.setUnLocationCode("ZRH/CH");
-        // act
-        final boolean result = locationA.equals(locationB);
-        // assert
-        Assertions.assertTrue(result);
-    }
-
-    @Test
-    public void additionalCodesAreNotEqual() {
-        final Location locationA = new Location();
-        locationA.setIataCode("ZRH");
-        locationA.setUnLocationCode("ZRH/CH");
-        final Location locationB = new Location();
-        locationB.setIataCode("ZRH");
-        locationB.setUnLocationCode("ZRH/CH");
-        locationB.setGeneralCode("CHAJD");
-        // act
-        final boolean result = locationA.equals(locationB);
-        // assert
-        Assertions.assertFalse(result);
-    }
-
-    @Test
-    public void differentCodesAreNotEqual() {
-        final Location locationA = new Location();
-        locationA.setIataCode("ZRH");
-        locationA.setUnLocationCode("ZRH/CH");
-        final Location locationB = new Location();
-        locationB.setIataCode("GVA");
-        locationB.setUnLocationCode("GVA/CH");
-        // act
-        final boolean result = locationA.equals(locationB);
-        // assert
-        Assertions.assertFalse(result);
-    }
-
-    @Test
-    public void toStringListsEntries() {
+    public void isUndefined() {
         final Location location = new Location();
+        Assertions.assertTrue(location.isUndefined());
         location.setIataCode("ZRH");
-        location.setUnLocationCode("ZRH/CH");
-        location.setCountryCode("CH");
-        final String result = location.toString();
-        Assertions.assertEquals("class ch.want.funnel.extension.model.Location{countryCode=CH, entries={IATA=ZRH, UNLOCATION=ZRH/CH}}", result);
+        Assertions.assertFalse(location.isUndefined());
+    }
+
+    @ParameterizedTest
+    @CsvSource({ "Zürich,ZRH,ZRH/CH,Zürich", ",ZRH,ZRH/CH,ZRH", ",,ZRH/CH,ZRH/CH" })
+    public void getGeneralDescription(final String name, final String iataCode, final String unLocationCode, final String expected) {
+        final Location location = new Location();
+        location.setName(name);
+        location.setIataCode(iataCode);
+        location.setUnLocationCode(unLocationCode);
+        // act
+        final String result = location.getGeneralDescription();
+        // assert
+        Assertions.assertEquals(expected, result);
+    }
+
+    @ParameterizedTest
+    @CsvSource({ "CH,ZRH/CH,CH", ",ZRH/CH,CH", ",," })
+    public void getCountryCode(final String countryCode, final String unLocationCode, final String expected) {
+        final Location location = new Location();
+        location.setUnLocationCode(unLocationCode);
+        location.setCountryCode(countryCode);
+        // act
+        final String result = location.getCountryCode();
+        // assert
+        Assertions.assertEquals(expected, result);
     }
 }
