@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -26,6 +27,7 @@ public class Trip implements Serializable {
     private LocalDate returndate;
     private String destination;
     private String comment;
+    private Locale locale;
     private transient List<Booking> bookings = new ArrayList<>();
     private transient List<CustomFieldValue> customfieldValues = new ArrayList<>();
     private transient List<OrganizationUnitAgencyCode> agencyCodes = new ArrayList<>();
@@ -92,8 +94,6 @@ public class Trip implements Serializable {
 
     /**
      * Some extensions might use libraries which still lack proper java.time support.
-     *
-     * @return
      */
     public Date getDeparturedateAsUtilDate() {
         return departuredate == null ? null : java.util.Date.from(departuredate.atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -113,8 +113,6 @@ public class Trip implements Serializable {
 
     /**
      * Some extensions might use libraries which still lack proper java.time support.
-     *
-     * @return
      */
     public Date getReturndateAsUtilDate() {
         return returndate == null ? null : java.util.Date.from(returndate.atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -158,5 +156,17 @@ public class Trip implements Serializable {
 
     public void setAgencyCodes(final List<OrganizationUnitAgencyCode> agencyCodes) {
         this.agencyCodes = agencyCodes;
+    }
+
+    /**
+     * The locale to use for any localized texts. This will be derived from the passenger, if locale data
+     * is available. As a fallback, locale data from the organization or, ultimately, from the account are used.
+     */
+    public Locale getLocale() {
+        return locale;
+    }
+
+    public void setLocale(final Locale locale) {
+        this.locale = locale;
     }
 }

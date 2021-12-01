@@ -14,7 +14,7 @@ public enum ExtensionCallAction {
     MODIFY,
     /**
      * Indicates that a booking has been deleted. In this case the {@link Booking} will be virtually empty;
-     * only {@link Booking#getReferencenumber()} and {@link Booking#getExtensionData()} will be populated.
+     * only {@link Booking#getReferenceNumber()} and {@link Booking#getExtensionData()} will be populated.
      */
     DELETE
 }
