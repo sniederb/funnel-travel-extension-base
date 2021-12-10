@@ -24,6 +24,8 @@ public class TransportDocument implements Serializable {
     private TransportDocumentType transportDocumentType;
     private String issuingAirline;
     private String referenceNumber;
+    private String internalReference;
+    private boolean associated;
     private String description;
     @JsonManagedReference("document-prices")
     private transient List<PriceItem> priceitems = new ArrayList<>();
@@ -120,5 +122,32 @@ public class TransportDocument implements Serializable {
 
     public void setAssociatedSegments(final List<String> associatedSegments) {
         this.associatedSegments = associatedSegments;
+    }
+
+    /**
+     * A technical reference which is used to if {@link #getReferenceNumber()} is empty. Producers should populate this
+     * with something like an ID, UUID or tattoo number if present.
+     */
+    public String getInternalReference() {
+        return internalReference;
+    }
+
+    public void setInternalReference(final String internalReference) {
+        this.internalReference = internalReference;
+    }
+
+    /**
+     * Set this to true for documents which are bound to the segments of {@link #getAssociatedSegments()},
+     * i.e. the document is rendered obsolete if the segment is cancelled. Tickets and EMD-S should be
+     * left at {@code associated} = false
+     *
+     * @return
+     */
+    public boolean isAssociated() {
+        return associated;
+    }
+
+    public void setAssociated(final boolean associated) {
+        this.associated = associated;
     }
 }
