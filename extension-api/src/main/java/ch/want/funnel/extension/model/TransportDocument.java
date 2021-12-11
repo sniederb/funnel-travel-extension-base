@@ -4,6 +4,7 @@
 package ch.want.funnel.extension.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -18,12 +19,14 @@ public class TransportDocument implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private UUID uuid;
+    private LocalDateTime issueTimestamp;
     @JsonBackReference("service-documents")
     private TravelService travelService;
     private Traveler traveler;
     private TransportDocumentType transportDocumentType;
     private String issuingAirline;
     private String referenceNumber;
+    private String exchangeForReferenceNumber;
     private String internalReference;
     private boolean associated;
     private String description;
@@ -149,5 +152,21 @@ public class TransportDocument implements Serializable {
 
     public void setAssociated(final boolean associated) {
         this.associated = associated;
+    }
+
+    public LocalDateTime getIssueTimestamp() {
+        return issueTimestamp;
+    }
+
+    public void setIssueTimestamp(final LocalDateTime issueTimestamp) {
+        this.issueTimestamp = issueTimestamp;
+    }
+
+    public String getExchangeForReferenceNumber() {
+        return exchangeForReferenceNumber;
+    }
+
+    public void setExchangeForReferenceNumber(final String exchangeForReferenceNumber) {
+        this.exchangeForReferenceNumber = exchangeForReferenceNumber;
     }
 }
