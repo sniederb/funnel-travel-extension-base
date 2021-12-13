@@ -29,11 +29,13 @@ public interface TripDataProducer extends TripRawDataConverter {
     /**
      * Other producers might attempt to modify booking data originally created by this producer. This method gives
      * the original producer a chance to determine whether cross-origin modifies are allowed or not.
-     * 
+     *
      * @param crossOriginSourceDomain
      *            The sourceDomain of the 'other' producer
+     * @param settingValues
+     *            Current extension settings
      */
-    default boolean isModifyAllowedFrom(final String crossOriginSourceDomain) {
+    default boolean isModifyAllowedFrom(final String crossOriginSourceDomain, final Map<String, Object> settingValues) {
         return true;
     }
 }
