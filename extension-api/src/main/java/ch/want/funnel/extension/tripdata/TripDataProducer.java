@@ -25,4 +25,10 @@ public interface TripDataProducer extends TripRawDataConverter {
      *         to the user on the trip UI.
      */
     List<RawTripDataSource> getRawSources(Map<String, Object> settings, Locale locale);
+
+    /**
+     * Other producers might attempt to modify booking data originally created by this producer. This method gives
+     * the original producer a chance to determine whether cross-origin modifies are allowed or not.
+     */
+    boolean isModifyAllowedFrom(String crossOriginSourceDomain);
 }
