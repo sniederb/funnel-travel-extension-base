@@ -139,14 +139,18 @@ public class Location implements Serializable {
             return false;
         }
         final Location other = (Location) obj;
-        if ((iataCode != null) || (other.iataCode != null)) {
+        if (!isBlank(iataCode) || !isBlank(other.iataCode)) {
             return Objects.equals(iataCode, other.iataCode);
         }
-        if ((unLocationCode != null) || (other.unLocationCode != null)) {
+        if (!isBlank(unLocationCode) || !isBlank(other.unLocationCode)) {
             return Objects.equals(unLocationCode, other.unLocationCode);
         }
-        return Objects.equals(countryCode, other.countryCode) &&
-            (Objects.equals(generalCode, other.generalCode) || Objects.equals(name, other.name));
+        if (!isBlank(generalCode) || !isBlank(other.generalCode)) {
+            return Objects.equals(generalCode, other.generalCode) &&
+                Objects.equals(countryCode, other.countryCode);
+        }
+        return Objects.equals(name, other.name) &&
+            Objects.equals(countryCode, other.countryCode);
     }
 
     private static boolean isBlank(final String s) {
