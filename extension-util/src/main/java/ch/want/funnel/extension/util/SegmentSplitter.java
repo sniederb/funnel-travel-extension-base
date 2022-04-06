@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.commons.lang3.StringUtils;
+
 import ch.want.funnel.extension.model.Location;
 import ch.want.funnel.extension.model.SegmentedLeg;
 import ch.want.funnel.extension.model.TransportSegment;
@@ -49,6 +51,25 @@ public class SegmentSplitter {
             previousSegment = segment;
         }
         return legs;
+    }
+
+    public String getRouting() {
+        final StringBuilder sb = new StringBuilder();
+        Location lastDestination = null;
+        for (final TransportSegment segment : allSegmentsSorted) {
+            if ((segment.getDepartingFromLocation() != null) && !Objects.equals(segment.getDepartingFromLocation(), lastDestination)) {
+                if (sb.length() > 0) {
+                    sb.append(", ");
+                }
+                sb.append(segment.getDepartingFromLocation().getAsCode());
+            }
+            if ((segment.getArrivingAtLocation() != null) && (StringUtils.isNotBlank(segment.getArrivingAtLocation().getAsCode()))) {
+                sb.append(" - ")//
+                    .append(segment.getArrivingAtLocation().getAsCode());
+            }
+            lastDestination = segment.getArrivingAtLocation();
+        }
+        return sb.toString();
     }
 
     private SegmentedLeg createSegmentedLeg(final List<SegmentedLeg> legs) {

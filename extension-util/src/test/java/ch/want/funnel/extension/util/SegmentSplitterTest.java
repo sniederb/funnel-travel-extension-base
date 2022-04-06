@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -16,7 +17,7 @@ import ch.want.funnel.extension.model.Location;
 import ch.want.funnel.extension.model.SegmentedLeg;
 import ch.want.funnel.extension.model.TransportSegment;
 
-public class SegmentSplitterTest {
+class SegmentSplitterTest {
 
     @ParameterizedTest(name = "{0}")
     @ArgumentsSource(SegmentArgumentsProvider.class)
@@ -35,6 +36,16 @@ public class SegmentSplitterTest {
             segmentCount += leg.getSegments().size();
         }
         Assertions.assertEquals(segments.size(), segmentCount, "Count of segments on all legs");
+    }
+
+    @Test
+    void getRouting() {
+        final List<TransportSegment> segments = new SegmentArgumentsProvider().zurichToNewYorkViaFrankfurtAndBack();
+        final SegmentSplitter testee = new SegmentSplitter(segments);
+        // act
+        final String result = testee.getRouting();
+        // assert
+        Assertions.assertEquals("ZRH/CH - FRA/DE - JFK/US - FRA/DE - ZRH/CH", result);
     }
 
     public static class SegmentArgumentsProvider implements ArgumentsProvider {
@@ -60,7 +71,7 @@ public class SegmentSplitterTest {
             final List<TransportSegment> segments = new ArrayList<>();
             segments.add(buildSegment(LocalDateTime.parse("2019-10-15T10:30:00"), "ZRH/CH", LocalDateTime.parse("2019-10-15T11:25:00"), "FRA/DE", "2033"));
             segments.add(buildSegment(LocalDateTime.parse("2019-10-15T14:18:00"), "FRA/DE", LocalDateTime.parse("2019-10-16T08:45:00"), "JFK/US", "122"));
-            segments.add(buildSegment(LocalDateTime.parse("2019-10-18T16:38:00"), "JFK/US", LocalDateTime.parse("2019-10-19T07:25:00"), "JFK/US", "128"));
+            segments.add(buildSegment(LocalDateTime.parse("2019-10-18T16:38:00"), "JFK/US", LocalDateTime.parse("2019-10-19T07:25:00"), "FRA/DE", "128"));
             segments.add(buildSegment(LocalDateTime.parse("2019-10-19T09:30:00"), "FRA/DE", LocalDateTime.parse("2019-10-19T10:25:00"), "ZRH/CH", "2032"));
             return segments;
         }

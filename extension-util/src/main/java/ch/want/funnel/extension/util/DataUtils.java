@@ -1,12 +1,16 @@
 package ch.want.funnel.extension.util;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
 import ch.want.funnel.extension.model.Location;
 import ch.want.funnel.extension.model.TransportSegment;
+import ch.want.funnel.extension.model.TravelService;
 import ch.want.funnel.extension.model.TravelServiceType;
 import ch.want.funnel.extension.model.Trip;
 
@@ -50,6 +54,24 @@ public final class DataUtils {
             .flatMap(leg -> leg.getSegments().stream())
             .map(TransportSegment::getDepartingFromLocation)
             .findFirst();
+    }
+
+    public static Optional<LocalDate> getDepartureDateFromSegments(final TravelService segmentedService) {
+        return segmentedService.getSegmentedLegs().stream()
+            .flatMap(leg -> leg.getSegments().stream())
+            .map(TransportSegment::getDeparturetime)
+            .filter(Objects::nonNull)
+            .min(LocalDateTime::compareTo)
+            .map(LocalDateTime::toLocalDate);
+    }
+
+    public static Optional<LocalDate> getReturnDateFromSegments(final TravelService segmentedService) {
+        return segmentedService.getSegmentedLegs().stream()
+            .flatMap(leg -> leg.getSegments().stream())
+            .map(TransportSegment::getArrivaltime)
+            .filter(Objects::nonNull)
+            .max(LocalDateTime::compareTo)
+            .map(LocalDateTime::toLocalDate);
     }
 
     /**

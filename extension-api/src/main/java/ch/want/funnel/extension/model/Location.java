@@ -1,6 +1,7 @@
 package ch.want.funnel.extension.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -81,6 +82,27 @@ public class Location implements Serializable {
         return result;
     }
 
+    /**
+     * Returns the first non-blank of:
+     * <ol>
+     * <li>{@link #getIataCode()}
+     * <li>{@link #getGeneralCode()}
+     * <li>{@link #getUnLocationCode()}
+     * </ol>
+     * if all above are empty, null is returned.
+     */
+    @JsonIgnore
+    public String getAsCode() {
+        String result = getIataCode();
+        if (isBlank(result)) {
+            result = getGeneralCode();
+        }
+        if (isBlank(result)) {
+            result = getUnLocationCode();
+        }
+        return result;
+    }
+
     public String getCountryCode() {
         if (countryCode != null) {
             return countryCode;
@@ -98,6 +120,33 @@ public class Location implements Serializable {
     @Override
     public String toString() {
         return this.getClass() + "{countryCode=" + countryCode + ", entry=" + getGeneralDescription() + "}";
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((countryCode == null) ? 0 : countryCode.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if ((obj == null) || (getClass() != obj.getClass())) {
+            return false;
+        }
+        final Location other = (Location) obj;
+        if ((iataCode != null) || (other.iataCode != null)) {
+            return Objects.equals(iataCode, other.iataCode);
+        }
+        if ((unLocationCode != null) || (other.unLocationCode != null)) {
+            return Objects.equals(unLocationCode, other.unLocationCode);
+        }
+        return Objects.equals(countryCode, other.countryCode) &&
+            (Objects.equals(generalCode, other.generalCode) || Objects.equals(name, other.name));
     }
 
     private static boolean isBlank(final String s) {
