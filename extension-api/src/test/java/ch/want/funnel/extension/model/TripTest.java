@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-public class TripTest {
+class TripTest {
 
     @Test
-    public void serialize() throws Exception {
+    void serialize() throws Exception {
         final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
         final byte[] payload = IOUtils.resourceToByteArray("/ch/want/funnel/extension/model/trip-7383012568246.json");
         // act

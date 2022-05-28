@@ -6,6 +6,17 @@ import java.util.Map;
 public interface TripDataTwoPhasedProducer extends TripDataProducer {
 
     /**
+     * Implementations can override this method to trigger two-phased processing on specific
+     * data sources only.
+     *
+     * @param rawTripDataSource
+     * @return
+     */
+    default boolean isTwoPhased(final RawTripDataSource rawTripDataSource) {
+        return true;
+    }
+
+    /**
      * From the data of an external source, extract the identifying ID which matches those produced by
      * {@link TripDataProducer#createTripData(Map, Locale)}.
      *
