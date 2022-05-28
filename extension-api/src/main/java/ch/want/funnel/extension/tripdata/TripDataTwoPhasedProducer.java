@@ -10,9 +10,11 @@ public interface TripDataTwoPhasedProducer extends TripDataProducer {
      * data sources only.
      *
      * @param rawTripDataSource
+     *            The {@link RawTripDataSource} as returned by {@link TripDataProducer#getRawSources(Map, Locale)}
+     * @param settings
      * @return
      */
-    default boolean isTwoPhased(final RawTripDataSource rawTripDataSource) {
+    default boolean isTwoPhased(final RawTripDataSource rawTripDataSource, final Map<String, Object> settings) {
         return true;
     }
 
