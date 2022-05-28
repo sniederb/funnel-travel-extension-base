@@ -20,7 +20,8 @@ public interface TripRawDataConverter {
      * For a given external source record, extract some key properties to be stored as metadata.
      *
      * @param rawSource
-     *            The original trip data source such an email MIME message
+     *            The source returned as {@link RawTripDataSource} by a {@link TripDataProducer}, or the
+     *            second-phase data for a {@link TripDataTwoPhasedProducer}
      * @param settings
      *            Account-specific settings
      * @param locale
