@@ -3,8 +3,6 @@ package ch.want.funnel.extension.tripdata;
 import java.util.Locale;
 import java.util.Map;
 
-import ch.want.funnel.extension.FunnelExtension;
-
 public interface TripDataTwoPhasedProducer extends TripDataProducer {
 
     /**
@@ -25,10 +23,7 @@ public interface TripDataTwoPhasedProducer extends TripDataProducer {
      * @param twoPhaseSource
      *            Source which is typically provided by a webhook. This is NOT necessarily equal
      *            to the original trip data source, but possibly some intermediate data structure.
-     * @param settings
-     *            A Map holding the keys defined in {@link FunnelExtension#getSettings()},
-     *            and associated values with possible inheritance applied
      * @return
      */
-    String getExternalId(byte[] twoPhaseSource, Map<String, Object> settings);
+    String getExternalId(byte[] twoPhaseSource);
 }
