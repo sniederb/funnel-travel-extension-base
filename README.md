@@ -308,5 +308,5 @@ The extension will run in the JVM context of the funnel.travel, and as such will
 * com.fasterxml.jackson.core (jackson-dataformat-xml), version2.10.0
 * com.fasterxml.jackson.core (jackson-dataformat-yaml), version2.10.0
 * org.freemarker, version2.3.29
-* ch.want.funnel (extension-util), version1.0.0
+* ch.want.funnel (extension-util), version2.0.11
 
