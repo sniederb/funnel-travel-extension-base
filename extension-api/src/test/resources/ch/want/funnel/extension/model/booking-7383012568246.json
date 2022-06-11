@@ -44,7 +44,10 @@
 							"description": null,
 							"currency": "CHF",
 							"amount": 373.25,
-							"amountInAccountCurrency": null
+							"amountInAccountCurrency": null,
+							"purchasePriceCurrency": "EUR",
+							"purchasePrice": 345.60,
+							"purchasePriceInAccountCurrency": 373.25
 						},
 						{
 							"uuid": null,
@@ -52,7 +55,10 @@
 							"description": null,
 							"currency": "CHF",
 							"amount": 101.25,
-							"amountInAccountCurrency": null
+							"amountInAccountCurrency": null,
+							"purchasePriceCurrency": "EUR",
+							"purchasePrice": 93.75,
+							"purchasePriceInAccountCurrency": 101.25
 						}
 					],
 					"associatedSegments": []

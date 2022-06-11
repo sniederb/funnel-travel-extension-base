@@ -27,6 +27,7 @@ public class PriceItem implements Serializable {
     private BigDecimal amountInAccountCurrency;
     private String purchasePriceCurrency;
     private BigDecimal purchasePrice;
+    private BigDecimal purchasePriceInAccountCurrency;
 
     public UUID getUuid() {
         return uuid;
@@ -103,11 +104,29 @@ public class PriceItem implements Serializable {
         this.purchasePriceCurrency = purchasePriceCurrency;
     }
 
+    /**
+     * Get the purchase amount in {@link #getPurchasePriceCurrency()}
+     *
+     * @return
+     */
     public BigDecimal getPurchasePrice() {
         return purchasePrice;
     }
 
     public void setPurchasePrice(final BigDecimal purchasePrice) {
         this.purchasePrice = purchasePrice;
+    }
+
+    /**
+     * Get the purchase amount in the billing account's reference currency
+     *
+     * @return
+     */
+    public BigDecimal getPurchasePriceInAccountCurrency() {
+        return purchasePriceInAccountCurrency;
+    }
+
+    public void setPurchasePriceInAccountCurrency(final BigDecimal purchasePriceInAccountCurrency) {
+        this.purchasePriceInAccountCurrency = purchasePriceInAccountCurrency;
     }
 }
