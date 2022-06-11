@@ -9,8 +9,16 @@ public class SettingItem {
 
     public static final String KEY_FILESTORE = "funnel.environment.filestore";
     public static final String KEY_SERVERCONTEXT = "funnel.environment.servercontext";
+    /**
+     * Key to retrieve whether or not the extension is running on production. Typically this is used to
+     * determine web service endpoints. Value is a boolean
+     */
     public static final String KEY_ISPRODUCTION = "funnel.environment.isproduction";
     public static final String KEY_ACCOUNT_UUID = "funnel.environment.account-uuid";
+    /**
+     * Key to retrieve the billing account's default currency. Value will be a string.
+     */
+    public static final String KEY_ACCOUNT_CURRENCY = "funnel.environment.account-currency";
     private String key;
     private SettingItemValueType valueType = SettingItemValueType.STRING;
     private boolean mandatory;
