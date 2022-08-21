@@ -25,7 +25,7 @@ public enum VatCategory {
      * Swiss VAT (Aug 2022): standard rate is 7.7%, travel reduced rate is 2.4%.
      */
     private static VatCategory fromSwissRate(final double rate) {
-        if (rate > 7) {
+        if (rate > 0.07) {
             return STANDARD;
         }
         if (rate > 0) {
@@ -38,7 +38,7 @@ public enum VatCategory {
      * French VAT (Aug 2022): standard rate is 20%, travel reduced rate is 10%.
      */
     private static VatCategory fromFrenchRate(final double rate) {
-        if (rate > 17) {
+        if (rate > 0.17) {
             return STANDARD;
         }
         if (rate > 0) {
@@ -51,7 +51,7 @@ public enum VatCategory {
      * German VAT (Aug 2022): standard rate is 19%, domestic travel is not reduced.
      */
     private static VatCategory fromGermanRate(final double rate) {
-        if (rate > 17) {
+        if (rate > 0.17) {
             return STANDARD;
         }
         return EXEMPT;

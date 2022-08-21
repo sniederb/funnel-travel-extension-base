@@ -39,6 +39,7 @@ public class VatDistribution implements Serializable {
     /**
      * If data is available, the rate should be set by the provider extension. For known countries and a {@link #getCategory()}
      * unequal {@link VatCategory#EXEMPT}, funnel.travel will attempt to provide the correct rate.
+     * A VAT of 7.7% is returned as 0.077.
      */
     public Double getVatRate() {
         return vatRate;
