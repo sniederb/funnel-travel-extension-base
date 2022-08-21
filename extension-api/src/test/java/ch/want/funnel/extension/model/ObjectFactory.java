@@ -1,6 +1,8 @@
 package ch.want.funnel.extension.model;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.util.UUID;
 
 public final class ObjectFactory {
 
@@ -9,6 +11,9 @@ public final class ObjectFactory {
 
     public static Booking createBooking() {
         final Booking booking = new Booking();
+        booking.setCreated(OffsetDateTime.now());
+        booking.setLastModified(OffsetDateTime.now());
+        booking.setUuid(UUID.randomUUID());
         booking.getTravelservices().add(createTravelService(TravelServiceType.FLIGHT));
         booking.getTravelservices().add(createTravelService(TravelServiceType.HOTEL));
         booking.getParticipants().add(createTraveler());
@@ -17,6 +22,7 @@ public final class ObjectFactory {
 
     public static TravelService createTravelService(final TravelServiceType type) {
         final TravelService service = new TravelService();
+        service.setUuid(UUID.randomUUID());
         service.setTravelServiceType(type);
         if (TravelServiceType.hasSegments(type)) {
             service.setSingleSegment(createSingleSegment());
@@ -28,6 +34,7 @@ public final class ObjectFactory {
 
     public static SingleSegment createSingleSegment() {
         final SingleSegment singleSegment = new SingleSegment();
+        singleSegment.setUuid(UUID.randomUUID());
         singleSegment.setProviderDescription("Hotel Hilton");
         singleSegment.setStartLocation(createLocation("AMS", null, "Amsterdam"));
         singleSegment.setServiceDescription("Single room");
@@ -36,12 +43,14 @@ public final class ObjectFactory {
 
     public static SegmentedLeg createSegmentedLeg() {
         final SegmentedLeg leg = new SegmentedLeg();
+        leg.setUuid(UUID.randomUUID());
         leg.getSegments().add(createTransportSegment());
         return leg;
     }
 
     public static TransportSegment createTransportSegment() {
         final TransportSegment segment = new TransportSegment();
+        segment.setUuid(UUID.randomUUID());
         segment.setDeparturetime(LocalDateTime.now().plusHours(36));
         segment.setDepartingFromLocation(createLocation("ZRH", null, "Zurich"));
         segment.setArrivaltime(LocalDateTime.now().plusHours(38));
@@ -51,6 +60,7 @@ public final class ObjectFactory {
 
     public static Traveler createTraveler() {
         final Traveler traveler = new Traveler();
+        traveler.setUuid(UUID.randomUUID());
         traveler.setFirstname("Max");
         traveler.setFirstname("Mustermann");
         return traveler;

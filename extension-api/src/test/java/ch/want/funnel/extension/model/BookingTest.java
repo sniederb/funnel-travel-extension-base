@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-public class BookingTest {
+class BookingTest {
 
     private static final ObjectMapper OBJECTMAPPER;
     static {
@@ -22,7 +22,7 @@ public class BookingTest {
     }
 
     @Test
-    public void deserialize() throws Exception {
+    void deserialize() throws Exception {
         final byte[] payload = IOUtils.resourceToByteArray("/ch/want/funnel/extension/model/booking-7383012568246.json");
         // act
         final Booking booking = OBJECTMAPPER.readValue(payload, Booking.class);
@@ -44,16 +44,17 @@ public class BookingTest {
     }
 
     @Test
-    public void serialize() throws Exception {
+    void serialize() throws Exception {
         final Booking booking = ObjectFactory.createBooking();
         // act
         final String bookingAsJson = OBJECTMAPPER.writeValueAsString(booking);
         //
         MatcherAssert.assertThat(bookingAsJson, CoreMatchers.containsString("iataCode"));
+        MatcherAssert.assertThat(bookingAsJson, CoreMatchers.containsString("Mustermann"));
     }
 
     @Test
-    public void updateTotalpriceFromPriceitems() throws Exception {
+    void updateTotalpriceFromPriceitems() throws Exception {
         final byte[] payload = IOUtils.resourceToByteArray("/ch/want/funnel/extension/model/booking-7383012568246.json");
         // act
         final Booking booking = OBJECTMAPPER.readValue(payload, Booking.class);

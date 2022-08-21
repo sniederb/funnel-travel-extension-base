@@ -8,7 +8,8 @@ public class VatDistribution implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private UUID uuid;
-    private String vatCode;
+    private Double vatRate;
+    private VatCategory category;
     private BigDecimal amount;
 
     public UUID getUuid() {
@@ -19,19 +20,31 @@ public class VatDistribution implements Serializable {
         this.uuid = uuid;
     }
 
-    public String getVatCode() {
-        return vatCode;
-    }
-
-    public void setVatCode(final String vatCode) {
-        this.vatCode = vatCode;
-    }
-
     public BigDecimal getAmount() {
         return amount;
     }
 
     public void setAmount(final BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public VatCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(final VatCategory category) {
+        this.category = category;
+    }
+
+    /**
+     * If data is available, the rate should be set by the provider extension. For known countries and a {@link #getCategory()}
+     * unequal {@link VatCategory#EXEMPT}, funnel.travel will attempt to provide the correct rate.
+     */
+    public Double getVatRate() {
+        return vatRate;
+    }
+
+    public void setVatRate(final Double vatRate) {
+        this.vatRate = vatRate;
     }
 }
