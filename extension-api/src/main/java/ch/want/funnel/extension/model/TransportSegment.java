@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "uuid")
@@ -35,6 +36,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     private String reservationlocator;
     private String baggage;
     private Integer co2KiloPerPax;
+    private String vehicleType;
     private transient List<TransportDocument> auxiliaries = new ArrayList<>();
 
     public UUID getUuid() {
@@ -224,5 +226,23 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
 
     public void setArrivingAtLocation(final Location arrivingAtLocation) {
         this.arrivingAtLocation = arrivingAtLocation;
+    }
+
+    public String getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(final String vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
+    @JsonIgnore
+    public String getAircraftType() {
+        return getVehicleType();
+    }
+
+    @JsonIgnore
+    public void setAircraftType(final String aircraftType) {
+        setVehicleType(aircraftType);
     }
 }
