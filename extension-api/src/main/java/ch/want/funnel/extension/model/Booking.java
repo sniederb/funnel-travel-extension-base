@@ -292,6 +292,11 @@ public class Booking implements Serializable {
         this.url = url;
     }
 
+    /**
+     * The funnel.travel provider name, associated to {@link #getProviderUuid()}
+     *
+     * @return
+     */
     public String getProviderName() {
         return providerName;
     }

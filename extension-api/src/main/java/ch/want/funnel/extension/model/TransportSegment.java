@@ -32,6 +32,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     private String farebasis;
     private BookingStatus bookingstatus;
     private String providername;
+    private String providerNumber;
     private String connectionnumber;
     private String reservationlocator;
     private String baggage;
@@ -112,7 +113,8 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     }
 
     /**
-     * Get the operating provider
+     * Get the operating provider. Note that the validating provider is available on a service level
+     * at {@link TravelService#getProviderSourcename()}
      */
     public String getProvidername() {
         return providername;
@@ -122,6 +124,20 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
         this.providername = providername;
     }
 
+    /**
+     * Get number of provider. For airlines, this is the IATA number.
+     */
+    public String getProviderNumber() {
+        return providerNumber;
+    }
+
+    public void setProviderNumber(final String providerNumber) {
+        this.providerNumber = providerNumber;
+    }
+
+    /**
+     * Get the flight/train number of the operating carrier. The number must not have any carrier prefix.
+     */
     public String getConnectionnumber() {
         return connectionnumber;
     }
