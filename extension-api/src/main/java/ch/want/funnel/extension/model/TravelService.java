@@ -34,6 +34,7 @@ public class TravelService implements Serializable {
     private String cancellationPolicy;
     private String comment;
     private Boolean nonBspFlight;
+    private Location destination;
     @JsonManagedReference("service-documents")
     private transient List<TransportDocument> transportDocuments = new ArrayList<>();
     @JsonManagedReference("service-priceitems")
@@ -240,5 +241,16 @@ public class TravelService implements Serializable {
 
     public void setNonBspFlight(final Boolean nonBspFlight) {
         this.nonBspFlight = nonBspFlight;
+    }
+
+    /**
+     * Derived destination
+     */
+    public Location getDestination() {
+        return destination;
+    }
+
+    public void setDestination(final Location destination) {
+        this.destination = destination;
     }
 }
