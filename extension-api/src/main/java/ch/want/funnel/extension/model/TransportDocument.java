@@ -32,6 +32,7 @@ public class TransportDocument implements Serializable {
     private String description;
     private String reasonCode;
     private String reasonSubCode;
+    private String ancillaryValue;
     @JsonManagedReference("document-prices")
     private transient List<PriceItem> priceitems = new ArrayList<>();
     private transient List<String> associatedSegments = new ArrayList<>();
@@ -196,5 +197,19 @@ public class TransportDocument implements Serializable {
 
     public void setReasonSubCode(final String reasonSubCode) {
         this.reasonSubCode = reasonSubCode;
+    }
+
+    /**
+     * Value or additional description of EMD service. This field holds the seat number,
+     * or possibly a meal code (if booked as ancillary)
+     *
+     * @return
+     */
+    public String getAncillaryValue() {
+        return ancillaryValue;
+    }
+
+    public void setAncillaryValue(final String ancillaryValue) {
+        this.ancillaryValue = ancillaryValue;
     }
 }
