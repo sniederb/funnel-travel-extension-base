@@ -30,6 +30,8 @@ public class TransportDocument implements Serializable {
     private String internalReference;
     private boolean associated;
     private String description;
+    private String reasonCode;
+    private String reasonSubCode;
     @JsonManagedReference("document-prices")
     private transient List<PriceItem> priceitems = new ArrayList<>();
     private transient List<String> associatedSegments = new ArrayList<>();
@@ -168,5 +170,31 @@ public class TransportDocument implements Serializable {
 
     public void setExchangeForReferenceNumber(final String exchangeForReferenceNumber) {
         this.exchangeForReferenceNumber = exchangeForReferenceNumber;
+    }
+
+    /**
+     * For EMD, this is the RFIC
+     *
+     * @return
+     */
+    public String getReasonCode() {
+        return reasonCode;
+    }
+
+    public void setReasonCode(final String reasonCode) {
+        this.reasonCode = reasonCode;
+    }
+
+    /**
+     * For EMD, this is the RFISC
+     *
+     * @return
+     */
+    public String getReasonSubCode() {
+        return reasonSubCode;
+    }
+
+    public void setReasonSubCode(final String reasonSubCode) {
+        this.reasonSubCode = reasonSubCode;
     }
 }
