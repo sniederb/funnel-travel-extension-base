@@ -18,6 +18,10 @@
 	"importStrategy": "FULL",
 	"extensionClassname": null,
 	"forceNewTrip": false,
+	"customer": {
+		"lastname" : "ACME Ltd.",
+		"customerNumber": "56288"
+	},
 	"travelservices": [
 		{
 			"uuid": null,

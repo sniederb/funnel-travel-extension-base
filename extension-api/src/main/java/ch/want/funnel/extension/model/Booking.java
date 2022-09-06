@@ -12,11 +12,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.StringJoiner;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -28,6 +30,7 @@ public class Booking implements Serializable {
     private UUID tripUuid;
     private String midofficeReferenceNumber;
     private UUID providerUuid;
+    private BookingCustomer customer;
     private OffsetDateTime created;
     private OffsetDateTime lastModified;
     private String providerSourcename;
@@ -110,6 +113,22 @@ public class Booking implements Serializable {
 
     public void setProviderUuid(final UUID providerUuid) {
         this.providerUuid = providerUuid;
+    }
+
+    /**
+     * Nullable! This is not mapped as Optional in order to adhere to JavaBeans specs.
+     */
+    public BookingCustomer getCustomer() {
+        return customer;
+    }
+
+    @JsonIgnore
+    public Optional<BookingCustomer> getCustomerOptional() {
+        return Optional.ofNullable(customer);
+    }
+
+    public void setCustomer(final BookingCustomer customer) {
+        this.customer = customer;
     }
 
     public OffsetDateTime getCreated() {
@@ -431,14 +450,22 @@ public class Booking implements Serializable {
     }
 
     /**
-     * Reference to customer account. In Amadeus this is the AIAN.
+     * @deprecated Use {@link #getCustomer()} instead
      */
+    @Deprecated
     public String getCustomerAccountId() {
-        return customerAccountId;
+        return customer == null ? null : customer.getCustomerNumber();
     }
 
+    /**
+     * @deprecated Use {@link #getCustomer()} instead
+     */
+    @Deprecated
     public void setCustomerAccountId(final String customerAccountId) {
-        this.customerAccountId = customerAccountId;
+        if (customer == null) {
+            customer = new BookingCustomer();
+        }
+        this.customer.setCustomerNumber(customerAccountId);
     }
 
     /**
