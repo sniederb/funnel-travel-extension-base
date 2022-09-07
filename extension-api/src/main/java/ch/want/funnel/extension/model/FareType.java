@@ -20,7 +20,7 @@ public enum FareType {
     /**
      * Corporate unifare
      */
-    UNI_CORPP,
+    UNI_CORP,
     /**
      * Fare type offered on internet sites
      */
