@@ -43,7 +43,6 @@ public class Booking implements Serializable {
     private String travelagencyId;
     private String ticketingTravelagencyId;
     private String agentSign;
-    private String customerAccountId;
     private String totalpricecurrency;
     private BigDecimal totalprice;
     private transient JsonNode extensionData;

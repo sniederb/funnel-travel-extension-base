@@ -33,6 +33,7 @@ public class TransportDocument implements Serializable {
     private String reasonCode;
     private String reasonSubCode;
     private String ancillaryValue;
+    private FareType fareType = FareType.PUBLIC;
     @JsonManagedReference("document-prices")
     private transient List<PriceItem> priceitems = new ArrayList<>();
     private transient List<String> associatedSegments = new ArrayList<>();
@@ -211,5 +212,13 @@ public class TransportDocument implements Serializable {
 
     public void setAncillaryValue(final String ancillaryValue) {
         this.ancillaryValue = ancillaryValue;
+    }
+
+    public FareType getFareType() {
+        return fareType;
+    }
+
+    public void setFareType(final FareType fareType) {
+        this.fareType = fareType;
     }
 }
