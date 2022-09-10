@@ -34,14 +34,14 @@ class FtpDownloader implements FileDownloader {
             localDir.mkdirs();
         }
         final List<File> downloadedFiles = new ArrayList<>();
-        final FTPClient client = new FTPClient();
+        final FTPClient client = createFtpClient();
         client.setConnectTimeout(TIMEOUT_IN_MILLIS);
         client.setDataTimeout(TIMEOUT_IN_MILLIS);
         try {
             client.connect(resourceIdentifier.getHost());
             client.enterLocalPassiveMode();
             if (!client.login(username, passwd)) {
-                throw new IOException("FTP Delivery: Failed to login: " + client.getReplyString());
+                throw new IOException("FTP: Failed to login: " + client.getReplyString());
             }
             if (resourceIdentifier.getPath() != null) {
                 client.changeWorkingDirectory(resourceIdentifier.getPath());
@@ -57,12 +57,17 @@ class FtpDownloader implements FileDownloader {
                         }
                     }
                     downloadedFiles.add(targetFile);
+                    client.deleteFile(remoteFile.getName());
                 }
             }
         } finally {
             closeAndDisconnectQuietly(client);
         }
         return downloadedFiles;
+    }
+
+    protected FTPClient createFtpClient() {
+        return new FTPClient();
     }
 
     private void closeAndDisconnectQuietly(final FTPClient client) {

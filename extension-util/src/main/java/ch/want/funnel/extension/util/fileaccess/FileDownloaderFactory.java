@@ -8,6 +8,7 @@ import java.net.URI;
  * <ul>
  * <li>sftp</li>
  * <li>ftp</li>
+ * <li>ftps</li>
  * </ul>
  */
 public class FileDownloaderFactory {
@@ -22,6 +23,9 @@ public class FileDownloaderFactory {
         }
         if ("ftp".equalsIgnoreCase(resourceIdentifier.getScheme())) {
             return new FtpDownloader(resourceIdentifier, username, passwd);
+        }
+        if ("ftps".equalsIgnoreCase(resourceIdentifier.getScheme())) {
+            return new FtpsDownloader(resourceIdentifier, username, passwd);
         }
         throw new IllegalArgumentException("Don't know how to download from " + resourceIdentifier);
     }

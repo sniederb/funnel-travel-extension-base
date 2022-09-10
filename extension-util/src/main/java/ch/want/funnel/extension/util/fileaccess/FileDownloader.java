@@ -6,5 +6,8 @@ import java.util.Collection;
 
 public interface FileDownloader {
 
+    /**
+     * Download all files and delete them on the remote server
+     */
     Collection<File> download(String localFolder) throws IOException;
 }
