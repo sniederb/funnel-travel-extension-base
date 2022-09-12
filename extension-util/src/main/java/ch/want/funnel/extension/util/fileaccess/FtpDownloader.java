@@ -43,6 +43,7 @@ class FtpDownloader implements FileDownloader {
             if (!client.login(username, passwd)) {
                 throw new IOException("FTP: Failed to login: " + client.getReplyString());
             }
+            onClientLoggedIn(client);
             if (resourceIdentifier.getPath() != null) {
                 client.changeWorkingDirectory(resourceIdentifier.getPath());
             }
@@ -68,6 +69,10 @@ class FtpDownloader implements FileDownloader {
 
     protected FTPClient createFtpClient() {
         return new FTPClient();
+    }
+
+    protected void onClientLoggedIn(final FTPClient client) {
+        // no-op
     }
 
     private void closeAndDisconnectQuietly(final FTPClient client) {
