@@ -449,25 +449,6 @@ public class Booking implements Serializable {
     }
 
     /**
-     * @deprecated Use {@link #getCustomer()} instead
-     */
-    @Deprecated
-    public String getCustomerAccountId() {
-        return customer == null ? null : customer.getCustomerNumber();
-    }
-
-    /**
-     * @deprecated Use {@link #getCustomer()} instead
-     */
-    @Deprecated
-    public void setCustomerAccountId(final String customerAccountId) {
-        if (customer == null) {
-            customer = new BookingCustomer();
-        }
-        this.customer.setCustomerNumber(customerAccountId);
-    }
-
-    /**
      * By default, all {@link #priceitems} collections hold all entries including nested. Thus {@link #getPriceitems()} will
      * return <strong>all</priceitems> priceitems, including those on {@link TravelService} and {@link TransportDocument}
      * level. Calling this method removes priceitems from all collections except the most local one.

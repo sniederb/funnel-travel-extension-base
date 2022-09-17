@@ -1,6 +1,8 @@
 package ch.want.funnel.extension.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -16,7 +18,7 @@ public class BookingCustomer implements Serializable {
     private String firstname;
     private String lastname;
     private String email;
-    private String customerNumber;
+    private transient List<BookingCustomerNumber> customerNumbers = new ArrayList<>();
 
     public UUID getUuid() {
         return uuid;
@@ -50,11 +52,11 @@ public class BookingCustomer implements Serializable {
         this.email = email;
     }
 
-    public String getCustomerNumber() {
-        return customerNumber;
+    public List<BookingCustomerNumber> getCustomerNumbers() {
+        return customerNumbers;
     }
 
-    public void setCustomerNumber(final String customerNumber) {
-        this.customerNumber = customerNumber;
+    public void setCustomerNumbers(final List<BookingCustomerNumber> customerNumbers) {
+        this.customerNumbers = customerNumbers;
     }
 }

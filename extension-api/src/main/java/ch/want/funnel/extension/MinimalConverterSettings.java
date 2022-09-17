@@ -39,14 +39,14 @@ public abstract class MinimalConverterSettings extends AbstractSettings {
     }
 
     /**
-     * If {@code false}, produces should not add passport data to {@link Traveler} entries
+     * If {@code false}, producers should not add passport data to {@link Traveler} entries
      */
     public boolean isIncludePassportData() {
         return Boolean.TRUE.equals(settingValues.get(INCLUDE_PASSPORT_DATA));
     }
 
     /**
-     * If {@code false}, produces should not process remarks
+     * If {@code false}, producers should not process remarks
      */
     public boolean isIncludeNonTravelData() {
         return Boolean.TRUE.equals(settingValues.get(INCLUDE_NON_TRAVEL_DATA));

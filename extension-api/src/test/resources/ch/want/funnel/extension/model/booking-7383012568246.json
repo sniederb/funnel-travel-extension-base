@@ -20,7 +20,12 @@
 	"forceNewTrip": false,
 	"customer": {
 		"lastname" : "ACME Ltd.",
-		"customerNumber": "56288"
+		"customerNumbers": [
+			{
+				"system" : "Foobar",
+				"customerNumber": "56288"
+			}
+		]
 	},
 	"travelservices": [
 		{
