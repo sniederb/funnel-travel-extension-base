@@ -49,6 +49,7 @@ public class Booking implements Serializable {
     private Location destination;
     private String url;
     private String providerName;
+    private SalesChannel salesChannel;
     private String comment;
     private TripImportStrategy importStrategy = TripImportStrategy.FULL;
     private ExtensionCallAction extensionCallAction;
@@ -425,6 +426,14 @@ public class Booking implements Serializable {
 
     public void setExtensionCallAction(final ExtensionCallAction extensionCallAction) {
         this.extensionCallAction = extensionCallAction;
+    }
+
+    public SalesChannel getSalesChannel() {
+        return salesChannel;
+    }
+
+    public void setSalesChannel(final SalesChannel salesChannel) {
+        this.salesChannel = salesChannel;
     }
 
     /**

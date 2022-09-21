@@ -1,9 +1,11 @@
 package ch.want.funnel.extension.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class BookingCustomerNumber {
+public class BookingCustomerNumber implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private UUID uuid;
     private String system;
     private String customerNumber;

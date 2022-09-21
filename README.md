@@ -33,6 +33,7 @@ The `funnel-extension.json` file tells the funnel.travel server about the extens
   "Name": "Confirmation E-mails",
   "Author": "WaNT GmbH",
   "BookingSource": "Domain of booking platform",
+  "CustomerSystem": "System name under which customer references are used",
   "Version": "1.0.0",
   "Description": "Read confirmation e-mails from a POP3/IMAP e-mail server.",
   "URL": "http://www.want.ch/emailextension.html",
