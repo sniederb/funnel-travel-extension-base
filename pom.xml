@@ -28,7 +28,7 @@
 	</ciManagement>
 
 	<build>
-		<finalName>funnel-extension-base</finalName>
+		<finalName>funnel-extension-base-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

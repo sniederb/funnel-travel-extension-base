@@ -1,6 +1,3 @@
-/*
- * Created on 26 Apr 2018
- */
 package ch.want.funnel.extension.model;
 
 import java.io.Serializable;
@@ -9,13 +6,21 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "uuid")
 public class BookingPayment implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private UUID uuid;
+    @JsonBackReference("service-payments")
+    private TravelService travelService;
+    @JsonBackReference("document-payments")
+    private TransportDocument transportDocument;
     private OffsetDateTime entryTimestamp;
     private String description;
-    private String serviceReference;
     private String currency;
     private BigDecimal amount;
     private PaymentType paymentType;
@@ -32,6 +37,22 @@ public class BookingPayment implements Serializable {
 
     public void setUuid(final UUID uuid) {
         this.uuid = uuid;
+    }
+
+    public TravelService getTravelService() {
+        return travelService;
+    }
+
+    public void setTravelService(final TravelService travelService) {
+        this.travelService = travelService;
+    }
+
+    public TransportDocument getTransportDocument() {
+        return transportDocument;
+    }
+
+    public void setTransportDocument(final TransportDocument transportDocument) {
+        this.transportDocument = transportDocument;
     }
 
     public OffsetDateTime getEntryTimestamp() {
@@ -88,13 +109,5 @@ public class BookingPayment implements Serializable {
 
     public void setCcExpiration(final LocalDate ccExpiration) {
         this.ccExpiration = ccExpiration;
-    }
-
-    public String getServiceReference() {
-        return serviceReference;
-    }
-
-    public void setServiceReference(final String serviceReference) {
-        this.serviceReference = serviceReference;
     }
 }

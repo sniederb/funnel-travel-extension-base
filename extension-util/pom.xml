@@ -8,6 +8,10 @@
 		<artifactId>extension-base</artifactId>
 		<version>2.0.29-SNAPSHOT</version>
 	</parent>
+
+	<build>
+		<finalName>funnel-extension-util-${project.version}</finalName>
+	</build>
 	
 	<dependencies>
 		<dependency>

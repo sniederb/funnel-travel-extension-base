@@ -39,6 +39,8 @@ public class TravelService implements Serializable {
     private transient List<TransportDocument> transportDocuments = new ArrayList<>();
     @JsonManagedReference("service-priceitems")
     private transient List<PriceItem> priceitems = new ArrayList<>();
+    @JsonManagedReference("service-payments")
+    private transient List<BookingPayment> bookingPayments = new ArrayList<>();
     @JsonManagedReference("service-legs")
     private transient List<SegmentedLeg> segmentedLegs = new ArrayList<>();
     @JsonManagedReference("singlesegment")
@@ -252,5 +254,13 @@ public class TravelService implements Serializable {
 
     public void setDestination(final Location destination) {
         this.destination = destination;
+    }
+
+    public List<BookingPayment> getBookingPayments() {
+        return bookingPayments;
+    }
+
+    public void setBookingPayments(final List<BookingPayment> bookingPayments) {
+        this.bookingPayments = bookingPayments;
     }
 }

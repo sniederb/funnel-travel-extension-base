@@ -36,6 +36,8 @@ public class TransportDocument implements Serializable {
     private FareType fareType = FareType.PUBLIC;
     @JsonManagedReference("document-prices")
     private transient List<PriceItem> priceitems = new ArrayList<>();
+    @JsonManagedReference("document-payments")
+    private transient List<BookingPayment> bookingPayments = new ArrayList<>();
     private transient List<String> associatedSegments = new ArrayList<>();
 
     public UUID getUuid() {
@@ -220,5 +222,13 @@ public class TransportDocument implements Serializable {
 
     public void setFareType(final FareType fareType) {
         this.fareType = fareType;
+    }
+
+    public List<BookingPayment> getBookingPayments() {
+        return bookingPayments;
+    }
+
+    public void setBookingPayments(final List<BookingPayment> bookingPayments) {
+        this.bookingPayments = bookingPayments;
     }
 }
