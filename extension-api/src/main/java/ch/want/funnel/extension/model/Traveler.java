@@ -19,6 +19,7 @@ public class Traveler implements Serializable {
     private UUID organizationUuid;
     private String tattooNumber;
     private String salutation;
+    private TravelerAgeGroup ageGroup;
     private String firstname;
     private String firstnameNonAps;
     private String lastname;
@@ -53,8 +54,22 @@ public class Traveler implements Serializable {
         return salutation;
     }
 
+    /**
+     * Beware that if salutation is left empty, funnel.travel will attempt to determine MR/MRS
+     * based on the {@link #getFirstname()}
+     *
+     * @param salutation
+     */
     public void setSalutation(final String salutation) {
         this.salutation = salutation;
+    }
+
+    public TravelerAgeGroup getAgeGroup() {
+        return ageGroup;
+    }
+
+    public void setAgeGroup(final TravelerAgeGroup ageGroup) {
+        this.ageGroup = ageGroup;
     }
 
     public String getFirstname() {
