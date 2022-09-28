@@ -11,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ch.want.funnel.extension.model.TravelerAgeGroup;
+
 public class GdsPassengerName {
 
     private static final Logger LOG = LoggerFactory.getLogger(GdsPassengerName.class);
@@ -20,7 +22,7 @@ public class GdsPassengerName {
     private final String firstname;
     private String title;
     private String salutation;
-    private String passengerType;
+    private TravelerAgeGroup passengerType;
     private String passengerId;
     private String infantName;
     private LocalDate infantBirthdate;
@@ -102,7 +104,7 @@ public class GdsPassengerName {
         return salutation;
     }
 
-    public String getPassengerType() {
+    public TravelerAgeGroup getPassengerType() {
         return passengerType;
     }
 
@@ -130,10 +132,13 @@ public class GdsPassengerName {
             case "INF":
                 this.infantName = addOn.getFirstValueElement();
                 this.infantBirthdate = addOn.getBirthdate();
+                this.passengerType = TravelerAgeGroup.INF;
                 break;
             case "CHD":
+                this.passengerType = TravelerAgeGroup.CHD;
+                break;
             case "ADT":
-                this.passengerType = addOn.getAddOnType();
+                this.passengerType = TravelerAgeGroup.ADT;
                 break;
             default:
                 LOG.warn("Unknown passenger add-on type {}", addOn.getAddOnType());
