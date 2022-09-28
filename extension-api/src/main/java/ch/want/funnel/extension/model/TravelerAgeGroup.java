@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public enum TravelerAgeGroup {
 
-    INFANT("INF"), CHILD("CHD"), ADULT("ADT");
+    INF("INF"), CHD("CHD"), ADT("ADT");
 
     private static final long INFANT_LIMIT_MONTHS = 2 * 12;
     private static final long CHILD_LIMIT_MONTHS = 12 * 12;
@@ -20,20 +20,20 @@ public enum TravelerAgeGroup {
         return Arrays.stream(values())
             .filter(e -> e.gdsCode.equalsIgnoreCase(gdsCode))
             .findFirst()
-            .orElse(TravelerAgeGroup.ADULT);
+            .orElse(TravelerAgeGroup.ADT);
     }
 
     public static TravelerAgeGroup fromBirthdate(final LocalDate paxBirthDate, final LocalDate travelDate) {
         if ((paxBirthDate == null) || (travelDate == null)) {
-            return TravelerAgeGroup.ADULT;
+            return TravelerAgeGroup.ADT;
         }
         final long months = paxBirthDate.until(travelDate, ChronoUnit.MONTHS);
         if (months <= INFANT_LIMIT_MONTHS) {
-            return TravelerAgeGroup.INFANT;
+            return TravelerAgeGroup.INF;
         }
         if (months <= CHILD_LIMIT_MONTHS) {
-            return TravelerAgeGroup.CHILD;
+            return TravelerAgeGroup.CHD;
         }
-        return TravelerAgeGroup.ADULT;
+        return TravelerAgeGroup.ADT;
     }
 }

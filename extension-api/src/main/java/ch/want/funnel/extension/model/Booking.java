@@ -459,7 +459,7 @@ public class Booking implements Serializable {
 
     /**
      * By default, all {@link #priceitems} collections hold all entries including nested. Thus {@link #getPriceitems()} will
-     * return <strong>all</priceitems> priceitems, including those on {@link TravelService} and {@link TransportDocument}
+     * return <strong>all</strong> priceitems, including those on {@link TravelService} and {@link TransportDocument}
      * level. Calling this method removes priceitems from all collections except the most local one.
      */
     public void removeMultiReferencedPriceitems() {
