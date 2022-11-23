@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class TransportDocument implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public static final String REVALIDATION = "Revalidation";
     private UUID uuid;
     private LocalDateTime issueTimestamp;
     @JsonBackReference("service-documents")
@@ -97,6 +98,13 @@ public class TransportDocument implements Serializable {
         return description;
     }
 
+    /**
+     * For EMD: add general-purpose description. This might be the RFIC description, esp. if the RFIC itself is unavailable.
+     * For TICKET: leave empty. In case of a revalidation, set {@link #REVALIDATION} or a string starting with {@link #REVALIDATION}.
+     *
+     * @param description
+     * @see #setReasonCode(String)
+     */
     public void setDescription(final String description) {
         this.description = description;
     }
@@ -230,5 +238,9 @@ public class TransportDocument implements Serializable {
 
     public void setBookingPayments(final List<BookingPayment> bookingPayments) {
         this.bookingPayments = bookingPayments;
+    }
+
+    public boolean isRevalidated() {
+        return description != null && description.startsWith(REVALIDATION);
     }
 }
