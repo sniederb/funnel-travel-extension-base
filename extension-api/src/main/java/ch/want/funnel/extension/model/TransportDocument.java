@@ -143,7 +143,7 @@ public class TransportDocument implements Serializable {
     }
 
     /**
-     * A technical reference which is used to if {@link #getReferenceNumber()} is empty. Producers should populate this
+     * A technical reference which is used to match documents if {@link #getReferenceNumber()} is empty. Producers should populate this
      * with something like an ID, UUID or tattoo number if present.
      */
     public String getInternalReference() {

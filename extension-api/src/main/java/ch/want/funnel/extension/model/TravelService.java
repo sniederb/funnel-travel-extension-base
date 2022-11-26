@@ -34,6 +34,7 @@ public class TravelService implements Serializable {
     private String cancellationPolicy;
     private String comment;
     private Boolean nonBspFlight;
+    private Boolean paidOnSite;
     private Location destination;
     @JsonManagedReference("service-documents")
     private transient List<TransportDocument> transportDocuments = new ArrayList<>();
@@ -243,6 +244,17 @@ public class TravelService implements Serializable {
 
     public void setNonBspFlight(final Boolean nonBspFlight) {
         this.nonBspFlight = nonBspFlight;
+    }
+
+    /**
+     * If true, the customer will pay for this service on-site.
+     */
+    public Boolean getPaidOnSite() {
+        return paidOnSite;
+    }
+
+    public void setPaidOnSite(final Boolean paidOnSite) {
+        this.paidOnSite = paidOnSite;
     }
 
     /**

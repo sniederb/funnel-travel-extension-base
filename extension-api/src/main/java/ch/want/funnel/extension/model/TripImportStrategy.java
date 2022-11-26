@@ -16,6 +16,11 @@ public enum TripImportStrategy {
      */
     FULL,
     /**
+     * Same as {@link #FULL}, except that no price items are deleted. This is an apporach commonly used in business travel,
+     * where value document are issued and the producer just adds those to the trip.
+     */
+    FULL_PRICE_ADDITIVE,
+    /**
      * Extra mark to indicate that this data package contains <strong>everything</strong>. Consequently,
      * the exceptions of {@link TripImportStrategy#FULL} do not apply here.
      */

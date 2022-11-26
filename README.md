@@ -120,6 +120,11 @@ Booking convertRawSourceToTripData(byte[] rawSource, Map<String, Object> setting
 
 This interface is suitable for pull systems such as retrieving e-mails.
 
+#### Design considerations
+
+- Producers should not filter data; this should be left to consumers (examples: skipping certain payments, setting prices to 0.00)
+- Ticket-related fees should be mapped to individual tickets, even if that means the producer needs to split the fee
+
 ### TripDataTwoPhasedProducer
 
 Some 'producer' mechanisms works such that in a first step, the extension triggers data production asynchronously. Once ready,
