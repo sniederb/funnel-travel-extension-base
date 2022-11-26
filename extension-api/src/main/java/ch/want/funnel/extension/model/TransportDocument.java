@@ -19,6 +19,7 @@ public class TransportDocument implements Serializable {
 
     private static final long serialVersionUID = 1L;
     public static final String REVALIDATION = "Revalidation";
+    public static final String VOID = "Void";
     private UUID uuid;
     private LocalDateTime issueTimestamp;
     @JsonBackReference("service-documents")
