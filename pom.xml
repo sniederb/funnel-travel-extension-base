@@ -98,8 +98,7 @@
 		<!-- Encoding for .xml files generated from unit tests -->
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
-		<junit.version>5.6.0</junit.version>
-		<junit.platform.version>1.6.0</junit.platform.version>
+		<junit.version>5.9.1</junit.version>
 		<!-- These two version need to be roughly in sync, otherwise you'll get -->
 		<!-- An API incompatibility was encountered while executing org.apache.maven.plugins:maven-checkstyle-plugin -->
 		<checkstyle.latest.version>[8.18,)</checkstyle.latest.version>
