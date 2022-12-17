@@ -20,6 +20,7 @@ public class TransportDocument implements Serializable {
     private static final long serialVersionUID = 1L;
     public static final String REVALIDATION = "Revalidation";
     public static final String VOID = "Void";
+    public static final String CONJUNCTION = "Conjunction";
     private UUID uuid;
     private LocalDateTime issueTimestamp;
     @JsonBackReference("service-documents")
@@ -95,17 +96,24 @@ public class TransportDocument implements Serializable {
         this.referenceNumber = referenceNumber;
     }
 
+    /**
+     * For TICKET: empty for regular tickets. Returns a value for special tickets:
+     * <dt>{@link #REVALIDATION}</dt>
+     * <dd>For revalidated tickets. Usually, funnel.travel will hold the new flight segments, but consumers might opt to process these with
+     * price 0.00</dd>
+     * <dt>{@link #VOID}</dt>
+     * <dd>For voided tickets. Ticket amount should usually be 0.00, unless there's a handling markup.</dd>
+     * <dt>{@link #CONJUNCTION}</dt>
+     * <dd>For conjunction tickets. Consumers should process these with price 0.00, or drop them entirely..</dd>
+     * For EMD: get the general-purpose description. This might be the RFIC description, esp. if the RFIC itself is unavailable.
+     *
+     * @return
+     * @see #getReasonCode(String)
+     */
     public String getDescription() {
         return description;
     }
 
-    /**
-     * For EMD: add general-purpose description. This might be the RFIC description, esp. if the RFIC itself is unavailable.
-     * For TICKET: leave empty. In case of a revalidation, set {@link #REVALIDATION} or a string starting with {@link #REVALIDATION}.
-     *
-     * @param description
-     * @see #setReasonCode(String)
-     */
     public void setDescription(final String description) {
         this.description = description;
     }
