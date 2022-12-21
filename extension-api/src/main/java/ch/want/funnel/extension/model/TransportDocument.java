@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -29,7 +30,7 @@ public class TransportDocument implements Serializable {
     private TransportDocumentType transportDocumentType;
     private String issuingAirline;
     private String referenceNumber;
-    private String exchangeForReferenceNumber;
+    private String parentReferenceNumber;
     private String internalReference;
     private boolean associated;
     private String description;
@@ -94,6 +95,14 @@ public class TransportDocument implements Serializable {
 
     public void setReferenceNumber(final String referenceNumber) {
         this.referenceNumber = referenceNumber;
+    }
+
+    public String getParentReferenceNumber() {
+        return parentReferenceNumber;
+    }
+
+    public void setParentReferenceNumber(final String parentReferenceNumber) {
+        this.parentReferenceNumber = parentReferenceNumber;
     }
 
     /**
@@ -185,12 +194,28 @@ public class TransportDocument implements Serializable {
         this.issueTimestamp = issueTimestamp;
     }
 
+    /**
+     * For {@link TransportDocumentType#TICKET}, this holds the old, exchanged ticket number.
+     */
+    @JsonIgnore
     public String getExchangeForReferenceNumber() {
-        return exchangeForReferenceNumber;
+        return getParentReferenceNumber();
     }
 
     public void setExchangeForReferenceNumber(final String exchangeForReferenceNumber) {
-        this.exchangeForReferenceNumber = exchangeForReferenceNumber;
+        setParentReferenceNumber(exchangeForReferenceNumber);
+    }
+
+    /**
+     * For {@link TransportDocumentType#EMD}, this holds the ticket to which the EMD is associated.
+     */
+    @JsonIgnore
+    public String getAssociatedReferenceNumber() {
+        return getParentReferenceNumber();
+    }
+
+    public void setAssociatedReferenceNumber(final String associatedReferenceNumber) {
+        setParentReferenceNumber(associatedReferenceNumber);
     }
 
     /**
@@ -249,6 +274,7 @@ public class TransportDocument implements Serializable {
         this.bookingPayments = bookingPayments;
     }
 
+    @JsonIgnore
     public boolean isRevalidated() {
         return description != null && description.startsWith(REVALIDATION);
     }
