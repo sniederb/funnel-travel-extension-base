@@ -11,6 +11,10 @@ public enum SettingItemValueType {
      */
     STRING,
     /**
+     * Internally the same as {@link #STRING}, but will be presented in a textarea in the UI
+     */
+    LONG_STRING,
+    /**
      * Handled internally same as {@link #STRING}, but is masked in the UI
      */
     PASSWORD,
