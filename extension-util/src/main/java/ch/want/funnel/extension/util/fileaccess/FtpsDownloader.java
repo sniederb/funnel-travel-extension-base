@@ -3,13 +3,16 @@ package ch.want.funnel.extension.util.fileaccess;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPSClient;
 
+/**
+ * Download over FTPS explicit
+ */
 public class FtpsDownloader extends FtpDownloader {
 
     FtpsDownloader(final URI resourceIdentifier, final String username, final String passwd) {
@@ -18,20 +21,18 @@ public class FtpsDownloader extends FtpDownloader {
 
     @Override
     protected FTPClient createFtpClient() {
+        // defaults to "explicit SSL/TLS".
         final FTPClient client = new FTPSClient();
-        try {
+        if (Boolean.parseBoolean(System.getProperty("funnel-verbose", "false"))) {
             client.addProtocolCommandListener(
                 new PrintCommandListener(
-                    new PrintWriter(new OutputStreamWriter(System.out, "UTF-8")), true));
-        } catch (final UnsupportedEncodingException e) {
-            e.printStackTrace();
+                    new PrintWriter(new OutputStreamWriter(System.out, StandardCharsets.UTF_8)), true));
         }
         return client;
     }
 
     @Override
     protected void onClientLoggedIn(final FTPClient client) {
-        // run "explicit SSL/TLS".
         final FTPSClient ftpsClient = (FTPSClient) client;
         try {
             // Set protection buffer size
