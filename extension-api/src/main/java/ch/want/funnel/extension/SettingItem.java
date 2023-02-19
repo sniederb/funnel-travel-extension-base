@@ -22,6 +22,7 @@ public class SettingItem {
     private String key;
     private SettingItemValueType valueType = SettingItemValueType.STRING;
     private boolean mandatory;
+    private Object defaultValue;
     private SettingItemInheritance inheritance = SettingItemInheritance.ACCOUNT_ONLY;
     private SortedMap<Object, String> options;
 
@@ -74,6 +75,15 @@ public class SettingItem {
             throw new IllegalArgumentException("Settings 'inheritance' must not be null");
         }
         this.inheritance = inheritance;
+        return this;
+    }
+
+    public Object getDefaultValue() {
+        return this.defaultValue;
+    }
+
+    public SettingItem setDefaultValue(final Object obj) {
+        this.defaultValue = obj;
         return this;
     }
 
