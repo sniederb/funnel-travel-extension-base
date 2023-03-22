@@ -10,13 +10,14 @@ public enum TripImportStrategy {
      * With this strategy, data not present in the form object will be deleted, except:
      * <ul>
      * <li>Numbered tickets</li>
+     * <li>Refunds</li>
      * <li>Raw sources</li>
      * <li>Payments</li>
      * </ul>
      */
     FULL,
     /**
-     * Same as {@link #FULL}, except that no price items are deleted. This is an apporach commonly used in business travel,
+     * Same as {@link #FULL}, except that no price items are deleted. This is an approach commonly used in business travel,
      * where value document are issued and the producer just adds those to the trip.
      */
     FULL_PRICE_ADDITIVE,

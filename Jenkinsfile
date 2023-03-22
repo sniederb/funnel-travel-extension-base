@@ -67,8 +67,7 @@ pipeline {
                 echo "Collecting JUnit test results" 	
                 junit allowEmptyResults: true, testResults: 'extension-api/target/surefire-reports/**/*.xml,extension-util/target/surefire-reports/**/*.xml'
                 // pattern: comma- or space-separated list of patterns of files that must be included.
-                step([$class: 'CheckStylePublisher', canComputeNew: false, defaultEncoding: '', healthy: '', 
-                	unstableTotalHigh: '0', unstableTotalNormal: '100', pattern: 'extension-api/target/checkstyle-result.xml,extension-util/target/checkstyle-result.xml', unHealthy: ''])
+                recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'extension-api/target/checkstyle-result.xml,extension-util/target/checkstyle-result.xml')
             }
         }
         
