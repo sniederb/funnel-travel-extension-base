@@ -101,7 +101,7 @@
 		<junit.version>5.9.1</junit.version>
 		<!-- These two version need to be roughly in sync, otherwise you'll get -->
 		<!-- An API incompatibility was encountered while executing org.apache.maven.plugins:maven-checkstyle-plugin -->
-		<checkstyle.latest.version>[8.18,)</checkstyle.latest.version>
+		<checkstyle.latest.version>[8.18,9.3]</checkstyle.latest.version>
 		<maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
 	</properties>
 	
