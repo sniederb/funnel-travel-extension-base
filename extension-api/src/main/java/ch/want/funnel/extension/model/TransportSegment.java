@@ -29,6 +29,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     private Location arrivingAtLocation;
     private Integer durationinminutes;
     private String travelclass;
+    private String travelclassDescription;
     private String farebasis;
     private BookingStatus bookingstatus;
     private String providername;
@@ -96,12 +97,28 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
         this.bookingstatus = bookingstatus;
     }
 
+    /**
+     * This is most likely a code, e.g. a one-letter cabin class code.
+     */
     public String getTravelclass() {
         return travelclass;
     }
 
     public void setTravelclass(final String travelclass) {
         this.travelclass = travelclass;
+    }
+
+    /**
+     * This is a descriptive text of {@link #getTravelclass()}
+     *
+     * @return
+     */
+    public String getTravelclassDescription() {
+        return travelclassDescription;
+    }
+
+    public void setTravelclassDescription(final String travelclassDescription) {
+        this.travelclassDescription = travelclassDescription;
     }
 
     public String getFarebasis() {
