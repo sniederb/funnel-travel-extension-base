@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPConnectionClosedException;
 import org.apache.commons.net.ftp.FTPFile;
 
 class FtpDownloader implements FileDownloader {
@@ -61,6 +62,8 @@ class FtpDownloader implements FileDownloader {
                     client.deleteFile(remoteFile.getName());
                 }
             }
+        } catch (final FTPConnectionClosedException ex) {
+            throw new FileAccessWarnException("Connection closed", ex);
         } finally {
             closeAndDisconnectQuietly(client);
         }
