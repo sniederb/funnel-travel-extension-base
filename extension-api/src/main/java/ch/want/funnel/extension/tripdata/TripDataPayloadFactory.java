@@ -8,7 +8,7 @@ import ch.want.funnel.extension.model.Trip;
 
 /**
  * If an extension implements this interface, funnel.travel will display a "download payload" link on the
- * trip details so an agent can see what the payload would be given the current trip data.
+ * trip details so an agent can see what the payload would be, given the current booking/trip data.
  */
 public interface TripDataPayloadFactory {
 

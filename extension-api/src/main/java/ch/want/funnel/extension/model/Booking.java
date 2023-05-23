@@ -22,6 +22,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 
+import ch.want.funnel.extension.tripdata.TripDataConsumer;
+
 @JsonIgnoreProperties(value = { "header", "departuredateAsUtilDate", "returndateAsUtilDate" }, allowGetters = true)
 public class Booking implements Serializable {
 
@@ -372,6 +374,10 @@ public class Booking implements Serializable {
         this.payments = payments;
     }
 
+    /**
+     * The raw sources, sorted by {@link RawSource#getEntrydate()}. Note that {@link RawSource#getSource()}
+     * will be null, unless {@link TripDataConsumer#isPayloadFromDatabase()} is set to true.
+     */
     public List<RawSource> getRawsources() {
         return rawsources;
     }

@@ -17,7 +17,7 @@ public interface TripDataConsumer {
     /**
      *
      * @param booking
-     *            Booking data structure
+     *            Booking data structure including raw sources
      * @param settings
      *            A Map holding the keys defined in {@link FunnelExtension#getSettings()},
      *            and associated values with possible inheritance applied
@@ -30,8 +30,17 @@ public interface TripDataConsumer {
     /**
      * Indicate how badly this extension needs extended traveler profile data. Use
      * {@link TravelerProfileAffinity#NONE} if you don't know.
-     *
-     * @return
      */
-    TravelerProfileAffinity getTravelerProfileAffinity();
+    default TravelerProfileAffinity getTravelerProfileAffinity() {
+        return TravelerProfileAffinity.NONE;
+    }
+
+    /**
+     * funnel.travel will store a booking state when queuing extension execution. By default, extensions
+     * will receive that snapshot. Override this method and return false if the current booking data
+     * should be read from the database.
+     */
+    default boolean isPayloadFromDatabase() {
+        return false;
+    }
 }
