@@ -25,8 +25,10 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     private Short segNr;
     private LocalDateTime departuretime;
     private Location departingFromLocation;
+    private String departingDetails;
     private LocalDateTime arrivaltime;
     private Location arrivingAtLocation;
+    private String arrivalDetails;
     private Integer durationinminutes;
     private String travelclass;
     private String travelclassDescription;
@@ -277,5 +279,29 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     @JsonIgnore
     public void setAircraftType(final String aircraftType) {
         setVehicleType(aircraftType);
+    }
+
+    /**
+     * Get additional information pertinent to departure, such as a train platform
+     * or an airport terminal
+     */
+    public String getDepartingDetails() {
+        return departingDetails;
+    }
+
+    public void setDepartingDetails(final String departingDetails) {
+        this.departingDetails = departingDetails;
+    }
+
+    /**
+     * Get additional information pertinent to arrival, such as a train platform
+     * or an airport terminal
+     */
+    public String getArrivalDetails() {
+        return arrivalDetails;
+    }
+
+    public void setArrivalDetails(final String arrivalDetails) {
+        this.arrivalDetails = arrivalDetails;
     }
 }

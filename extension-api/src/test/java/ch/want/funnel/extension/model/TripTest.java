@@ -7,17 +7,24 @@ import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 class TripTest {
 
+    private static final ObjectMapper OBJECTMAPPER;
+    static {
+        OBJECTMAPPER = new ObjectMapper()
+            .registerModule(new JavaTimeModule())
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+    }
+
     @Test
     void serialize() throws Exception {
-        final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
         final byte[] payload = IOUtils.resourceToByteArray("/ch/want/funnel/extension/model/trip-7383012568246.json");
         // act
-        final Trip trip = objectMapper.readValue(payload, Trip.class);
-        final String tripAsJson = objectMapper.writeValueAsString(trip);
+        final Trip trip = OBJECTMAPPER.readValue(payload, Trip.class);
+        final String tripAsJson = OBJECTMAPPER.writeValueAsString(trip);
         //
         assertThat(tripAsJson, CoreMatchers.containsString("0742798225235"));
         assertThat(tripAsJson, CoreMatchers.containsString("header"));

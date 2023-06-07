@@ -1,32 +1,52 @@
 {
 	"uuid": null,
 	"tripUuid": null,
+	"midofficeReferenceNumber": null,
 	"providerUuid": null,
+	"customer": {
+		"uuid": null,
+		"firstname": null,
+		"lastname": "ACME Ltd.",
+		"email": null,
+		"customerNumbers": [
+			{
+				"uuid": null,
+				"system": "Foobar",
+				"customerNumber": "56288"
+			}
+		]
+	},
 	"created": null,
+	"lastModified": null,
 	"providerSourcename": "Expedia",
 	"sourceDomain": "Expedia",
 	"departuredate": null,
 	"returndate": null,
 	"referenceNumber": "7383012568246",
+	"sourceInternalReferencenumber": null,
+	"productkey": null,
+	"travelagencyId": null,
+	"ticketingTravelagencyId": null,
+	"agentSign": null,
 	"totalpricecurrency": null,
 	"totalprice": null,
 	"extensionData": null,
-	"destination": null,
+	"destination": {
+		"iataCode": null,
+		"unLocationCode": null,
+		"generalCode": null,
+		"name": null,
+		"countryCode": null
+	},
 	"url": null,
 	"providerName": null,
+	"salesChannel": null,
 	"comment": null,
 	"importStrategy": "FULL",
+	"extensionCallAction": null,
 	"extensionClassname": null,
 	"forceNewTrip": false,
-	"customer": {
-		"lastname" : "ACME Ltd.",
-		"customerNumbers": [
-			{
-				"system" : "Foobar",
-				"customerNumber": "56288"
-			}
-		]
-	},
+	"packaged": false,
 	"travelservices": [
 		{
 			"uuid": null,
@@ -40,12 +60,44 @@
 			"returndate": null,
 			"cancellationPolicy": null,
 			"comment": null,
+			"nonBspFlight": null,
+			"paidOnSite": null,
+			"destination": null,
 			"transportDocuments": [
 				{
 					"uuid": null,
+					"issueTimestamp": null,
+					"traveler": {
+						"uuid": "b41ef637-6274-44ac-83f5-a42a9d2d65f4",
+						"userloginUuid": null,
+						"organizationUuid": null,
+						"tattooNumber": null,
+						"salutation": null,
+						"ageGroup": null,
+						"firstname": "John",
+						"firstnameNonAps": null,
+						"lastname": "Busybody",
+						"fullname": "John Busybody",
+						"email": null,
+						"sourceId": null,
+						"sourceDisplayId": null,
+						"birthdate": null,
+						"passportCountry": null,
+						"passportNumber": null,
+						"passportExpiration": null,
+						"passportPlaceOfIssue": null
+					},
+					"transportDocumentType": null,
+					"issuingAirline": null,
 					"referenceNumber": "0742798225235",
-					"traveler": "b41ef637-6274-44ac-83f5-a42a9d2d65f4",
+					"parentReferenceNumber": null,
+					"internalReference": null,
+					"associated": false,
 					"description": null,
+					"reasonCode": null,
+					"reasonSubCode": null,
+					"ancillaryValue": null,
+					"fareType": "PUBLIC",
 					"priceitems": [
 						{
 							"uuid": null,
@@ -55,7 +107,7 @@
 							"amount": 373.25,
 							"amountInAccountCurrency": null,
 							"purchasePriceCurrency": "EUR",
-							"purchasePrice": 345.60,
+							"purchasePrice": 345.6,
 							"purchasePriceInAccountCurrency": 373.25
 						},
 						{
@@ -70,13 +122,43 @@
 							"purchasePriceInAccountCurrency": 101.25
 						}
 					],
+					"bookingPayments": [],
 					"associatedSegments": []
 				},
 				{
 					"uuid": null,
+					"issueTimestamp": null,
+					"traveler": {
+						"uuid": "b1a89c44-a105-4cb7-8828-6d3689fac0b0",
+						"userloginUuid": null,
+						"organizationUuid": null,
+						"tattooNumber": null,
+						"salutation": null,
+						"ageGroup": null,
+						"firstname": "Sara",
+						"firstnameNonAps": null,
+						"lastname": "Schnell",
+						"fullname": "Sara Schnell",
+						"email": null,
+						"sourceId": null,
+						"sourceDisplayId": null,
+						"birthdate": null,
+						"passportCountry": null,
+						"passportNumber": null,
+						"passportExpiration": null,
+						"passportPlaceOfIssue": null
+					},
+					"transportDocumentType": null,
+					"issuingAirline": null,
 					"referenceNumber": "0742798225234",
-					"traveler": "b1a89c44-a105-4cb7-8828-6d3689fac0b0",
+					"parentReferenceNumber": null,
+					"internalReference": null,
+					"associated": false,
 					"description": null,
+					"reasonCode": null,
+					"reasonSubCode": null,
+					"ancillaryValue": null,
+					"fareType": "PUBLIC",
 					"priceitems": [
 						{
 							"uuid": null,
@@ -84,7 +166,10 @@
 							"description": null,
 							"currency": "CHF",
 							"amount": 373.25,
-							"amountInAccountCurrency": null
+							"amountInAccountCurrency": null,
+							"purchasePriceCurrency": "CHF",
+							"purchasePrice": null,
+							"purchasePriceInAccountCurrency": null
 						},
 						{
 							"uuid": null,
@@ -92,13 +177,18 @@
 							"description": null,
 							"currency": "CHF",
 							"amount": 101.25,
-							"amountInAccountCurrency": null
+							"amountInAccountCurrency": null,
+							"purchasePriceCurrency": "CHF",
+							"purchasePrice": null,
+							"purchasePriceInAccountCurrency": null
 						}
 					],
+					"bookingPayments": [],
 					"associatedSegments": []
 				}
 			],
 			"priceitems": [],
+			"bookingPayments": [],
 			"segmentedLegs": [
 				{
 					"uuid": null,
@@ -109,17 +199,34 @@
 							"segNr": 0,
 							"departuretime": "2019-01-02T09:10:00",
 							"departingFromLocation": {
-								"unLocationCode": "ZRH/CH"
+								"iataCode": null,
+								"unLocationCode": "ZRH/CH",
+								"generalCode": null,
+								"name": null,
+								"countryCode": "CH"
 							},
+							"departingDetails": null,
 							"arrivaltime": "2019-01-02T10:55:00",
 							"arrivingAtLocation": {
-								"unLocationCode": "AMS/NL"
+								"iataCode": null,
+								"unLocationCode": "AMS/NL",
+								"generalCode": null,
+								"name": null,
+								"countryCode": "NL"
 							},
+							"arrivalDetails": null,
 							"durationinminutes": null,
 							"travelclass": "Economy",
+							"travelclassDescription": null,
+							"farebasis": null,
+							"bookingstatus": null,
 							"providername": "KL",
+							"providerNumber": null,
 							"connectionnumber": "1954",
 							"reservationlocator": "PCRESW",
+							"baggage": null,
+							"co2KiloPerPax": null,
+							"vehicleType": null,
 							"auxiliaries": []
 						},
 						{
@@ -127,17 +234,34 @@
 							"segNr": 1,
 							"departuretime": "2019-01-02T12:10:00",
 							"departingFromLocation": {
-								"unLocationCode": "AMS/NL"
+								"iataCode": null,
+								"unLocationCode": "AMS/NL",
+								"generalCode": null,
+								"name": null,
+								"countryCode": "NL"
 							},
+							"departingDetails": null,
 							"arrivaltime": "2019-01-02T12:50:00",
 							"arrivingAtLocation": {
-								"unLocationCode": "INV/GB"
+								"iataCode": null,
+								"unLocationCode": "INV/GB",
+								"generalCode": null,
+								"name": null,
+								"countryCode": "GB"
 							},
+							"arrivalDetails": null,
 							"durationinminutes": null,
 							"travelclass": "Economy",
+							"travelclassDescription": null,
+							"farebasis": null,
+							"bookingstatus": null,
 							"providername": "KL",
+							"providerNumber": null,
 							"connectionnumber": "929",
 							"reservationlocator": "PCRESW",
+							"baggage": null,
+							"co2KiloPerPax": null,
+							"vehicleType": null,
 							"auxiliaries": []
 						}
 					]
@@ -151,17 +275,34 @@
 							"segNr": 0,
 							"departuretime": "2019-01-30T13:20:00",
 							"departingFromLocation": {
-								"unLocationCode": "INV/GB"
+								"iataCode": null,
+								"unLocationCode": "INV/GB",
+								"generalCode": null,
+								"name": null,
+								"countryCode": "GB"
 							},
+							"departingDetails": null,
 							"arrivaltime": "2019-01-30T16:00:00",
 							"arrivingAtLocation": {
-								"unLocationCode": "AMS/NL"
+								"iataCode": null,
+								"unLocationCode": "AMS/NL",
+								"generalCode": null,
+								"name": null,
+								"countryCode": "NL"
 							},
+							"arrivalDetails": null,
 							"durationinminutes": null,
 							"travelclass": "Economy",
+							"travelclassDescription": null,
+							"farebasis": null,
+							"bookingstatus": null,
 							"providername": "KL",
+							"providerNumber": null,
 							"connectionnumber": "930",
 							"reservationlocator": "PCRESW",
+							"baggage": null,
+							"co2KiloPerPax": null,
+							"vehicleType": null,
 							"auxiliaries": []
 						},
 						{
@@ -169,90 +310,124 @@
 							"segNr": 1,
 							"departuretime": "2019-01-30T17:05:00",
 							"departingFromLocation": {
-								"unLocationCode": "AMS/NL"
+								"iataCode": null,
+								"unLocationCode": "AMS/NL",
+								"generalCode": null,
+								"name": null,
+								"countryCode": "NL"
 							},
+							"departingDetails": null,
 							"arrivaltime": "2019-01-30T18:25:00",
 							"arrivingAtLocation": {
-								"unLocationCode": "ZRH/CH"
+								"iataCode": null,
+								"unLocationCode": "ZRH/CH",
+								"generalCode": null,
+								"name": null,
+								"countryCode": "CH"
 							},
+							"arrivalDetails": null,
 							"durationinminutes": null,
 							"travelclass": "Economy",
+							"travelclassDescription": null,
+							"farebasis": null,
+							"bookingstatus": null,
 							"providername": "KL",
+							"providerNumber": null,
 							"connectionnumber": "1963",
 							"reservationlocator": "PCRESW",
+							"baggage": null,
+							"co2KiloPerPax": null,
+							"vehicleType": null,
 							"auxiliaries": []
 						}
 					]
 				}
 			],
 			"singleSegment": null,
+			"travelServiceReferences": [],
 			"returndateAsUtilDate": null,
 			"departuredateAsUtilDate": null
 		},
 		{
+			"uuid": null,
+			"bookingUuid": null,
 			"providerUuid": null,
 			"providerSourcename": "Bookingcom",
 			"travelServiceType": "HOTEL",
+			"bookingstatus": null,
 			"referenceNumber": "1281529927",
 			"departuredate": "2019-01-11",
 			"returndate": "2019-01-12",
+			"cancellationPolicy": null,
+			"comment": null,
+			"nonBspFlight": null,
+			"paidOnSite": null,
+			"destination": null,
+			"transportDocuments": [],
+			"priceitems": [
+				{
+					"uuid": null,
+					"priceItemType": "AUX_PER_BOOKING",
+					"description": null,
+					"currency": "CHF",
+					"amount": 200.0,
+					"amountInAccountCurrency": null,
+					"purchasePriceCurrency": "CHF",
+					"purchasePrice": null,
+					"purchasePriceInAccountCurrency": null
+				}
+			],
+			"bookingPayments": [],
+			"segmentedLegs": [],
 			"singleSegment": {
+				"uuid": null,
 				"startLocation": {
+					"iataCode": null,
+					"unLocationCode": null,
+					"generalCode": null,
 					"name": "Inverness",
 					"countryCode": "GB"
 				},
+				"endLocation": {
+					"iataCode": null,
+					"unLocationCode": null,
+					"generalCode": null,
+					"name": null,
+					"countryCode": null
+				},
 				"providerDescription": "The Glenmoriston Townhouse Hotel, Inverness",
 				"serviceDescription": "Club Double Room",
+				"additionalDescription": null,
+				"serviceTypeCode": null,
+				"serviceCount": null,
 				"startConditions": "",
-				"endConditions": ""
+				"startTime": null,
+				"endConditions": "",
+				"endTime": null,
+				"street": null,
+				"zip": null,
+				"city": null,
+				"rateCode": null,
+				"rateCurrency": null,
+				"rate": null,
+				"transfer": false,
+				"insurance": false,
+				"refund": false
 			},
-			"priceitems": [
-				{
-					"priceItemType": "AUX_PER_BOOKING",
-					"currency": "CHF",
-					"amount": "200.00"
-				}
-			]
+			"travelServiceReferences": [],
+			"returndateAsUtilDate": "2019-01-12T00:00:00.000+0000",
+			"departuredateAsUtilDate": "2019-01-11T00:00:00.000+0000"
 		}
 	],
 	"priceitems": [],
 	"payments": [],
 	"rawsources": [],
 	"participants": [
-		{
-			"uuid": "b41ef637-6274-44ac-83f5-a42a9d2d65f4",
-			"userloginUuid": null,
-			"organizationUuid": null,
-			"firstname": "John",
-			"firstnameNonAps": null,
-			"lastname": "Busybody",
-			"fullname": "John Busybody",
-			"email": null,
-			"sourceId": null,
-			"birthdate": null,
-			"passportCountry": null,
-			"passportNumber": null,
-			"passportExpiration": null,
-			"passportPlaceOfIssue": null
-		},
-		{
-			"uuid": "b1a89c44-a105-4cb7-8828-6d3689fac0b0",
-			"userloginUuid": null,
-			"organizationUuid": null,
-			"firstname": "Sara",
-			"firstnameNonAps": null,
-			"lastname": "Schnell",
-			"fullname": "Sara Schnell",
-			"email": null,
-			"sourceId": null,
-			"birthdate": null,
-			"passportCountry": null,
-			"passportNumber": null,
-			"passportExpiration": null,
-			"passportPlaceOfIssue": null
-		}
+		"b41ef637-6274-44ac-83f5-a42a9d2d65f4",
+		"b1a89c44-a105-4cb7-8828-6d3689fac0b0"
 	],
 	"customfields": [],
+	"vatDistribution": [],
 	"header": "Expedia, Expedia, 7383012568246",
 	"returndateAsUtilDate": null,
 	"departuredateAsUtilDate": null
