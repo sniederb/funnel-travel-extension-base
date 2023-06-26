@@ -5,8 +5,13 @@ package ch.want.funnel.extension.util;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -20,9 +25,13 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import ch.want.funnel.extension.model.Booking;
 import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.SimpleDate;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
+import freemarker.template.TemplateModel;
+import freemarker.template.TemplateModelException;
 import freemarker.template.Version;
 
 /**
@@ -49,7 +58,7 @@ public abstract class AbstractTemplateBasedExtension {
 
     /**
      * Load the provided JSON into a Java map. Beware that this method does NOT
-     * attempt and date/time conversion. Use {@link #convertPayloadDates(Map)} if value objects
+     * attempt any date/time conversion. Use {@link #convertPayloadDates(Map)} if value objects
      * need to be dates.
      *
      * @param payloadNode
@@ -141,6 +150,7 @@ public abstract class AbstractTemplateBasedExtension {
             freemarkerConfig.setClassForTemplateLoading(getClass(), "/");
             freemarkerConfig.setDefaultEncoding("UTF-8");
             freemarkerConfig.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+            freemarkerConfig.setObjectWrapper(new CustomObjectWrapper());
             updateFreemarkerConfiguration(freemarkerConfig);
         }
     }
@@ -171,6 +181,39 @@ public abstract class AbstractTemplateBasedExtension {
             return result.toString();
         } catch (final TemplateException e) {
             throw new IOException(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Freemarker has terrible support for Java 8 time. This class wraps those classes into a
+     * freemarker {@link SimpleDate}.
+     */
+    private static class CustomObjectWrapper extends DefaultObjectWrapper {
+
+        CustomObjectWrapper() {
+            super(getCtorVersion());
+        }
+
+        @Override
+        public TemplateModel wrap(final Object obj) throws TemplateModelException {
+            if (obj instanceof LocalDateTime) {
+                final Timestamp timestamp = Timestamp.valueOf((LocalDateTime) obj);
+                return new SimpleDate(timestamp);
+            }
+            if (obj instanceof LocalDate) {
+                final java.sql.Date date = java.sql.Date.valueOf((LocalDate) obj);
+                return new SimpleDate(date);
+            }
+            if (obj instanceof LocalTime) {
+                final Time time = Time.valueOf((LocalTime) obj);
+                return new SimpleDate(time);
+            }
+            return super.wrap(obj);
+        }
+
+        private static Version getCtorVersion() {
+            final Configuration configuration = new Configuration(VERSION_2_3_28);
+            return configuration.getIncompatibleImprovements();
         }
     }
 }

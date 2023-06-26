@@ -7,18 +7,19 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
 import freemarker.template.Template;
 
-public class XmlTemplateBasedExtensionTest {
+class XmlTemplateBasedExtensionTest {
 
     private static final String PAYLOAD = "<response><name>John</name><city>London</city></response>";
 
     @Test
-    public void parsePayloadToMap() throws Exception {
+    void parsePayloadToMap() throws Exception {
         // arrange
         final AbstractTemplateBasedExtension testee = new XmlTemplateBasedExtension();
         // act
@@ -28,7 +29,7 @@ public class XmlTemplateBasedExtensionTest {
     }
 
     @Test
-    public void loadTemplate() throws Exception {
+    void loadTemplate() throws Exception {
         // arrange
         final AbstractTemplateBasedExtension testee = new XmlTemplateBasedExtension();
         // act
@@ -38,10 +39,11 @@ public class XmlTemplateBasedExtensionTest {
     }
 
     @Test
-    public void render() throws Exception {
+    void render() throws Exception {
         // arrange
         final AbstractTemplateBasedExtension testee = new XmlTemplateBasedExtension();
         final Map<String, Object> payloadMap = testee.parsePayloadToMap(PAYLOAD);
+        payloadMap.put("entrydate", LocalDate.parse("2023-10-04"));
         final Template template = testee.loadTemplate("ch/want/funnel/extension/util/test-template.ftlh");
         // act
         final String result = testee.render(template, payloadMap);
