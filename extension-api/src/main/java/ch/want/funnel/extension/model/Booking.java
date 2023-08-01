@@ -37,6 +37,7 @@ public class Booking implements Serializable {
     private OffsetDateTime lastModified;
     private String providerSourcename;
     private String sourceDomain;
+    private String supplier;
     private LocalDate departuredate;
     private LocalDate returndate;
     private String referenceNumber;
@@ -149,6 +150,11 @@ public class Booking implements Serializable {
         this.lastModified = lastModified;
     }
 
+    /**
+     * Name of the company providing the travel service.
+     *
+     * @return
+     */
     public String getProviderSourcename() {
         return providerSourcename;
     }
@@ -157,12 +163,26 @@ public class Booking implements Serializable {
         this.providerSourcename = providerSourcename;
     }
 
+    /**
+     * Name of the platform which owns the booking, i.e. which created the booking number.
+     */
     public String getSourceDomain() {
         return sourceDomain;
     }
 
     public void setSourceDomain(final String sourceDomain) {
         this.sourceDomain = sourceDomain;
+    }
+
+    /**
+     * Name of the company sending the purchase invoice.
+     */
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(final String supplier) {
+        this.supplier = supplier;
     }
 
     public LocalDate getDeparturedate() {
@@ -213,7 +233,7 @@ public class Booking implements Serializable {
 
     /**
      * The {@code sourceInternalReferencenumber} reflects the ID for this booking internal to the source system.
-     * This is often a UUID or a length hash-type string, but might also be identical to {@link #getReferencenumber()}
+     * This is often a UUID or a lengthy hash-type string, but might also be identical to {@link #getReferencenumber()}
      */
     public String getSourceInternalReferencenumber() {
         return sourceInternalReferencenumber;
