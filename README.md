@@ -292,27 +292,23 @@ all segments from a service and split it into legs based on the stay at each des
 
 The extension will run in the JVM context of the funnel.travel, and as such will have available the runtime libraries provided by funnel.travel.
 
-* slf4j-api, version1.7.25
+* slf4j-api, version1.7.36
     * Use jcl-over-slf4j for an implementation in tests
-* ch.qos.logback, version1.2.3
-* com.google.code.gson, version2.8.6
-* com.googlecode.json-simple, version1.1.1
+* ch.qos.logback, version 1.2.12
+* com.google.code.gson, version 2.9.1
 * com.google.guava (guava), version 19.0
-* commons-beanutils, version1.9.3
-* commons-collections, version3.2.2
-* commons-codec, version1.13
+* commons-codec, version 1.15
 * commons-io, version 2.6
 * commons-net, version 3.6
 * com.jcraft, jsch, version 0.1.55
-* javax.mail, version1.6.2
-* com.sun.mail, version1.6.4
-* org.apache.httpcomponents (httpclient), version4.5.5
-* org.apache.httpcomponents (httpcore), version4.4.9
-* org.apache.httpcomponents (httpmime), version4.5.5
-* com.fasterxml.jackson.core (jackson-core), version2.10.0
-* com.fasterxml.jackson.core (jackson-dataformat-csv), version2.10.0
-* com.fasterxml.jackson.core (jackson-dataformat-xml), version2.10.0
-* com.fasterxml.jackson.core (jackson-dataformat-yaml), version2.10.0
-* org.freemarker, version2.3.29
-* ch.want.funnel (extension-util), version2.0.11
+* javax.mail, version 1.6.7
+* org.apache.httpcomponents (httpclient), version 4.5.14
+* org.apache.httpcomponents (httpcore), version 4.4.16
+* org.apache.httpcomponents (httpmime), version 4.5.14
+* com.fasterxml.jackson.core (jackson-core), version 2.13.5
+* com.fasterxml.jackson.core (jackson-dataformat-csv), version 2.13.5
+* com.fasterxml.jackson.core (jackson-dataformat-xml), version 2.13.5
+* com.fasterxml.jackson.core (jackson-dataformat-yaml), version 2.13.5
+* org.freemarker, version 2.3.32
+* ch.want.funnel (extension-util), newest 2.x version
 
