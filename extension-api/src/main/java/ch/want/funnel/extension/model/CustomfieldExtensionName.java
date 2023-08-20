@@ -2,12 +2,15 @@ package ch.want.funnel.extension.model;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * Extension-specific name for a {@link CustomField}.
  */
 public class CustomfieldExtensionName implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @JsonBackReference("customfield-extensionnames")
     private CustomField customField;
     private String extensionClassName;
     private String fieldName;

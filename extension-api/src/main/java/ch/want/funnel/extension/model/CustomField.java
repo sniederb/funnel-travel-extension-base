@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "uuid")
 public class CustomField implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -15,6 +20,7 @@ public class CustomField implements Serializable {
     private CustomFieldDataType datatype;
     private CustomFieldDirective editDirective;
     private String name;
+    @JsonManagedReference("customfield-extensionnames")
     private List<CustomfieldExtensionName> extensionFieldNames = new ArrayList<>();
 
     public UUID getUuid() {

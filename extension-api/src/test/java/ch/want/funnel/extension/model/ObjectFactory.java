@@ -79,4 +79,20 @@ public final class ObjectFactory {
         }
         return location;
     }
+
+    public static CustomFieldValue createFieldValue(final String fieldname, final String value) {
+        final CustomFieldValue fieldValue = new CustomFieldValue();
+        fieldValue.setCustomField(createField(fieldname));
+        fieldValue.setInternalvalue(value);
+        return fieldValue;
+    }
+
+    private static CustomField createField(final String fieldname) {
+        final CustomField field = new CustomField();
+        field.setUuid(UUID.randomUUID());
+        field.setName(fieldname);
+        field.setDatatype(CustomFieldDataType.STRING);
+        field.setEditDirective(CustomFieldDirective.OPTIONAL);
+        return field;
+    }
 }

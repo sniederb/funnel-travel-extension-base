@@ -54,6 +54,23 @@ class BookingTest {
     }
 
     @Test
+    void serializeWithCustomField() throws Exception {
+        final Booking booking = ObjectFactory.createBooking();
+        final CustomFieldValue customFieldValue = ObjectFactory.createFieldValue("invoiceNumber", "123456");
+        final CustomfieldExtensionName extensionFieldName = new CustomfieldExtensionName();
+        extensionFieldName.setCustomField(customFieldValue.getCustomField());
+        extensionFieldName.setExtensionClassName("ch.want.WhateverExtension");
+        extensionFieldName.setFieldName("invoiceNumber");
+        customFieldValue.getCustomField().getExtensionFieldNames().add(extensionFieldName);
+        booking.getCustomfields().add(customFieldValue);
+        // act
+        final String bookingAsJson = OBJECTMAPPER.writeValueAsString(booking);
+        //
+        MatcherAssert.assertThat(bookingAsJson, CoreMatchers.containsString("invoiceNumber"));
+        MatcherAssert.assertThat(bookingAsJson, CoreMatchers.containsString(extensionFieldName.getExtensionClassName()));
+    }
+
+    @Test
     void updateTotalpriceFromPriceitems() throws Exception {
         final byte[] payload = IOUtils.resourceToByteArray("/ch/want/funnel/extension/model/booking-7383012568246.json");
         // act
