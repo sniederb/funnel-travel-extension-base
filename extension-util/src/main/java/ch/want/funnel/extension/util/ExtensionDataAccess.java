@@ -2,14 +2,14 @@ package ch.want.funnel.extension.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -22,6 +22,7 @@ import ch.want.funnel.extension.model.Trip;
 
 public class ExtensionDataAccess {
 
+    public static final String REMARKS_NODE_NAME = "remarks";
     private final Booking booking;
 
     public ExtensionDataAccess(final Booking booking) {
@@ -58,6 +59,23 @@ public class ExtensionDataAccess {
         return Optional.empty();
     }
 
+    /**
+     * If {@code replaceLinePrefix} is not empty, this method will look for an existing remark line
+     * {@code startsWith(replaceLinePrefix)}, and if found remove that line.
+     */
+    public void addRemark(final String extenstionName, final String remark, final String replaceLinePrefix, final String paxTattoo) {
+        final ArrayNode remarksArrayNode = (ArrayNode) getOrCreateNode(extenstionName, REMARKS_NODE_NAME, true);
+        if (StringUtils.isNotBlank(replaceLinePrefix)) {
+            for (final Iterator<JsonNode> iterator = remarksArrayNode.elements(); iterator.hasNext();) {
+                final JsonNode remarkNode = iterator.next();
+                if (getMatchingRemarkContent(remarkNode, replaceLinePrefix, paxTattoo).isPresent()) {
+                    iterator.remove();
+                }
+            }
+        }
+        remarksArrayNode.add(remark);
+    }
+
     public List<String> getAllRemarks() {
         if (booking.getExtensionData() == null) {
             return Collections.emptyList();
@@ -65,7 +83,7 @@ public class ExtensionDataAccess {
         final List<String> remarks = new ArrayList<>();
         for (final Iterator<Map.Entry<String, JsonNode>> iterator = booking.getExtensionData().fields(); iterator.hasNext();) {
             final Map.Entry<String, JsonNode> entry = iterator.next();
-            final JsonNode remarksNode = entry.getValue().get("remarks");
+            final JsonNode remarksNode = entry.getValue().get(REMARKS_NODE_NAME);
             if (remarksNode != null && remarksNode.isArray()) {
                 for (final JsonNode value : remarksNode) {
                     remarks.add(value.asText());
@@ -76,7 +94,7 @@ public class ExtensionDataAccess {
     }
 
     private static Optional<String> searchExtensionSubnode(final JsonNode extensionSubnode, final String remarkPrefix, final String paxTattoo) {
-        final JsonNode remarks = extensionSubnode.get("remarks");
+        final JsonNode remarks = extensionSubnode.get(REMARKS_NODE_NAME);
         if ((remarks != null) && remarks.isArray()) {
             final ArrayNode remarksArray = (ArrayNode) remarks;
             for (final JsonNode value : remarksArray) {
@@ -157,11 +175,5 @@ public class ExtensionDataAccess {
             ((ObjectNode) extensionData).set(extensionClassname, internalData);
         }
         return internalData;
-    }
-
-    private <T> Set<T> toSet(final Iterator<T> iterator) {
-        final Set<T> result = new HashSet<>();
-        iterator.forEachRemaining(result::add);
-        return result;
     }
 }
