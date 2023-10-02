@@ -3,6 +3,12 @@ package ch.want.funnel.extension.tripdata;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * A two-phased producer is used for asynchronous processing on the producer system. Typically, in the first
+ * phase, the call to {@link #getRawSources(Map, Locale)} only returns a collection of IDs, while delegating
+ * work to an external system. The latter later calls a webhook with a payload, which is then passed on
+ * to {@link #convertRawSourceToTripData(byte[], Map, Locale)}.
+ */
 public interface TripDataTwoPhasedProducer extends TripDataProducer {
 
     /**

@@ -5,9 +5,17 @@
 	"providerUuid": null,
 	"customer": {
 		"uuid": null,
+		"salutation": null,
+		"ageGroup": null,
 		"firstname": null,
 		"lastname": "ACME Ltd.",
+        "street" : "Blumenweg 6",
+        "addressLine2" : null,
+        "city" : "Schwerzenbach",
+        "zip" : "8603",
+		"countryCode" : "CH",
 		"email": null,
+        "phone" : "079 123 456",
 		"customerNumbers": [
 			{
 				"uuid": null,

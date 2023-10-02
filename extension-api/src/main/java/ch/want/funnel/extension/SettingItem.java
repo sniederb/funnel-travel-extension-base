@@ -8,7 +8,18 @@ import java.util.SortedMap;
 public class SettingItem {
 
     public static final String KEY_FILESTORE = "funnel.environment.filestore";
+    /**
+     * Settings value will be something like {@code /be/purple}, i.e. the pure context
+     *
+     * @deprecated
+     */
+    @Deprecated
     public static final String KEY_SERVERCONTEXT = "funnel.environment.servercontext";
+    /**
+     * Settings value will be an absolute URL of the webhook for this extension. Note that all extensions receive a value, but only
+     * produces with 'WEBHOOK' setting will eventually be able to process the URL.
+     */
+    public static final String KEY_OWN_WEBHOOK = "funnel.environment.ownwebhook";
     /**
      * Key to retrieve whether or not the extension is running on production. Typically this is used to
      * determine web service endpoints. Value is a boolean
