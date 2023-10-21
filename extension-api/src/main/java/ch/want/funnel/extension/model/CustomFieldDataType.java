@@ -4,8 +4,8 @@
 package ch.want.funnel.extension.model;
 
 /**
- * These datatypes must reflect HTML input types
+ * These data types reflect HTML input types.
  */
 public enum CustomFieldDataType {
-    STRING, NUMBER
+    STRING, LONG_STRING, NUMBER
 }
