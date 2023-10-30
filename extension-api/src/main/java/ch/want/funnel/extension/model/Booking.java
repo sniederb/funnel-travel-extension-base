@@ -7,7 +7,9 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.Set;
 import java.util.StringJoiner;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -378,6 +381,13 @@ public class Booking implements Serializable {
         this.travelservices = travelservices;
     }
 
+    /**
+     * Get priceitems. Be careful with object references, as {@link TravelService#getPriceitems()}
+     * or {@link TransportDocument#getPriceitems()} may return the same priceitem but with a different
+     * object identity. Thus always check using {@link PriceItem#getUuid()}
+     *
+     * @return
+     */
     public List<PriceItem> getPriceitems() {
         return priceitems;
     }
@@ -519,15 +529,23 @@ public class Booking implements Serializable {
         }
     }
 
-    private Set<PriceItem> getPriceitemsIncludingNested() {
-        final Set<PriceItem> allpriceitems = new HashSet<>();
-        allpriceitems.addAll(getPriceitems());
+    private Collection<PriceItem> getPriceitemsIncludingNested() {
+        final Map<UUID, PriceItem> savedPriceitems = new HashMap<>();
+        final Set<PriceItem> unsavedPriceitems = new HashSet<>();
+        getPriceitems().forEach(priceitem -> addPriceitem(priceitem, savedPriceitems, unsavedPriceitems));
         getTravelservices().forEach(srv -> {
-            allpriceitems.addAll(srv.getPriceitems());
-            srv.getTransportDocuments().forEach(doc -> {
-                allpriceitems.addAll(doc.getPriceitems());
-            });
+            srv.getPriceitems().forEach(priceitem -> addPriceitem(priceitem, savedPriceitems, unsavedPriceitems));
+            srv.getTransportDocuments().forEach(doc -> doc.getPriceitems().forEach(priceitem -> addPriceitem(priceitem, savedPriceitems, unsavedPriceitems)));
         });
-        return allpriceitems;
+        return Stream.concat(savedPriceitems.values().stream(), unsavedPriceitems.stream())
+            .collect(Collectors.toSet());
+    }
+
+    private void addPriceitem(final PriceItem priceitem, final Map<UUID, PriceItem> savedPriceitems, final Set<PriceItem> unsavedPriceitems) {
+        if (priceitem.getUuid() != null) {
+            savedPriceitems.put(priceitem.getUuid(), priceitem);
+        } else {
+            unsavedPriceitems.add(priceitem);
+        }
     }
 }
