@@ -27,6 +27,7 @@ public class Traveler implements Serializable {
     private String email;
     private String sourceId;
     private String sourceDisplayId;
+    private String sourceIdSystem;
     private LocalDate birthdate;
     private String passportCountry;
     private String passportNumber;
@@ -151,6 +152,20 @@ public class Traveler implements Serializable {
 
     public void setSourceDisplayId(final String sourceDisplayId) {
         this.sourceDisplayId = emptyToNull(sourceDisplayId);
+    }
+
+    /**
+     * Should be set if the system generating the {@link #getSourceId()} is not the same
+     * as {@link Booking#getSourceDomain()}
+     *
+     * @return
+     */
+    public String getSourceIdSystem() {
+        return sourceIdSystem;
+    }
+
+    public void setSourceIdSystem(final String sourceIdSystem) {
+        this.sourceIdSystem = sourceIdSystem;
     }
 
     public LocalDate getBirthdate() {
