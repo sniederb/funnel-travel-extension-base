@@ -40,7 +40,7 @@ public class GdsPassengerName {
 
     /**
      * GDS will use salutations MR, MRS, CHD and INF, while other booking sources might use
-     * Mr., Ms., Mrs., MISS, MS etc. This method returns a standard set of saluations:
+     * Mr., Ms., Mrs., MISS, MS etc. This method returns a standard set of salutations:
      * <ul>
      * <li>'MRS' for any female-type salutations</li>
      * <li>'MR' for any male-type salutation</li>

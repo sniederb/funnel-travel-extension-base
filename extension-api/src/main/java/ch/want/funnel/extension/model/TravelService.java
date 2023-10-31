@@ -26,6 +26,7 @@ public class TravelService implements Serializable {
     private UUID bookingUuid;
     private UUID providerUuid;
     private String providerSourcename;
+    private String providerName;
     private TravelServiceType travelServiceType;
     private BookingStatus bookingstatus;
     private String referenceNumber;
@@ -87,6 +88,19 @@ public class TravelService implements Serializable {
 
     public void setProviderSourcename(final String providerSourcename) {
         this.providerSourcename = providerSourcename;
+    }
+
+    /**
+     * The funnel.travel provider name, associated to {@link #getProviderUuid()}
+     *
+     * @return
+     */
+    public String getProviderName() {
+        return providerName;
+    }
+
+    public void setProviderName(final String providerName) {
+        this.providerName = providerName;
     }
 
     public TravelServiceType getTravelServiceType() {

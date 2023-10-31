@@ -39,6 +39,7 @@ public class Booking implements Serializable {
     private OffsetDateTime created;
     private OffsetDateTime lastModified;
     private String providerSourcename;
+    private String providerName;
     private String sourceDomain;
     private String supplier;
     private LocalDate departuredate;
@@ -54,7 +55,6 @@ public class Booking implements Serializable {
     private transient JsonNode extensionData;
     private Location destination;
     private String url;
-    private String providerName;
     private SalesChannel salesChannel;
     private String comment;
     private TripImportStrategy importStrategy = TripImportStrategy.FULL;
