@@ -3,7 +3,9 @@ package ch.want.funnel.extension;
 import java.util.Optional;
 
 import ch.want.funnel.extension.model.Booking;
+import ch.want.funnel.extension.tripdata.RawTripDataSource;
 import ch.want.funnel.extension.tripdata.TripDataProducer;
+import ch.want.funnel.extension.tripdata.TripRawDataConverter;
 
 /**
  * Result class for extensions to indicate processing state.
@@ -23,6 +25,7 @@ public class ExtensionResult {
     private final String message;
     private final int returnCode;
     private final Booking booking;
+    private RawTripDataSource updatedRawSource;
 
     public ExtensionResult(final String message) {
         this(null, 0, message);
@@ -54,6 +57,11 @@ public class ExtensionResult {
         this.message = message;
     }
 
+    /**
+     * For a webhook {@link TripRawDataConverter}, this message is returned as HTTP response.
+     *
+     * @return
+     */
     public String getMessage() {
         return message;
     }
@@ -64,5 +72,18 @@ public class ExtensionResult {
 
     public Optional<Booking> getBooking() {
         return Optional.ofNullable(booking);
+    }
+
+    /**
+     * Set this if funnel.travel should not persist the value passed into {@link TripRawDataConverter#convertRawSourceToTripData(byte[],
+     * Map<String, Object>, Locale)} as raw source, but rather the one set here.
+     */
+    public ExtensionResult setUpdatedRawSource(final RawTripDataSource updatedRawSource) {
+        this.updatedRawSource = updatedRawSource;
+        return this;
+    }
+
+    public Optional<RawTripDataSource> getUpdatedRawSource() {
+        return Optional.ofNullable(updatedRawSource);
     }
 }
