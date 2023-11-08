@@ -18,21 +18,40 @@ import com.fasterxml.jackson.databind.node.NullNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import ch.want.funnel.extension.model.Booking;
+import ch.want.funnel.extension.model.TravelService;
 import ch.want.funnel.extension.model.Trip;
 
 public class ExtensionDataAccess {
 
     public static final String REMARKS_NODE_NAME = "remarks";
     private final Booking booking;
+    private final TravelService service;
 
+    /**
+     * Create instance to access booking-level extension data
+     *
+     * @param booking
+     */
     public ExtensionDataAccess(final Booking booking) {
         this.booking = booking;
+        this.service = null;
+    }
+
+    /**
+     * Create instance to access booking-level extension data
+     *
+     * @param booking
+     */
+    public ExtensionDataAccess(final TravelService service) {
+        this.booking = null;
+        this.service = service;
     }
 
     /**
      * Search in all extension data for a 'remarks' array, and therein an entry with the provided {@code remarkPrefix}.
      * If found, the entry value string is returned.
      */
+    @Deprecated
     public static Optional<String> searchAllExtensionDataForRemark(final Trip trip, final String remarkPrefix) {
         return searchAllExtensionDataForRemark(trip, remarkPrefix, null);
     }
@@ -42,6 +61,7 @@ public class ExtensionDataAccess {
      * is provided, this method searches for entries with a {@code ,Pn} suffix. For valid "P"-associations see
      * {@link DataUtils#mapAssociationToNumbers(String)}
      */
+    @Deprecated
     public static Optional<String> searchAllExtensionDataForRemark(final Trip trip, final String remarkPrefix, final String paxTattoo) {
         final List<JsonNode> allExtensionData = trip.getBookings().stream()
             .filter(bk -> bk.getExtensionData() != null)
@@ -63,8 +83,8 @@ public class ExtensionDataAccess {
      * If {@code replaceLinePrefix} is not empty, this method will look for an existing remark line
      * {@code startsWith(replaceLinePrefix)}, and if found remove that line.
      */
-    public void addRemark(final String extenstionName, final String remark, final String replaceLinePrefix, final String paxTattoo) {
-        final ArrayNode remarksArrayNode = (ArrayNode) getOrCreateNode(extenstionName, REMARKS_NODE_NAME, true);
+    public void addRemark(final String extensionName, final String remark, final String replaceLinePrefix, final String paxTattoo) {
+        final ArrayNode remarksArrayNode = (ArrayNode) getOrCreateNode(extensionName, REMARKS_NODE_NAME, true);
         if (StringUtils.isNotBlank(replaceLinePrefix)) {
             for (final Iterator<JsonNode> iterator = remarksArrayNode.elements(); iterator.hasNext();) {
                 final JsonNode remarkNode = iterator.next();
@@ -76,12 +96,41 @@ public class ExtensionDataAccess {
         remarksArrayNode.add(remark);
     }
 
+    /**
+     * Return all remarks of the booking as well as all contained service remarks.
+     *
+     * @deprecated Use the more specific {@link #getAllBookingRemarks()} or {@link #getAllServiceRemarks()}
+     * @return
+     */
+    @Deprecated
     public List<String> getAllRemarks() {
-        if (booking.getExtensionData() == null) {
+        final List<String> result = new ArrayList<>();
+        if (booking != null) {
+            result.addAll(getAllBookingRemarks());
+            booking.getTravelservices().stream()
+                .map(TravelService::getExtensionData)
+                .map(this::getRemarks)
+                .forEach(result::addAll);
+        } else {
+            return getAllServiceRemarks();
+        }
+        return result;
+    }
+
+    public List<String> getAllBookingRemarks() {
+        return getRemarks(booking.getExtensionData());
+    }
+
+    public List<String> getAllServiceRemarks() {
+        return getRemarks(service.getExtensionData());
+    }
+
+    private List<String> getRemarks(final JsonNode extensionData) {
+        if (extensionData == null) {
             return Collections.emptyList();
         }
         final List<String> remarks = new ArrayList<>();
-        for (final Iterator<Map.Entry<String, JsonNode>> iterator = booking.getExtensionData().fields(); iterator.hasNext();) {
+        for (final Iterator<Map.Entry<String, JsonNode>> iterator = extensionData.fields(); iterator.hasNext();) {
             final Map.Entry<String, JsonNode> entry = iterator.next();
             final JsonNode remarksNode = entry.getValue().get(REMARKS_NODE_NAME);
             if (remarksNode != null && remarksNode.isArray()) {
@@ -127,7 +176,8 @@ public class ExtensionDataAccess {
     }
 
     public Optional<JsonNode> getNode(final String extensionClassname, final String key) {
-        return Optional.ofNullable(booking.getExtensionData())
+        final JsonNode extensionData = service == null ? booking.getExtensionData() : service.getExtensionData();
+        return Optional.ofNullable(extensionData)
             .map(json -> json.get(extensionClassname))
             .map(node -> node.get(key));
     }
@@ -164,10 +214,14 @@ public class ExtensionDataAccess {
     }
 
     private ObjectNode getOrCreate(final String extensionClassname) {
-        JsonNode extensionData = booking.getExtensionData();
+        JsonNode extensionData = service == null ? booking.getExtensionData() : service.getExtensionData();
         if ((extensionData == null) || !extensionData.isObject()) {
             extensionData = JsonNodeFactory.instance.objectNode();
-            booking.setExtensionData(extensionData);
+            if (service == null) {
+                booking.setExtensionData(extensionData);
+            } else {
+                service.setExtensionData(extensionData);
+            }
         }
         ObjectNode internalData = (ObjectNode) extensionData.get(extensionClassname);
         if ((internalData == null) || !internalData.isObject()) {

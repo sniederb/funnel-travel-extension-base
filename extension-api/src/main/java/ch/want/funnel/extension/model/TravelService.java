@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.JsonNode;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "uuid")
 @JsonIgnoreProperties(value = { "departuredateAsUtilDate", "returndateAsUtilDate" }, allowGetters = true)
@@ -34,6 +35,7 @@ public class TravelService implements Serializable {
     private LocalDate returndate;
     private String cancellationPolicy;
     private String comment;
+    private transient JsonNode extensionData;
     private Boolean nonBspFlight;
     private Boolean paidOnSite;
     private Location destination;
@@ -288,5 +290,13 @@ public class TravelService implements Serializable {
 
     public void setBookingPayments(final List<BookingPayment> bookingPayments) {
         this.bookingPayments = bookingPayments;
+    }
+
+    public JsonNode getExtensionData() {
+        return extensionData;
+    }
+
+    public void setExtensionData(final JsonNode extensionData) {
+        this.extensionData = extensionData;
     }
 }

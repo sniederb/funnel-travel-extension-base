@@ -50,6 +50,14 @@
                     "departuredate": "2019-10-17",
                     "returndate": "2019-10-19",
                     "cancellationPolicy": null,
+                    "extensionData": {
+		                "ch.want.funnel.extension.galileomir.GalileoMirExtension": {
+		                    "remarks": [
+		                        "SV-10",
+		                        "FF-1024"
+		                    ]
+		                }
+		            },
                     "transportDocuments": [
                         {
                             "uuid": "c1f7640a-84e1-49df-b9aa-695cc3727d32",

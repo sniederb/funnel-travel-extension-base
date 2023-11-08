@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.TimeZone;
 
 import org.apache.commons.lang3.StringUtils;
@@ -24,6 +23,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import ch.want.funnel.extension.model.Booking;
+import ch.want.funnel.extension.model.TravelService;
 import ch.want.funnel.extension.model.Trip;
 
 class ExtensionDataAccessTest {
@@ -39,49 +39,11 @@ class ExtensionDataAccessTest {
     }
 
     @Test
-    void searchAllExtensionDataForRemark() throws Exception {
-        final Trip trip = getTrip();
-        final Optional<String> result = ExtensionDataAccess.searchAllExtensionDataForRemark(trip, "VISA/N-");
-        assertTrue(result.isPresent());
-        assertEquals("VISA/N-DE", result.get());
-    }
-
-    @Test
-    void searchAllExtensionDataForRemark_withTattoo() throws Exception {
-        final Trip trip = getTrip();
-        final Optional<String> result = ExtensionDataAccess.searchAllExtensionDataForRemark(trip, "VISA/E-", "1");
-        assertTrue(result.isPresent());
-        assertEquals("VISA/E-FOO.BAR@NOWHERE.COM", result.get());
-    }
-
-    @Test
-    void searchAllExtensionDataForRemark_withNonNumericTattoo() throws Exception {
-        final Trip trip = getTrip();
-        final Optional<String> result = ExtensionDataAccess.searchAllExtensionDataForRemark(trip, "VISA/E-", "P1");
-        assertFalse(result.isPresent());
-    }
-
-    @Test
-    void searchAllExtensionDataForRemark_withNullTattooOnRestrictedEntry() throws Exception {
-        final Trip trip = getTrip();
-        final Optional<String> result = ExtensionDataAccess.searchAllExtensionDataForRemark(trip, "VISA/E-", null);
-        assertFalse(result.isPresent());
-    }
-
-    @Test
-    void searchAllExtensionDataForRemark_withNullTattooOnUnrestrictedEntry() throws Exception {
-        final Trip trip = getTrip();
-        final Optional<String> result = ExtensionDataAccess.searchAllExtensionDataForRemark(trip, "VISA/N-", null);
-        assertTrue(result.isPresent());
-        assertEquals("VISA/N-DE", result.get());
-    }
-
-    @Test
-    void getAllRemarks_bookingWithRemarksShouldReturnArray() throws Exception {
+    void getAllBookingRemarksWithRemarksShouldReturnArray() throws Exception {
         final Trip trip = getTrip();
         final ExtensionDataAccess testee = new ExtensionDataAccess(trip.getBookings().get(0));
         // act
-        final List<String> result = testee.getAllRemarks();
+        final List<String> result = testee.getAllBookingRemarks();
         assertNotNull(result);
         assertEquals(4, result.size());
     }
@@ -98,13 +60,32 @@ class ExtensionDataAccessTest {
      */
     @ParameterizedTest
     @CsvSource({ "FF-87912,,", "VISA/N-EN,VISA/N,", "VISA/E-FOOBAR@NOWHERE.COM,VISA/E,1" })
-    void addRemark(final String remark, final String replaceLinePrefix, final String paxTattoo) throws Exception {
+    void addRemarkOnBooking(final String remark, final String replaceLinePrefix, final String paxTattoo) throws Exception {
         final Trip trip = getTrip();
         final ExtensionDataAccess testee = new ExtensionDataAccess(trip.getBookings().get(0));
         // act
         testee.addRemark("ch.want.funnel.extension.galileomir.GalileoMirExtension", remark, replaceLinePrefix, paxTattoo);
         // assert
-        final List<String> remarks = testee.getAllRemarks();
+        final List<String> remarks = testee.getAllBookingRemarks();
+        MatcherAssert.assertThat(remarks, Matchers.hasItem(Matchers.equalTo(remark)));
+        if (StringUtils.isNotBlank(replaceLinePrefix)) {
+            final long matchingRemarks = remarks.stream()
+                .filter(s -> s.startsWith(replaceLinePrefix))
+                .count();
+            Assertions.assertEquals(1, matchingRemarks);
+        }
+    }
+
+    @ParameterizedTest
+    @CsvSource({ "FF-87912,,", "VISA/N-EN,VISA/N,", "VISA/E-FOOBAR@NOWHERE.COM,VISA/E,1" })
+    void addRemarkOnService(final String remark, final String replaceLinePrefix, final String paxTattoo) throws Exception {
+        final Trip trip = getTrip();
+        final TravelService service = trip.getBookings().get(0).getTravelservices().get(0);
+        final ExtensionDataAccess testee = new ExtensionDataAccess(service);
+        // act
+        testee.addRemark("ch.want.funnel.extension.galileomir.GalileoMirExtension", remark, replaceLinePrefix, paxTattoo);
+        // assert
+        final List<String> remarks = testee.getAllServiceRemarks();
         MatcherAssert.assertThat(remarks, Matchers.hasItem(Matchers.equalTo(remark)));
         if (StringUtils.isNotBlank(replaceLinePrefix)) {
             final long matchingRemarks = remarks.stream()
