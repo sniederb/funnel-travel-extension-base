@@ -4,23 +4,17 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.want.funnel.extension.model.BookingStatus;
 
 /**
- * HK = Holding Confirmed
- * HL = Holding Waitlist
- * BK = Passive Sold Segment, or Booked outside
- * BL = Booked outside and Waitlisted
- * BN = Booked outside and Requested
- * AK = Confirmed outside
- * AL = Waitlist outside
- * AN = Requested outside
- * GK = Passive Sold Segment
- * NO = Open Segment
- * PB = Holding Waitlist
+ * Map standard booking status codes to funnel.travel {@link BookingStatus}.
  */
-public class BookingStatusMapper {
+public final class BookingStatusMapper {
 
+    private static final Logger LOG = LoggerFactory.getLogger(BookingStatusMapper.class);
     /**
      * You use the GK status code to enter a confirmed ghost segment or GL for a waitlisted ghost segment.
      */
@@ -36,27 +30,39 @@ public class BookingStatusMapper {
     }
 
     /**
-     * {@code gdsStatus} can be 'HK' but also 'OK03'
+     * {@code gdsStatus} can be 'HK' but also 'OK03'.
+     * See e.g. <a href='https://support.travelport.com/webhelp/uapi/Content/Air/Shared_Air_Topics/PNR_Status_Codes.htm'>Galileo PNR status
+     * codes</a>,
+     * of which only the commonly used codes are mapped here.
      */
     public static BookingStatus getBookingStatus(final String gdsStatus) {
         if (gdsStatus != null) {
             final String twoLetterStatus = gdsStatus.length() > 2 ? gdsStatus.substring(0, 2) : gdsStatus;
             switch (twoLetterStatus) {
-            case "OK":
-            case "HK":
-            case "AK":
+            case "OK": // ticketed and confirmed
+            case "HK": // Holds confirmed, seat confirmed on a flight
+            case "AK": // passive confirmed
+            case "TK": // Schedule Change
                 return BookingStatus.CONFIRMED;
             case "OP":
-            case "HL":
-            case "PB":
+            case "HL": // Holds waitlist
+            case "TL": // Schedule change on waitlist
+            case "PA": // Priority waitlist
+            case "PB": // Priority waitlist
+            case "PC": // Priority waitlist
+            case "PD": // Priority waitlist
+            case "UU": // Unable to confirm. Waitlist requested
                 return BookingStatus.OPTION;
-            case "RQ":
-            case "UC":
+            case "RQ": // On request
+            case "HQ": // Space prev. request
+            case "UC": // Unable to confirm or waitlist
+            case "PN": // Pending need
                 return BookingStatus.PROCESSING;
             case "XX":
-            case "UN":
+            case "UN": // Flight cancelled by airline
                 return BookingStatus.CANCELED;
             default:
+                LOG.error("Got unknown code {}, mapping to UNDEFINED", twoLetterStatus);
                 return BookingStatus.UNDEFINED;
             }
         }
