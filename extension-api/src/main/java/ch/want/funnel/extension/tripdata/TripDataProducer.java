@@ -16,6 +16,8 @@ import ch.want.funnel.extension.FunnelExtension;
 public interface TripDataProducer extends TripRawDataConverter {
 
     /**
+     * Produce a list of raw sources. These will subsequently be fed into {@link #convertRawSourceToTripData(byte[], Map, Locale)}.
+     *
      * @param settings
      *            A Map holding the keys defined in {@link FunnelExtension#getSettings()},
      *            and associated values with possible inheritance applied

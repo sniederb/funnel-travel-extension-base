@@ -44,6 +44,7 @@ public final class BookingStatusMapper {
             case "AK": // passive confirmed
             case "TK": // Schedule Change
             case "GK": // confirmed ghost segment
+            case "YK": // Hold confirmed Airline space
                 return BookingStatus.CONFIRMED;
             case "OP":
             case "HL": // Holds waitlist

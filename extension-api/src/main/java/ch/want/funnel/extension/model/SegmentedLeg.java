@@ -76,6 +76,7 @@ public class SegmentedLeg implements Serializable {
      *
      * @return
      */
+    @JsonIgnore
     public Optional<Location> getDepartingDestination() {
         return Optional.ofNullable(getFirstSegment())
             .map(TransportSegment::getDepartingFromLocation);
@@ -86,6 +87,7 @@ public class SegmentedLeg implements Serializable {
      *
      * @return
      */
+    @JsonIgnore
     public Optional<Location> getArrivalDestination() {
         return Optional.ofNullable(getLastSegment())
             .map(TransportSegment::getArrivingAtLocation);
@@ -97,6 +99,7 @@ public class SegmentedLeg implements Serializable {
      *
      * @return
      */
+    @JsonIgnore
     public Optional<Location> getMidpointDestination() {
         if (segments.isEmpty()) {
             return Optional.empty();

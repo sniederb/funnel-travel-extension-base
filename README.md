@@ -305,6 +305,7 @@ The extension will run in the JVM context of the funnel.travel, and as such will
 * org.apache.httpcomponents (httpclient), version 4.5.14
 * org.apache.httpcomponents (httpcore), version 4.4.16
 * org.apache.httpcomponents (httpmime), version 4.5.14
+* org.apache.cxf, version 3.3.3
 * com.fasterxml.jackson.core (jackson-core), version 2.13.5
 * com.fasterxml.jackson.core (jackson-dataformat-csv), version 2.13.5
 * com.fasterxml.jackson.core (jackson-dataformat-xml), version 2.13.5
