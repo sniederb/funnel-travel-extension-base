@@ -155,6 +155,7 @@ public class TravelService implements Serializable {
      *
      * @return
      */
+    @JsonIgnore
     public Date getDeparturedateAsUtilDate() {
         return departuredate == null ? null : java.util.Date.from(departuredate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
@@ -182,6 +183,7 @@ public class TravelService implements Serializable {
      *
      * @return
      */
+    @JsonIgnore
     public Date getReturndateAsUtilDate() {
         return returndate == null ? null : java.util.Date.from(returndate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }

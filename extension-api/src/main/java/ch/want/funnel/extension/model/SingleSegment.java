@@ -196,14 +196,17 @@ public class SingleSegment implements Serializable {
         return serviceTypeCode;
     }
 
+    @JsonIgnore
     public boolean isRefund() {
         return SERVICE_TYPECODE_REFUND.equalsIgnoreCase(serviceTypeCode);
     }
 
+    @JsonIgnore
     public boolean isInsurance() {
         return SERVICE_TYPECODE_INSURANCE.equalsIgnoreCase(serviceTypeCode);
     }
 
+    @JsonIgnore
     public boolean isTransfer() {
         return SERVICE_TYPECODE_TRANSFER.equalsIgnoreCase(serviceTypeCode);
     }
