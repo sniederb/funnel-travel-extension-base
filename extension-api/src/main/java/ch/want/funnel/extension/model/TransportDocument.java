@@ -89,6 +89,11 @@ public class TransportDocument implements Serializable {
         this.issuingAirline = issuingAirline;
     }
 
+    /**
+     * Document / ticket number. For flight tickets, try to include the airline code if possible.
+     *
+     * @return
+     */
     public String getReferenceNumber() {
         return referenceNumber;
     }
@@ -277,5 +282,13 @@ public class TransportDocument implements Serializable {
     @JsonIgnore
     public boolean isRevalidated() {
         return description != null && description.startsWith(REVALIDATION);
+    }
+
+    /**
+     * Beware that voided tickets might still show the original fare in their {@link #getPriceitems()}.
+     */
+    @JsonIgnore
+    public boolean isVoided() {
+        return description != null && description.startsWith(VOID);
     }
 }

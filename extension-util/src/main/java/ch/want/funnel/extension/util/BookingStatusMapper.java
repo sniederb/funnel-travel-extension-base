@@ -45,6 +45,7 @@ public final class BookingStatusMapper {
             case "TK": // Schedule Change
             case "GK": // confirmed ghost segment
             case "YK": // Hold confirmed Airline space
+            case "PK": // Discounted passenger.
                 return BookingStatus.CONFIRMED;
             case "OP":
             case "HL": // Holds waitlist
@@ -63,6 +64,7 @@ public final class BookingStatusMapper {
                 return BookingStatus.PROCESSING;
             case "XX":
             case "UN": // Flight cancelled by airline
+            case "NO": // No action taken / Not confirmed
                 return BookingStatus.CANCELED;
             default:
                 LOG.error("Got unknown code {}, mapping to UNDEFINED", twoLetterStatus);

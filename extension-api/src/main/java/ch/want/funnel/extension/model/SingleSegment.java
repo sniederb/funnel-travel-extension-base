@@ -190,7 +190,8 @@ public class SingleSegment implements Serializable {
     /**
      * A code describing the service type, such as a room code or a car code.
      * Provider should make sure to send the more generally applicable code. If e.g. there
-     * is a RoomTypeCode (A1D) and a RoomCode (A1DBX8), the former should be used.
+     * is a RoomTypeCode (A1D) and a RoomCode (A1DBX8), the former should be used (and 'BX8'
+     * set as {@link #getRateCode()}).
      */
     public String getServiceTypeCode() {
         return serviceTypeCode;
@@ -268,6 +269,8 @@ public class SingleSegment implements Serializable {
 
     /**
      * A code describing the rate, e.g. a room rate code. This can be a corporate rate or a promo code.
+     * Room rate codes are usually 3-4 letters. Sometimes the room type code is added, but here that should
+     * be stored separately in {@link #getServiceTypeCode()}.
      */
     public String getRateCode() {
         return rateCode;
