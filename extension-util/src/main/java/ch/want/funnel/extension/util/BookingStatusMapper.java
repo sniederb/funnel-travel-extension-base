@@ -62,7 +62,8 @@ public final class BookingStatusMapper {
             case "UC": // Unable to confirm or waitlist
             case "PN": // Pending need
                 return BookingStatus.PROCESSING;
-            case "XX":
+            case "XX": // Cancel segment
+            case "HX": // Cancel confirm hold
             case "UN": // Flight cancelled by airline
             case "NO": // No action taken / Not confirmed
                 return BookingStatus.CANCELED;
