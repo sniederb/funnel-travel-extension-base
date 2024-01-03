@@ -177,15 +177,15 @@ public class Traveler implements Serializable {
     }
 
     /**
-     * Get the ISO-3166-1 alpha-2 country code
+     * Get the ISO-3166-1 alpha-2 or alpha-3 country code
      */
     public String getPassportCountry() {
         return passportCountry;
     }
 
     /**
-     * Set the ISO-3166-1 alpha-2 country code. This method throws an {@link IllegalArgumentException}
-     * if {@code passportCountry} is not-null and length is not equal 2.
+     * Set the ISO-3166-1 alpha-2 or alpha-3 country code. This method throws an {@link IllegalArgumentException}
+     * if {@code passportCountry} is not-null and length is not equal 2 or 3.
      */
     public void setPassportCountry(final String passportCountry) {
         final String strippedPassportCountry = emptyToNull(passportCountry);
