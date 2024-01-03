@@ -20,8 +20,15 @@ class TravelerTest {
     }
 
     @Test
-    void passportCountrynonIso() {
+    void passportCountryNonIso() {
         final Traveler pax = new Traveler();
         Assertions.assertThrows(IllegalArgumentException.class, () -> pax.setPassportCountry("Switzerland"));
+    }
+
+    @Test
+    void passportCountryEmpty() {
+        final Traveler pax = new Traveler();
+        pax.setPassportCountry("");
+        Assertions.assertNull(pax.getPassportCountry());
     }
 }
