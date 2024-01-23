@@ -17,8 +17,8 @@ public enum TripImportStrategy {
      */
     FULL,
     /**
-     * Same as {@link #FULL}, except that no price items are deleted. This is an approach commonly used in business travel,
-     * where value document are issued and the producer just adds those to the trip.
+     * Same as {@link #FULL}, except that no price items are updated or deleted. This is an approach commonly used in
+     * business travel, where value document are issued and the producer just adds those to the trip.
      */
     FULL_PRICE_ADDITIVE,
     /**

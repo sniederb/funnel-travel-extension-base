@@ -42,6 +42,7 @@ public final class BookingStatusMapper {
             case "OK": // ticketed and confirmed
             case "HK": // Holds confirmed, seat confirmed on a flight
             case "AK": // passive confirmed
+            case "KK": // Carrier confirmed
             case "TK": // Schedule Change
             case "GK": // confirmed ghost segment
             case "YK": // Hold confirmed Airline space
