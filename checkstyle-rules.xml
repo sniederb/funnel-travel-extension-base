@@ -157,7 +157,7 @@ Checkstyle configuration that checks the Google coding conventions from Google J
     <module name="VariableDeclarationUsageDistance"/>
     <!-- Should match Preferences - Java - Code Style - Organize Imports -->
     <module name="ImportOrder">
-      <property name="groups" value="/^java\./,javax,org,com"/>
+      <property name="groups" value="/^java\./,javax,jakarta,org,com"/>
       <property name="ordered" value="true"/>
       <property name="separated" value="true"/>
       <!-- Where should static imports go -->
