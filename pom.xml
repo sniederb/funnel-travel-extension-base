@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ch.want.funnel</groupId>
 	<artifactId>extension-base</artifactId>
@@ -12,11 +14,13 @@
 		<url>http://www.want.ch</url>
 	</organization>
 	<scm>
-		<connection>scm:git:git@github.com:sniederb/funnel-travel-extension-base.git</connection>
+		<connection>
+			scm:git:git@github.com:sniederb/funnel-travel-extension-base.git</connection>
 		<url>scm:git:git@github.com:sniederb/funnel-travel-extension-base.git</url>
-		<developerConnection>scm:git:git@github.com:sniederb/funnel-travel-extension-base.git</developerConnection>
-      <tag>extension-base-1.0.0</tag>
-    </scm>
+		<developerConnection>
+			scm:git:git@github.com:sniederb/funnel-travel-extension-base.git</developerConnection>
+		<tag>extension-base-3.0.0</tag>
+	</scm>
 	<issueManagement>
 		<system>JIRA</system>
 		<url>http://www.want.ch/jira/</url>
@@ -30,52 +34,83 @@
 	<build>
 		<finalName>funnel-extension-base-${project.version}</finalName>
 		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.6.3</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration> 
+							<failOnError>false</failOnError>
+        					<quiet>true</quiet>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.12.1</version>
+				<configuration>
+					<parameters>true</parameters>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
-				<version>2.5.2</version>
-				<!-- See https://www.want.ch/jira/browse/FUN-126 reg. installAtEnd -->
+				<version>3.1.1</version>
+				<!-- See https://www.want.ch/jira/browse/FUN-126 reg.
+				installAtEnd -->
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.8</version>
-				<!-- See https://www.want.ch/jira/browse/FUN-126 reg. deployAtEnd -->
+				<version>3.1.1</version>
+				<!-- See https://www.want.ch/jira/browse/FUN-126 reg.
+				deployAtEnd -->
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.2</version>
+				<version>3.2.5</version>
 				<configuration>
-			        <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
-			    </configuration>
+					<argLine>
+						-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+				</configuration>
 			</plugin>
 			<plugin>
-			    <artifactId>maven-checkstyle-plugin</artifactId>
-			    <version>${maven-checkstyle-plugin.version}</version>
-			    <dependencies>
-	                <dependency>
-	                    <groupId>com.puppycrawl.tools</groupId>
-	                    <artifactId>checkstyle</artifactId>
-	                    <version>${checkstyle.latest.version}</version>
-	                </dependency>
-	            </dependencies>
-			    <configuration>
-			      <configLocation>./checkstyle-rules.xml</configLocation>
-			      <suppressionsLocation>./checkstyle-suppressions.xml</suppressionsLocation>
-			    </configuration>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${maven-checkstyle-plugin.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>com.puppycrawl.tools</groupId>
+						<artifactId>checkstyle</artifactId>
+						<version>${checkstyle.latest.version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<configLocation>./checkstyle-rules.xml</configLocation>
+					<suppressionsLocation>./checkstyle-suppressions.xml</suppressionsLocation>
+				</configuration>
 			</plugin>
 			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
-                <configuration>
-        			<arguments>-DskipTests</arguments>
-    			</configuration>
-            </plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<arguments>-DskipTests</arguments>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-	
+
 	<modules>
 		<module>extension-api</module>
 		<module>extension-util</module>
@@ -91,20 +126,21 @@
 	</developers>
 
 	<properties>
-	    <maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<!-- Encoding for .java files -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Encoding for .xml files generated from unit tests -->
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		
+
 		<junit.version>5.9.1</junit.version>
 		<!-- These two version need to be roughly in sync, otherwise you'll get -->
-		<!-- An API incompatibility was encountered while executing org.apache.maven.plugins:maven-checkstyle-plugin -->
-		<checkstyle.latest.version>[8.18,8.40)</checkstyle.latest.version>
-		<maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
+		<!-- An API incompatibility was encountered while executing
+		org.apache.maven.plugins:maven-checkstyle-plugin -->
+		<checkstyle.latest.version>[9.3)</checkstyle.latest.version>
+		<maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>funnel-extension-api</id>
@@ -114,11 +150,13 @@
 	<distributionManagement>
 		<snapshotRepository>
 			<id>funnel-extension-api-snapshots</id>
-			<url>https://internal.want.ch/nexus/repository/funnel-extension-api-snapshots/</url>
+			<url>
+				https://internal.want.ch/nexus/repository/funnel-extension-api-snapshots/</url>
 		</snapshotRepository>
 		<repository>
 			<id>funnel-extension-api-releases</id>
-			<url>https://internal.want.ch/nexus/repository/funnel-extension-api-releases/</url>
+			<url>
+				https://internal.want.ch/nexus/repository/funnel-extension-api-releases/</url>
 		</repository>
 	</distributionManagement>
 </project>
