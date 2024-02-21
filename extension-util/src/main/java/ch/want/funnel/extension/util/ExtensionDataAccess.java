@@ -66,7 +66,7 @@ public class ExtensionDataAccess {
         final List<JsonNode> allExtensionData = trip.getBookings().stream()
             .filter(bk -> bk.getExtensionData() != null)
             .map(Booking::getExtensionData)
-            .collect(Collectors.toList());
+            .toList();
         for (final JsonNode extensionData : allExtensionData) {
             for (final Iterator<String> iterator = extensionData.fieldNames(); iterator.hasNext();) {
                 final String extensionClassname = iterator.next();

@@ -24,7 +24,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import ch.want.funnel.extension.model.Location;
 import ch.want.funnel.extension.model.Trip;
 
-public class DataUtilsTest {
+class DataUtilsTest {
 
     private final ObjectMapper objectMapper;
 
@@ -37,19 +37,19 @@ public class DataUtilsTest {
     }
 
     @Test
-    public void getCountry() throws Exception {
+    void getCountry() throws Exception {
         final String country = DataUtils.getCountry("BCN/ES");
         assertEquals("ES", country);
     }
 
     @Test
-    public void getDestination() throws Exception {
+    void getDestination() throws Exception {
         final String destination = DataUtils.getDestination("BCN/ES");
         assertEquals("BCN", destination);
     }
 
     @Test
-    public void getDepartingAirport() throws Exception {
+    void getDepartingAirport() throws Exception {
         final Trip trip = getTrip();
         final Optional<Location> origin = DataUtils.getDepartingAirport(trip);
         assertTrue(origin.isPresent());
@@ -57,7 +57,7 @@ public class DataUtilsTest {
     }
 
     @TestFactory
-    public List<DynamicTest> mapAssociationToNumbers() throws Exception {
+    List<DynamicTest> mapAssociationToNumbers() throws Exception {
         return Arrays.stream(new AssociationTestData[] { //
             new AssociationTestData("SimpleSingle", "1", new Integer[] { 1 }), //
             new AssociationTestData("ComprehensiveList", "1,2", new Integer[] { 1, 2 }), //
@@ -68,7 +68,7 @@ public class DataUtilsTest {
                 final Collection<Integer> associations = DataUtils.mapAssociationToNumbers(testdata.input);
                 assertThat(associations, containsInAnyOrder(testdata.expected));
             }))
-            .collect(Collectors.toList());
+            .toList();
     }
 
     private Trip getTrip() throws IOException {

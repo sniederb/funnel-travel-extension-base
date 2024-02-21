@@ -14,7 +14,6 @@ import ch.want.funnel.extension.model.TravelService;
 
 class TransportSegmentUtilsTest {
 
-    // static
     @Test
     void getAssociatedSegments() {
         final TravelService service = new TravelService();
@@ -38,6 +37,6 @@ class TransportSegmentUtilsTest {
     private List<String> association(final Boolean... values) {
         return Arrays.stream(values)
             .map(b -> b.toString())
-            .collect(Collectors.toList());
+            .toList();
     }
 }

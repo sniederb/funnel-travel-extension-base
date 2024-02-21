@@ -17,7 +17,7 @@ public class TransportSegmentUtils {
     public static List<TransportSegment> getAssociatedSegments(final TravelService flightService, final TransportDocument... documents) {
         final List<TransportSegment> travelSegments = flightService.getSegmentedLegs().stream()
             .flatMap(leg -> leg.getSegments().stream())
-            .collect(Collectors.toList());
+            .toList();
         final List<Boolean> segmentAssociations = new ArrayList<>();
         if (documents != null) {
             mergeSegmentAssociations(segmentAssociations, documents);

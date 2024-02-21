@@ -294,22 +294,23 @@ The extension will run in the JVM context of the funnel.travel, and as such will
 
 * slf4j-api, version1.7.36
     * Use jcl-over-slf4j for an implementation in tests
-* ch.qos.logback, version 1.2.12
-* com.google.code.gson, version 2.9.1
-* com.google.guava (guava), version 19.0
-* commons-codec, version 1.15
+* ch.qos.logback, version 1.4.14
+* com.google.code.gson, version 2.10.1
+* com.google.guava (guava), version 33.0.0-jre
+* commons-codec, version 1.16.0
 * commons-io, version 2.6
 * commons-net, version 3.6
 * com.jcraft, jsch, version 0.1.55
-* javax.mail, version 1.6.7
-* org.apache.httpcomponents (httpclient), version 4.5.14
-* org.apache.httpcomponents (httpcore), version 4.4.16
-* org.apache.httpcomponents (httpmime), version 4.5.14
+* jakarta.mail, version 2.0.2
+* jakarta.xml, 4.0.1
+* jaxb runtime 4.0.4
+* org.apache.httpcomponents.client5 (httpclient5), version 5.2.3
+* org.apache.httpcomponents.core5 (httpcore5-reactive), version 5.2.4
 * org.apache.cxf, version 3.3.3
-* com.fasterxml.jackson.core (jackson-core), version 2.13.5
-* com.fasterxml.jackson.core (jackson-dataformat-csv), version 2.13.5
-* com.fasterxml.jackson.core (jackson-dataformat-xml), version 2.13.5
-* com.fasterxml.jackson.core (jackson-dataformat-yaml), version 2.13.5
+* com.fasterxml.jackson.core (jackson-core), version 2.15.3
+* com.fasterxml.jackson.core (jackson-dataformat-csv), version 2.15.3
+* com.fasterxml.jackson.core (jackson-dataformat-xml), version 2.15.3
+* com.fasterxml.jackson.core (jackson-dataformat-yaml), version 2.15.3
 * org.freemarker, version 2.3.32
 * ch.want.funnel (extension-util), newest 2.x version
 
