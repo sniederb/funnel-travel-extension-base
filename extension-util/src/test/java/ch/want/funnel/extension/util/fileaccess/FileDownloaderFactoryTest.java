@@ -12,6 +12,6 @@ class FileDownloaderFactoryTest {
     @CsvSource({ "ftp", "ftps", "sftp" })
     void getDownloader(final String prototol) {
         final FileDownloader result = FileDownloaderFactory.getDownloader(URI.create(prototol + "://localhost/myfolder"), "foobar", "secret");
-        Assertions.assertNotNull("result");
+        Assertions.assertNotNull(result);
     }
 }

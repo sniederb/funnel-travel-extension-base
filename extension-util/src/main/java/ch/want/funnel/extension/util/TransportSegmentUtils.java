@@ -3,7 +3,6 @@ package ch.want.funnel.extension.util;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import ch.want.funnel.extension.model.TransportDocument;
 import ch.want.funnel.extension.model.TransportSegment;

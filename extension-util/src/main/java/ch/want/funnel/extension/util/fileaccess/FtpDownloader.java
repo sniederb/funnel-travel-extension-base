@@ -74,6 +74,7 @@ class FtpDownloader implements FileDownloader {
         return new FTPClient();
     }
 
+    @SuppressWarnings("unused")
     protected void onClientLoggedIn(final FTPClient client) {
         // no-op
     }

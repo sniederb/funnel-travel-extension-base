@@ -39,34 +39,34 @@ public final class BookingStatusMapper {
         if (gdsStatus != null) {
             final String twoLetterStatus = gdsStatus.length() > 2 ? gdsStatus.substring(0, 2) : gdsStatus;
             switch (twoLetterStatus) {
-            case "OK": // ticketed and confirmed
-            case "HK": // Holds confirmed, seat confirmed on a flight
-            case "AK": // passive confirmed
-            case "KK": // Carrier confirmed
-            case "TK": // Schedule Change
-            case "GK": // confirmed ghost segment
-            case "YK": // Hold confirmed Airline space
-            case "PK": // Discounted passenger.
+            case "OK", // ticketed and confirmed
+                    "HK", // Holds confirmed, seat confirmed on a flight
+                    "AK", // passive confirmed
+                    "KK", // Carrier confirmed
+                    "TK", // Schedule Change
+                    "GK", // confirmed ghost segment
+                    "YK", // Hold confirmed Airline space
+                    "PK": // Discounted passenger.
                 return BookingStatus.CONFIRMED;
-            case "OP":
-            case "HL": // Holds waitlist
-            case "GL": // waitlisted ghost segmentl
-            case "TL": // Schedule change on waitlist
-            case "PA": // Priority waitlist
-            case "PB": // Priority waitlist
-            case "PC": // Priority waitlist
-            case "PD": // Priority waitlist
-            case "UU": // Unable to confirm. Waitlist requested
+            case "OP", "HL", // Holds waitlist
+                    "GL", // waitlisted ghost segmentl
+                    "TL", // Schedule change on waitlist
+                    "PA", // Priority waitlist
+                    "PB", // Priority waitlist
+                    "PC", // Priority waitlist
+                    "PD", // Priority waitlist
+                    "UU": // Unable to confirm. Waitlist requested
                 return BookingStatus.OPTION;
-            case "RQ": // On request
-            case "HQ": // Space prev. request
-            case "UC": // Unable to confirm or waitlist
-            case "PN": // Pending need
+            case "RQ", // On request
+                    "HQ", // Space prev. request
+                    "UC", // Unable to confirm or waitlist
+                    "PN": // Pending need
                 return BookingStatus.PROCESSING;
-            case "XX": // Cancel segment
-            case "HX": // Cancel confirm hold
-            case "UN": // Flight cancelled by airline
-            case "NO": // No action taken / Not confirmed
+            case "XX", // Cancel segment
+                    "HX", // Cancel confirm hold
+                    "UN", // Flight cancelled by airline
+                    "NO", // No action taken / Not confirmed
+                    "US": // Unable to sell
                 return BookingStatus.CANCELED;
             default:
                 LOG.error("Got unknown code {}, mapping to UNDEFINED", twoLetterStatus);
