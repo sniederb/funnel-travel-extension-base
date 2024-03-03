@@ -46,7 +46,8 @@ public final class BookingStatusMapper {
                     "TK", // Schedule Change
                     "GK", // confirmed ghost segment
                     "YK", // Hold confirmed Airline space
-                    "PK": // Discounted passenger.
+                    "PK", // Discounted passenger.
+                    "RR": // Passenger reconfirm (unusual, but still sometimes done on international segments)
                 return BookingStatus.CONFIRMED;
             case "OP", "HL", // Holds waitlist
                     "GL", // waitlisted ghost segmentl
