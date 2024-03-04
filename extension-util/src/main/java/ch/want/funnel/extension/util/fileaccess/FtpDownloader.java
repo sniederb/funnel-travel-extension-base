@@ -45,8 +45,8 @@ class FtpDownloader implements FileDownloader {
                 throw new IOException("FTP: Failed to login: " + client.getReplyString());
             }
             onClientLoggedIn(client);
-            if (resourceIdentifier.getPath() != null) {
-                client.changeWorkingDirectory(resourceIdentifier.getPath());
+            if ((resourceIdentifier.getPath() != null) && !client.changeWorkingDirectory(resourceIdentifier.getPath())) {
+                throw new FileAccessWarnException("Failed to change to directory " + resourceIdentifier.getPath());
             }
             client.setFileType(FTP.BINARY_FILE_TYPE);
             final FTPFile[] remoteFiles = client.listFiles(".");
