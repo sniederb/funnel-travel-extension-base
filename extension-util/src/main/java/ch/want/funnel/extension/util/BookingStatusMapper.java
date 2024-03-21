@@ -40,7 +40,7 @@ public final class BookingStatusMapper {
             final String twoLetterStatus = gdsStatus.length() > 2 ? gdsStatus.substring(0, 2) : gdsStatus;
             switch (twoLetterStatus) {
             case "OK", // ticketed and confirmed
-                    "HK", // Holds confirmed, seat confirmed on a flight
+                    "HK", // Holds confirmed, seat confirmed on a flight, but not ticketed
                     "AK", // passive confirmed
                     "KK", // Carrier confirmed
                     "TK", // Schedule Change
@@ -52,6 +52,7 @@ public final class BookingStatusMapper {
             case "OP", "HL", // Holds waitlist
                     "GL", // waitlisted ghost segmentl
                     "TL", // Schedule change on waitlist
+                    "KL", // Waitlist confirmed
                     "PA", // Priority waitlist
                     "PB", // Priority waitlist
                     "PC", // Priority waitlist
@@ -60,6 +61,8 @@ public final class BookingStatusMapper {
                 return BookingStatus.OPTION;
             case "RQ", // On request
                     "HQ", // Space prev. request
+                    "HN", // Holds need/confirmed
+                    "NN", // Requesting segment
                     "UC", // Unable to confirm or waitlist
                     "PN": // Pending need
                 return BookingStatus.PROCESSING;
