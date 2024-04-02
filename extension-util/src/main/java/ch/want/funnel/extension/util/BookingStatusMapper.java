@@ -62,6 +62,7 @@ public final class BookingStatusMapper {
             case "RQ", // On request
                     "HQ", // Space prev. request
                     "HN", // Holds need/confirmed
+                    "IS", // If not holding sell
                     "NN", // Requesting segment
                     "UC", // Unable to confirm or waitlist
                     "PN": // Pending need
@@ -70,6 +71,7 @@ public final class BookingStatusMapper {
                     "HX", // Cancel confirm hold
                     "UN", // Flight cancelled by airline
                     "NO", // No action taken / Not confirmed
+                    "OX", // Cancel only if requested segment is available
                     "US": // Unable to sell
                 return BookingStatus.CANCELED;
             default:
