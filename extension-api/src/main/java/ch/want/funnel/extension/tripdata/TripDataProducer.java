@@ -36,6 +36,9 @@ public interface TripDataProducer extends TripRawDataConverter {
      *            The sourceDomain of the 'other' producer
      * @param settingValues
      *            Current extension settings
+     * @return True if modify is allowed, false if booking should create a separate trip.
+     * @throws DiscardPayloadException
+     *             if payload should be processed neither as modify nor as new trip
      */
     default boolean isModifyAllowedFrom(final String crossOriginSourceDomain, final Map<String, Object> settingValues) {
         return true;
