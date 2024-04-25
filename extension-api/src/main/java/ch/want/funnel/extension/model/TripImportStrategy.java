@@ -25,8 +25,14 @@ public enum TripImportStrategy {
      */
     FULL,
     /**
+     * <p>
      * Same as {@link #FULL}, except that no price items are updated or deleted. This is an approach commonly used in
      * business travel, where value document are issued and the producer just adds those to the trip.
+     * </p>
+     * <p>
+     * A typical use-case are ticket refunds or void, where the producer sends all flight (segment) data, but only additional, new
+     * price items.
+     * </p>
      */
     FULL_PRICE_ADDITIVE,
     /**
@@ -42,10 +48,10 @@ public enum TripImportStrategy {
     /**
      * <p>
      * With this strategy, data not present in the form object will remain, ie. not be deleted.
-     * This is useful for sources which send partial data.
+     * This is useful for sources which send partial data. Data with matching keys will still be modified.
      * </p>
      * <p>
-     * A typical use-case are ticket refunds or void, where often the segment data is not anymore included.
+     * A typical use-case are ticket refunds or void, where often the segment data is not included anymore.
      * </p>
      */
     ADD_ONLY
