@@ -105,6 +105,20 @@
 					<arguments>-DskipTests</arguments>
 				</configuration>
 			</plugin>
+			<!-- username / password are in settings.xml -->
+			<plugin>
+          		<groupId>org.sonatype.central</groupId>
+          		<artifactId>central-publishing-maven-plugin</artifactId>
+          		<version>0.4.0</version>
+          		<extensions>true</extensions>
+          		<configuration>
+            		<publishingServerId>central</publishingServerId>
+            		<tokenAuth>true</tokenAuth>
+            		<!--
+            		<autoPublish>true</autoPublish>
+            		-->
+          		</configuration>
+        	</plugin>
 		</plugins>
 	</build>
 
@@ -143,16 +157,5 @@
 			<url>https://internal.want.ch/nexus/repository/funnel-extension-api/</url>
 		</repository>
 	</repositories>
-	<distributionManagement>
-		<snapshotRepository>
-			<id>funnel-extension-api-snapshots</id>
-			<url>
-				https://internal.want.ch/nexus/repository/funnel-extension-api-snapshots/</url>
-		</snapshotRepository>
-		<repository>
-			<id>funnel-extension-api-releases</id>
-			<url>
-				https://internal.want.ch/nexus/repository/funnel-extension-api-releases/</url>
-		</repository>
-	</distributionManagement>
+
 </project>
