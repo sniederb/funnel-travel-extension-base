@@ -59,7 +59,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    def exitCode = sh(script: "mvn clean checkstyle:check deploy -Dproject.version=${projectVersion}", returnStatus: true)
+                    def exitCode = sh(script: "mvn clean checkstyle:check install -Dproject.version=${projectVersion}", returnStatus: true)
                     if (exitCode != 0) {
                         currentBuild.result = "UNSTABLE"
                     }
@@ -79,6 +79,7 @@ pipeline {
                 }
             }
             steps {
+                // note that release:perform runs a "mvn deploy site-deploy", which will itself trigger maven central deployment
             	script {
             		def devVersionCommand = ""
             		if (params.PARAM_RELEASE_NEXT_VERSION != "") {
