@@ -11,26 +11,6 @@
 
 	<build>
 		<finalName>funnel-extension-api-${project.version}</finalName>
-		<plugins>
-			<plugin>
-        		<groupId>org.apache.maven.plugins</groupId>
-        		<artifactId>maven-source-plugin</artifactId>
-        		<version>3.3.1</version>
-      		</plugin>
-			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.2.4</version>
-                <configuration>
-            		<keyname>0x14A8134F</keyname>
-            		<passphraseServerId>central</passphraseServerId>
-            		<gpgArguments>
-    					<arg>--pinentry-mode</arg>
-    					<arg>loopback</arg>	
-  					</gpgArguments>
-          		</configuration>
-            </plugin>      		
-      	</plugins>		
 	</build>
 	
 	<dependencies>
