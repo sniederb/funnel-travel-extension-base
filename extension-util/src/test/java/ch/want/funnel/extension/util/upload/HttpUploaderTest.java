@@ -13,6 +13,8 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicStatusLine;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -33,7 +35,8 @@ class HttpUploaderTest {
         Assertions.assertNotNull(request);
         final Header contentTypeHeader = request.getFirstHeader(HttpHeaders.CONTENT_TYPE);
         Assertions.assertNotNull(contentTypeHeader);
-        Assertions.assertEquals("multipart/form-data", contentTypeHeader.getValue());
+        MatcherAssert.assertThat(contentTypeHeader.getValue(), CoreMatchers.containsString("multipart/form-data"));
+        MatcherAssert.assertThat(contentTypeHeader.getValue(), CoreMatchers.containsString("boundary="));
     }
 
     private CloseableHttpClient httpClient() throws ClientProtocolException, IOException {

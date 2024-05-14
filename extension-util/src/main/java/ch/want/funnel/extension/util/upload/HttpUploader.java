@@ -5,7 +5,7 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpHeaders;
+import org.apache.http.HttpEntity;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
@@ -58,12 +58,13 @@ public class HttpUploader implements FileUploader {
 
     protected HttpPost createHttpPost(final String targetFilename, final String tripData) {
         final byte[] bytes = tripData.getBytes(StandardCharsets.ISO_8859_1);
-        final MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-        builder.addBinaryBody("file", bytes, ContentType.DEFAULT_BINARY, targetFilename);
+        final HttpEntity multipartEntity = MultipartEntityBuilder.create()
+            .setMode(HttpMultipartMode.BROWSER_COMPATIBLE)
+            .addBinaryBody("file", bytes, ContentType.DEFAULT_BINARY, targetFilename)
+            .build();
         final HttpPost httpPost = new HttpPost(resourceIdentifier);
-        httpPost.setEntity(builder.build());
-        httpPost.setHeader(HttpHeaders.CONTENT_TYPE, ContentType.MULTIPART_FORM_DATA.getMimeType());
+        httpPost.setEntity(multipartEntity);
+        httpPost.setHeader(multipartEntity.getContentType());
         return httpPost;
     }
 
