@@ -18,12 +18,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-class HttpsUploaderTest {
+class HttpUploaderTest {
 
     @Test
     void testUpload() throws IOException {
         final CloseableHttpClient httpClient = httpClient();
-        final HttpsUploader testee = new MockHttpsUploader(httpClient);
+        final HttpUploader testee = new MockHttpsUploader(httpClient);
         // act
         testee.upload("DFGHMS-20240105.txt", "Some data here");
         // assert
@@ -45,7 +45,7 @@ class HttpsUploaderTest {
         return client;
     }
 
-    private static class MockHttpsUploader extends HttpsUploader {
+    private static class MockHttpsUploader extends HttpUploader {
 
         private final CloseableHttpClient httpClient;
 

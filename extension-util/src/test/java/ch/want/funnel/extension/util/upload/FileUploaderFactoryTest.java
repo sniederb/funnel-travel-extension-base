@@ -41,15 +41,22 @@ class FileUploaderFactoryTest {
     }
 
     @Test
+    void getUploader_http() throws Exception {
+        final URI resourceIdentifier = new URI("http://filestore.funnel.travel/export");
+        final FileUploader fileUploader = FileUploaderFactory.getUploader(resourceIdentifier, "", "");
+        assertEquals(HttpUploader.class, fileUploader.getClass());
+    }
+
+    @Test
     void getUploader_https() throws Exception {
         final URI resourceIdentifier = new URI("https://filestore.funnel.travel/export");
         final FileUploader fileUploader = FileUploaderFactory.getUploader(resourceIdentifier, "foo", "bar");
-        assertEquals(HttpsUploader.class, fileUploader.getClass());
+        assertEquals(HttpUploader.class, fileUploader.getClass());
     }
 
     @Test
     void getUploader_unknown() throws Exception {
-        final URI resourceIdentifier = new URI("http://filestore.funnel.travel/export");
+        final URI resourceIdentifier = new URI("foo://filestore.funnel.travel/export");
         assertThrows(IllegalArgumentException.class, () -> FileUploaderFactory.getUploader(resourceIdentifier, "foo", "bar"));
     }
 

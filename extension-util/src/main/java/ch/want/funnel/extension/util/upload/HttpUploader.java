@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHeaders;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -20,18 +21,22 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HttpsUploader implements FileUploader {
+public class HttpUploader implements FileUploader {
 
-    private static final Logger LOG = LoggerFactory.getLogger(HttpsUploader.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HttpUploader.class);
     private static final int TIMEOUT_IN_MILLIS = 5 * 60 * 1000;
     private final URI resourceIdentifier;
     private final CredentialsProvider credentialsProvider;
     private final RequestConfig requestConfig;
 
-    HttpsUploader(final URI resourceIdentifier, final String username, final String passwd) {
+    HttpUploader(final URI resourceIdentifier, final String username, final String passwd) {
         this.resourceIdentifier = resourceIdentifier;
-        credentialsProvider = new BasicCredentialsProvider();
-        credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(username, passwd));
+        if (StringUtils.isNoneBlank(username, passwd)) {
+            credentialsProvider = new BasicCredentialsProvider();
+            credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(username, passwd));
+        } else {
+            credentialsProvider = null;
+        }
         requestConfig = RequestConfig.custom()
             .setConnectTimeout(TIMEOUT_IN_MILLIS * 1000)
             .setConnectionRequestTimeout(TIMEOUT_IN_MILLIS * 1000)

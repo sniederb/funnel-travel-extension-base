@@ -2,6 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>extension-api</artifactId>
 	<packaging>jar</packaging>
+	<description>API for funnel.travel extensions</description>
 	
 	<parent>
 		<groupId>ch.want.funnel</groupId>

@@ -24,8 +24,8 @@ public class FileUploaderFactory {
         if ("ftps".equalsIgnoreCase(resourceIdentifier.getScheme())) {
             return new FtpsUploader(resourceIdentifier, username, passwd);
         }
-        if ("https".equalsIgnoreCase(resourceIdentifier.getScheme())) {
-            return new HttpsUploader(resourceIdentifier, username, passwd);
+        if ("https".equalsIgnoreCase(resourceIdentifier.getScheme()) || "http".equalsIgnoreCase(resourceIdentifier.getScheme())) {
+            return new HttpUploader(resourceIdentifier, username, passwd);
         }
         throw new IllegalArgumentException("Don't know how to send/upload to " + resourceIdentifier);
     }

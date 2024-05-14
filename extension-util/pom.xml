@@ -2,6 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>extension-util</artifactId>
 	<packaging>jar</packaging>
+	<description>Utils commonly needed in funnel.travel extensions</description>
 	
 	<parent>
 		<groupId>ch.want.funnel</groupId>
