@@ -3,7 +3,7 @@
 	<groupId>ch.want.funnel</groupId>
 	<artifactId>extension-base</artifactId>
 	<packaging>pom</packaging>
-	<version>3.0.13-SNAPSHOT</version>
+	<version>3.0.13</version>
 	<name>funnel-extension-base</name>
 	<url>http://www.funnel.travel/</url>
     <description>API and utils to create a funnel.travel extension</description>	
@@ -18,7 +18,7 @@
 		<url>scm:git:git@github.com:sniederb/funnel-travel-extension-base.git</url>
 		<developerConnection>
 			scm:git:git@github.com:sniederb/funnel-travel-extension-base.git</developerConnection>
-		<tag>extension-base-3.0.0</tag>
+		<tag>extension-base-3.0.13</tag>
 	</scm>
 	<issueManagement>
 		<system>JIRA</system>
