@@ -188,13 +188,9 @@
 		<!-- An API incompatibility was encountered while executing org.apache.maven.plugins:maven-checkstyle-plugin -->
 		<checkstyle.latest.version>9.3</checkstyle.latest.version>
 		<maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
+		
+		<!-- Library versions, kept in sync with funnel.travel -->
+		<jackson.version>2.15.3</jackson.version>
 	</properties>
-
-	<repositories>
-		<repository>
-			<id>funnel-extension-api</id>
-			<url>https://internal.want.ch/nexus/repository/funnel-extension-api/</url>
-		</repository>
-	</repositories>
 
 </project>
