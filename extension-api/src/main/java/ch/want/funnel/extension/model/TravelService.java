@@ -31,6 +31,7 @@ public class TravelService implements Serializable {
     private TravelServiceType travelServiceType;
     private BookingStatus bookingstatus;
     private String referenceNumber;
+    private String sourceInternalReferenceNumber;
     private LocalDate departuredate;
     private LocalDate returndate;
     private String cancellationPolicy;
@@ -136,6 +137,18 @@ public class TravelService implements Serializable {
 
     public void setReferenceNumber(final String referenceNumber) {
         this.referenceNumber = referenceNumber;
+    }
+
+    /**
+     * The {@code sourceInternalReferenceNumber} reflects the ID for this service internal to the source system.
+     * This is often a UUID or a lengthy hash-type string, but might also be identical to {@link #getReferenceNumber()}
+     */
+    public String getSourceInternalReferenceNumber() {
+        return sourceInternalReferenceNumber;
+    }
+
+    public void setSourceInternalReferenceNumber(final String sourceInternalReferenceNumber) {
+        this.sourceInternalReferenceNumber = sourceInternalReferenceNumber;
     }
 
     /**
