@@ -148,6 +148,8 @@
             		<publishingServerId>central</publishingServerId>
             		<tokenAuth>true</tokenAuth>
             		<autoPublish>true</autoPublish>
+            		<!-- uploaded | validated | published -->
+            		<waitUntil>validated</waitUntil>
           		</configuration>
         	</plugin>
 		</plugins>
@@ -164,6 +166,10 @@
 			<name>Simon Niederberger</name>
 			<email>simon.niederberger@want.ch</email>
 			<url>http://www.want.ch/</url>
+			<organization>WaNT GmbH</organization>
+			<roles>
+		        <role>Developer</role>
+		      </roles>
 		</developer>
 	</developers>
 	
