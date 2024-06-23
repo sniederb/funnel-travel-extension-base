@@ -68,6 +68,7 @@ public final class BookingStatusMapper {
                     "PN": // Pending need
                 return BookingStatus.PROCESSING;
             case "XX", // Cancel segment
+                    "XK", // Cancel segment with change
                     "HX", // Cancel confirm hold
                     "UN", // Flight cancelled by airline
                     "NO", // No action taken / Not confirmed
