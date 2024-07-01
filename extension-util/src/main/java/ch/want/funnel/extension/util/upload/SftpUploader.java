@@ -62,8 +62,13 @@ class SftpUploader implements FileUploader {
         }
     }
 
-    private void put(final byte[] data, final String remoteFilename) throws SftpException {
-        sftpChannel.put(new ByteArrayInputStream(data), remoteFilename, ChannelSftp.OVERWRITE);
+    private void put(final byte[] data, final String remoteFilename) throws IOException {
+        try {
+            sftpChannel.put(new ByteArrayInputStream(data), remoteFilename, ChannelSftp.OVERWRITE);
+        } catch (final SftpException ex) {
+            // see com.jcraft.jsch.ChannelSftp for values
+            throw new IOException("Failed to upload to " + remoteFilename + ", error code " + ex.id, ex);
+        }
     }
 
     private void close() {
