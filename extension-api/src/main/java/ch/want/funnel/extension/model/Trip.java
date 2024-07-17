@@ -142,6 +142,10 @@ public class Trip implements Serializable {
         this.bookings = bookings;
     }
 
+    /**
+     * Get custom field values on trip-level. Note that there might be further custom
+     * field values on bookings and/or services.
+     */
     public List<CustomFieldValue> getCustomfieldValues() {
         return customfieldValues;
     }

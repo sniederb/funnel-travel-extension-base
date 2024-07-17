@@ -67,7 +67,7 @@ public class Booking implements Serializable {
     private transient List<BookingPayment> payments = new ArrayList<>();
     private transient List<RawSource> rawsources = new ArrayList<>();
     private transient List<Traveler> participants = new ArrayList<>();
-    private transient List<CustomFieldValue> customfields = new ArrayList<>();
+    private transient List<CustomFieldValue> customfieldValues = new ArrayList<>();
     private transient List<VatDistribution> vatDistribution = new ArrayList<>();
 
     public Booking() {
@@ -432,12 +432,32 @@ public class Booking implements Serializable {
         this.vatDistribution = vatDistribution;
     }
 
+    /**
+     * @deprecated Use {@link #getCustomfieldValues()}
+     */
+    @Deprecated(since = "3.0.18")
     public List<CustomFieldValue> getCustomfields() {
-        return customfields;
+        return getCustomfieldValues();
     }
 
+    /**
+     * @deprecated Use {@link #setCustomfieldValues(List)}
+     */
+    @Deprecated(since = "3.0.18")
     public void setCustomfields(final List<CustomFieldValue> customfields) {
-        this.customfields = customfields;
+        setCustomfieldValues(customfields);
+    }
+
+    /**
+     * Get custom field values on booking-level. Note that there might be further custom
+     * field values on services and/or the parent trip.
+     */
+    public List<CustomFieldValue> getCustomfieldValues() {
+        return customfieldValues;
+    }
+
+    public void setCustomfieldValues(final List<CustomFieldValue> customfieldValues) {
+        this.customfieldValues = customfieldValues;
     }
 
     public String getComment() {

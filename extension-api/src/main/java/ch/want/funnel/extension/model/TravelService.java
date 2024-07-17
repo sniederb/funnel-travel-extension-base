@@ -52,6 +52,7 @@ public class TravelService implements Serializable {
     private transient SingleSegment singleSegment;
     @JsonManagedReference("references")
     private transient List<TravelServiceReference> travelServiceReferences = new ArrayList<>();
+    private transient List<CustomFieldValue> customfieldValues = new ArrayList<>();
 
     public TravelService() {
         // default c'tor
@@ -313,5 +314,17 @@ public class TravelService implements Serializable {
 
     public void setExtensionData(final JsonNode extensionData) {
         this.extensionData = extensionData;
+    }
+
+    /**
+     * Get custom field values on service-level. Note that there might be further custom
+     * field values on the parent booking and/or trip.
+     */
+    public List<CustomFieldValue> getCustomfieldValues() {
+        return customfieldValues;
+    }
+
+    public void setCustomfieldValues(final List<CustomFieldValue> customfieldValues) {
+        this.customfieldValues = customfieldValues;
     }
 }

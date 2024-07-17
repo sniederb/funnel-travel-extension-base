@@ -353,6 +353,7 @@
 			],
 			"singleSegment": null,
 			"travelServiceReferences": [],
+			"customfieldValues": [],
 			"returndateAsUtilDate": null,
 			"departuredateAsUtilDate": null
 		},
@@ -423,6 +424,7 @@
 				"refund": false
 			},
 			"travelServiceReferences": [],
+			"customfieldValues": [],
 			"returndateAsUtilDate": "2019-01-12T00:00:00.000+0000",
 			"departuredateAsUtilDate": "2019-01-11T00:00:00.000+0000"
 		}
@@ -434,7 +436,7 @@
 		"b41ef637-6274-44ac-83f5-a42a9d2d65f4",
 		"b1a89c44-a105-4cb7-8828-6d3689fac0b0"
 	],
-	"customfields": [],
+	"customfieldValues": [],
 	"vatDistribution": [],
 	"header": "Expedia, Expedia, 7383012568246",
 	"returndateAsUtilDate": null,

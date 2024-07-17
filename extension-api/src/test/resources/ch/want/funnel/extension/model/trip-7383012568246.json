@@ -309,6 +309,7 @@
 					],
 					"singleSegment": null,
 					"travelServiceReferences": [],
+					"customfieldValues": [],
 					"departuredateAsUtilDate": null,
 					"returndateAsUtilDate": null
 				}
@@ -358,7 +359,7 @@
 					"passportPlaceOfIssue": null
 				}
 			],
-			"customfields": [],
+			"customfieldValues": [],
 			"vatDistribution": [],
 			"departuredateAsUtilDate": null,
 			"returndateAsUtilDate": null,
