@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>ch.want.funnel</groupId>
 		<artifactId>extension-base</artifactId>
-		<version>3.0.18-SNAPSHOT</version>
+		<version>3.0.18</version>
 	</parent>
 
 	<build>
