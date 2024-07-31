@@ -263,6 +263,11 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
         this.arrivingAtLocation = arrivingAtLocation;
     }
 
+    /**
+     * Describes the vehicle doing the transport, i.e. an aircraft, train or ship description.
+     *
+     * @return
+     */
     public String getVehicleType() {
         return vehicleType;
     }

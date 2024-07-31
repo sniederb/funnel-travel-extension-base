@@ -2,8 +2,10 @@ package ch.want.funnel.extension.util;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import ch.want.funnel.extension.model.PriceItem;
+import ch.want.funnel.extension.model.PriceItemType;
 import ch.want.funnel.extension.model.TravelService;
 
 public final class PriceItemUtils {
@@ -20,11 +22,18 @@ public final class PriceItemUtils {
      * of nesting.
      */
     public static Set<PriceItem> getAllPriceitems(final TravelService service) {
+        return getAllPriceitems(service, false);
+    }
+
+    public static Set<PriceItem> getAllPriceitems(final TravelService service, final boolean includeOnSite) {
+        final Predicate<PriceItem> additionalFilter = includeOnSite ? priceitem -> true : priceitem -> priceitem.getPriceItemType() != PriceItemType.ONSITE;
         final Set<PriceItem> allpriceitems = service.getPriceitems().stream()
+            .filter(additionalFilter)
             .filter(priceitem -> priceitem.getTransportDocument() == null)
             .collect(HashSet::new, HashSet::add, HashSet::addAll);
         service.getTransportDocuments().stream()
             .flatMap(srv -> srv.getPriceitems().stream())
+            .filter(additionalFilter)
             .forEach(allpriceitems::add);
         return allpriceitems;
     }

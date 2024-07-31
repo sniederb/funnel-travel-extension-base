@@ -1,5 +1,6 @@
 package ch.want.funnel.extension.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -58,11 +59,22 @@ public final class ObjectFactory {
         return segment;
     }
 
+    public static PriceItem createPriceItem() {
+        final PriceItem priceItem = new PriceItem();
+        priceItem.setUuid(UUID.randomUUID());
+        priceItem.setPriceItemType(PriceItemType.DEFAULT);
+        priceItem.setAmount(BigDecimal.TEN);
+        priceItem.setCurrency("CHF");
+        priceItem.setPurchasePrice(BigDecimal.TEN);
+        priceItem.setPurchasePriceCurrency("CHF");
+        return priceItem;
+    }
+
     public static Traveler createTraveler() {
         final Traveler traveler = new Traveler();
         traveler.setUuid(UUID.randomUUID());
         traveler.setFirstname("Max");
-        traveler.setFirstname("Mustermann");
+        traveler.setLastname("Mustermann");
         return traveler;
     }
 

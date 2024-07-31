@@ -64,6 +64,7 @@ public class Booking implements Serializable {
     private boolean packaged;
     private transient List<TravelService> travelservices = new ArrayList<>();
     private transient List<PriceItem> priceitems = new ArrayList<>();
+    private transient List<PriceItem> onsitePriceitems = new ArrayList<>();
     private transient List<BookingPayment> payments = new ArrayList<>();
     private transient List<RawSource> rawsources = new ArrayList<>();
     private transient List<Traveler> participants = new ArrayList<>();
@@ -396,6 +397,18 @@ public class Booking implements Serializable {
         this.priceitems = priceitems;
     }
 
+    /**
+     * Get {@link PriceItem} with type {@link PriceItemType#ONSITE}. These are kept separate, as they typically
+     * are not included in any 'total' calculation.
+     */
+    public List<PriceItem> getOnsitePriceitems() {
+        return onsitePriceitems;
+    }
+
+    public void setOnsitePriceitems(final List<PriceItem> onsitePriceitems) {
+        this.onsitePriceitems = onsitePriceitems;
+    }
+
     public List<BookingPayment> getPayments() {
         return payments;
     }
@@ -436,6 +449,7 @@ public class Booking implements Serializable {
      * @deprecated Use {@link #getCustomfieldValues()}
      */
     @Deprecated(since = "3.0.18")
+    @JsonIgnore
     public List<CustomFieldValue> getCustomfields() {
         return getCustomfieldValues();
     }
@@ -444,6 +458,7 @@ public class Booking implements Serializable {
      * @deprecated Use {@link #setCustomfieldValues(List)}
      */
     @Deprecated(since = "3.0.18")
+    @JsonIgnore
     public void setCustomfields(final List<CustomFieldValue> customfields) {
         setCustomfieldValues(customfields);
     }

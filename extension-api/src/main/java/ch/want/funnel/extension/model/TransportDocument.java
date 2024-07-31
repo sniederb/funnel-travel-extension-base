@@ -132,6 +132,12 @@ public class TransportDocument implements Serializable {
         this.description = description;
     }
 
+    /**
+     * Get priceitems. Note that this class provides no {@code getOnsitePriceitems()}, as EMD and
+     * flight tickets don't have on-site payment components.
+     *
+     * @return
+     */
     public List<PriceItem> getPriceitems() {
         return priceitems;
     }
