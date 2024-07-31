@@ -237,7 +237,7 @@ public class Booking implements Serializable {
 
     /**
      * The {@code sourceInternalReferencenumber} reflects the ID for this booking internal to the source system.
-     * This is often a UUID or a lengthy hash-type string, but might also be identical to {@link #getReferencenumber()}
+     * This is often a UUID or a lengthy hash-type string, but might also be identical to {@link #getReferenceNumber()}
      */
     public String getSourceInternalReferencenumber() {
         return sourceInternalReferencenumber;
@@ -508,9 +508,7 @@ public class Booking implements Serializable {
     }
 
     /**
-     * If true, the {@link #getTravelservices()} form a package, and consumers must not split these services
-     *
-     * @return
+     * If true, the {@link #getTravelservices()} form a package, and consumers must not split these services.
      */
     public boolean isPackaged() {
         return packaged;

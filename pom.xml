@@ -43,7 +43,8 @@
 						<goals>
 							<goal>jar</goal>
 						</goals>
-						<configuration> 
+						<configuration>
+							<doclint>all,-missing</doclint>
 							<failOnError>false</failOnError>
         					<quiet>true</quiet>
 						</configuration>
