@@ -51,12 +51,12 @@ public final class BookingStatusMapper {
                 return BookingStatus.CONFIRMED;
             case "OP", "HL", // Holds waitlist
                     "GL", // waitlisted ghost segmentl
-                    "TL", // Schedule change on waitlist
                     "KL", // Waitlist confirmed
                     "PA", // Priority waitlist
                     "PB", // Priority waitlist
                     "PC", // Priority waitlist
                     "PD", // Priority waitlist
+                    "TL", // Schedule change on waitlist
                     "UU": // Unable to confirm. Waitlist requested
                 return BookingStatus.OPTION;
             case "RQ", // On request
@@ -65,7 +65,8 @@ public final class BookingStatusMapper {
                     "IS", // If not holding sell
                     "NN", // Requesting segment
                     "UC", // Unable to confirm or waitlist
-                    "PN": // Pending need
+                    "PN", // Pending need
+                    "TN": // Schedule change. Is Pending Need
                 return BookingStatus.PROCESSING;
             case "XX", // Cancel segment
                     "XK", // Cancel segment with change
