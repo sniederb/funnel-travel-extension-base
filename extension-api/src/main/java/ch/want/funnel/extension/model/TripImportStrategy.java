@@ -54,5 +54,11 @@ public enum TripImportStrategy {
      * A typical use-case are ticket refunds or void, where often the segment data is not included anymore.
      * </p>
      */
-    ADD_ONLY
+    ADD_ONLY,
+    /**
+     * Extensions which - on cancellation of a booking - cannot provide details of the individual
+     * services originally booked should use this strategy to indicate that all services should be
+     * updated to cancelled, and all prices should be set to 0.00.
+     */
+    CANCEL_ALL;
 }
