@@ -37,6 +37,17 @@ public enum TripImportStrategy {
     FULL_PRICE_ADDITIVE,
     /**
      * <p>
+     * Extensions which - on (partial) cancellation of a booking - cannot provide details of the individual
+     * services originally booked should use this strategy to indicate that missing services should be
+     * updated to cancelled, and prices should be set to 0.00.
+     * </p>
+     * <p>
+     * Note that this cancellation strategy only applies to {@link TravelService}.
+     * </p>
+     */
+    FULL_CANCEL_MISSING,
+    /**
+     * <p>
      * Extra mark to indicate that this data package contains <strong>everything</strong>. Consequently,
      * the exceptions of {@link TripImportStrategy#FULL} do not apply here.
      * </p>
@@ -54,11 +65,5 @@ public enum TripImportStrategy {
      * A typical use-case are ticket refunds or void, where often the segment data is not included anymore.
      * </p>
      */
-    ADD_ONLY,
-    /**
-     * Extensions which - on cancellation of a booking - cannot provide details of the individual
-     * services originally booked should use this strategy to indicate that all services should be
-     * updated to cancelled, and all prices should be set to 0.00.
-     */
-    CANCEL_ALL;
+    ADD_ONLY;
 }
