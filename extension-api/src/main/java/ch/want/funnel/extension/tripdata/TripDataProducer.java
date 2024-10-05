@@ -3,6 +3,8 @@
  */
 package ch.want.funnel.extension.tripdata;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -42,5 +44,13 @@ public interface TripDataProducer extends TripRawDataConverter {
      */
     default boolean isModifyAllowedFrom(final String crossOriginSourceDomain, final Map<String, Object> settingValues) {
         return true;
+    }
+
+    /**
+     * Implementations can return one or more setting keys, for which funnel.travel will validate that only 1 installation
+     * is present for a given value.
+     */
+    default Collection<String> getUniqueSettingKeys() {
+        return Collections.emptySet();
     }
 }
