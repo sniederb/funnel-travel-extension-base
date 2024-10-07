@@ -26,6 +26,7 @@ public class BookingPayment implements Serializable {
     private PaymentType paymentType;
     private String ccNumber;
     private LocalDate ccExpiration;
+    private PayeeType payeeType;
 
     public BookingPayment() {
         // default c'tor
@@ -109,5 +110,13 @@ public class BookingPayment implements Serializable {
 
     public void setCcExpiration(final LocalDate ccExpiration) {
         this.ccExpiration = ccExpiration;
+    }
+
+    public PayeeType getPayeeType() {
+        return payeeType;
+    }
+
+    public void setPayeeType(final PayeeType payeeType) {
+        this.payeeType = payeeType;
     }
 }
