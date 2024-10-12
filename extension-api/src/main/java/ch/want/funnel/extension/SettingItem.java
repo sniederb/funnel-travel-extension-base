@@ -30,6 +30,10 @@ public class SettingItem {
      * Key to retrieve the billing account's default currency. Value will be a string.
      */
     public static final String KEY_ACCOUNT_CURRENCY = "funnel.environment.account-currency";
+    /**
+     * Key to retrieve the billing account's default locale. Value will be a valid ISO 639 string in the Java format (de_CH).
+     */
+    public static final String KEY_ACCOUNT_LOCALE = "funnel.environment.account-locale";
     private String key;
     private SettingItemValueType valueType = SettingItemValueType.STRING;
     private boolean mandatory;

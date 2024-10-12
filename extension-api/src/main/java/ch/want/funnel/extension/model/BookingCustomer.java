@@ -132,17 +132,4 @@ public class BookingCustomer implements Serializable {
     public void setSalutation(final String salutation) {
         this.salutation = salutation;
     }
-
-    /**
-     * The returned value is <strong>not</strong> guaranteed to be a valid locale,
-     * maybe not even an ISO 639 value. It is simply what the producer extension
-     * delivered as "language".
-     */
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(final String language) {
-        this.language = language;
-    }
 }
