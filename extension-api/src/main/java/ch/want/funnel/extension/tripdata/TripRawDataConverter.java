@@ -17,6 +17,22 @@ import ch.want.funnel.extension.FunnelExtension;
 public interface TripRawDataConverter {
 
     /**
+     * Throws a {@link InvalidPayloadException} if the payload is found to be invalid. Note that this method returning
+     * without exception is no guarantee that {@link #convertRawSourceToTripData(byte[], Map, Locale)} will succeed.
+     *
+     * @param rawSource
+     *            The source returned as {@link RawTripDataSource} by a {@link TripDataProducer}, or a webhook payload.
+     * @param httpHeaders
+     *            List of HTTP headers
+     * @param settingValues
+     *            Account-specific settings
+     * @param locale
+     */
+    default void validatePayload(final byte[] rawSource, final Map<String, String> httpHeaders, final Map<String, Object> settingValues, final Locale locale) {
+        // no-op. default is to assume valid
+    }
+
+    /**
      * For a given external source record, extract some key properties to be stored as metadata.
      *
      * @param rawSource

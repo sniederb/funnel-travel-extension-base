@@ -196,16 +196,16 @@ public abstract class AbstractTemplateBasedExtension {
 
         @Override
         public TemplateModel wrap(final Object obj) throws TemplateModelException {
-            if (obj instanceof LocalDateTime) {
-                final Timestamp timestamp = Timestamp.valueOf((LocalDateTime) obj);
+            if (obj instanceof final LocalDateTime dt) {
+                final Timestamp timestamp = Timestamp.valueOf(dt);
                 return new SimpleDate(timestamp);
             }
-            if (obj instanceof LocalDate) {
-                final java.sql.Date date = java.sql.Date.valueOf((LocalDate) obj);
+            if (obj instanceof final LocalDate dt) {
+                final java.sql.Date date = java.sql.Date.valueOf(dt);
                 return new SimpleDate(date);
             }
-            if (obj instanceof LocalTime) {
-                final Time time = Time.valueOf((LocalTime) obj);
+            if (obj instanceof final LocalTime tm) {
+                final Time time = Time.valueOf(tm);
                 return new SimpleDate(time);
             }
             return super.wrap(obj);
