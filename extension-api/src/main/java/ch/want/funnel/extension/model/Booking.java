@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 
+import ch.want.funnel.extension.ExtensionResult;
 import ch.want.funnel.extension.tripdata.TripDataConsumer;
 
 @JsonIgnoreProperties(value = { "header", "departuredateAsUtilDate", "returndateAsUtilDate" }, allowGetters = true)
@@ -254,6 +255,10 @@ public class Booking implements Serializable {
         return midofficeReferenceNumber;
     }
 
+    /**
+     * Setting a value here has no effect. If an extension wants to update the midoffice reference number, it needs to be
+     * returned in the {@link ExtensionResult#getMidofficeReferenceNumber()}
+     */
     public void setMidofficeReferenceNumber(final String midofficeReferenceNumber) {
         this.midofficeReferenceNumber = midofficeReferenceNumber;
     }
