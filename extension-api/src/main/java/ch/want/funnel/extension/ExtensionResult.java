@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import ch.want.funnel.extension.model.Booking;
 import ch.want.funnel.extension.tripdata.RawTripDataSource;
+import ch.want.funnel.extension.tripdata.TripDataConsumer;
+import ch.want.funnel.extension.tripdata.TripDataModifier;
 import ch.want.funnel.extension.tripdata.TripDataProducer;
 import ch.want.funnel.extension.tripdata.TripRawDataConverter;
 
@@ -11,8 +13,7 @@ import ch.want.funnel.extension.tripdata.TripRawDataConverter;
  * Result class for extensions to indicate processing state.
  * <ul>
  * <li>If processing failed exceptionally, and re-processing is desirable, throw an exception</li>
- * <li>If processing basically succeeded, this class allows for returning a processing message
- * and/or a return code.</li>
+ * <li>If processing basically succeeded, this class allows for returning a processing message and/or a return code.</li>
  * <li>If processing worked, but the execution should still show up in the list of failed extension calls, return an error code
  * {@link #EXECUTION_ERROR_RETURN_CODE}</li>
  * <li>For {@link TripDataProducer} extensions being called by a webhook, the {@link #message} will be returned as a HTTP response.</li>
@@ -26,6 +27,7 @@ public class ExtensionResult {
     private final int returnCode;
     private final Booking booking;
     private RawTripDataSource updatedRawSource;
+    private String midofficeReferenceNumber;
 
     public ExtensionResult(final String message) {
         this(null, 0, message);
@@ -59,8 +61,6 @@ public class ExtensionResult {
 
     /**
      * For a webhook {@link TripRawDataConverter}, this message is returned as HTTP response.
-     *
-     * @return
      */
     public String getMessage() {
         return message;
@@ -70,6 +70,9 @@ public class ExtensionResult {
         return returnCode;
     }
 
+    /**
+     * Only relevant for {@link TripDataProducer} and {@link TripDataModifier}. For {@link TripDataConsumer}, this method is not used.
+     */
     public Optional<Booking> getBooking() {
         return Optional.ofNullable(booking);
     }
@@ -85,5 +88,16 @@ public class ExtensionResult {
 
     public Optional<RawTripDataSource> getUpdatedRawSource() {
         return Optional.ofNullable(updatedRawSource);
+    }
+
+    /**
+     * If set on a {@link TripDataConsumer}, funnel.travel will update the internal {@link Booking#getMidofficeReferenceNumber()}.
+     */
+    public String getMidofficeReferenceNumber() {
+        return midofficeReferenceNumber;
+    }
+
+    public void setMidofficeReferenceNumber(final String midofficeReferenceNumber) {
+        this.midofficeReferenceNumber = midofficeReferenceNumber;
     }
 }

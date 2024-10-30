@@ -23,7 +23,7 @@ public interface TripRawDataConverter {
      * @param rawSource
      *            The source returned as {@link RawTripDataSource} by a {@link TripDataProducer}, or a webhook payload.
      * @param httpHeaders
-     *            List of HTTP headers
+     *            List of HTTP headers, in the case they were sent.
      * @param settingValues
      *            Account-specific settings
      * @param locale
