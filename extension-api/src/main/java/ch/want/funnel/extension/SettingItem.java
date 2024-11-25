@@ -34,6 +34,10 @@ public class SettingItem {
      * Key to retrieve the billing account's default locale. Value will be a valid ISO 639 string in the Java format (de_CH).
      */
     public static final String KEY_ACCOUNT_LOCALE = "funnel.environment.account-locale";
+    /**
+     * Two-letter code of the country the account is based in.
+     */
+    public static final String KEY_ACCOUNT_COUNTRY = "funnel.environment.account-country";
     private String key;
     private SettingItemValueType valueType = SettingItemValueType.STRING;
     private boolean mandatory;
