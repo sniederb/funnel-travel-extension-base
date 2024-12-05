@@ -13,6 +13,7 @@ public class Location implements Serializable {
     private String generalCode;
     private String name;
     private String countryCode;
+    private String countryName;
 
     public String getIataCode() {
         return iataCode;
@@ -115,6 +116,14 @@ public class Location implements Serializable {
 
     public void setCountryCode(final String countryCode) {
         this.countryCode = countryCode;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(final String countryName) {
+        this.countryName = countryName;
     }
 
     @Override

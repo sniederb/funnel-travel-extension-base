@@ -163,8 +163,8 @@ public class Trip implements Serializable {
     }
 
     /**
-     * The locale to use for any localized texts. This will be derived from the passenger, if locale data
-     * is available. As a fallback, locale data from the organization or, ultimately, from the account are used.
+     * The locale to use for any localized texts. This will be derived from the organization or,
+     * ultimately, from the account are used.
      */
     public Locale getLocale() {
         return locale;
