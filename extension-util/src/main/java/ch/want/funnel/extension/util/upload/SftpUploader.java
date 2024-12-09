@@ -4,6 +4,10 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.Vector;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
@@ -13,6 +17,7 @@ import com.jcraft.jsch.SftpException;
 
 class SftpUploader implements FileUploader {
 
+    private static final Logger LOG = LoggerFactory.getLogger(SftpUploader.class);
     private static final int TIMEOUT_IN_MILLIS = 5 * 60 * 1000;
     private final URI resourceIdentifier;
     private final String username;
@@ -24,6 +29,18 @@ class SftpUploader implements FileUploader {
         this.resourceIdentifier = resourceIdentifier;
         this.username = username;
         this.passwd = passwd;
+    }
+
+    @Override
+    public void ping() throws IOException {
+        try {
+            initSession();
+            connectToSubfolder();
+            listRemoteDirectory();
+            close();
+        } catch (final JSchException | SftpException e) {
+            throw new IOException(e.getMessage(), e);
+        }
     }
 
     @Override
@@ -68,6 +85,13 @@ class SftpUploader implements FileUploader {
         } catch (final SftpException ex) {
             // see com.jcraft.jsch.ChannelSftp for values
             throw new IOException("Failed to upload to " + remoteFilename + ", error code " + ex.id, ex);
+        }
+    }
+
+    private void listRemoteDirectory() throws SftpException {
+        final Vector<?> ls = sftpChannel.ls("*"); // NOSONAR
+        for (final Object entry : ls) {
+            LOG.info("{}", entry);
         }
     }
 

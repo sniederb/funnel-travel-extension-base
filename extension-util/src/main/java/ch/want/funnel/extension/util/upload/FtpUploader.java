@@ -8,9 +8,13 @@ import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class FtpUploader implements FileUploader {
 
+    private static final Logger LOG = LoggerFactory.getLogger(FtpUploader.class);
     private static final int TIMEOUT_IN_MILLIS = 5 * 60 * 1000;
     private final URI resourceIdentifier;
     private final String username;
@@ -20,6 +24,27 @@ class FtpUploader implements FileUploader {
         this.resourceIdentifier = resourceIdentifier;
         this.username = username;
         this.passwd = passwd;
+    }
+
+    @Override
+    public void ping() throws IOException {
+        final FTPClient client = createFtpClient();
+        client.setConnectTimeout(TIMEOUT_IN_MILLIS);
+        client.setDataTimeout(TIMEOUT_IN_MILLIS);
+        try {
+            LOG.info("Connecting to {}", resourceIdentifier);
+            client.connect(resourceIdentifier.getHost());
+            client.enterLocalPassiveMode();
+            if (!client.login(username, passwd)) {
+                throw new IOException("FTP Delivery: Failed to login: " + client.getReplyString());
+            }
+            if (resourceIdentifier.getPath() != null) {
+                client.changeWorkingDirectory(resourceIdentifier.getPath());
+            }
+            listRemoteDirectory(client);
+        } finally {
+            closeAndDisconnectQuietly(client);
+        }
     }
 
     @Override
@@ -47,6 +72,13 @@ class FtpUploader implements FileUploader {
 
     protected FTPClient createFtpClient() {
         return new FTPClient();
+    }
+
+    private void listRemoteDirectory(final FTPClient client) throws IOException {
+        final FTPFile[] files = client.listFiles();
+        for (final FTPFile file : files) {
+            LOG.info("{}", file);
+        }
     }
 
     private void closeAndDisconnectQuietly(final FTPClient client) {

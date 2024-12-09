@@ -45,6 +45,11 @@ public class HttpUploader implements FileUploader {
     }
 
     @Override
+    public void ping() throws IOException {
+        // not supported
+    }
+
+    @Override
     public void upload(final String targetFilename, final String tripData) throws IOException {
         final CloseableHttpClient client = createClient();
         final HttpPost httpPost = createHttpPost(targetFilename, tripData);
