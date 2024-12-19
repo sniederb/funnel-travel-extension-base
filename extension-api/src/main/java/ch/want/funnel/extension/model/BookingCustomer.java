@@ -132,4 +132,12 @@ public class BookingCustomer implements Serializable {
     public void setSalutation(final String salutation) {
         this.salutation = salutation;
     }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(final String language) {
+        this.language = language;
+    }
 }

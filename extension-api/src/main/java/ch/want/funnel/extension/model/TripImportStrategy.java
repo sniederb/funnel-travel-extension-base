@@ -14,7 +14,7 @@ public enum TripImportStrategy {
     /**
      * With this strategy, data not present in the form object will be deleted, except:
      * <ul>
-     * <li>Numbered tickets</li>
+     * <li>Numbered documents (ticket, EMD)</li>
      * <li>Refunds</li>
      * <li>Raw sources</li>
      * <li>Payments</li>
