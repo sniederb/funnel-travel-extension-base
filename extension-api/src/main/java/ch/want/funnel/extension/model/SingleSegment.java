@@ -13,6 +13,10 @@ public class SingleSegment implements Serializable {
     public static final String SERVICE_TYPECODE_INSURANCE = "INSURANCE";
     public static final String SERVICE_TYPECODE_REFUND = "REFUND";
     public static final String SERVICE_TYPECODE_TRANSFER = "TRANSFER";
+    /**
+     * An event, activity.
+     */
+    public static final String SERVICE_TYPECODE_EVENT = "EVENT";
     private UUID uuid;
     @JsonBackReference("singlesegment")
     private TravelService travelService;
@@ -212,6 +216,11 @@ public class SingleSegment implements Serializable {
         return SERVICE_TYPECODE_TRANSFER.equalsIgnoreCase(serviceTypeCode);
     }
 
+    @JsonIgnore
+    public boolean isEvent() {
+        return SERVICE_TYPECODE_EVENT.equalsIgnoreCase(serviceTypeCode);
+    }
+
     public void setServiceTypeCode(final String serviceTypeCode) {
         this.serviceTypeCode = serviceTypeCode;
     }
@@ -235,6 +244,14 @@ public class SingleSegment implements Serializable {
     public void setTransfer(final boolean isTransfer) {
         if (isTransfer) {
             setServiceTypeCode(SERVICE_TYPECODE_TRANSFER);
+        } else if (isTransfer()) {
+            setServiceTypeCode(null);
+        }
+    }
+
+    public void setEvent(final boolean isEvent) {
+        if (isEvent) {
+            setServiceTypeCode(SERVICE_TYPECODE_EVENT);
         } else if (isTransfer()) {
             setServiceTypeCode(null);
         }
