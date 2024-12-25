@@ -120,6 +120,17 @@ public class GdsPassengerName {
         return infantBirthdate;
     }
 
+    /**
+     * Compare
+     *
+     * <pre>
+     * STRUMPF/WIRAIPORN MRS (INF/LENNY/04OCT10)
+     * STRUMPF/LENNY(INF)
+     * </pre>
+     *
+     * @param s
+     * @return
+     */
     private String extractAdditionalInformation(final String s) {
         String remainingComposite = s;
         int lastBracket = remainingComposite.lastIndexOf('(');
@@ -132,7 +143,11 @@ public class GdsPassengerName {
             case "INF":
                 this.infantName = addOn.getFirstValueElement();
                 this.infantBirthdate = addOn.getBirthdate();
-                this.passengerType = TravelerAgeGroup.INF;
+                if ((this.infantName != null) && (this.infantName.length() > 0)) {
+                    this.passengerType = TravelerAgeGroup.ADT;
+                } else {
+                    this.passengerType = TravelerAgeGroup.INF;
+                }
                 break;
             case "CHD":
                 this.passengerType = TravelerAgeGroup.CHD;

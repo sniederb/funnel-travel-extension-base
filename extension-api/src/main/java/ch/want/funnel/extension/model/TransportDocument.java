@@ -92,7 +92,11 @@ public class TransportDocument implements Serializable {
     /**
      * Document / ticket number. For flight tickets, try to include the airline code if possible.
      *
-     * @return
+     * <pre>
+     * 3901364482274
+     * 390-1364482274
+     * 390 1364482274
+     * </pre>
      */
     public String getReferenceNumber() {
         return referenceNumber;

@@ -8,6 +8,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import ch.want.funnel.extension.model.TravelerAgeGroup;
+
 class GdsPassengerNameTest {
 
     @ParameterizedTest(name = "parse_{0}")
@@ -35,10 +37,20 @@ class GdsPassengerNameTest {
     }
 
     @Test
-    void parseInfant() {
-        final GdsPassengerName testee = new GdsPassengerName("STRUMPF/MARGE MRS (INF/LENNY/04OCT10))");
+    void parseAssociatedInfant() {
+        final GdsPassengerName testee = new GdsPassengerName("STRUMPF/MARGE MRS (INF/LENNY/04OCT10)");
+        Assertions.assertEquals("STRUMPF", testee.getLastname());
+        Assertions.assertEquals(TravelerAgeGroup.ADT, testee.getPassengerType());
         Assertions.assertEquals("LENNY", testee.getInfantName());
         Assertions.assertNotNull(testee.getInfantBirthdate());
         Assertions.assertEquals("2010-10-04", testee.getInfantBirthdate().toString());
+    }
+
+    @Test
+    void parseInfant() {
+        final GdsPassengerName testee = new GdsPassengerName("STRUMPF/LENNY(INF)");
+        Assertions.assertEquals("STRUMPF", testee.getLastname());
+        Assertions.assertEquals("LENNY", testee.getFirstname());
+        Assertions.assertEquals(TravelerAgeGroup.INF, testee.getPassengerType());
     }
 }
