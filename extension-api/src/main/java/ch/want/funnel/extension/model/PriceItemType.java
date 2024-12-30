@@ -44,5 +44,11 @@ public enum PriceItemType {
     /**
      * Surcharge per booking. {@link PriceItem}s of this type must have a {@link PriceItem#getPurchasePrice()} of zero.
      */
-    SURCHARGE_PER_BOOKING
+    SURCHARGE_PER_BOOKING,
+    /**
+     * Supply-side surcharge or commission. {@link PriceItem}s of this type must have a {@link PriceItem#getAmount()} of zero. Typically the
+     * {@link PriceItem#getPurchasePrice()} is negative (for a commission), but this type can also be used for supplier-only surcharges
+     * (which do not get passed on to retail).
+     */
+    SUPPLIER_ONLY
 }
