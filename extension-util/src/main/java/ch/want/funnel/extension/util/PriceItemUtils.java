@@ -1,8 +1,12 @@
 package ch.want.funnel.extension.util;
 
+import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import ch.want.funnel.extension.model.PriceItem;
 import ch.want.funnel.extension.model.PriceItemType;
@@ -36,5 +40,23 @@ public final class PriceItemUtils {
             .filter(additionalFilter)
             .forEach(allpriceitems::add);
         return allpriceitems;
+    }
+
+    public static final Map<String, BigDecimal> getAmountPerCurrency(final Collection<PriceItem> priceitems) {
+        return priceitems.stream()
+            .collect(Collectors.groupingBy(PriceItem::getCurrency))
+            .entrySet().stream()
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                e -> e.getValue().stream().map(PriceItem::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add)));
+    }
+
+    public static final Map<String, BigDecimal> getPurchasePricePerCurrency(final Collection<PriceItem> priceitems) {
+        return priceitems.stream()
+            .collect(Collectors.groupingBy(PriceItem::getCurrency))
+            .entrySet().stream()
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                e -> e.getValue().stream().map(PriceItem::getPurchasePrice).reduce(BigDecimal.ZERO, BigDecimal::add)));
     }
 }
