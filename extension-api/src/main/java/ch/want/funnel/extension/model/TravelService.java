@@ -54,6 +54,7 @@ public class TravelService implements Serializable {
     private transient SingleSegment singleSegment;
     @JsonManagedReference("references")
     private transient List<TravelServiceReference> travelServiceReferences = new ArrayList<>();
+    private transient List<Traveler> assignedTravelers = new ArrayList<>();
     private transient List<CustomFieldValue> customfieldValues = new ArrayList<>();
 
     public TravelService() {
@@ -336,5 +337,17 @@ public class TravelService implements Serializable {
 
     public void setCustomfieldValues(final List<CustomFieldValue> customfieldValues) {
         this.customfieldValues = customfieldValues;
+    }
+
+    /**
+     * Get the travelers assigned to this service. This collection might be empty, in
+     * which case all travelers are to be considered 'assigned'
+     */
+    public List<Traveler> getAssignedTravelers() {
+        return assignedTravelers;
+    }
+
+    public void setAssignedTravelers(final List<Traveler> assignedTravelers) {
+        this.assignedTravelers = assignedTravelers;
     }
 }
