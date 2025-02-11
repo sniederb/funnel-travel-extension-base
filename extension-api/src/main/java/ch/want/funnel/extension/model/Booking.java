@@ -256,7 +256,7 @@ public class Booking implements Serializable {
     }
 
     /**
-     * Setting a value here has no effect. If an extension wants to update the midoffice reference number, it needs to be
+     * <strong>Setting a value here has no effect.</strong> If an extension wants to update the midoffice reference number, it needs to be
      * returned in the {@link ExtensionResult#getMidofficeReferenceNumber()}
      */
     public void setMidofficeReferenceNumber(final String midofficeReferenceNumber) {
