@@ -36,6 +36,7 @@ public class Booking implements Serializable {
     private UUID tripUuid;
     private String midofficeReferenceNumber;
     private UUID providerUuid;
+    private BookingLifecycleState lifecycleState = BookingLifecycleState.BOOKED;
     private BookingCustomer customer;
     private OffsetDateTime created;
     private OffsetDateTime lastModified;
@@ -153,6 +154,14 @@ public class Booking implements Serializable {
 
     public void setLastModified(final OffsetDateTime lastModified) {
         this.lastModified = lastModified;
+    }
+
+    public BookingLifecycleState getLifecycleState() {
+        return lifecycleState;
+    }
+
+    public void setLifecycleState(final BookingLifecycleState lifecycleState) {
+        this.lifecycleState = lifecycleState;
     }
 
     /**
