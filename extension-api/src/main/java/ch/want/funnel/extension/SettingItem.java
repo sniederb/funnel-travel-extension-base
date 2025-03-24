@@ -21,6 +21,11 @@ public class SettingItem {
      */
     public static final String KEY_OWN_WEBHOOK = "funnel.environment.ownwebhook";
     /**
+     * UUID of the extension settings. This should be used if {@link #KEY_ACCOUNT_UUID} might actually hold
+     * multiple settings of the same extension type.
+     */
+    public static final String KEY_SETTING_UUID = "funnel.environment.settings-uuid";
+    /**
      * Key to retrieve whether or not the extension is running on production. Typically this is used to
      * determine web service endpoints. Value is a boolean
      */

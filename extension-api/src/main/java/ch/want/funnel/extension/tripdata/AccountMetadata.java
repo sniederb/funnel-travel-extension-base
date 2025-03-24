@@ -24,7 +24,7 @@ public class AccountMetadata implements Serializable {
 
     @Override
     public String toString() {
-        return this.getClass() + "{" + settingItemKey + "=" + settingItemValue + "}";
+        return this.getClass().getSimpleName() + "{" + settingItemKey + "=" + settingItemValue + "}";
     }
 
     @Override

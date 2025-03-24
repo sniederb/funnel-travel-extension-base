@@ -179,6 +179,7 @@ public class Booking implements Serializable {
 
     /**
      * Name of the platform which owns the booking, i.e. which created the booking number.
+     * This is usually a static value for a given extension.
      */
     public String getSourceDomain() {
         return sourceDomain;

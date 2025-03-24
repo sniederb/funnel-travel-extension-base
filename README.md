@@ -122,7 +122,10 @@ This interface is suitable for pull systems such as retrieving e-mails.
 
 #### Design considerations
 
-- Producers should not filter data; this should be left to consumers (examples: skipping certain payments, setting prices to 0.00)
+- All producer settings should extend `MinimalConverterSettings` and honor the GDPR-settings.
+- Don't tailor data towards an anticipated consumer. Import data as-is, and let the consumer implementation figure out what is needed.
+- Don't preemptively filter data with an anticipated consumer in mind.
+- Use extension data for extension-internal data, use custom fields to share data with other extensions 
 - Ticket-related fees should be mapped to individual tickets, even if that means the producer needs to split the fee
 
 ### TripDataTwoPhasedProducer
@@ -196,7 +199,6 @@ in the `settings` map, and mark the key as `SettingItemValueType.INTERNAL`.
 
 The second one is useful for extensions which need to write back a tracking ID or similar. This, again, could be an accounting sequence number, or a tracking ID etc.
 See the following chapter on how to handle such Booking#extensionData.  
-
 
 ## The Booking#extensionData field
 

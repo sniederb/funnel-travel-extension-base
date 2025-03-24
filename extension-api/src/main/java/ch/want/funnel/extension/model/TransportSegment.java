@@ -265,9 +265,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
 
     /**
      * Describes the vehicle doing the transport, i.e. an aircraft, train or ship description.
-     * For aircraft, this is usually the code (788), not the full name ("BOEING 787-8").
-     *
-     * @return
+     * For aircraft, this is usually the code ("788"), not the full name ("BOEING 787-8").
      */
     public String getVehicleType() {
         return vehicleType;
@@ -276,8 +274,6 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     /**
      * If the data producer has both an equipment <strong>code</strong> and a full description, then the
      * code should be used here.
-     *
-     * @param vehicleType
      */
     public void setVehicleType(final String vehicleType) {
         this.vehicleType = vehicleType;
@@ -300,8 +296,24 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     }
 
     /**
-     * Get additional information pertinent to departure, such as a train platform
-     * or an airport terminal
+     * See {@link #getVehicleType()}.
+     */
+    @JsonIgnore
+    public String getShipName() {
+        return getVehicleType();
+    }
+
+    /**
+     * See {@link #setVehicleType(String)}.
+     */
+    @JsonIgnore
+    public void setShipName(final String shipName) {
+        setVehicleType(shipName);
+    }
+
+    /**
+     * Get additional information pertinent to departure, such as a train platform,
+     * an airport terminal or vehicle restrictions for a ferry.
      */
     public String getDepartingDetails() {
         return departingDetails;

@@ -6,19 +6,19 @@ public enum BookingStatus {
      */
     UNDEFINED,
     /**
-     * Tentative booking, to be confirmed later
+     * Tentative booking, to be confirmed later (OP, OX)
      */
     OPTION,
     /**
-     * Booking is in the process of being confirmed (eg. waiting for hotel to respond, or a waitlisted segment)
+     * Booking is in the process of being confirmed (eg. waiting for hotel to respond, or a waitlisted segment). (RQ)
      */
     PROCESSING,
     /**
-     * The booking is confirmed and active
+     * The booking is confirmed and active. (OK)
      */
     CONFIRMED,
     /**
-     * The booking was canceled
+     * The booking was canceled (XX)
      */
     CANCELED
 }
