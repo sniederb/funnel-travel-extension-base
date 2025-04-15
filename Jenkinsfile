@@ -97,11 +97,8 @@ pipeline {
     }
     
     post {
-        unstable {
-            slackSend (color: 'warning', message: "funnel-extension-base: There were test failures in job '${currentBuild.displayName}' (<${env.BUILD_URL}|Open>)")
-        }
-        failure {
-            slackSend (color: 'danger', message: "funnel-extension-base: There were build errors in job '${currentBuild.displayName}' (<${env.BUILD_URL}|Open>)")
+    	always {
+            junit allowEmptyResults: true, testResults: 'target/surefire-reports/**/*.xml'
         }
     }
 }

@@ -119,6 +119,9 @@ public class SingleSegment implements Serializable {
         this.serviceDescription = serviceDescription;
     }
 
+    /**
+     * For hotels, these are check-in instructions. For rental cars, these are car pickup instructions.
+     */
     public String getStartConditions() {
         return startConditions;
     }
@@ -127,6 +130,9 @@ public class SingleSegment implements Serializable {
         this.startConditions = startConditions;
     }
 
+    /**
+     * For hotels, these are check-out instructions. For rental cars, these are car dropoff instructions.
+     */
     public String getEndConditions() {
         return endConditions;
     }

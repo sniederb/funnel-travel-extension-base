@@ -14,10 +14,16 @@ public class AccountMetadata implements Serializable {
         this.settingItemValue = settingItemValue;
     }
 
+    /**
+     * Case-sensitive key.
+     */
     public String getSettingItemKey() {
         return settingItemKey;
     }
 
+    /**
+     * Case-insensitive value.
+     */
     public String getSettingItemValue() {
         return settingItemValue;
     }

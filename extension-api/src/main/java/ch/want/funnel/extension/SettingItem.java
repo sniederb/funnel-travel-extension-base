@@ -4,6 +4,7 @@
 package ch.want.funnel.extension;
 
 import java.util.SortedMap;
+import java.util.UUID;
 
 public class SettingItem {
 
@@ -22,7 +23,7 @@ public class SettingItem {
     public static final String KEY_OWN_WEBHOOK = "funnel.environment.ownwebhook";
     /**
      * UUID of the extension settings. This should be used if {@link #KEY_ACCOUNT_UUID} might actually hold
-     * multiple settings of the same extension type.
+     * multiple settings of the same extension type. The setting value type is {@link UUID}.
      */
     public static final String KEY_SETTING_UUID = "funnel.environment.settings-uuid";
     /**
@@ -30,6 +31,9 @@ public class SettingItem {
      * determine web service endpoints. Value is a boolean
      */
     public static final String KEY_ISPRODUCTION = "funnel.environment.isproduction";
+    /**
+     * UUID of the extension owning account. The setting value type is {@link UUID}.
+     */
     public static final String KEY_ACCOUNT_UUID = "funnel.environment.account-uuid";
     /**
      * Key to retrieve the billing account's default currency. Value will be a string.

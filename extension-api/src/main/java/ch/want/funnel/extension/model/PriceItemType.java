@@ -38,11 +38,13 @@ public enum PriceItemType {
      */
     ONSITE,
     /**
-     * Surcharge per pax. {@link PriceItem}s of this type must have a {@link PriceItem#getPurchasePrice()} of zero.
+     * Agency surcharge per pax. {@link PriceItem}s of this type must have a {@link PriceItem#getPurchasePrice()} of zero.
+     * <strong>This type must not be used for supplier/operator fees, even in a marketplace setting.</strong>
      */
     SURCHARGE_PER_PAX,
     /**
-     * Surcharge per booking. {@link PriceItem}s of this type must have a {@link PriceItem#getPurchasePrice()} of zero.
+     * Agency surcharge per booking. {@link PriceItem}s of this type must have a {@link PriceItem#getPurchasePrice()} of zero.
+     * <strong>This type must not be used for supplier/operator fees, even in a marketplace setting.</strong>
      */
     SURCHARGE_PER_BOOKING,
     /**
