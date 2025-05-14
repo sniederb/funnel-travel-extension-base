@@ -22,6 +22,7 @@ public class PriceItem implements Serializable {
     private TransportDocument transportDocument;
     private PriceItemType priceItemType;
     private String description;
+    private String code;
     private String currency;
     private BigDecimal amount;
     private BigDecimal amountInAccountCurrency;
@@ -61,12 +62,31 @@ public class PriceItem implements Serializable {
         this.priceItemType = priceItemType;
     }
 
+    /**
+     * varchar(1024) field. Leave empty if there is no descriptive text, use {@link #getPriceItemType()} to indicate the type of price item
+     * (rather than setting descriptions like 'Fare' and 'Taxes'). For coded values, use {@link #getCode()}.
+     */
     public String getDescription() {
         return description;
     }
 
     public void setDescription(final String description) {
         this.description = description;
+    }
+
+    /**
+     * varchar(128) field. Beware that coded values are typically not displayed to the customer. Example:
+     *
+     * <pre>
+     * Code: RO (for room only on a hotel booking)
+     * </pre>
+     */
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(final String code) {
+        this.code = code;
     }
 
     public String getCurrency() {
