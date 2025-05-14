@@ -553,8 +553,20 @@ public class Booking implements Serializable {
                 iterator.remove();
             }
         }
+        for (final Iterator<PriceItem> iterator = onsitePriceitems.iterator(); iterator.hasNext();) {
+            final PriceItem priceitem = iterator.next();
+            if (priceitem.getTravelService() != null) {
+                iterator.remove();
+            }
+        }
         for (final TravelService service : travelservices) {
             for (final Iterator<PriceItem> iterator = service.getPriceitems().iterator(); iterator.hasNext();) {
+                final PriceItem priceitem = iterator.next();
+                if (priceitem.getTransportDocument() != null) {
+                    iterator.remove();
+                }
+            }
+            for (final Iterator<PriceItem> iterator = service.getOnsitePriceitems().iterator(); iterator.hasNext();) {
                 final PriceItem priceitem = iterator.next();
                 if (priceitem.getTransportDocument() != null) {
                     iterator.remove();

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -54,6 +55,9 @@ public class TravelService implements Serializable {
     private transient SingleSegment singleSegment;
     @JsonManagedReference("references")
     private transient List<TravelServiceReference> travelServiceReferences = new ArrayList<>();
+    @JsonManagedReference("service-auxiliaries")
+    private transient List<TravelServiceAuxiliary> auxiliaries = new ArrayList<>();
+    @JsonIdentityReference(alwaysAsId = true)
     private transient List<Traveler> assignedTravelers = new ArrayList<>();
     private transient List<CustomFieldValue> customfieldValues = new ArrayList<>();
 
@@ -349,5 +353,13 @@ public class TravelService implements Serializable {
 
     public void setAssignedTravelers(final List<Traveler> assignedTravelers) {
         this.assignedTravelers = assignedTravelers;
+    }
+
+    public List<TravelServiceAuxiliary> getAuxiliaries() {
+        return auxiliaries;
+    }
+
+    public void setAuxiliaries(final List<TravelServiceAuxiliary> auxiliaries) {
+        this.auxiliaries = auxiliaries;
     }
 }

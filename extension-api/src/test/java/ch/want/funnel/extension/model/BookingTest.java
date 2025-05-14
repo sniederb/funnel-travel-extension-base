@@ -73,6 +73,7 @@ class BookingTest {
         booking.getTravelservices().get(0).getOnsitePriceitems().add(onsitePrice);
         final CustomFieldValue customFieldValue1 = ObjectFactory.createFieldValue("random.thought", "Value 1");
         booking.getTravelservices().get(0).getCustomfieldValues().add(customFieldValue1);
+        booking.getTravelservices().get(0).getAssignedTravelers().add(booking.getParticipants().get(0));
         final CustomFieldValue customFieldValue2 = new CustomFieldValue();
         customFieldValue2.setCustomField(customFieldValue1.getCustomField());
         customFieldValue2.setInternalvalue("Value 2");
@@ -93,7 +94,7 @@ class BookingTest {
         extensionFieldName.setExtensionClassName("ch.want.WhateverExtension");
         extensionFieldName.setFieldName("invoiceNumber");
         customFieldValue.getCustomField().getExtensionFieldNames().add(extensionFieldName);
-        booking.getCustomfields().add(customFieldValue);
+        booking.getCustomfieldValues().add(customFieldValue);
         // act
         final String bookingAsJson = OBJECTMAPPER.writeValueAsString(booking);
         //
