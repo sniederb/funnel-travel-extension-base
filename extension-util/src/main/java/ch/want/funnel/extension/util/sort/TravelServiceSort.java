@@ -40,7 +40,8 @@ public class TravelServiceSort<T> {
         }
         return sortKeys.stream()
             .sorted(
-                Comparator.nullsLast(Comparator.comparing(TravelServiceSortKey::getDeparture).thenComparing(TravelServiceSortKey::getLastResortSortProperty)))
+                Comparator.comparing(TravelServiceSortKey::getDeparture, Comparator.nullsLast(Comparator.naturalOrder()))
+                    .thenComparing(Comparator.comparing(TravelServiceSortKey::getLastResortSortProperty, Comparator.nullsLast(Comparator.naturalOrder()))))
             .map(serviceMap::get)
             .toList();
     }

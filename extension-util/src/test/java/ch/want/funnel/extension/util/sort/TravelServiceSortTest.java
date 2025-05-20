@@ -59,6 +59,18 @@ class TravelServiceSortTest {
         Assertions.assertEquals("22-HTL", result.get(7).getReferenceNumber());
     }
 
+    @Test
+    void sortWithoutDeparture() {
+        final List<TravelService> services = new ArrayList<>();
+        services.add(flight("FLT", LocalDateTime.parse("2025-05-19T13:15:00"), "FRA"));
+        services.add(hotel("HTL", LocalDate.parse("2025-05-19"), "afternoon", "FRA"));
+        services.add(transfer("TRF", null, "", null));
+        services.add(transfer("TRF2", LocalDate.parse("2025-05-22"), "", null));
+        final TravelServiceSort<TravelService> testee = new TravelServiceSort<>(new DefaultTravelServiceSortKeyTranslator());
+        // act + assert
+        Assertions.assertDoesNotThrow(() -> testee.sort(services));
+    }
+
     private TravelService flight(final String refNumber, final LocalDateTime departure, final String iataCode) {
         final TravelService flight = new TravelService();
         flight.setUuid(UUID.randomUUID());
