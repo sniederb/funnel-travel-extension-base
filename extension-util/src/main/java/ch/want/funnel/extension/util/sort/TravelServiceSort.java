@@ -29,19 +29,14 @@ public class TravelServiceSort<T> {
             serviceMap.put(sortKeyTranslator.getSortKey(service), service);
         }
         final List<TravelServiceSortKey> sortKeys = new ArrayList<>(serviceMap.keySet());
-        Optional<TravelServiceSortKey> keyNeedingTime = sortKeys.stream()
-            .filter(key -> key.isNeedsTime())
-            .findFirst();
-        while (keyNeedingTime.isPresent()) {
-            setSortKeyTime(keyNeedingTime.get(), serviceMap.values());
-            keyNeedingTime = sortKeys.stream()
-                .filter(key -> key.isNeedsTime())
-                .findFirst();
-        }
+        sortKeys.stream()
+            .filter(TravelServiceSortKey::isNeedsTime)
+            .forEach(key -> setSortKeyTime(key, serviceMap.values()));
+        final Comparator<TravelServiceSortKey> byDepatureAndThenLastResort = Comparator
+            .comparing(TravelServiceSortKey::getDeparture, Comparator.nullsLast(Comparator.naturalOrder()))
+            .thenComparing(Comparator.comparing(TravelServiceSortKey::getLastResortSortProperty, Comparator.nullsLast(Comparator.naturalOrder())));
         return sortKeys.stream()
-            .sorted(
-                Comparator.comparing(TravelServiceSortKey::getDeparture, Comparator.nullsLast(Comparator.naturalOrder()))
-                    .thenComparing(Comparator.comparing(TravelServiceSortKey::getLastResortSortProperty, Comparator.nullsLast(Comparator.naturalOrder()))))
+            .sorted(byDepatureAndThenLastResort)
             .map(serviceMap::get)
             .toList();
     }
@@ -62,9 +57,8 @@ public class TravelServiceSort<T> {
             } else {
                 setSortKeyTimeForMisc(travelServiceSortKey);
             }
-        } else {
-            travelServiceSortKey.setNeedsTime(false);
         }
+        travelServiceSortKey.setNeedsTime(false);
     }
 
     /**
@@ -72,7 +66,6 @@ public class TravelServiceSort<T> {
      */
     private void setSortKeyTimeForHotel(final TravelServiceSortKey travelServiceSortKey) {
         travelServiceSortKey.setDeparture(travelServiceSortKey.getDeparture().toLocalDate().atTime(LocalTime.MAX));
-        travelServiceSortKey.setNeedsTime(false);
     }
 
     /**
@@ -80,7 +73,6 @@ public class TravelServiceSort<T> {
      */
     private void setSortKeyTimeForCarRental(final TravelServiceSortKey travelServiceSortKey) {
         travelServiceSortKey.setDeparture(travelServiceSortKey.getDeparture().toLocalDate().atTime(LocalTime.MAX.minusMinutes(3)));
-        travelServiceSortKey.setNeedsTime(false);
     }
 
     /**
@@ -104,7 +96,6 @@ public class TravelServiceSort<T> {
         }
         // note that if there is no flight or train on the transfer day, the transfer will be the first item of the day, which is fitting
         // for over-night transports
-        travelServiceSortKey.setNeedsTime(false);
     }
 
     /**
@@ -112,7 +103,6 @@ public class TravelServiceSort<T> {
      */
     private void setSortKeyTimeForEvent(final TravelServiceSortKey travelServiceSortKey) {
         travelServiceSortKey.setDeparture(travelServiceSortKey.getDeparture().toLocalDate().atTime(LocalTime.MAX.minusMinutes(2)));
-        travelServiceSortKey.setNeedsTime(false);
     }
 
     /**
@@ -120,7 +110,6 @@ public class TravelServiceSort<T> {
      */
     private void setSortKeyTimeForInsurance(final TravelServiceSortKey travelServiceSortKey) {
         travelServiceSortKey.setDeparture(null);
-        travelServiceSortKey.setNeedsTime(false);
     }
 
     /**
@@ -128,6 +117,5 @@ public class TravelServiceSort<T> {
      */
     private void setSortKeyTimeForMisc(final TravelServiceSortKey travelServiceSortKey) {
         travelServiceSortKey.setDeparture(travelServiceSortKey.getDeparture().toLocalDate().atTime(LocalTime.MAX.minusMinutes(1)));
-        travelServiceSortKey.setNeedsTime(false);
     }
 }
