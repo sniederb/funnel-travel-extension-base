@@ -165,9 +165,7 @@ public class Booking implements Serializable {
     }
 
     /**
-     * Name of the company providing the travel service.
-     *
-     * @return
+     * Name of the company providing the travel service. Note that this value should match a registered funnel.travel provider.
      */
     public String getProviderSourcename() {
         return providerSourcename;
@@ -274,8 +272,8 @@ public class Booking implements Serializable {
     }
 
     /**
-     * The {@code productkey} has no business-function within funnel.travel, but consumer extensions
-     * might use it.
+     * The {@code productkey} has no business-function within funnel.travel, but consumer extensions might use it.
+     * Field should indicate something like a package catalog number.
      */
     public String getProductkey() {
         return productkey;
