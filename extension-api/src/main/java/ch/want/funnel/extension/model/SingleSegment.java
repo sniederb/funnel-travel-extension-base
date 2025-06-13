@@ -184,7 +184,13 @@ public class SingleSegment implements Serializable {
     }
 
     @JsonIgnore
+    @Deprecated
     public String getRentalCarExtras() {
+        return getAdditionalDescription();
+    }
+
+    @JsonIgnore
+    public String getRentalCarIncluded() {
         return getAdditionalDescription();
     }
 

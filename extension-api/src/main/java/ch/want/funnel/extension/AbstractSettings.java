@@ -1,6 +1,7 @@
 package ch.want.funnel.extension;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 
 public abstract class AbstractSettings {
@@ -20,7 +21,8 @@ public abstract class AbstractSettings {
     protected void validateUrl(final String value, final String errorcode) throws IllegalSettingException {
         try {
             new URL(value);
-        } catch (final MalformedURLException e) {
+            URI.create(value);
+        } catch (final IllegalArgumentException | MalformedURLException e) {
             throw new IllegalSettingException(translate(errorcode), e);
         }
     }

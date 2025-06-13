@@ -305,7 +305,8 @@ public class TravelService implements Serializable {
     }
 
     /**
-     * Derived destination
+     * Derived destination. For segmented services, this is the calculated destination. For all other, this is the
+     * {@link SingleSegment#getStartLocation()}.
      */
     public Location getDestination() {
         return destination;
