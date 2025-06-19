@@ -54,6 +54,8 @@ public class Booking implements Serializable {
     private String agentSign;
     private String totalpricecurrency;
     private BigDecimal totalprice;
+    private BigDecimal depositAmount;
+    private LocalDate fullPaymentDueDate;
     private transient JsonNode extensionData;
     private Location destination;
     private String url;
@@ -321,6 +323,28 @@ public class Booking implements Serializable {
 
     public void setTotalprice(final BigDecimal totalprice) {
         this.totalprice = totalprice;
+    }
+
+    /**
+     * The amount payable on booking, usually the non-refundable part of the booking.
+     */
+    public BigDecimal getDepositAmount() {
+        return depositAmount;
+    }
+
+    public void setDepositAmount(final BigDecimal depositAmount) {
+        this.depositAmount = depositAmount;
+    }
+
+    /**
+     * The date the full/remaining payment is due. Typically this is the date the cancellation policy turns to 0% refundable.
+     */
+    public LocalDate getFullPaymentDueDate() {
+        return fullPaymentDueDate;
+    }
+
+    public void setFullPaymentDueDate(final LocalDate fullPaymentDueDate) {
+        this.fullPaymentDueDate = fullPaymentDueDate;
     }
 
     public JsonNode getExtensionData() {
