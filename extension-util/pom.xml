@@ -3,6 +3,7 @@
 	<artifactId>extension-util</artifactId>
 	<packaging>jar</packaging>
 	<description>Utils commonly needed in funnel.travel extensions</description>
+	<name>funnel.travel extension utils</name>
 	
 	<parent>
 		<groupId>ch.want.funnel</groupId>

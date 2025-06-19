@@ -3,6 +3,7 @@
 	<artifactId>extension-api</artifactId>
 	<packaging>jar</packaging>
 	<description>API for funnel.travel extensions</description>
+	<name>funnel.travel extension API</name>
 	
 	<parent>
 		<groupId>ch.want.funnel</groupId>
