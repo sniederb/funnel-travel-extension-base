@@ -26,6 +26,7 @@ public class BookingPayment implements Serializable {
     private PaymentType paymentType;
     private String ccNumber;
     private LocalDate ccExpiration;
+    private String transactionNumber;
     private PayeeType payeeType;
 
     public BookingPayment() {
@@ -118,5 +119,17 @@ public class BookingPayment implements Serializable {
 
     public void setPayeeType(final PayeeType payeeType) {
         this.payeeType = payeeType;
+    }
+
+    /**
+     * This field holds the payment reference number. Depending on context, this can be a credit card transaction ID, an EFT POS reference
+     * number or any other payment system reference number.
+     */
+    public String getTransactionNumber() {
+        return transactionNumber;
+    }
+
+    public void setTransactionNumber(final String transactionNumber) {
+        this.transactionNumber = transactionNumber;
     }
 }
