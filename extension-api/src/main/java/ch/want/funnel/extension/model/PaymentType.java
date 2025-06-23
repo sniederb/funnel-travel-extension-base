@@ -1,12 +1,13 @@
 package ch.want.funnel.extension.model;
 
 public enum PaymentType {
+
     INVOICE("INV"), //
-    AMEX("AX"), //
-    VISA("VI", "BA", "JB"), //
-    MASTERCARD("MC", "CA", "EC"), //
-    DINERS("DC"), //
-    AIRPLUS("TP"),
+    AMEX("AX", "AMX"), //
+    VISA("VI", "VIS", "BA", "JB"), //
+    MASTERCARD("MC", "CA", "EC", "ECA"), //
+    DINERS("DC", "DIN"), //
+    AIRPLUS("TP", "UAP"),
     //
     OTHER;
 
