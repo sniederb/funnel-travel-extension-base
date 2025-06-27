@@ -27,10 +27,18 @@ public interface FunnelExtension {
     /**
      * Get a list of settings which the implementation requires. The settings will be presented in the UI
      * <strong>in the same order</strong> as provided by the returned list.
-     *
-     * @return
      */
     List<SettingItem> getSettings();
+
+    /**
+     * Same as {@link #getSettings()}, but takes a map of context setting values as defined in {@link SettingItem}.
+     *
+     * @param contextSettingValues
+     *            a map of context setting values as defined in {@link SettingItem}
+     */
+    default List<SettingItem> getSettings(final Map<String, Object> contextSettingValues) {
+        return getSettings();
+    }
 
     /**
      * Validate the settings which will later be passed to the extension.
