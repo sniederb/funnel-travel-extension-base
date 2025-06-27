@@ -346,7 +346,8 @@ public class TravelService implements Serializable {
 
     /**
      * Get the travelers assigned to this service. This collection might be empty, in
-     * which case all travelers are to be considered 'assigned'
+     * which case all travelers are to be considered 'assigned'. Note that the collection items might
+     * <strong>not have object identity</strong> with {@link Booking#getParticipants()}
      */
     public List<Traveler> getAssignedTravelers() {
         return assignedTravelers;

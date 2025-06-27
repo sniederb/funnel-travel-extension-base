@@ -44,6 +44,14 @@ public class SettingItem {
      */
     public static final String KEY_ACCOUNT_LOCALE = "funnel.environment.account-locale";
     /**
+     * Key to retrieve the billing account's code. This can be useful if processing logic is specific to a certain account
+     */
+    public static final String KEY_ACCOUNT_CODE = "funnel.environment.account-code";
+    /**
+     * Key to retrieve the comma-separated list of communities associated with the booking.
+     */
+    public static final String KEY_COMMUNITY_LIST = "funnel.environment.community-list";
+    /**
      * Two-letter code of the country the account is based in.
      */
     public static final String KEY_ACCOUNT_COUNTRY = "funnel.environment.account-country";
