@@ -32,6 +32,8 @@ public interface FunnelExtension {
 
     /**
      * Same as {@link #getSettings()}, but takes a map of context setting values as defined in {@link SettingItem}.
+     * Note that settings of type {@link SettingItemValueType#INTERNAL} are <strong>never</strong> deemed context-specific,
+     * and must therefore always be returned.
      *
      * @param contextSettingValues
      *            a map of context setting values as defined in {@link SettingItem}
