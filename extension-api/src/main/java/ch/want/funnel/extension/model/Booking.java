@@ -66,6 +66,7 @@ public class Booking implements Serializable {
     private String extensionClassname;
     private boolean forceNewTrip;
     private boolean packaged;
+    private BookingFormOfPayment formOfPayment;
     private transient List<TravelService> travelservices = new ArrayList<>();
     private transient List<PriceItem> priceitems = new ArrayList<>();
     private transient List<PriceItem> onsitePriceitems = new ArrayList<>();
@@ -140,6 +141,19 @@ public class Booking implements Serializable {
 
     public void setCustomer(final BookingCustomer customer) {
         this.customer = customer;
+    }
+
+    public BookingFormOfPayment getFormOfPayment() {
+        return formOfPayment;
+    }
+
+    @JsonIgnore
+    public Optional<BookingFormOfPayment> getFormOfPaymentOptional() {
+        return Optional.ofNullable(formOfPayment);
+    }
+
+    public void setFormOfPayment(final BookingFormOfPayment formOfPayment) {
+        this.formOfPayment = formOfPayment;
     }
 
     public OffsetDateTime getCreated() {

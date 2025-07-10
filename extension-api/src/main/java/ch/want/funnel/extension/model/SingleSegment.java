@@ -54,6 +54,15 @@ public class SingleSegment implements Serializable {
         this.travelService = travelService;
     }
 
+    /**
+     * Get {@link Location} object with:
+     * <ul>
+     * <li>{@link Location#getName()} holding the producer-provided name, if present. Otherwise, the location name</li>
+     * <li>{@link Location#getIataCode()} is only set if the producer provided an IATA code or the location lookup determined one</li>
+     * </ul>
+     *
+     * @return
+     */
     public Location getStartLocation() {
         if (startLocation == null) {
             startLocation = new Location();
@@ -165,6 +174,15 @@ public class SingleSegment implements Serializable {
         this.city = city;
     }
 
+    /**
+     * Get {@link Location} object with:
+     * <ul>
+     * <li>{@link Location#getName()} holding the producer-provided name, if present. Otherwise, the location name</li>
+     * <li>{@link Location#getIataCode()} is only set if the producer provided an IATA code or the location lookup determined one</li>
+     * </ul>
+     *
+     * @return
+     */
     public Location getEndLocation() {
         if (endLocation == null) {
             endLocation = new Location();
