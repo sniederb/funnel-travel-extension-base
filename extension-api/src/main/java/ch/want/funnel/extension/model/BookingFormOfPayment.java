@@ -9,11 +9,20 @@ import java.time.LocalDate;
 public class BookingFormOfPayment implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private FormOfPaymentSystem system;
     private String formOfPaymentType;
     private String identifier;
     private String identifierType;
     private LocalDate expiration;
     private String holderName;
+
+    public FormOfPaymentSystem getSystem() {
+        return system;
+    }
+
+    public void setSystem(final FormOfPaymentSystem system) {
+        this.system = system;
+    }
 
     public String getFormOfPaymentType() {
         return formOfPaymentType;

@@ -27,6 +27,7 @@ public class BookingPayment implements Serializable {
     private String ccNumber;
     private LocalDate ccExpiration;
     private String transactionNumber;
+    private FormOfPaymentSystem formOfPaymentSystem;
     private PayeeType payeeType;
 
     public BookingPayment() {
@@ -131,5 +132,18 @@ public class BookingPayment implements Serializable {
 
     public void setTransactionNumber(final String transactionNumber) {
         this.transactionNumber = transactionNumber;
+    }
+
+    /**
+     * The system which issued the {@link #transactionNumber}.
+     *
+     * @return
+     */
+    public FormOfPaymentSystem getFormOfPaymentSystem() {
+        return formOfPaymentSystem;
+    }
+
+    public void setFormOfPaymentSystem(final FormOfPaymentSystem formOfPaymentSystem) {
+        this.formOfPaymentSystem = formOfPaymentSystem;
     }
 }
