@@ -59,6 +59,7 @@ public class SingleSegment implements Serializable {
      * <ul>
      * <li>{@link Location#getName()} holding the producer-provided name, if present. Otherwise, the location name</li>
      * <li>{@link Location#getIataCode()} is only set if the producer provided an IATA code or the location lookup determined one</li>
+     * <li>{@link Location#getCountry()} holding the producer-provided country, if present. Otherwise, the location's country</li>
      * </ul>
      *
      * @return
@@ -179,6 +180,7 @@ public class SingleSegment implements Serializable {
      * <ul>
      * <li>{@link Location#getName()} holding the producer-provided name, if present. Otherwise, the location name</li>
      * <li>{@link Location#getIataCode()} is only set if the producer provided an IATA code or the location lookup determined one</li>
+     * <li>{@link Location#getCountry()} holding the producer-provided country, if present. Otherwise, the location's country</li>
      * </ul>
      *
      * @return

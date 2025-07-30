@@ -39,6 +39,7 @@ public class TravelService implements Serializable {
     private String comment;
     private transient JsonNode extensionData;
     private Boolean nonBspFlight;
+    private Boolean ndcFlight;
     private Boolean paidOnSite;
     private Location destination;
     @JsonManagedReference("service-documents")
@@ -221,6 +222,12 @@ public class TravelService implements Serializable {
         this.cancellationPolicy = cancellationPolicy;
     }
 
+    /**
+     * Get list of {@link TransportDocument}, sorted by {@link TransportDocument#getTransportDocumentType()},
+     * {@link TransportDocument#getReferenceNumber()} and {@link TransportDocument#getDescription()}.
+     *
+     * @return
+     */
     public List<TransportDocument> getTransportDocuments() {
         return transportDocuments;
     }
@@ -282,8 +289,8 @@ public class TravelService implements Serializable {
     }
 
     /**
-     * If true, the {@link #getProviderSourcename()} is not a BSP-airline. As such, BSP-style 13-digit tickets are meaningless, and vendor
-     * locators should be used instead.
+     * If true, the {@link #getProviderSourcename()} is not a BSP-airline. As such, BSP-style 13-digit tickets are probably meaningless, and
+     * vendor locators should be used instead. Irrelevant for all service types except {@link TravelServiceType#FLIGHT}.
      */
     public Boolean getNonBspFlight() {
         return nonBspFlight;
@@ -291,6 +298,17 @@ public class TravelService implements Serializable {
 
     public void setNonBspFlight(final Boolean nonBspFlight) {
         this.nonBspFlight = nonBspFlight;
+    }
+
+    /**
+     * If true, the flight was booked via an NDC platform. Irrelevant for all service types except {@link TravelServiceType#FLIGHT}.
+     */
+    public Boolean getNdcFlight() {
+        return ndcFlight;
+    }
+
+    public void setNdcFlight(final Boolean ndcFlight) {
+        this.ndcFlight = ndcFlight;
     }
 
     /**
