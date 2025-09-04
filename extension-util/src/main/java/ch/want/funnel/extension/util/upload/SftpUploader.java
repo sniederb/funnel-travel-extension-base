@@ -6,6 +6,7 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Vector;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,14 +68,8 @@ class SftpUploader implements FileUploader {
         session.connect();
         sftpChannel = (ChannelSftp) session.openChannel("sftp");
         sftpChannel.connect();
-        String path = resourceIdentifier.getPath();
-        if (path != null && path.length() > 0) {
-            // path could be relative or absolute
-            final String ftpHome = sftpChannel.pwd();
-            if (!path.startsWith(ftpHome) && path.startsWith("/")) {
-                // path is relative, strip leading slash
-                path = path.substring(1);
-            }
+        final String path = resourceIdentifier.getPath();
+        if (StringUtils.isNotBlank(path)) {
             sftpChannel.cd(path);
         }
     }

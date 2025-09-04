@@ -8,6 +8,7 @@ public class TravelServiceReference {
     private TravelService travelService;
     private String system;
     private String referenceNumber;
+    private SystemReferenceType referenceType = SystemReferenceType.DEFAULT;
     private String agencyId;
 
     public TravelService getTravelService() {
@@ -32,6 +33,14 @@ public class TravelServiceReference {
 
     public void setReferenceNumber(final String referenceNumber) {
         this.referenceNumber = referenceNumber;
+    }
+
+    public SystemReferenceType getReferenceType() {
+        return referenceType;
+    }
+
+    public void setReferenceType(final SystemReferenceType referenceType) {
+        this.referenceType = referenceType;
     }
 
     public String getAgencyId() {

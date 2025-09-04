@@ -239,6 +239,8 @@ public class TravelService implements Serializable {
     /**
      * Get all price items associated with this service. This will <strong>include</strong> price items bound to a
      * {@link TransportDocument}. Note that {@link PriceItem}s might not have object-identity.
+     *
+     * The resulting collection will <strong>not</strong> contain price items of type {@link PriceItemType#ONSITE}.
      */
     public List<PriceItem> getPriceitems() {
         return priceitems;

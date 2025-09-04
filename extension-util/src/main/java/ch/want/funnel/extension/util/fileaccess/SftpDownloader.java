@@ -8,6 +8,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
@@ -78,14 +80,8 @@ class SftpDownloader implements FileDownloader {
         session.connect();
         sftpChannel = (ChannelSftp) session.openChannel("sftp");
         sftpChannel.connect();
-        String path = resourceIdentifier.getPath();
-        if (path != null && path.length() > 0) {
-            // path could be relative or absolute
-            final String ftpHome = sftpChannel.pwd();
-            if (!path.startsWith(ftpHome) && path.startsWith("/")) {
-                // path is relative, strip leading slash
-                path = path.substring(1);
-            }
+        final String path = resourceIdentifier.getPath();
+        if (StringUtils.isNotBlank(path)) {
             sftpChannel.cd(path);
         }
     }

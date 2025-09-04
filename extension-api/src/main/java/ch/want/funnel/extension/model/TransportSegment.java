@@ -34,8 +34,8 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     private String travelclassDescription;
     private String farebasis;
     private BookingStatus bookingstatus;
-    private String providername;
-    private String providerNumber;
+    private String operatorCode;
+    private String operatorNumber;
     private String connectionnumber;
     private String reservationlocator;
     private String baggage;
@@ -100,20 +100,21 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     }
 
     /**
-     * This is most likely a code, e.g. a one-letter cabin class code.
+     * Return a class code, e.g. a one-letter cabin class code.
      */
     public String getTravelclass() {
         return travelclass;
     }
 
+    /**
+     * Set the travel class. If a producer has both booking class and cabin class, the latter should be used here.
+     */
     public void setTravelclass(final String travelclass) {
         this.travelclass = travelclass;
     }
 
     /**
-     * This is a descriptive text of {@link #getTravelclass()}
-     *
-     * @return
+     * Return the descriptive text of {@link #getTravelclass()}.
      */
     public String getTravelclassDescription() {
         return travelclassDescription;
@@ -132,26 +133,63 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     }
 
     /**
-     * Get the operating provider. Note that the validating provider is available on a service level
-     * at {@link TravelService#getProviderSourcename()}
+     * @deprecated Use {@link #getOperatorCode()}
+     * @return
      */
+    @Deprecated
     public String getProvidername() {
-        return providername;
-    }
-
-    public void setProvidername(final String providername) {
-        this.providername = providername;
+        return getOperatorCode();
     }
 
     /**
-     * Get number of provider. For airlines, this is the IATA number.
+     * @deprecated Use {@link #setOperatorCode(String)}
+     * @return
      */
-    public String getProviderNumber() {
-        return providerNumber;
+    @Deprecated
+    public void setProvidername(final String providername) {
+        setOperatorCode(providername);
     }
 
+    /**
+     * @deprecated Use {@link #getOperatorNumber()}
+     * @return
+     */
+    @Deprecated
+    public String getProviderNumber() {
+        return getOperatorNumber();
+    }
+
+    /**
+     * @deprecated Use {@link #setOperatorNumber()}
+     * @return
+     */
+    @Deprecated
     public void setProviderNumber(final String providerNumber) {
-        this.providerNumber = providerNumber;
+        setOperatorNumber(providerNumber);
+    }
+
+    /**
+     * Get the operating provider. Note that the validating provider is available on a service level at
+     * {@link TravelService#getProviderSourcename()}. The returned value is <strong>not mapped</strong> and will typically be a two-letter
+     * airline code
+     */
+    public String getOperatorCode() {
+        return operatorCode;
+    }
+
+    public void setOperatorCode(final String operatorCode) {
+        this.operatorCode = operatorCode;
+    }
+
+    /**
+     * Get number of operator/provider. For airlines, this is the IATA number.
+     */
+    public String getOperatorNumber() {
+        return operatorNumber;
+    }
+
+    public void setOperatorNumber(final String operatorNumber) {
+        this.operatorNumber = operatorNumber;
     }
 
     /**
