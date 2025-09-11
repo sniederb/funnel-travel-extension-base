@@ -4,6 +4,7 @@
 package ch.want.funnel.extension.model;
 
 public enum TravelServiceType {
+
     /**
      * Segmented type
      * Ordinal: 0
@@ -35,6 +36,8 @@ public enum TravelServiceType {
      */
     SHIP,
     /**
+     * Unsegmented type. Use this type with care. Often, instead of the "package", individual services are processed. Using this type can
+     * make sense if e.g. the individual services are not priced, and an additional entry of this type is used to hold the price.
      * Ordinal: 6
      */
     PACKAGE,

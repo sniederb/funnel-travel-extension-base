@@ -15,6 +15,8 @@ public interface MidofficeReferenceNumberCallback {
 
     /**
      * Use the {@link Booking#getMidofficeReferenceNumber()} to update the target system. Beware that {@code trip} can be null.
+     *
+     * @return True if the number callback executed successfully, false otherwise.
      */
-    void midofficeReferenceNumberChanged(Booking booking, Trip trip, Map<String, Object> settings, Locale locale);
+    boolean midofficeReferenceNumberChanged(Booking booking, Trip trip, Map<String, Object> settings, Locale locale);
 }
