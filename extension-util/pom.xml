@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>ch.want.funnel</groupId>
 		<artifactId>extension-base</artifactId>
-		<version>3.0.56</version>
+		<version>3.0.57-SNAPSHOT</version>
 	</parent>
 
 	<build>
@@ -19,7 +19,7 @@
 		<dependency>
 		    <groupId>ch.want.funnel</groupId>
 		    <artifactId>extension-api</artifactId>
-		    <version>3.0.56</version>
+		    <version>3.0.57-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.freemarker</groupId>
