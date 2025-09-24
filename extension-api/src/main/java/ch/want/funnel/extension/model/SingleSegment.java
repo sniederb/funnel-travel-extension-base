@@ -76,7 +76,7 @@ public class SingleSegment implements Serializable {
     }
 
     /**
-     * General-purpose getter for the description of the provider.
+     * General-purpose getter for the description of the provider ("who").
      * See {@link #getHotelName()}, {@link #getRentalcarCompany()} and {@link #getMiscServiceDescription()} resp.
      */
     public String getProviderDescription() {
@@ -103,7 +103,7 @@ public class SingleSegment implements Serializable {
     }
 
     /**
-     * General-purpose getter for the description of the service provided.
+     * General-purpose getter for the description of the service provided ("what").
      * See {@link #getRoomDescription()}, {@link #getVehicleDescription()} resp.
      */
     public String getServiceDescription() {

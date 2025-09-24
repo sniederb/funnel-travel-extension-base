@@ -290,6 +290,16 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
         this.departingFromLocation = departingFromLocation;
     }
 
+    @JsonIgnore
+    public String getDeparturePort() {
+        return getDepartingFromLocation().getName();
+    }
+
+    @JsonIgnore
+    public void setDeparturePort(final String portName) {
+        getDepartingFromLocation().setName(portName);
+    }
+
     public Location getArrivingAtLocation() {
         if (arrivingAtLocation == null) {
             arrivingAtLocation = new Location();
@@ -299,6 +309,16 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
 
     public void setArrivingAtLocation(final Location arrivingAtLocation) {
         this.arrivingAtLocation = arrivingAtLocation;
+    }
+
+    @JsonIgnore
+    public String getArrivalPort() {
+        return getArrivingAtLocation().getName();
+    }
+
+    @JsonIgnore
+    public void setArrivalPort(final String portName) {
+        getArrivingAtLocation().setName(portName);
     }
 
     /**

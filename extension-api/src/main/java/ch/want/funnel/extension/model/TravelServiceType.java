@@ -31,7 +31,8 @@ public enum TravelServiceType {
      */
     BUS,
     /**
-     * Segmented type
+     * Segmented type. This service type typically has only one (1) segment, but is in nature still a "from A to B" service. A cruise will
+     * often have information more akin to a {@link #HOTEL}, use custom fields to map such data.
      * Ordinal: 5
      */
     SHIP,
