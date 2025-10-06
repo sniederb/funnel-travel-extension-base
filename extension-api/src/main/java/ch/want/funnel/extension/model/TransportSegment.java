@@ -41,6 +41,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     private String baggage;
     private Integer co2KiloPerPax;
     private String vehicleType;
+    private String catering;
     private transient List<TransportDocument> auxiliaries = new ArrayList<>();
 
     public UUID getUuid() {
@@ -227,6 +228,14 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
         this.baggage = baggage;
     }
 
+    public String getFerryVehicle() {
+        return getBaggage();
+    }
+
+    public void setFerryVehicle(final String vehicle) {
+        setBaggage(vehicle);
+    }
+
     public Integer getCo2KiloPerPax() {
         return co2KiloPerPax;
     }
@@ -391,5 +400,16 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
 
     public void setArrivalDetails(final String arrivalDetails) {
         this.arrivalDetails = arrivalDetails;
+    }
+
+    /**
+     * Description of meal services, mainly for cruises.
+     */
+    public String getCatering() {
+        return catering;
+    }
+
+    public void setCatering(final String catering) {
+        this.catering = catering;
     }
 }

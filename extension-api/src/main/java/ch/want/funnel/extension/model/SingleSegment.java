@@ -25,6 +25,9 @@ public class SingleSegment implements Serializable {
     private String providerDescription;
     private String serviceDescription;
     private String additionalDescription;
+    private String primaryTraveller;
+    private String liability;
+    private String upgrades;
     private String serviceTypeCode;
     private Integer serviceCount;
     private String startConditions;
@@ -197,14 +200,14 @@ public class SingleSegment implements Serializable {
     }
 
     /**
-     * Multi-purpose, additional description field. See {@link #getRentalCarExtras()} and {@link #getHotelAndPensionDescription()}
+     * Multi-purpose, additional description field. See {@link #getRentalCarIncluded()} and {@link #getHotelAndPensionDescription()}
      */
     public String getAdditionalDescription() {
         return additionalDescription;
     }
 
     @JsonIgnore
-    @Deprecated
+    @Deprecated(forRemoval = true)
     public String getRentalCarExtras() {
         return getAdditionalDescription();
     }
@@ -343,5 +346,39 @@ public class SingleSegment implements Serializable {
 
     public void setRate(final BigDecimal rate) {
         this.rate = rate;
+    }
+
+    /**
+     * Get rental car main driver, or passenger name a hotel room is booked on.
+     */
+    public String getPrimaryTraveller() {
+        return primaryTraveller;
+    }
+
+    public void setPrimaryTraveller(final String primaryTraveller) {
+        this.primaryTraveller = primaryTraveller;
+    }
+
+    /**
+     * Insurance description, mainly for rental cars.
+     */
+    public String getLiability() {
+        return liability;
+    }
+
+    public void setLiability(final String liability) {
+        this.liability = liability;
+    }
+
+    /**
+     * Priced extras for which the provider only has a text description (if structured data is present, consider populating
+     * {@link TravelServiceAuxiliary}.
+     */
+    public String getUpgrades() {
+        return upgrades;
+    }
+
+    public void setUpgrades(final String upgrades) {
+        this.upgrades = upgrades;
     }
 }
