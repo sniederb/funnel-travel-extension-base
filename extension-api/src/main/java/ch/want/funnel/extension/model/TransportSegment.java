@@ -138,6 +138,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
      * @return
      */
     @Deprecated
+    @JsonIgnore
     public String getProvidername() {
         return getOperatorCode();
     }
@@ -147,6 +148,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
      * @return
      */
     @Deprecated
+    @JsonIgnore
     public void setProvidername(final String providername) {
         setOperatorCode(providername);
     }
@@ -156,6 +158,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
      * @return
      */
     @Deprecated
+    @JsonIgnore
     public String getProviderNumber() {
         return getOperatorNumber();
     }
@@ -165,6 +168,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
      * @return
      */
     @Deprecated
+    @JsonIgnore
     public void setProviderNumber(final String providerNumber) {
         setOperatorNumber(providerNumber);
     }
@@ -228,10 +232,12 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
         this.baggage = baggage;
     }
 
+    @JsonIgnore
     public String getFerryVehicle() {
         return getBaggage();
     }
 
+    @JsonIgnore
     public void setFerryVehicle(final String vehicle) {
         setBaggage(vehicle);
     }

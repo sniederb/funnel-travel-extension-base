@@ -95,7 +95,7 @@ public class AcrissClassification {
         case 'M':
             return "Monospace";
         case 'R':
-            return "Recreational Vehicle";
+            return "Recreational Vehicle"; // motorhome or a smaller campervan
         case 'H':
             return "Motor Home";
         case 'Y':
