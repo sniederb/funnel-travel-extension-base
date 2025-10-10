@@ -64,14 +64,14 @@ public class AcrissClassification {
     /**
      * Check an ACRISS code against the list at https://www.acriss.org/car-codes/expanded-matrix/pseudo-car-codes/ .
      */
-    public boolean isPseudoCode(final String acrissCode) {
+    public static boolean isPseudoCode(final String acrissCode) {
         return PSEUDO_CODES.containsKey(acrissCode);
     }
 
     /**
      * Get a vehicle description for an ACRISS pseudo-code.
      */
-    public Optional<String> getPseudoDefinition(final String acrissCode) {
+    public static Optional<String> getPseudoDefinition(final String acrissCode) {
         return Optional.ofNullable(PSEUDO_CODES.get(acrissCode));
     }
 
