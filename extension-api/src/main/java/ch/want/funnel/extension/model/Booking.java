@@ -31,6 +31,7 @@ import ch.want.funnel.extension.tripdata.TripDataConsumer;
 @JsonIgnoreProperties(value = { "header", "departuredateAsUtilDate", "returndateAsUtilDate" }, allowGetters = true)
 public class Booking implements Serializable {
 
+    public static final String SHARED_EXTENSIONDATA_KEY = "ch.want.funnel.extension._shared_";
     private static final long serialVersionUID = 1L;
     private UUID uuid;
     private UUID tripUuid;
