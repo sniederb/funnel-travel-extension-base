@@ -8,13 +8,16 @@ public class TravelServiceSortKey {
 
     private final TravelServiceType serviceType;
     private final MiscServiceType miscServiceType;
-    private final String lastResortSortProperty;
+    private final String referenceNumber;
+    private String lastResortSortProperty;
     private LocalDateTime departure;
     private boolean needsTime;
 
-    public TravelServiceSortKey(final TravelServiceType serviceType, final MiscServiceType miscServiceType, final String lastResortSortProperty) {
+    public TravelServiceSortKey(final TravelServiceType serviceType, final MiscServiceType miscServiceType, final String referenceNumber,
+            final String lastResortSortProperty) {
         this.serviceType = serviceType;
         this.miscServiceType = miscServiceType;
+        this.referenceNumber = referenceNumber;
         this.lastResortSortProperty = lastResortSortProperty;
     }
 
@@ -44,5 +47,13 @@ public class TravelServiceSortKey {
 
     public String getLastResortSortProperty() {
         return lastResortSortProperty;
+    }
+
+    public void setLastResortSortProperty(final String lastResortSortProperty) {
+        this.lastResortSortProperty = lastResortSortProperty;
+    }
+
+    public String getReferenceNumber() {
+        return referenceNumber;
     }
 }

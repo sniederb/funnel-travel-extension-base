@@ -26,10 +26,10 @@ public class DefaultTravelServiceSortKeyTranslator implements TravelServiceSortK
     public TravelServiceSortKey getSortKey(final TravelService obj) {
         TravelServiceSortKey result;
         if (TravelServiceType.hasSegments(obj.getTravelServiceType())) {
-            result = new TravelServiceSortKey(obj.getTravelServiceType(), MiscServiceType.DEFAULT, obj.getUuid().toString());
+            result = new TravelServiceSortKey(obj.getTravelServiceType(), MiscServiceType.DEFAULT, obj.getReferenceNumber(), obj.getUuid().toString());
             initFromSegment(obj, result);
         } else {
-            result = new TravelServiceSortKey(obj.getTravelServiceType(), getMiscServiceType(obj), obj.getUuid().toString());
+            result = new TravelServiceSortKey(obj.getTravelServiceType(), getMiscServiceType(obj), obj.getReferenceNumber(), obj.getUuid().toString());
             initFromUnsegmented(obj, result);
         }
         return result;
@@ -78,7 +78,7 @@ public class DefaultTravelServiceSortKeyTranslator implements TravelServiceSortK
                 sortKey.setDeparture(departureDate.atStartOfDay());
                 sortKey.setNeedsTime(true);
                 final String timeExpression = travelService.getSingleSegment().getStartTime();
-                if (timeExpression != null) {
+                if ((timeExpression != null) && (unsegmentedTimeIsBinding(travelService))) {
                     try {
                         final DateTimeFormatter timeFormatter = getMostLikeyDateTimeFormatter(timeExpression);
                         final LocalTime tm = LocalTime.parse(timeExpression.toUpperCase(), timeFormatter);
@@ -110,5 +110,13 @@ public class DefaultTravelServiceSortKeyTranslator implements TravelServiceSortK
                 sortKey.setDeparture(seg.getDeparturetime());
                 sortKey.setNeedsTime(false);
             });
+    }
+
+    /**
+     * Returns false for service types where a "start time" is an indicative "not before", such as a hotel check-in or a rental car pick up.
+     */
+    private boolean unsegmentedTimeIsBinding(final TravelService travelService) {
+        return travelService.getTravelServiceType() != TravelServiceType.HOTEL &&
+            travelService.getTravelServiceType() != TravelServiceType.CARRENTAL;
     }
 }

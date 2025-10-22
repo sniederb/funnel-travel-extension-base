@@ -60,6 +60,23 @@ class TravelServiceSortTest {
     }
 
     @Test
+    void sortRailAndFly() {
+        final List<TravelService> services = new ArrayList<>();
+        services.add(flight("ZD8L73", LocalDateTime.parse("2025-05-19T11:35:00"), "FRA"));
+        services.add(hotel("286-2142283", LocalDate.parse("2025-05-19"), "22:10", "NBO"));
+        services.add(transfer("JHYN72", LocalDate.parse("2025-05-19"), "21:40", null));
+        services.add(misc("ZD8L73_1", LocalDate.parse("2025-05-19"), "", null));
+        final TravelServiceSort<TravelService> testee = new TravelServiceSort<>(new DefaultTravelServiceSortKeyTranslator());
+        // act
+        final List<TravelService> result = testee.sort(services);
+        // assert
+        Assertions.assertEquals("ZD8L73", result.get(0).getReferenceNumber());
+        Assertions.assertEquals("ZD8L73_1", result.get(1).getReferenceNumber());
+        Assertions.assertEquals("JHYN72", result.get(2).getReferenceNumber());
+        Assertions.assertEquals("286-2142283", result.get(3).getReferenceNumber());
+    }
+
+    @Test
     void sortWithoutDeparture() {
         final List<TravelService> services = new ArrayList<>();
         services.add(flight("FLT", LocalDateTime.parse("2025-05-19T13:15:00"), "FRA"));
@@ -121,5 +138,17 @@ class TravelServiceSortTest {
         activity.getSingleSegment().setStartTime(timeExpression);
         activity.getSingleSegment().getStartLocation().setIataCode(iataCode);
         return activity;
+    }
+
+    private TravelService misc(final String refNumber, final LocalDate checkin, final String timeExpression, final String iataCode) {
+        final TravelService misc = new TravelService();
+        misc.setUuid(UUID.randomUUID());
+        misc.setTravelServiceType(TravelServiceType.MISC);
+        misc.setSingleSegment(new SingleSegment());
+        misc.setReferenceNumber(refNumber);
+        misc.setDeparturedate(checkin);
+        misc.getSingleSegment().setStartTime(timeExpression);
+        misc.getSingleSegment().getStartLocation().setIataCode(iataCode);
+        return misc;
     }
 }

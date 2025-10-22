@@ -10,11 +10,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
+
 import ch.want.funnel.extension.model.TravelServiceType;
 
 public class TravelServiceSort<T> {
 
     private final TravelServiceSortKeyTranslator<T> sortKeyTranslator;
+    private final Map<TravelServiceSortKey, T> serviceMap = new HashMap<>();
 
     public TravelServiceSort(final TravelServiceSortKeyTranslator<T> sortKeyTranslator) {
         this.sortKeyTranslator = sortKeyTranslator;
@@ -24,24 +27,24 @@ public class TravelServiceSort<T> {
      * Sort a list of T using an internal {@link TravelServiceSortKey}.
      */
     public List<T> sort(final List<T> services) {
-        final Map<TravelServiceSortKey, T> serviceMap = new HashMap<>();
+        serviceMap.clear();
         for (final T service : services) {
             serviceMap.put(sortKeyTranslator.getSortKey(service), service);
         }
         final List<TravelServiceSortKey> sortKeys = new ArrayList<>(serviceMap.keySet());
         sortKeys.stream()
             .filter(TravelServiceSortKey::isNeedsTime)
-            .forEach(key -> setSortKeyTime(key, serviceMap.values()));
-        final Comparator<TravelServiceSortKey> byDepatureAndThenLastResort = Comparator
+            .forEach(key -> setSortKeyTime(key));
+        final Comparator<TravelServiceSortKey> byDepartureAndThenLastResort = Comparator
             .comparing(TravelServiceSortKey::getDeparture, Comparator.nullsLast(Comparator.naturalOrder()))
             .thenComparing(Comparator.comparing(TravelServiceSortKey::getLastResortSortProperty, Comparator.nullsLast(Comparator.naturalOrder())));
         return sortKeys.stream()
-            .sorted(byDepatureAndThenLastResort)
+            .sorted(byDepartureAndThenLastResort)
             .map(serviceMap::get)
             .toList();
     }
 
-    private void setSortKeyTime(final TravelServiceSortKey travelServiceSortKey, final Collection<T> services) {
+    private void setSortKeyTime(final TravelServiceSortKey travelServiceSortKey) {
         // note that sortkeys with needsTime = true +always+ have a departure date set
         if (travelServiceSortKey.getServiceType() == TravelServiceType.HOTEL) {
             setSortKeyTimeForHotel(travelServiceSortKey);
@@ -49,13 +52,13 @@ public class TravelServiceSort<T> {
             setSortKeyTimeForCarRental(travelServiceSortKey);
         } else if (travelServiceSortKey.getServiceType() == TravelServiceType.MISC) {
             if (travelServiceSortKey.getMiscServiceType() == MiscServiceType.TRANSFER) {
-                setSortKeyTimeForTransfer(travelServiceSortKey, sortKeyTranslator.getSameDayItems(travelServiceSortKey.getDeparture(), services));
+                setSortKeyTimeForTransfer(travelServiceSortKey, sortKeyTranslator.getSameDayItems(travelServiceSortKey.getDeparture(), serviceMap.values()));
             } else if (travelServiceSortKey.getMiscServiceType() == MiscServiceType.EVENT) {
                 setSortKeyTimeForEvent(travelServiceSortKey);
             } else if (travelServiceSortKey.getMiscServiceType() == MiscServiceType.INSURANCE) {
                 setSortKeyTimeForInsurance(travelServiceSortKey);
             } else {
-                setSortKeyTimeForMisc(travelServiceSortKey);
+                setSortKeyTimeForMisc(travelServiceSortKey, sortKeyTranslator.getSameDayItems(travelServiceSortKey.getDeparture(), serviceMap.values()));
             }
         }
         travelServiceSortKey.setNeedsTime(false);
@@ -113,9 +116,21 @@ public class TravelServiceSort<T> {
     }
 
     /**
-     * General-purpose MISC services without any time information are list before hotels.
+     * General-purpose MISC services without any time information are listed before hotels. The one exception is MISC services with a
+     * reference number matching a same-day flight reference number, e.g. ZD8L73_1 and ZD8L73. Such a service will be sorted directly after
+     * the flight.
      */
-    private void setSortKeyTimeForMisc(final TravelServiceSortKey travelServiceSortKey) {
-        travelServiceSortKey.setDeparture(travelServiceSortKey.getDeparture().toLocalDate().atTime(LocalTime.MAX.minusMinutes(1)));
+    private void setSortKeyTimeForMisc(final TravelServiceSortKey travelServiceSortKey, final Collection<T> sameDayServices) {
+        serviceMap.entrySet().stream()
+            .filter(entry -> sameDayServices.contains(entry.getValue()))
+            .filter(entry -> entry.getKey().getServiceType() == TravelServiceType.FLIGHT)
+            .filter(entry -> StringUtils.startsWith(travelServiceSortKey.getReferenceNumber(), entry.getKey().getReferenceNumber()))
+            .findFirst()
+            .ifPresentOrElse(entry -> {
+                travelServiceSortKey.setDeparture(entry.getKey().getDeparture().plusMinutes(1));
+                travelServiceSortKey.setLastResortSortProperty(travelServiceSortKey.getReferenceNumber());
+            }, () -> {
+                travelServiceSortKey.setDeparture(travelServiceSortKey.getDeparture().toLocalDate().atTime(LocalTime.MAX.minusMinutes(1)));
+            });
     }
 }
