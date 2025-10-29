@@ -44,7 +44,7 @@ class TravelServiceSortTest {
         services.add(hotel("22-HTL", LocalDate.parse("2025-05-22"), "03:00 PM", "JFK"));
         services.add(flight("22-FL", LocalDateTime.parse("2025-05-22T09:22:00"), "JFK"));
         services.add(transfer("22-TR1", LocalDate.parse("2025-05-22"), "7:15", null));
-        services.add(transfer("22-TR2", LocalDate.parse("2025-05-22"), "14:30", null));
+        services.add(transfer("22-TR2", LocalDate.parse("2025-05-22"), "14:30:00", null));
         final TravelServiceSort<TravelService> testee = new TravelServiceSort<>(new DefaultTravelServiceSortKeyTranslator());
         // act
         final List<TravelService> result = testee.sort(services);
