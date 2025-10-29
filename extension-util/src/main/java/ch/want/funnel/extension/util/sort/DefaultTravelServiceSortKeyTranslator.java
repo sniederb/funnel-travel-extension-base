@@ -97,9 +97,9 @@ public class DefaultTravelServiceSortKeyTranslator implements TravelServiceSortK
 
     private DateTimeFormatter getMostLikeyDateTimeFormatter(final String timeExpression) {
         if (timeExpression.indexOf(' ') >= 0) {
-            return DateTimeFormatter.ofPattern("h:mm a", Locale.US);
+            return DateTimeFormatter.ofPattern("h:mm[:ss] a", Locale.US);
         }
-        return DateTimeFormatter.ofPattern("H:mm", Locale.US);
+        return DateTimeFormatter.ofPattern("H:mm[:ss]", Locale.US);
     }
 
     private void initFromSegment(final TravelService travelService, final TravelServiceSortKey sortKey) {

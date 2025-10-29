@@ -47,6 +47,9 @@ public final class PriceItemUtils {
         return allpriceitems;
     }
 
+    /**
+     * Create totals of {@link PriceItem#getAmount()} grouped by {@link PriceItem#getCurrency()}.
+     */
     public static final Map<String, BigDecimal> getAmountPerCurrency(final Collection<PriceItem> priceitems) {
         return priceitems.stream()
             .collect(Collectors.groupingBy(PriceItem::getCurrency))
@@ -56,9 +59,14 @@ public final class PriceItemUtils {
                 e -> e.getValue().stream().map(PriceItem::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add)));
     }
 
+    /**
+     * Create totals of {@link PriceItem#getPurchasePrice()} grouped by {@link PriceItem#getPurchasePriceCurrency()}.
+     */
     public static final Map<String, BigDecimal> getPurchasePricePerCurrency(final Collection<PriceItem> priceitems) {
         return priceitems.stream()
-            .collect(Collectors.groupingBy(PriceItem::getCurrency))
+            .filter(p -> p.getPurchasePrice() != null)
+            .filter(p -> p.getPurchasePriceCurrency() != null)
+            .collect(Collectors.groupingBy(PriceItem::getPurchasePriceCurrency))
             .entrySet().stream()
             .collect(Collectors.toMap(
                 Map.Entry::getKey,
