@@ -5,6 +5,17 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * Guidelines on populating a location object:
+ * <ul>
+ * <li>If the source might be or might not be an IATA code, only {@link #setIataCode(String)} if the code is 3 letters</li>
+ * <li>If {@link #setIataCode(String)} with a value which might also be a place name, also {@link #setName(String)}.</li>
+ * <li>If available, always {@link #setCountryCode(String)}, even for IATA codes.</li>
+ * </ul>
+ *
+ * The above guidelines are esp. important when dealing with data elements which could be IATA codes but might not be (something like a
+ * generic 'locationCode'), as some three-letter places like Kos (GR) or Itu (BR) might otherwise be mismatched.
+ */
 public class Location implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,7 +46,7 @@ public class Location implements Serializable {
     }
 
     /**
-     * A location code, but none of the above types. For flights this code be an ICAO code.
+     * A location code, but none of the above types. For flights this could be an ICAO code.
      * For rail services, this can be the rail station code.
      */
     public String getGeneralCode() {
