@@ -77,6 +77,23 @@ class TravelServiceSortTest {
     }
 
     @Test
+    void sortFlightWithSeatRes() {
+        final List<TravelService> services = new ArrayList<>();
+        services.add(flight("OYH6PX", LocalDateTime.parse("2026-08-04T10:45:00"), "FRA"));
+        services.add(rentalcar("R39306", LocalDate.parse("2026-08-06"), "12:00"));
+        services.add(transfer("JHYN72", LocalDate.parse("2025-05-19"), "21:40", null));
+        services.add(misc("OYH6PX", LocalDate.parse("2026-08-25"), "", null));
+        final TravelServiceSort<TravelService> testee = new TravelServiceSort<>(new DefaultTravelServiceSortKeyTranslator());
+        // act
+        final List<TravelService> result = testee.sort(services);
+        // assert
+        Assertions.assertEquals("ZD8L73", result.get(0).getReferenceNumber());
+        Assertions.assertEquals("ZD8L73_1", result.get(1).getReferenceNumber());
+        Assertions.assertEquals("JHYN72", result.get(2).getReferenceNumber());
+        Assertions.assertEquals("286-2142283", result.get(3).getReferenceNumber());
+    }
+
+    @Test
     void sortWithoutDeparture() {
         final List<TravelService> services = new ArrayList<>();
         services.add(flight("FLT", LocalDateTime.parse("2025-05-19T13:15:00"), "FRA"));
@@ -88,7 +105,7 @@ class TravelServiceSortTest {
         Assertions.assertDoesNotThrow(() -> testee.sort(services));
     }
 
-    private TravelService flight(final String refNumber, final LocalDateTime departure, final String iataCode) {
+    private TravelService flight(final String refNumber, final LocalDateTime departure, final String departingIataCode) {
         final TravelService flight = new TravelService();
         flight.setUuid(UUID.randomUUID());
         flight.setTravelServiceType(TravelServiceType.FLIGHT);
@@ -96,7 +113,7 @@ class TravelServiceSortTest {
         flight.getSegmentedLegs().add(new SegmentedLeg());
         flight.getSegmentedLegs().get(0).getSegments().add(new TransportSegment());
         final TransportSegment firstSegment = flight.getSegmentedLegs().get(0).getSegments().get(0);
-        firstSegment.getDepartingFromLocation().setIataCode(iataCode);
+        firstSegment.getDepartingFromLocation().setIataCode(departingIataCode);
         firstSegment.setDeparturetime(departure);
         flight.setDeparturedate(departure.toLocalDate());
         return flight;
@@ -112,6 +129,17 @@ class TravelServiceSortTest {
         hotel.getSingleSegment().setStartTime(timeExpression);
         hotel.getSingleSegment().getStartLocation().setIataCode(iataCode);
         return hotel;
+    }
+
+    private TravelService rentalcar(final String refNumber, final LocalDate pickup, final String timeExpression) {
+        final TravelService rentalCar = new TravelService();
+        rentalCar.setUuid(UUID.randomUUID());
+        rentalCar.setTravelServiceType(TravelServiceType.CARRENTAL);
+        rentalCar.setSingleSegment(new SingleSegment());
+        rentalCar.setReferenceNumber(refNumber);
+        rentalCar.setDeparturedate(pickup);
+        rentalCar.getSingleSegment().setStartTime(timeExpression);
+        return rentalCar;
     }
 
     private TravelService transfer(final String refNumber, final LocalDate checkin, final String timeExpression, final String iataCode) {
