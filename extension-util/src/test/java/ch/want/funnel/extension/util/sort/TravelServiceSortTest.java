@@ -80,15 +80,15 @@ class TravelServiceSortTest {
     void sortFlightWithSeatRes() {
         final List<TravelService> services = new ArrayList<>();
         services.add(flight("OYH6PX", LocalDateTime.parse("2026-08-04T10:45:00"), "FRA"));
-        services.add(rentalcar("R39306", LocalDate.parse("2026-08-06"), "12:00"));
-        services.add(transfer("JHYN72", LocalDate.parse("2025-05-19"), "21:40", null));
-        services.add(misc("OYH6PX", LocalDate.parse("2026-08-25"), "", null));
+        services.add(rentalcar("286-2142283", LocalDate.parse("2026-08-06"), "12:00"));
+        services.add(transfer("JHYN72", LocalDate.parse("2026-08-04"), "21:40", null));
+        services.add(misc("OYH6PX_1", LocalDate.parse("2026-08-04"), "", null));
         final TravelServiceSort<TravelService> testee = new TravelServiceSort<>(new DefaultTravelServiceSortKeyTranslator());
         // act
         final List<TravelService> result = testee.sort(services);
         // assert
-        Assertions.assertEquals("ZD8L73", result.get(0).getReferenceNumber());
-        Assertions.assertEquals("ZD8L73_1", result.get(1).getReferenceNumber());
+        Assertions.assertEquals("OYH6PX", result.get(0).getReferenceNumber());
+        Assertions.assertEquals("OYH6PX_1", result.get(1).getReferenceNumber());
         Assertions.assertEquals("JHYN72", result.get(2).getReferenceNumber());
         Assertions.assertEquals("286-2142283", result.get(3).getReferenceNumber());
     }
