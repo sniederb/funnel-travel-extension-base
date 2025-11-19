@@ -7,6 +7,10 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPSClient;
 import org.apache.commons.net.util.TrustManagerUtils;
 
+/**
+ * FTPS implementation with encrypted data channel. Note that TLS/SSL session reuse for the data connection is <strong>not
+ * supported</strong>.
+ */
 class FtpsUploader extends FtpUploader {
 
     FtpsUploader(final URI resourceIdentifier, final String username, final String passwd) {
@@ -24,6 +28,7 @@ class FtpsUploader extends FtpUploader {
 
     @Override
     protected void afterConnect(final FTPClient client) throws IOException {
+        // see https://issues.apache.org/jira/browse/NET-235
         ((FTPSClient) client).execPROT("P");
         super.afterConnect(client);
     }
