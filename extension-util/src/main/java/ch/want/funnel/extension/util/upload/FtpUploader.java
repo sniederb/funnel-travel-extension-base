@@ -54,7 +54,7 @@ class FtpUploader implements FileUploader {
         client.setDataTimeout(TIMEOUT_IN_MILLIS);
         try (InputStream is = new ByteArrayInputStream(tripData.getBytes(StandardCharsets.UTF_8))) {
             client.connect(resourceIdentifier.getHost());
-            client.enterLocalPassiveMode();
+            afterConnect(client);
             if (!client.login(username, passwd)) {
                 throw new IOException("FTP Delivery: Failed to login: " + client.getReplyString());
             }
@@ -72,6 +72,10 @@ class FtpUploader implements FileUploader {
 
     protected FTPClient createFtpClient() {
         return new FTPClient();
+    }
+
+    protected void afterConnect(final FTPClient client) throws IOException {
+        client.enterLocalPassiveMode();
     }
 
     private void listRemoteDirectory(final FTPClient client) throws IOException {

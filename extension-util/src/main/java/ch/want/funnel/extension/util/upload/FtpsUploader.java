@@ -1,5 +1,6 @@
 package ch.want.funnel.extension.util.upload;
 
+import java.io.IOException;
 import java.net.URI;
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -19,5 +20,11 @@ class FtpsUploader extends FtpUploader {
         final FTPSClient ftpClient = new FTPSClient();
         ftpClient.setTrustManager(TrustManagerUtils.getAcceptAllTrustManager());
         return ftpClient;
+    }
+
+    @Override
+    protected void afterConnect(final FTPClient client) throws IOException {
+        ((FTPSClient) client).execPROT("P");
+        super.afterConnect(client);
     }
 }
