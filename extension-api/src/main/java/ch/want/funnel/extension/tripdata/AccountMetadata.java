@@ -3,13 +3,17 @@ package ch.want.funnel.extension.tripdata;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AccountMetadata implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private final String settingItemKey;
     private final String settingItemValue;
 
-    public AccountMetadata(final String settingItemKey, final String settingItemValue) {
+    @JsonCreator
+    public AccountMetadata(final @JsonProperty("settingItemKey") String settingItemKey, final @JsonProperty("settingItemValue") String settingItemValue) {
         this.settingItemKey = settingItemKey;
         this.settingItemValue = settingItemValue;
     }

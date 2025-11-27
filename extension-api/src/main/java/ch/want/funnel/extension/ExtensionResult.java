@@ -79,7 +79,7 @@ public class ExtensionResult {
 
     /**
      * Set this if funnel.travel should not persist the value passed into {@link TripRawDataConverter#convertRawSourceToTripData(byte[],
-     * Map<String, Object>, Locale)} as raw source, but rather the one set here.
+     * Map<String, Object>, Locale)} as raw source, but rather the one set here. Only relevant for {@link TripDataProducer}
      */
     public ExtensionResult setUpdatedRawSource(final RawTripDataSource updatedRawSource) {
         this.updatedRawSource = updatedRawSource;
