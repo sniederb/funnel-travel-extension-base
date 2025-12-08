@@ -47,7 +47,7 @@ The `funnel-extension.json` file tells the funnel.travel server about the extens
 ```
 
 Mandatory properties are 'Implementation', 'Name', 'Author', 'Version', 'Description' and 'PrivacyPolicyURL'. If the optional 'URL' is provided, 
-a link to the URL will be shown to the user. **Producer** extensions are recommend to supply 'BookingSource'; if this is not a constant value, then
+a link to the URL will be shown to the user. **Producer** extensions are recommended to supply 'System' (was: 'BookingSource'); if this is not a constant value, then
 describe what sources the extension will provide.
 
 (The logo URL is _not_ provided by the JSON file, but by the interface implementation. The reason is that many implementations
@@ -237,6 +237,24 @@ private void updateExtensionData(final Booking booking, final String value) {
 }
 ```
 
+### Shared extension data
+
+In rare cases, sharing data between extensions is critical, and not just a matter of configuring additional functionality. In such cases, the providing extension can
+put data in a `Booking.SHARED_EXTENSIONDATA_KEY` key, from which the consuming extension can read it. funnel.travel handles the `Booking.SHARED_EXTENSIONDATA_KEY` specially,
+making sure it never gets deleted. 
+
+
+```json
+{
+	"ch.want.funnel.extension._shared_": {
+	    "product": {
+    		"refId": "64f83bd13400007cd0b7cf61",
+            "supplier": "wantgmbh"
+    	}
+	}
+}
+
+```
 
 ### Additional data for user
 

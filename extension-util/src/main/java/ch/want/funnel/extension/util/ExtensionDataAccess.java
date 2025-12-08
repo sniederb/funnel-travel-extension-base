@@ -37,7 +37,7 @@ public class ExtensionDataAccess {
     }
 
     /**
-     * Create instance to access booking-level extension data
+     * Create instance to access service-level extension data
      *
      * @param booking
      */
@@ -47,8 +47,8 @@ public class ExtensionDataAccess {
     }
 
     /**
-     * Search in all extension data for a 'remarks' array, and therein an entry with the provided {@code remarkPrefix}.
-     * If found, the entry value string is returned.
+     * Search in all extension data for a 'remarks' array, and therein an entry with the provided {@code remarkPrefix}. If found, the entry
+     * value string is returned.
      */
     @Deprecated
     public static Optional<String> searchAllExtensionDataForRemark(final Trip trip, final String remarkPrefix) {
@@ -56,8 +56,8 @@ public class ExtensionDataAccess {
     }
 
     /**
-     * Same as {@link #searchAllExtensionDataForRemark(Trip, String)} without the pax tattoo, but if a {@code paxTattoo}
-     * is provided, this method searches for entries with a {@code ,Pn} suffix. For valid "P"-associations see
+     * Same as {@link #searchAllExtensionDataForRemark(Trip, String)} without the pax tattoo, but if a {@code paxTattoo} is provided, this
+     * method searches for entries with a {@code ,Pn} suffix. For valid "P"-associations see
      * {@link DataUtils#mapAssociationToNumbers(String)}
      */
     @Deprecated
@@ -79,8 +79,8 @@ public class ExtensionDataAccess {
     }
 
     /**
-     * If {@code replaceLinePrefix} is not empty, this method will look for an existing remark line
-     * {@code startsWith(replaceLinePrefix)}, and if found remove that line.
+     * If {@code replaceLinePrefix} is not empty, this method will look for an existing remark line {@code startsWith(replaceLinePrefix)},
+     * and if found remove that line.
      */
     public void addRemark(final String extensionName, final String remark, final String replaceLinePrefix, final String paxTattoo) {
         final ArrayNode remarksArrayNode = (ArrayNode) getOrCreateNode(extensionName, REMARKS_NODE_NAME, true);
@@ -182,8 +182,8 @@ public class ExtensionDataAccess {
     }
 
     /**
-     * Retrieve the current {@link JsonNode} for a given {@code key}. If no node exists, a new one is created.
-     * Beware that this method might return a {@link NullNode}.
+     * Retrieve the current {@link JsonNode} for a given {@code key}. If no node exists, a new one is created. Beware that this method might
+     * return a {@link NullNode}.
      *
      * @param extensionClassname
      * @param key
