@@ -79,8 +79,7 @@ public class SingleSegment implements Serializable {
     }
 
     /**
-     * General-purpose getter for the description of the provider ("who").
-     * See {@link #getHotelName()}, {@link #getRentalcarCompany()} and {@link #getMiscServiceDescription()} resp.
+     * General-purpose getter for the description of the provider ("who"). See {@link #getHotelName()} or {@link #getRentalcarCompany()}.
      */
     public String getProviderDescription() {
         return providerDescription;
@@ -97,6 +96,7 @@ public class SingleSegment implements Serializable {
     }
 
     @JsonIgnore
+    @Deprecated
     public String getMiscServiceDescription() {
         return getProviderDescription();
     }
@@ -106,8 +106,8 @@ public class SingleSegment implements Serializable {
     }
 
     /**
-     * General-purpose getter for the description of the service provided ("what").
-     * See {@link #getRoomDescription()}, {@link #getVehicleDescription()} resp.
+     * General-purpose getter for the description of the service provided ("what"). See {@link #getRoomDescription()},
+     * {@link #getVehicleDescription()} resp.
      */
     public String getServiceDescription() {
         return serviceDescription;
@@ -133,7 +133,8 @@ public class SingleSegment implements Serializable {
     }
 
     /**
-     * For hotels, these are check-in instructions. For rental cars, these are car pickup instructions.
+     * For hotels, these are check-in instructions. For rental cars, these are car pickup instructions. For a transfer, this field adds more
+     * detailed information about the start of the transfer (location details).
      */
     public String getStartConditions() {
         return startConditions;
@@ -144,7 +145,8 @@ public class SingleSegment implements Serializable {
     }
 
     /**
-     * For hotels, these are check-out instructions. For rental cars, these are car dropoff instructions.
+     * For hotels, these are check-out instructions. For rental cars, these are car drop off instructions. For a transfer, this field adds
+     * more detailed information about the destination of the transfer (location details).
      */
     public String getEndConditions() {
         return endConditions;
@@ -227,10 +229,9 @@ public class SingleSegment implements Serializable {
     }
 
     /**
-     * A code describing the service type, such as a room code or a car code.
-     * Provider should make sure to send the more generally applicable code. If e.g. there
-     * is a RoomTypeCode (A1D) and a RoomCode (A1DBX8), the former should be used (and 'BX8'
-     * set as {@link #getRateCode()}).
+     * A code describing the service type, such as a room code or a car code. Provider should make sure to send the more generally
+     * applicable code. If e.g. there is a RoomTypeCode (A1D) and a RoomCode (A1DBX8), the former should be used (and 'BX8' set as
+     * {@link #getRateCode()}).
      */
     public String getServiceTypeCode() {
         return serviceTypeCode;
@@ -320,9 +321,8 @@ public class SingleSegment implements Serializable {
     }
 
     /**
-     * A code describing the rate, e.g. a room rate code. This can be a corporate rate or a promo code.
-     * Room rate codes are usually 3-4 letters. Sometimes the room type code is added, but here that should
-     * be stored separately in {@link #getServiceTypeCode()}.
+     * A code describing the rate, e.g. a room rate code. This can be a corporate rate or a promo code. Room rate codes are usually 3-4
+     * letters. Sometimes the room type code is added, but here that should be stored separately in {@link #getServiceTypeCode()}.
      */
     public String getRateCode() {
         return rateCode;
