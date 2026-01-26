@@ -47,7 +47,7 @@ public class Paragraph {
         }
     }
 
-    String getFirstSentence() {
+    public String getFirstSentence() {
         if (wholeText == null) {
             return null;
         }
