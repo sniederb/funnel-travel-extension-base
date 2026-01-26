@@ -24,7 +24,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @see <a href='https://icu-project.org/docs/papers/text_boundary_analysis_in_java/'>Text Boundary Analysis in Java</a>
  */
-class Paragraph {
+public class Paragraph {
 
     private static final Set<Character> PUNCTUATION = Set.of('.', '!', '?');
     private static final Map<String, List<String>> ABBREV_PER_LANGUAGE = new HashMap<>();
@@ -36,7 +36,7 @@ class Paragraph {
         ABBREV_PER_LANGUAGE.put("fr", List.of("av", "mm", "cie", "env", "etc"));
     }
 
-    Paragraph(final String s, final Locale... locales) {
+    public Paragraph(final String s, final Locale... locales) {
         this.wholeText = s;
         if ((locales == null) || locales.length == 0) {
             ABBREV_PER_LANGUAGE.values().forEach(abbreviations::addAll);
