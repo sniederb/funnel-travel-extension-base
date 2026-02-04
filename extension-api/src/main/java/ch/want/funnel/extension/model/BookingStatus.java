@@ -18,7 +18,11 @@ public enum BookingStatus {
      */
     CONFIRMED,
     /**
-     * The booking was canceled (XX)
+     * The booking was canceled. (XX)
      */
-    CANCELED
+    CANCELED,
+    /**
+     * Booking confirmation was attempted, but resulted in an error.
+     */
+    ERROR
 }

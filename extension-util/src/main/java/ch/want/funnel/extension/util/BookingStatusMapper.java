@@ -30,10 +30,9 @@ public final class BookingStatusMapper {
     }
 
     /**
-     * {@code gdsStatus} can be 'HK' but also 'OK03'.
-     * See e.g. <a href='https://support.travelport.com/webhelp/uapi/Content/Air/Shared_Air_Topics/PNR_Status_Codes.htm'>Galileo PNR status
-     * codes</a>,
-     * of which only the commonly used codes are mapped here.
+     * {@code gdsStatus} can be 'HK' but also 'OK03'. See e.g.
+     * <a href='https://support.travelport.com/webhelp/uapi/Content/Air/Shared_Air_Topics/PNR_Status_Codes.htm'>Galileo PNR status
+     * codes</a>, of which only the commonly used codes are mapped here.
      */
     public static BookingStatus getBookingStatus(final String gdsStatus) {
         if (gdsStatus != null) {
@@ -85,9 +84,8 @@ public final class BookingStatusMapper {
     }
 
     /**
-     * This method returns a <strong>possible</strong> value for a GDS status. Refering to
-     * {@link #getBookingStatus(String)} it is clear that multiple status are mapped to the
-     * same value, so this method simply returns on of those.
+     * This method returns a <strong>possible</strong> value for a GDS status. Refering to {@link #getBookingStatus(String)} it is clear
+     * that multiple status are mapped to the same value, so this method simply returns on of those.
      *
      * @param funnelStatus
      * @return
@@ -104,6 +102,7 @@ public final class BookingStatusMapper {
             case PROCESSING:
                 return "RQ";
             case UNDEFINED:
+            case ERROR:
             default:
                 return "";
             }
