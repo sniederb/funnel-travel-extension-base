@@ -1,6 +1,5 @@
 package ch.want.funnel.extension.tripdata;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -15,10 +14,10 @@ import ch.want.funnel.extension.model.Trip;
 public interface PaymentCallback {
 
     /**
-     * Offer the implementation a chance to process newly imported {@code payments}. Note that these payment will also be part of the
-     * provided {@link Booking#getPayments()}, but that collection might contain additional payments.
+     * Offer the implementation a chance to process newly imported {@code payment}. Note that the payment will also be part of the provided
+     * {@link Booking#getPayments()}, but that collection might contain additional payments.
      *
      * @return True if the payment callback executed successfully, false otherwise.
      */
-    boolean paymentImported(List<BookingPayment> payments, Booking booking, Trip trip, Map<String, Object> settingValues, Locale locale);
+    boolean paymentImported(BookingPayment payment, Booking booking, Trip trip, Map<String, Object> settingValues, Locale locale);
 }
