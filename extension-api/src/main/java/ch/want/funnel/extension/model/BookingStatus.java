@@ -2,7 +2,8 @@ package ch.want.funnel.extension.model;
 
 public enum BookingStatus {
     /**
-     * The booking source did not provide a status, or the status is something like "Open", "Edit" or "Quote"
+     * The booking source did not provide a status, or the status is something like "Open", "Edit" or "Quote". Also, and "fail" or "error"
+     * state is mapped to this status.
      */
     UNDEFINED,
     /**
@@ -20,9 +21,5 @@ public enum BookingStatus {
     /**
      * The booking was canceled. (XX)
      */
-    CANCELED,
-    /**
-     * Booking confirmation was attempted, but resulted in an error.
-     */
-    ERROR
+    CANCELED
 }
