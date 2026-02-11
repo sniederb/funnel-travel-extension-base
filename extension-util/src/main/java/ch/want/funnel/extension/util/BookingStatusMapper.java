@@ -102,7 +102,6 @@ public final class BookingStatusMapper {
             case PROCESSING:
                 return "RQ";
             case UNDEFINED:
-            case ERROR:
             default:
                 return "";
             }
