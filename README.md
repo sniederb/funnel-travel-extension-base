@@ -1,6 +1,6 @@
 # Guide to writing a funnel.travel extension
 
-Last updated: Sep 15th, 2019
+Last updated: Feb 12th, 2026
 
 ## Minimal requirements
 
@@ -258,7 +258,7 @@ making sure it never gets deleted.
 
 ### Additional data for user
 
-An extension can add data to be presented to the user by adding a `ui` node with a predefined structure:
+A modify or consumer extension can add data to be presented to the user by adding a `ui` node with a predefined structure in the booking extension data:
 
 ```json
 {
