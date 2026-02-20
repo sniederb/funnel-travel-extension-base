@@ -78,7 +78,7 @@ public class Paragraph {
             final String wordBeforePunctuation = wholeText.substring(closestSpace + 1, posPunctuation);
             return wordBeforePunctuation.length() == 1 ||
                 abbreviations.contains(wordBeforePunctuation.toLowerCase().trim()) ||
-                StringUtils.isNumeric(wordBeforePunctuation);
+                !StringUtils.isAlpha(wordBeforePunctuation);
         }
         return false;
     }
