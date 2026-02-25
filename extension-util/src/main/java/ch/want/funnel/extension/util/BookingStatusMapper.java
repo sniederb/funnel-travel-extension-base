@@ -61,6 +61,7 @@ public final class BookingStatusMapper {
             case "RQ", // On request
                     "HQ", // Space prev. request
                     "HN", // Holds need/confirmed
+                    "GN", // Group booking
                     "IS", // If not holding sell
                     "NN", // Requesting segment
                     "UC", // Unable to confirm or waitlist
