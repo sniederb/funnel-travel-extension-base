@@ -17,18 +17,18 @@ public class SettingItem {
     @Deprecated
     public static final String KEY_SERVERCONTEXT = "funnel.environment.servercontext";
     /**
-     * Settings value will be an absolute URL of the webhook for this extension. Note that all extensions receive a value, but only
-     * produces with 'WEBHOOK' setting will eventually be able to process the URL.
+     * Settings value will be an absolute URL of the webhook for this extension. Note that all extensions receive a value, but only produces
+     * with 'WEBHOOK' setting will eventually be able to process the URL.
      */
     public static final String KEY_OWN_WEBHOOK = "funnel.environment.ownwebhook";
     /**
-     * UUID of the extension settings. This should be used if {@link #KEY_ACCOUNT_UUID} might actually hold
-     * multiple settings of the same extension type. The setting value type is {@link UUID}.
+     * UUID of the extension settings. This should be used if {@link #KEY_ACCOUNT_UUID} might actually hold multiple settings of the same
+     * extension type. The setting value type is {@link UUID}.
      */
     public static final String KEY_SETTING_UUID = "funnel.environment.settings-uuid";
     /**
-     * Key to retrieve whether or not the extension is running on production. Typically this is used to
-     * determine web service endpoints. Value is a boolean
+     * Key to retrieve whether or not the extension is running on production. Typically this is used to determine web service endpoints.
+     * Value is a boolean
      */
     public static final String KEY_ISPRODUCTION = "funnel.environment.isproduction";
     /**
@@ -56,6 +56,7 @@ public class SettingItem {
      */
     public static final String KEY_ACCOUNT_COUNTRY = "funnel.environment.account-country";
     private String key;
+    private String group;
     private SettingItemValueType valueType = SettingItemValueType.STRING;
     private boolean mandatory;
     private Object defaultValue;
@@ -67,7 +68,7 @@ public class SettingItem {
     }
 
     public SettingItem(final String key) {
-        if ((key == null) || (key.length() == 0)) {
+        if ((key == null) || key.isEmpty()) {
             throw new IllegalArgumentException("Settings 'key' must not be empty");
         }
         this.key = key;
@@ -86,10 +87,23 @@ public class SettingItem {
     }
 
     public SettingItem setKey(final String key) {
-        if ((key == null) || (key.length() == 0)) {
+        if ((key == null) || key.isEmpty()) {
             throw new IllegalArgumentException("Settings 'key' must not be empty");
         }
         this.key = key;
+        return this;
+    }
+
+    /**
+     * Setting the same {@link #group} on multiple setting items will result in a grouped display in the funnel.travel UI. Apart from visual
+     * representation, the group has no influence on settings. Groups are sorted in alphabetical order (untranslated).
+     */
+    public String getGroup() {
+        return group;
+    }
+
+    public SettingItem setGroup(final String group) {
+        this.group = group;
         return this;
     }
 
