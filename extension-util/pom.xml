@@ -108,6 +108,17 @@
 		    <artifactId>jackson-dataformat-xml</artifactId>
 		    <version>${jackson.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>4.0.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.glassfish.jaxb</groupId>
+		    <artifactId>jaxb-runtime</artifactId>
+		    <version>4.0.4</version>
+		    <scope>provided</scope>
+		</dependency>
 		<!-- Logging -->
 		<dependency>
 	        <groupId>org.slf4j</groupId>
