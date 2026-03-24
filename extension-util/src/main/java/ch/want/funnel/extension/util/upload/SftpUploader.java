@@ -79,7 +79,7 @@ class SftpUploader implements FileUploader {
             sftpChannel.put(new ByteArrayInputStream(data), remoteFilename, ChannelSftp.OVERWRITE);
         } catch (final SftpException ex) {
             // see com.jcraft.jsch.ChannelSftp for values
-            throw new IOException("Failed to upload to " + remoteFilename + ", error code " + ex.id, ex);
+            throw new IOException("Failed to upload to " + remoteFilename + ": " + ex.getMessage(), ex);
         }
     }
 
