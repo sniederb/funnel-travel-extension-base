@@ -3,9 +3,11 @@ package ch.want.funnel.extension.util.upload;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -63,7 +65,7 @@ class FtpUploader implements FileUploader {
                 client.changeWorkingDirectory(resourceIdentifier.getPath());
             }
             client.setFileType(FTP.BINARY_FILE_TYPE);
-            if (!client.storeFile(targetFilename, is)) {
+            if (!storeFile(is, targetFilename, client)) {
                 throw new IOException("FTP Delivery: Failed to store file on server: " + client.getReplyString());
             }
         } finally {
@@ -77,6 +79,13 @@ class FtpUploader implements FileUploader {
 
     protected void afterConnect(final FTPClient client) throws IOException {
         client.enterLocalPassiveMode();
+    }
+
+    private boolean storeFile(final InputStream input, final String targetFilename, final FTPClient client) throws IOException {
+        try (OutputStream out = client.storeFileStream(targetFilename)) {
+            IOUtils.copy(input, out);
+        }
+        return client.completePendingCommand();
     }
 
     private void listRemoteDirectory(final FTPClient client) throws IOException {
