@@ -55,7 +55,8 @@ class FtpUploader implements FileUploader {
         client.setConnectTimeout(TIMEOUT_IN_MILLIS);
         client.setDataTimeout(TIMEOUT_IN_MILLIS);
         client.addProtocolCommandListener(new FtpWireLogger());
-        try (InputStream is = new ByteArrayInputStream(tripData.getBytes(StandardCharsets.UTF_8))) {
+        final byte[] data = tripData.getBytes(StandardCharsets.UTF_8);
+        try {
             client.connect(resourceIdentifier.getHost());
             afterConnect(client);
             if (!client.login(username, passwd)) {
@@ -65,7 +66,7 @@ class FtpUploader implements FileUploader {
                 client.changeWorkingDirectory(resourceIdentifier.getPath());
             }
             client.setFileType(FTP.BINARY_FILE_TYPE);
-            if (!storeFile(is, targetFilename, client)) {
+            if (!storeFile(data, targetFilename, client)) {
                 throw new IOException("FTP Delivery: Failed to store file on server: " + client.getReplyString());
             }
         } finally {
@@ -81,9 +82,15 @@ class FtpUploader implements FileUploader {
         client.enterLocalPassiveMode();
     }
 
-    private boolean storeFile(final InputStream input, final String targetFilename, final FTPClient client) throws IOException {
-        try (OutputStream out = client.storeFileStream(targetFilename)) {
+    private boolean storeFile(final byte[] data, final String targetFilename, final FTPClient client) throws IOException {
+        try (InputStream input = new ByteArrayInputStream(data);
+            OutputStream out = client.storeFileStream(targetFilename)) {
             IOUtils.copy(input, out);
+        }
+        try {
+            Thread.sleep(500);
+        } catch (final InterruptedException e) { // NOSONAR
+            Thread.currentThread().interrupt();
         }
         return client.completePendingCommand();
     }
