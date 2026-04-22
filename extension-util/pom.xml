@@ -82,9 +82,9 @@
 		    <version>2.6</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.jcraft</groupId>
-		    <artifactId>jsch</artifactId>
-		    <version>0.1.55</version>
+  			<groupId>com.github.mwiede</groupId>
+  			<artifactId>jsch</artifactId>
+  			<version>2.27.2</version>
 		</dependency>
 		<dependency>
 		    <groupId>commons-net</groupId>

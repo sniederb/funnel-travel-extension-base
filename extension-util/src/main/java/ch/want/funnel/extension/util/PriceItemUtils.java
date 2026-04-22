@@ -23,12 +23,10 @@ public final class PriceItemUtils {
     }
 
     /**
-     * Beware that the core TripReader produces clones of the {@link PriceItem} linked
-     * to service / document. Furthermore, segment auxiliary {@link PriceItem} are
-     * not linked to the service.
+     * Beware that the core TripReader produces clones of the {@link PriceItem} linked to service / document. Furthermore, segment auxiliary
+     * {@link PriceItem} are not linked to the service.
      *
-     * This method returns all {@link PriceItem} within a {@link TravelService}, regardless
-     * of nesting.
+     * This method returns all {@link PriceItem} within a {@link TravelService}, regardless of nesting.
      */
     public static Set<PriceItem> getAllPriceitems(final TravelService service) {
         return getAllPriceitems(service, false);
@@ -88,7 +86,8 @@ public final class PriceItemUtils {
     /**
      * <dt>Commission</dt>
      * <dd>Commission granted by the tour operator to the agency. In an agency-collection scenario, this effectively reduces the total
-     * purchase price. In a direct-collection scenario, this amount must be passed on to the agency.</dd>
+     * purchase price. In a direct-collection scenario, this amount must be passed on to the agency. <strong>This method returns false for
+     * supplier fees (positive purchase amount)</strong>.</dd>
      */
     public static boolean isCommission(final PriceItem priceitem) {
         return (priceitem.getPriceItemType() == PriceItemType.SUPPLIER_ONLY) &&

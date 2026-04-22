@@ -22,6 +22,7 @@ class FtpsUploader extends FtpUploader {
         // The FTPSClient class defaults to an explicit TLS/SSL (recommended).
         // In a rare case you need an implicit TLS/SSL, use new FTPSClient(true).
         final FTPSClient ftpClient = new FTPSClient();
+        // note that while "accept all" trust manager accepts new fingerprints, it will reject changed ones
         ftpClient.setTrustManager(TrustManagerUtils.getAcceptAllTrustManager());
         return ftpClient;
     }

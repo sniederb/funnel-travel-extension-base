@@ -52,6 +52,7 @@ class FtpUploader implements FileUploader {
         final FTPClient client = createFtpClient();
         client.setConnectTimeout(TIMEOUT_IN_MILLIS);
         client.setDataTimeout(TIMEOUT_IN_MILLIS);
+        client.addProtocolCommandListener(new FtpWireLogger());
         try (InputStream is = new ByteArrayInputStream(tripData.getBytes(StandardCharsets.UTF_8))) {
             client.connect(resourceIdentifier.getHost());
             afterConnect(client);
