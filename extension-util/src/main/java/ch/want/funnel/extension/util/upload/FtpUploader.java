@@ -88,11 +88,6 @@ class FtpUploader implements FileUploader {
             OutputStream out = client.storeFileStream(targetFilename)) {
             IOUtils.copy(input, out);
         }
-        try {
-            Thread.sleep(500);
-        } catch (final InterruptedException e) { // NOSONAR
-            Thread.currentThread().interrupt();
-        }
         return client.completePendingCommand();
     }
 
