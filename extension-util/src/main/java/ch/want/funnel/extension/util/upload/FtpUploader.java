@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.net.ftp.FTP;
@@ -53,7 +54,7 @@ class FtpUploader implements FileUploader {
     public void upload(final String targetFilename, final String tripData) throws IOException {
         final FTPClient client = createFtpClient();
         client.setConnectTimeout(TIMEOUT_IN_MILLIS);
-        client.setDataTimeout(TIMEOUT_IN_MILLIS);
+        client.setDataTimeout(Duration.ofMillis(TIMEOUT_IN_MILLIS));
         client.addProtocolCommandListener(new FtpWireLogger());
         final byte[] data = tripData.getBytes(StandardCharsets.UTF_8);
         try {
