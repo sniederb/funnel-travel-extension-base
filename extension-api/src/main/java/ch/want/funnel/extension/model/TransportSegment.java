@@ -134,46 +134,6 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     }
 
     /**
-     * @deprecated Use {@link #getOperatorCode()}
-     * @return
-     */
-    @Deprecated
-    @JsonIgnore
-    public String getProvidername() {
-        return getOperatorCode();
-    }
-
-    /**
-     * @deprecated Use {@link #setOperatorCode(String)}
-     * @return
-     */
-    @Deprecated
-    @JsonIgnore
-    public void setProvidername(final String providername) {
-        setOperatorCode(providername);
-    }
-
-    /**
-     * @deprecated Use {@link #getOperatorNumber()}
-     * @return
-     */
-    @Deprecated
-    @JsonIgnore
-    public String getProviderNumber() {
-        return getOperatorNumber();
-    }
-
-    /**
-     * @deprecated Use {@link #setOperatorNumber()}
-     * @return
-     */
-    @Deprecated
-    @JsonIgnore
-    public void setProviderNumber(final String providerNumber) {
-        setOperatorNumber(providerNumber);
-    }
-
-    /**
      * Get the operating provider. Note that the validating provider is available on a service level at
      * {@link TravelService#getProviderSourcename()}. The returned value is <strong>not mapped</strong> and will typically be a two-letter
      * airline code
@@ -337,16 +297,15 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     }
 
     /**
-     * Describes the vehicle doing the transport, i.e. an aircraft, train or ship description.
-     * For aircraft, this is usually the code ("788"), not the full name ("BOEING 787-8").
+     * Describes the vehicle doing the transport, i.e. an aircraft, train or ship description. For aircraft, this is usually the code
+     * ("788"), not the full name ("BOEING 787-8").
      */
     public String getVehicleType() {
         return vehicleType;
     }
 
     /**
-     * If the data producer has both an equipment <strong>code</strong> and a full description, then the
-     * code should be used here.
+     * If the data producer has both an equipment <strong>code</strong> and a full description, then the code should be used here.
      */
     public void setVehicleType(final String vehicleType) {
         this.vehicleType = vehicleType;
@@ -385,8 +344,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     }
 
     /**
-     * Get additional information pertinent to departure, such as a train platform,
-     * an airport terminal or vehicle restrictions for a ferry.
+     * Get additional information pertinent to departure, such as a train platform, an airport terminal or vehicle restrictions for a ferry.
      */
     public String getDepartingDetails() {
         return departingDetails;
@@ -397,8 +355,7 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     }
 
     /**
-     * Get additional information pertinent to arrival, such as a train platform
-     * or an airport terminal
+     * Get additional information pertinent to arrival, such as a train platform or an airport terminal
      */
     public String getArrivalDetails() {
         return arrivalDetails;

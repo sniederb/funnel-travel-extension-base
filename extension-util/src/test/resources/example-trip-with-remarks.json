@@ -131,7 +131,7 @@
                                     },
                                     "durationinminutes": null,
                                     "travelclass": "ECONOMY",
-                                    "providername": "VY",
+                                    "operatorCode": "VY",
                                     "connectionnumber": "6247",
                                     "reservationlocator": "6SV8AI",
                                     "auxiliaries": [
@@ -175,7 +175,7 @@
                                     },
                                     "durationinminutes": null,
                                     "travelclass": "ECONOMY",
-                                    "providername": "VY",
+                                    "operatorCode": "VY",
                                     "connectionnumber": "6248",
                                     "reservationlocator": "6SV8AI",
                                     "auxiliaries": [
@@ -256,8 +256,7 @@
                     "passportExpiration": null,
                     "passportPlaceOfIssue": null
                 }
-            ],
-            "customfields": []
+            ]
         },
         {
             "uuid": "fc47c143-9da3-47a9-98e9-187fe62423e6",

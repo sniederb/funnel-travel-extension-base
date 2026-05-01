@@ -95,12 +95,6 @@ public class SingleSegment implements Serializable {
         return getProviderDescription();
     }
 
-    @JsonIgnore
-    @Deprecated
-    public String getMiscServiceDescription() {
-        return getProviderDescription();
-    }
-
     public void setProviderDescription(final String providerDescription) {
         this.providerDescription = providerDescription;
     }
@@ -206,12 +200,6 @@ public class SingleSegment implements Serializable {
      */
     public String getAdditionalDescription() {
         return additionalDescription;
-    }
-
-    @JsonIgnore
-    @Deprecated(forRemoval = true)
-    public String getRentalCarExtras() {
-        return getAdditionalDescription();
     }
 
     @JsonIgnore

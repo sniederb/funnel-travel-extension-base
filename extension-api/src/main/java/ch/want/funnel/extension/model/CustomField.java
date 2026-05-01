@@ -51,10 +51,9 @@ public class CustomField implements Serializable {
     }
 
     /**
-     * Get the field name. When writing a custom field, extensions can set their own extension-specific
-     * name, funnel.travel will match that against the mapping. When reading a custom field, extensions
-     * will want to check {@link #getExtensionFieldNames()} and filter on their own
-     * {@link CustomfieldExtensionName#getExtensionClassName()}.
+     * Get the field name. When writing a custom field, extensions can set their own extension-specific name, funnel.travel will match that
+     * against the mapping. When reading a custom field, extensions will want to check {@link #getExtensionFieldNames()} and filter on their
+     * own {@link CustomfieldExtensionName#getExtensionClassName()}.
      */
     public String getName() {
         return name;
@@ -70,14 +69,5 @@ public class CustomField implements Serializable {
 
     public void setExtensionFieldNames(final List<CustomfieldExtensionName> extensionFieldNames) {
         this.extensionFieldNames = extensionFieldNames;
-    }
-
-    @Deprecated
-    public CustomFieldValue getCustomFieldValuesHolder() {
-        return customFieldValuesHolder;
-    }
-
-    public void setCustomFieldValuesHolder(final CustomFieldValue customFieldValuesHolder) {
-        this.customFieldValuesHolder = customFieldValuesHolder;
     }
 }

@@ -193,8 +193,8 @@ public class Booking implements Serializable {
     }
 
     /**
-     * Name of the platform which owns the booking, i.e. which created the booking number.
-     * This is usually a static value for a given extension.
+     * Name of the platform which owns the booking, i.e. which created the booking number. This is usually a static value for a given
+     * extension.
      */
     public String getSourceDomain() {
         return sourceDomain;
@@ -250,8 +250,8 @@ public class Booking implements Serializable {
     }
 
     /**
-     * The {@code referencenumber} reflects the number presented to the customer. If the source system
-     * uses a different, internal ID, be sure to set {@link #setSourceInternalReferencenumber(String)}
+     * The {@code referencenumber} reflects the number presented to the customer. If the source system uses a different, internal ID, be
+     * sure to set {@link #setSourceInternalReferencenumber(String)}
      */
     public String getReferenceNumber() {
         return referenceNumber;
@@ -262,8 +262,8 @@ public class Booking implements Serializable {
     }
 
     /**
-     * The {@code sourceInternalReferencenumber} reflects the ID for this booking internal to the source system.
-     * This is often a UUID or a lengthy hash-type string, but might also be identical to {@link #getReferenceNumber()}
+     * The {@code sourceInternalReferencenumber} reflects the ID for this booking internal to the source system. This is often a UUID or a
+     * lengthy hash-type string, but might also be identical to {@link #getReferenceNumber()}
      */
     public String getSourceInternalReferencenumber() {
         return sourceInternalReferencenumber;
@@ -289,8 +289,8 @@ public class Booking implements Serializable {
     }
 
     /**
-     * The {@code productkey} has no business-function within funnel.travel, but consumer extensions might use it.
-     * Field should indicate something like a package catalog number.
+     * The {@code productkey} has no business-function within funnel.travel, but consumer extensions might use it. Field should indicate
+     * something like a package catalog number.
      */
     public String getProductkey() {
         return productkey;
@@ -435,9 +435,9 @@ public class Booking implements Serializable {
     }
 
     /**
-     * Get priceitems. Be careful with object references, as {@link TravelService#getPriceitems()}
-     * or {@link TransportDocument#getPriceitems()} may return the same priceitem but with a different
-     * object identity. Thus always check using {@link PriceItem#getUuid()}
+     * Get priceitems. Be careful with object references, as {@link TravelService#getPriceitems()} or
+     * {@link TransportDocument#getPriceitems()} may return the same priceitem but with a different object identity. Thus always check using
+     * {@link PriceItem#getUuid()}
      *
      * @return
      */
@@ -450,8 +450,8 @@ public class Booking implements Serializable {
     }
 
     /**
-     * Get {@link PriceItem} with type {@link PriceItemType#ONSITE}. These are kept separate, as they typically
-     * are not included in any 'total' calculation.
+     * Get {@link PriceItem} with type {@link PriceItemType#ONSITE}. These are kept separate, as they typically are not included in any
+     * 'total' calculation.
      */
     public List<PriceItem> getOnsitePriceitems() {
         return onsitePriceitems;
@@ -470,8 +470,8 @@ public class Booking implements Serializable {
     }
 
     /**
-     * The raw sources, sorted by {@link RawSource#getEntrydate()}. Note that {@link RawSource#getSource()}
-     * will be null, unless {@link TripDataConsumer#isPayloadFromDatabase()} is set to true.
+     * The raw sources, sorted by {@link RawSource#getEntrydate()}. Note that {@link RawSource#getSource()} will be null, unless
+     * {@link TripDataConsumer#isPayloadFromDatabase()} is set to true.
      */
     public List<RawSource> getRawsources() {
         return rawsources;
@@ -498,26 +498,7 @@ public class Booking implements Serializable {
     }
 
     /**
-     * @deprecated Use {@link #getCustomfieldValues()}
-     */
-    @Deprecated(since = "3.0.18")
-    @JsonIgnore
-    public List<CustomFieldValue> getCustomfields() {
-        return getCustomfieldValues();
-    }
-
-    /**
-     * @deprecated Use {@link #setCustomfieldValues(List)}
-     */
-    @Deprecated(since = "3.0.18")
-    @JsonIgnore
-    public void setCustomfields(final List<CustomFieldValue> customfields) {
-        setCustomfieldValues(customfields);
-    }
-
-    /**
-     * Get custom field values on booking-level. Note that there might be further custom
-     * field values on services and/or the parent trip.
+     * Get custom field values on booking-level. Note that there might be further custom field values on services and/or the parent trip.
      */
     public List<CustomFieldValue> getCustomfieldValues() {
         return customfieldValues;
@@ -579,9 +560,9 @@ public class Booking implements Serializable {
     }
 
     /**
-     * By default, all {@link #priceitems} collections hold all entries including nested. Thus {@link #getPriceitems()} will
-     * return <strong>all</strong> priceitems, including those on {@link TravelService} and {@link TransportDocument}
-     * level. Calling this method removes priceitems from all collections except the most local one.
+     * By default, all {@link #priceitems} collections hold all entries including nested. Thus {@link #getPriceitems()} will return
+     * <strong>all</strong> priceitems, including those on {@link TravelService} and {@link TransportDocument} level. Calling this method
+     * removes priceitems from all collections except the most local one.
      */
     public void removeMultiReferencedPriceitems() {
         for (final Iterator<PriceItem> iterator = priceitems.iterator(); iterator.hasNext();) {
