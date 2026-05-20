@@ -320,6 +320,9 @@ public class SingleSegment implements Serializable {
         this.rateCode = rateCode;
     }
 
+    /**
+     * The currency for {@link #getRate()}.
+     */
     public String getRateCurrency() {
         return rateCurrency;
     }
@@ -328,6 +331,9 @@ public class SingleSegment implements Serializable {
         this.rateCurrency = rateCurrency;
     }
 
+    /**
+     * Get the retail "rate" of the service, for hotels this is the advertised nightly rate (ex. fees and amenities)
+     */
     public BigDecimal getRate() {
         return rate;
     }

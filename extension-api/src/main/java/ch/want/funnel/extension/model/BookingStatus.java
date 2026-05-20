@@ -2,7 +2,7 @@ package ch.want.funnel.extension.model;
 
 public enum BookingStatus {
     /**
-     * The booking source did not provide a status, or the status is something like "Open", "Edit" or "Quote". Also, and "fail" or "error"
+     * The booking source did not provide a status, or the status is something like "Open", "Edit" or "Quote". Also, any "fail" or "error"
      * state is mapped to this status.
      */
     UNDEFINED,
