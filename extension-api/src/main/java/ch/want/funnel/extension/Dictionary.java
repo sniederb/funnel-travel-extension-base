@@ -14,7 +14,7 @@ public class Dictionary {
     }
 
     /**
-     * Used to determine if the PriceItem is a commission.
+     * Use for PriceItem of type SUPPLIER to indicate a commission.
      *
      * <dt>Commission</dt>
      * <dd>Commission granted by the tour operator to the agency. In an agency-collection scenario, this effectively reduces the total
