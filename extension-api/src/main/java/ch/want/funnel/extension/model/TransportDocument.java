@@ -19,8 +19,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class TransportDocument implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Deprecated
     public static final String REVALIDATION = "Revalidation";
+    @Deprecated
     public static final String VOID = "Void";
+    @Deprecated
     public static final String CONJUNCTION = "Conjunction";
     private UUID uuid;
     private LocalDateTime issueTimestamp;
