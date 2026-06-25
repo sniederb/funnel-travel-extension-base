@@ -16,7 +16,9 @@ import ch.want.funnel.extension.model.TravelService;
 
 public final class PriceItemUtils {
 
+    @Deprecated
     public static final String PROMOTION_PREFIX = "Promotion";
+    @Deprecated
     public static final String DISCOUNT_PREFIX = "Discount";
 
     private PriceItemUtils() {
