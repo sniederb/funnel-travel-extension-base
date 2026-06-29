@@ -50,7 +50,6 @@ class SftpDownloader implements FileDownloader {
             }
             initSession();
             connectToSubfolder();
-            @SuppressWarnings("unchecked")
             final Vector<ChannelSftp.LsEntry> filelist = sftpChannel.ls("."); // NOSONAR
             for (final ChannelSftp.LsEntry file : filelist) {
                 final String filename = file.getFilename();

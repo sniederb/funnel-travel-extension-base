@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -37,7 +38,7 @@ class FtpDownloader implements FileDownloader {
         final List<File> downloadedFiles = new ArrayList<>();
         final FTPClient client = createFtpClient();
         client.setConnectTimeout(TIMEOUT_IN_MILLIS);
-        client.setDataTimeout(TIMEOUT_IN_MILLIS);
+        client.setDataTimeout(Duration.ofMillis(TIMEOUT_IN_MILLIS));
         try {
             client.connect(resourceIdentifier.getHost());
             client.enterLocalPassiveMode();

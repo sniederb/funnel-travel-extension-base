@@ -33,7 +33,7 @@ class FtpUploader implements FileUploader {
     public void ping() throws IOException {
         final FTPClient client = createFtpClient();
         client.setConnectTimeout(TIMEOUT_IN_MILLIS);
-        client.setDataTimeout(TIMEOUT_IN_MILLIS);
+        client.setDataTimeout(Duration.ofMillis(TIMEOUT_IN_MILLIS));
         try {
             LOG.info("Connecting to {}", resourceIdentifier);
             client.connect(resourceIdentifier.getHost());

@@ -129,8 +129,7 @@ public class ExtensionDataAccess {
             return Collections.emptyList();
         }
         final List<String> remarks = new ArrayList<>();
-        for (final Iterator<Map.Entry<String, JsonNode>> iterator = extensionData.fields(); iterator.hasNext();) {
-            final Map.Entry<String, JsonNode> entry = iterator.next();
+        for (final Map.Entry<String, JsonNode> entry : extensionData.properties()) {
             final JsonNode remarksNode = entry.getValue().get(REMARKS_NODE_NAME);
             if (remarksNode != null && remarksNode.isArray()) {
                 for (final JsonNode value : remarksNode) {

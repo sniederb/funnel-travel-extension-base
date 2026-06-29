@@ -15,6 +15,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import ch.want.funnel.extension.Dictionary;
+
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "uuid")
 public class TransportDocument implements Serializable {
 
@@ -119,14 +121,14 @@ public class TransportDocument implements Serializable {
 
     /**
      * For TICKET: empty for regular tickets. Returns a value for special tickets:
-     * <dt>{@link #REVALIDATION}</dt>
+     * <dt>{@link Dictionary#REVALIDATION}</dt>
      * <dd>For revalidated tickets. Usually, funnel.travel will hold the new flight segments, but consumers might opt to process these with
      * price 0.00</dd>
-     * <dt>{@link #VOID}</dt>
+     * <dt>{@link Dictionary#VOID}</dt>
      * <dd>For voided tickets. Ticket amount should usually be 0.00, unless there's a handling markup.</dd>
-     * <dt>{@link #CONJUNCTION}</dt>
-     * <dd>For conjunction tickets. Consumers should process these with price 0.00, or drop them entirely..</dd>
-     * For EMD: get the general-purpose description. This might be the RFIC description, esp. if the RFIC itself is unavailable.
+     * <dt>{@link Dictionary#CONJUNCTION}</dt>
+     * <dd>For conjunction tickets. Consumers should process these with price 0.00, or drop them entirely..</dd> For EMD: get the
+     * general-purpose description. This might be the RFIC description, esp. if the RFIC itself is unavailable.
      *
      * @return
      * @see #getReasonCode(String)
@@ -140,8 +142,8 @@ public class TransportDocument implements Serializable {
     }
 
     /**
-     * Get priceitems. Note that this class provides no {@code getOnsitePriceitems()}, as EMD and
-     * flight tickets don't have on-site payment components.
+     * Get priceitems. Note that this class provides no {@code getOnsitePriceitems()}, as EMD and flight tickets don't have on-site payment
+     * components.
      *
      * @return
      */
@@ -154,9 +156,9 @@ public class TransportDocument implements Serializable {
     }
 
     /**
-     * Get a list of elements, the count of which must match the count of all segments present in the parent.
-     * An association will be created/updated if the value at the matching index is truthy (true, TRUE), or if
-     * the list contains the UUID of the segment (at any position!)
+     * Get a list of elements, the count of which must match the count of all segments present in the parent. An association will be
+     * created/updated if the value at the matching index is truthy (true, TRUE), or if the list contains the UUID of the segment (at any
+     * position!)
      */
     public List<String> getAssociatedSegments() {
         return associatedSegments;
@@ -178,8 +180,8 @@ public class TransportDocument implements Serializable {
     }
 
     /**
-     * A technical reference which is used to match documents if {@link #getReferenceNumber()} is empty. Producers should populate this
-     * with something like an ID, UUID or tattoo number if present.
+     * A technical reference which is used to match documents if {@link #getReferenceNumber()} is empty. Producers should populate this with
+     * something like an ID, UUID or tattoo number if present.
      */
     public String getInternalReference() {
         return internalReference;
@@ -190,9 +192,8 @@ public class TransportDocument implements Serializable {
     }
 
     /**
-     * Set this to true for documents which are bound to the segments of {@link #getAssociatedSegments()},
-     * i.e. the document is rendered obsolete if the segment is cancelled. Tickets and EMD-S should be
-     * left at {@code associated} = false
+     * Set this to true for documents which are bound to the segments of {@link #getAssociatedSegments()}, i.e. the document is rendered
+     * obsolete if the segment is cancelled. Tickets and EMD-S should be left at {@code associated} = false
      *
      * @return
      */
@@ -263,8 +264,7 @@ public class TransportDocument implements Serializable {
     }
 
     /**
-     * Value or additional description of EMD service. This field holds the seat number,
-     * or possibly a meal code (if booked as ancillary)
+     * Value or additional description of EMD service. This field holds the seat number, or possibly a meal code (if booked as ancillary)
      *
      * @return
      */
@@ -294,7 +294,7 @@ public class TransportDocument implements Serializable {
 
     @JsonIgnore
     public boolean isRevalidated() {
-        return description != null && description.startsWith(REVALIDATION);
+        return description != null && description.startsWith(Dictionary.REVALIDATION);
     }
 
     /**
@@ -302,6 +302,11 @@ public class TransportDocument implements Serializable {
      */
     @JsonIgnore
     public boolean isVoided() {
-        return description != null && description.startsWith(VOID);
+        return description != null && description.startsWith(Dictionary.VOID);
+    }
+
+    @JsonIgnore
+    public boolean isConjunction() {
+        return description != null && description.startsWith(Dictionary.CONJUNCTION);
     }
 }

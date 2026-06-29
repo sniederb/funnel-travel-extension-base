@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
+import ch.want.funnel.extension.Dictionary;
 import ch.want.funnel.extension.model.PriceItem;
 import ch.want.funnel.extension.model.PriceItemType;
 import ch.want.funnel.extension.model.TravelService;
@@ -107,7 +108,7 @@ public final class PriceItemUtils {
             priceitem.getPriceItemType() == PriceItemType.AUX_PER_BOOKING &&
             priceitem.getTravelService() == null &&
             StringUtils.isNotBlank(priceitem.getDescription()) &&
-            priceitem.getDescription().startsWith(PROMOTION_PREFIX);
+            priceitem.getDescription().startsWith(Dictionary.PROMOTION);
     }
 
     /**
@@ -119,6 +120,6 @@ public final class PriceItemUtils {
             priceitem.getPriceItemType() == PriceItemType.AUX_PER_BOOKING &&
             priceitem.getTravelService() == null &&
             StringUtils.isNotBlank(priceitem.getDescription()) &&
-            priceitem.getDescription().startsWith(DISCOUNT_PREFIX);
+            priceitem.getDescription().startsWith(Dictionary.DISCOUNT);
     }
 }
