@@ -1,5 +1,6 @@
 package ch.want.funnel.extension;
 
+import ch.want.funnel.extension.model.Booking;
 import ch.want.funnel.extension.model.BookingPayment;
 import ch.want.funnel.extension.model.PriceItem;
 import ch.want.funnel.extension.model.PriceItemType;
@@ -88,4 +89,19 @@ public final class Dictionary {
      * handling markup.
      */
     public static final String VOID = "Void";
+    /**
+     * Prefix used to define a {@link BookingPayment#getDescription()}, see {@link #getImportedPaymentDescription(Class, String)}.
+     */
+    public static final String PAYMENT_IMPORT_DESCRPTIONPREFIX = "Import";
+
+    /**
+     * @param originatingExtensionClass
+     *            The extension class which is providing the payment into funnel.travel
+     * @param bookingReference
+     *            Typically either {@link Booking#getReferenceNumber()} or {@link Booking#getMidofficeReferenceNumber()}
+     * @return
+     */
+    public static String getImportedPaymentDescription(final Class<?> originatingExtensionClass, final String bookingReference) {
+        return PAYMENT_IMPORT_DESCRPTIONPREFIX + "/" + originatingExtensionClass.getSimpleName().replace("Extension", "") + "/" + bookingReference;
+    }
 }

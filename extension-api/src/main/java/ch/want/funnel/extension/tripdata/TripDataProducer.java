@@ -8,12 +8,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
 import ch.want.funnel.extension.FunnelExtension;
 
 /**
- * Implementations of this interface retrieve trip data from "pull" sources such as e-mail servers,
- * booking websites or a GDS.
+ * Implementations of this interface retrieve trip data from "pull" sources such as e-mail servers, booking websites or a GDS.
  */
 public interface TripDataProducer extends TripRawDataConverter {
 
@@ -21,18 +21,30 @@ public interface TripDataProducer extends TripRawDataConverter {
      * Produce a list of raw sources. These will subsequently be fed into {@link #convertRawSourceToTripData(byte[], Map, Locale)}.
      *
      * @param settings
-     *            A Map holding the keys defined in {@link FunnelExtension#getSettings()},
-     *            and associated values with possible inheritance applied
+     *            A Map holding the keys defined in {@link FunnelExtension#getSettings()}, and associated values with possible inheritance
+     *            applied
      * @param locale
      *            Locale for error messages
-     * @return A list of raw sources from the external trip data system. These sources will be made available
-     *         to the user on the trip UI.
+     * @return A list of raw sources from the external trip data system. These sources will be made available to the user on the trip UI.
      */
     List<RawTripDataSource> getRawSources(Map<String, Object> settings, Locale locale);
 
     /**
-     * Other producers might attempt to modify booking data originally created by this producer. This method gives
-     * the original producer a chance to determine whether cross-origin modifies are allowed or not.
+     * Fetch the newest raw source for a given {@code  bookingId}.
+     *
+     * @param bookingId
+     * @param settings
+     * @param locale
+     * @return
+     */
+    default Optional<RawTripDataSource> getRawSource(final String bookingId, final Map<String, Object> settings, final Locale locale) {
+        throw new UnsupportedOperationException(
+            getClass().getSimpleName().replace("Extension", "") + " doesn't support fetching newest source for " + bookingId);
+    }
+
+    /**
+     * Other producers might attempt to modify booking data originally created by this producer. This method gives the original producer a
+     * chance to determine whether cross-origin modifies are allowed or not.
      *
      * @param crossOriginSourceDomain
      *            The sourceDomain of the 'other' producer
@@ -47,8 +59,8 @@ public interface TripDataProducer extends TripRawDataConverter {
     }
 
     /**
-     * Implementations can return one or more setting keys, for which funnel.travel will validate that only 1 installation
-     * is present for a given value.
+     * Implementations can return one or more setting keys, for which funnel.travel will validate that only 1 installation is present for a
+     * given value.
      */
     default Collection<String> getUniqueSettingKeys() {
         return Collections.emptySet();
