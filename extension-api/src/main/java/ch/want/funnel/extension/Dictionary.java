@@ -80,6 +80,15 @@ public final class Dictionary {
      */
     public static final String SERVICE_CHARGE = "Service charge";
     /**
+     * Typical {@link PriceItem#getDescription()} for a price item describing a fee charged by the agency because of additional
+     * administrative work. The most common case would be a re-booking fee. Price items should have type
+     * {@link PriceItemType#AUX_PER_BOOKING}.
+     *
+     * <strong>Note:</strong> be careful not to use {@link PriceItemType#SURCHARGE_PER_BOOKING} for such a fee. Many consumers see
+     * surcharges as a "markup" and process that amount separately.
+     */
+    public static final String PROCESSING_FEES = "Processing fees";
+    /**
      * Standard {@link PriceItem#getDescription()} for a price item of type {@link PriceItemType#TAX_PER_PAX}.
      */
     public static final String TAX = "Tax";
