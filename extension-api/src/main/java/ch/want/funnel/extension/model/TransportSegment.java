@@ -34,9 +34,10 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     private String travelclassDescription;
     private String farebasis;
     private BookingStatus bookingstatus;
+    private String providerCode;
+    private String connectionnumber;
     private String operatorCode;
     private String operatorNumber;
-    private String connectionnumber;
     private String reservationlocator;
     private String baggage;
     private Integer co2KiloPerPax;
@@ -134,9 +135,22 @@ public class TransportSegment implements Serializable, Comparable<TransportSegme
     }
 
     /**
+     * The code returned here <strong>must relate to {@link #getConnectionnumber()}</strong>.
+     *
+     * @return
+     */
+    public String getProviderCode() {
+        return providerCode;
+    }
+
+    public void setProviderCode(final String providerCode) {
+        this.providerCode = providerCode;
+    }
+
+    /**
      * Get the operating provider. Note that the validating provider is available on a service level at
-     * {@link TravelService#getProviderSourcename()}. The returned value is <strong>not mapped</strong> and will typically be a two-letter
-     * airline code
+     * {@link TravelService#getProviderSourcename()}. The returned value is <strong>not mapped to a provider</strong> and will typically be
+     * a two-letter airline code.
      */
     public String getOperatorCode() {
         return operatorCode;
