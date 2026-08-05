@@ -41,6 +41,7 @@ public class Booking implements Serializable {
     private BookingCustomer customer;
     private OffsetDateTime created;
     private OffsetDateTime lastModified;
+    private BookingConsolidation consolidation = BookingConsolidation.NONE;
     private String providerSourcename;
     private String providerName;
     private String sourceDomain;
@@ -549,6 +550,14 @@ public class Booking implements Serializable {
 
     public void setPackaged(final boolean packaged) {
         this.packaged = packaged;
+    }
+
+    public BookingConsolidation getConsolidation() {
+        return consolidation;
+    }
+
+    public void setConsolidation(final BookingConsolidation consolidation) {
+        this.consolidation = consolidation;
     }
 
     public String getTicketingTravelagencyId() {
