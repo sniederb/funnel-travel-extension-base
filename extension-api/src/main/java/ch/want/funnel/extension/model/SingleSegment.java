@@ -40,6 +40,7 @@ public class SingleSegment implements Serializable {
     private String rateCode;
     private String rateCurrency;
     private BigDecimal rate;
+    private RateTimeUnit rateTimeUnit;
 
     public UUID getUuid() {
         return uuid;
@@ -340,6 +341,19 @@ public class SingleSegment implements Serializable {
 
     public void setRate(final BigDecimal rate) {
         this.rate = rate;
+    }
+
+    /**
+     * Returns the {@link RateTimeUnit} for which {@link #getRate()} applies. Can be null if the unit is unknown.
+     *
+     * @return
+     */
+    public RateTimeUnit getRateTimeUnit() {
+        return rateTimeUnit;
+    }
+
+    public void setRateTimeUnit(final RateTimeUnit rateTimeUnit) {
+        this.rateTimeUnit = rateTimeUnit;
     }
 
     /**
