@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import ch.want.funnel.extension.model.TravelerAgeGroup;
@@ -52,5 +53,12 @@ class GdsPassengerNameTest {
         Assertions.assertEquals("STRUMPF", testee.getLastname());
         Assertions.assertEquals("LENNY", testee.getFirstname());
         Assertions.assertEquals(TravelerAgeGroup.INF, testee.getPassengerType());
+    }
+
+    @ParameterizedTest
+    @CsvSource({ ",false,", "Peter,false,Peter", "Pèter,false,Peter", "Stína,false,Stina", "Müller,true,Mueller", "Äsop,true,Aesop", "Pašić,true,Pasic" })
+    void toAscii(final String input, final boolean expandUmlaute, final String expected) {
+        final String actual = GdsPassengerName.toAscii(input, expandUmlaute);
+        Assertions.assertEquals(expected, actual);
     }
 }

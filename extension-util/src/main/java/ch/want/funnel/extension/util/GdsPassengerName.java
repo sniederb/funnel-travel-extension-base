@@ -39,8 +39,8 @@ public class GdsPassengerName {
     }
 
     /**
-     * GDS will use salutations MR, MRS, CHD and INF, while other booking sources might use
-     * Mr., Ms., Mrs., MISS, MS etc. This method returns a standard set of salutations:
+     * GDS will use salutations MR, MRS, CHD and INF, while other booking sources might use Mr., Ms., Mrs., MISS, MS etc. This method
+     * returns a standard set of salutations:
      * <ul>
      * <li>'MRS' for any female-type salutations</li>
      * <li>'MR' for any male-type salutation</li>
@@ -61,6 +61,36 @@ public class GdsPassengerName {
             return "MRS";
         }
         return "";
+    }
+
+    /**
+     * Remove accents and diacritics from a string.
+     *
+     * @param s
+     * @param expandUmlaute
+     *            If true, 'ö' will be replaced with 'oe'
+     * @return
+     */
+    public static String toAscii(final String s, final boolean expandUmlaute) {
+        if (s == null) {
+            return null;
+        }
+        if (expandUmlaute) {
+            final String expanded = s.replace("æ", "ae")
+                .replace("æ", "ae")
+                .replace("ä", "ae")
+                .replace("Æ", "Ae")
+                .replace("Ä", "Ae")
+                .replace("ø", "oe")
+                .replace("ö", "oe")
+                .replace("Ø", "Oe")
+                .replace("Ö", "Oe")
+                .replace("ü", "ue")
+                .replace("Ü", "Ue")
+                .replace("ß", "ss");
+            return StringUtils.stripAccents(expanded);
+        }
+        return StringUtils.stripAccents(s);
     }
 
     /**
