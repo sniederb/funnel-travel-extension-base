@@ -51,9 +51,9 @@ public class HttpUploader implements FileUploader {
 
     @Override
     public void upload(final String targetFilename, final String tripData) throws IOException {
-        final CloseableHttpClient client = createClient();
         final HttpPost httpPost = createHttpPost(targetFilename, tripData);
-        try (CloseableHttpResponse response = client.execute(httpPost)) {
+        try (final CloseableHttpClient client = createClient();
+            CloseableHttpResponse response = client.execute(httpPost)) {
             if (response.getStatusLine().getStatusCode() > 299) {
                 LOG.warn("Call failed with {}, entity {}", response.getStatusLine(), response.getEntity());
                 throw new IllegalStateException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode());
