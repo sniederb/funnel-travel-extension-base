@@ -39,6 +39,8 @@ public class HttpClientFactory {
                 .build();
             return HttpClientBuilder.create()
                 .setDefaultRequestConfig(requestConfig)
+                .disableAuthCaching()
+                .disableCookieManagement()
                 .build();
         });
     }
