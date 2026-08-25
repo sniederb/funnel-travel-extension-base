@@ -3,6 +3,7 @@ package ch.want.funnel.extension.util.upload;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
@@ -41,6 +42,8 @@ public class HttpClientFactory {
                 .setDefaultRequestConfig(requestConfig)
                 .disableAuthCaching()
                 .disableCookieManagement()
+                .evictExpiredConnections()
+                .evictIdleConnections(30, TimeUnit.SECONDS)
                 .build();
         });
     }
