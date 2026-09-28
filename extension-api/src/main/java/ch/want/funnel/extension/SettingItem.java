@@ -6,6 +6,9 @@ package ch.want.funnel.extension;
 import java.util.SortedMap;
 import java.util.UUID;
 
+import ch.want.funnel.extension.model.ExtensionRuletype;
+import ch.want.funnel.extension.model.TripEvent;
+
 public class SettingItem {
 
     public static final String KEY_FILESTORE = "funnel.environment.filestore";
@@ -14,6 +17,14 @@ public class SettingItem {
      * with 'WEBHOOK' setting will eventually be able to process the URL.
      */
     public static final String KEY_OWN_WEBHOOK = "funnel.environment.ownwebhook";
+    /**
+     * Holds a {@link ExtensionRuletype} as value.
+     */
+    public static final String KEY_RULETYPE = "funnel.environment.ruletype";
+    /**
+     * Holds a {@link TripEvent} as value. Is only relevant if {@link #KEY_RULETYPE} has {@link ExtensionRuletype#EVENT}
+     */
+    public static final String KEY_EVENTTYPE = "funnel.environment.eventtype";
     /**
      * UUID of the extension settings. This should be used if {@link #KEY_ACCOUNT_UUID} might actually hold multiple settings of the same
      * extension type. The setting value type is {@link UUID}.
