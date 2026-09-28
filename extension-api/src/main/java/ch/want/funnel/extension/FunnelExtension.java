@@ -52,6 +52,17 @@ public interface FunnelExtension {
     void validateSettings(Map<String, Object> settingValues, Locale locale) throws IllegalSettingException;
 
     /**
+     * Execute just prior to committing "save" on changed settings, this method allows for implementations to run actions on the connected
+     * system. The most typical implementation is to register webhook(s).
+     *
+     * @param settingValues
+     * @param locale
+     */
+    default void onSaveSettings(final Map<String, Object> settingValues, final Locale locale) {
+        // no-op
+    }
+
+    /**
      * Translate a resource bundle key. This is used to display labels for settings, in which case the
      * {@code settingItemKey} will match the {@link SettingItem#getKey()}. A further use is to translate
      * UI elements added to the booking extension data.
