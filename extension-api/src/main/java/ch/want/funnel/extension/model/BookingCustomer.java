@@ -137,6 +137,11 @@ public class BookingCustomer implements Serializable {
         return language;
     }
 
+    /**
+     * Set a two-letter language code like "fr" or "en".
+     *
+     * @param language
+     */
     public void setLanguage(final String language) {
         this.language = language;
     }
