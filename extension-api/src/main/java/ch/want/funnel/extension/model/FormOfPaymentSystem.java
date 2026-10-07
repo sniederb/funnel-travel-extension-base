@@ -31,5 +31,9 @@ public enum FormOfPaymentSystem {
     /**
      * https://www.adyen.com/
      */
-    ADYEN
+    ADYEN,
+    /**
+     * https://docs.straumur.is/
+     */
+    STRAUMUR
 }
