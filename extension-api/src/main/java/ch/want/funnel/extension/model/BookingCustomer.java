@@ -6,8 +6,14 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * This instance will only be present if the providing extension supplies customer data. Note that this
- * is <strong>not a passenger</strong>, but rather the invoice receiver.
+ * This instance will only be present if the providing extension supplies customer data. Note that this is <strong>not a passenger</strong>,
+ * but rather the invoice receiver.
+ *
+ * <ul>
+ * <li>If {@link #getCompanyName()} is set, and {@link #getLastname()} is empty, this is a corporate customer</li>
+ * <li>If both {@link #getCompanyName()} and {@link #getLastname()} are set, this is an employee customer</li>
+ * <li>If {@link #getCompanyName()} is empty, and {@link #getLastname()} is set, this is a private customer</li>
+ * </ul>
  *
  * @see Traveler
  */
@@ -17,6 +23,7 @@ public class BookingCustomer implements Serializable {
     private UUID uuid;
     private String firstname;
     private String lastname;
+    private String companyName;
     private String email;
     private String phone;
     private String street;
@@ -51,6 +58,14 @@ public class BookingCustomer implements Serializable {
 
     public void setLastname(final String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(final String companyName) {
+        this.companyName = companyName;
     }
 
     public String getEmail() {
