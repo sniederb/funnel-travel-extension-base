@@ -436,9 +436,19 @@ public class Booking implements Serializable {
     }
 
     /**
-     * Get priceitems. Be careful with object references, as {@link TravelService#getPriceitems()} or
+     * <p>
+     * Get all priceitems of the booking.
+     * </p>
+     * <p>
+     * Be careful with <strong>object references</strong>, as {@link TravelService#getPriceitems()} or
      * {@link TransportDocument#getPriceitems()} may return the same priceitem but with a different object identity. Thus always check using
      * {@link PriceItem#getUuid()}
+     * </p>
+     * <p>
+     * A note when deserializing booking JSON: if deserializing a booking JSON produced by funnel.travel, the priceitems will only be
+     * present on the most deeply nested level. This is, however, not how the application itself will present price item collections. In
+     * order to remedy that, run a {@code relinkPriceitems()} type of method which adds price items to all parent collections.
+     * </p>
      *
      * @return
      */
