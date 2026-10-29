@@ -56,7 +56,8 @@ class GdsPassengerNameTest {
     }
 
     @ParameterizedTest
-    @CsvSource({ ",false,", "Peter,false,Peter", "Pèter,false,Peter", "Stína,false,Stina", "Müller,true,Mueller", "Äsop,true,Aesop", "Pašić,true,Pasic" })
+    @CsvSource({ ",false,", "Peter,false,Peter", "Pèter,false,Peter", "Stína,false,Stina", "Müller,true,Mueller", "Äsop,true,Aesop", "Pašić,true,Pasic",
+        "Víðisson/Leó Gunnar MR,true,Vidisson/Leo Gunnar MR" })
     void toAscii(final String input, final boolean expandUmlaute, final String expected) {
         final String actual = GdsPassengerName.toAscii(input, expandUmlaute);
         Assertions.assertEquals(expected, actual);

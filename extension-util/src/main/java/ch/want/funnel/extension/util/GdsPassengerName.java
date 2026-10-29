@@ -75,22 +75,30 @@ public class GdsPassengerName {
         if (s == null) {
             return null;
         }
+        String text;
         if (expandUmlaute) {
-            final String expanded = s.replace("æ", "ae")
+            text = s.replace("æ", "ae")
                 .replace("æ", "ae")
                 .replace("ä", "ae")
                 .replace("Æ", "Ae")
                 .replace("Ä", "Ae")
                 .replace("ø", "oe")
                 .replace("ö", "oe")
-                .replace("Ø", "Oe")
                 .replace("Ö", "Oe")
+                .replace("Ø", "Oe")
                 .replace("ü", "ue")
                 .replace("Ü", "Ue")
                 .replace("ß", "ss");
-            return StringUtils.stripAccents(expanded);
+        } else {
+            text = s;
         }
-        return StringUtils.stripAccents(s);
+        return StringUtils.stripAccents(text)
+            .replace("ð", "d")
+            .replace("Ð", "D")
+            .replace("þ", "th")
+            .replace("Þ", "Th")
+            .replace("æ", "ae")
+            .replace("Æ", "Ae");
     }
 
     /**
