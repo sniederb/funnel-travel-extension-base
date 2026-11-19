@@ -41,6 +41,7 @@ public class SingleSegment implements Serializable {
     private String rateCurrency;
     private BigDecimal rate;
     private RateTimeUnit rateTimeUnit;
+    private Integer co2KiloPerPax;
 
     public UUID getUuid() {
         return uuid;
@@ -388,5 +389,13 @@ public class SingleSegment implements Serializable {
 
     public void setUpgrades(final String upgrades) {
         this.upgrades = upgrades;
+    }
+
+    public Integer getCo2KiloPerPax() {
+        return co2KiloPerPax;
+    }
+
+    public void setCo2KiloPerPax(final Integer co2KiloPerPax) {
+        this.co2KiloPerPax = co2KiloPerPax;
     }
 }
